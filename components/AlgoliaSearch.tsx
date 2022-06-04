@@ -98,14 +98,14 @@ export const AlgoliaSearch = ({ modalHandler }: Props) => {
   );
 
   const updateResults = useCallback(
-    (value) => {
+    (value: any) => {
       debouncedSearch(value);
     },
     [debouncedSearch]
   );
 
   const handleChange = useCallback(
-    (e) => {
+    (e: any) => {
       setQuery(e.target.value);
 
       if (e.target.value.length > 0) {

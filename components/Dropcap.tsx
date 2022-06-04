@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
-const Dropcap: React.FC = ({ children }) => {
+const Dropcap = ({ children }: any) => {
   return (
     <Box
       as='span'

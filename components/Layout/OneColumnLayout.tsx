@@ -1,6 +1,5 @@
-import { Flex, Grid } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { Nav } from "./Nav";
-import { Footer } from "../Footer";
 import { SocialFooter } from "../SocialFooter";
 
 export const OneColumnLayout = ({ children }: any) => {
