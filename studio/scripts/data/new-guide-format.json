@@ -1,0 +1,45 @@
+{
+  "_createdAt": "2021-01-23T19:14:23Z",
+  "_id": "schem-sets",
+  "_rev": "QT65E2974nDDWoIEwHc5pW",
+  "_type": "guide",
+  "icon": {
+    "_type": "image",
+    "asset": {
+      "_ref": "image-52c6d74d9bce708ad5d5467e591ddb3509bfbe2b-240x240-png",
+      "_type": "reference"
+    }
+  },
+  "pageBuilder": [
+    {
+      "_key": "78cdcee39932",
+      "_type": "imageGallery",
+      "images": [
+        {
+          "_key": "b47f8cec15fe",
+          "_type": "image",
+          "asset": {
+            "_ref": "image-6c60285370549c5af2b7d59644f8665030f3b783-1920x915-jpg",
+            "_type": "reference"
+          }
+        },
+        {
+          "_key": "e9b7138b4a84",
+          "_type": "image",
+          "asset": {
+            "_ref": "image-3ecc621ebcde2e2cb2343c5cd10cc278374b2a74-2816x2112-jpg",
+            "_type": "reference"
+          }
+        }
+      ],
+      "subtitle": "subtitle",
+      "title": "title"
+    }
+  ],
+  "slug": {
+    "_type": "slug",
+    "current": "schem-sets"
+  },
+  "title": "Schem Sets",
+  "_updatedAt": "2022-04-13T00:40:22.644Z"
+}
