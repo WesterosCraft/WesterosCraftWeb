@@ -1,12 +1,12 @@
 import type { ReactElement } from "react";
 import { GetStaticProps } from "next";
-import { Flex, Heading, Box, Text, Container } from "@chakra-ui/react";
+import { Heading, Box, Text, Container } from "@chakra-ui/react";
 import { WikiLayout } from "../../../../components";
 import { sanityClient } from "../../../../lib/sanity.server";
 import { ChakraNextImage } from "../../../../components/ChakraNextImage";
 import { ProjectDetails } from "../../../../components/ProjectDetails";
 import { RichText } from "../../../../components/RichText";
-import BrightSquares from "../../../public/bright-squares.png";
+import BrightSquares from "../../../../public/bright-squares.png";
 import { isEmpty } from "lodash";
 import { Breadcrumbs } from "../../../../components/Breadcrumbs";
 

@@ -1,12 +1,10 @@
-import { Center, useDisclosure } from "@chakra-ui/react";
-
+import { Center } from "@chakra-ui/react";
 import type { ReactElement } from "react";
-import { Nav, OneColumnLayout } from "../components";
+import { OneColumnLayout } from "../components";
 
 export default function Home() {
   return (
     <Center width='full' flexDirection='column'>
-      <Nav />
       home
     </Center>
   );

@@ -35,23 +35,26 @@ export const Nav = (props: FlexProps) => {
       as='nav'
       bgColor='#22261F'
       position='fixed'
-      minHeight={16}
+      h={16}
       zIndex={100}
       width='full'
-      py={4}
+      // py={4}
       px={5}
       {...props}
     >
       <Container
         px={0}
+        h='full'
         justifyContent='space-between'
         flexDirection='row'
         centerContent
         maxWidth='container.xl'
       >
-        <Heading fontSize='2xl' color='white'>
-          WesterosCraft
-        </Heading>
+        <NextLink href='/'>
+          <Heading cursor='pointer' fontSize='2xl' color='white'>
+            WesterosCraft
+          </Heading>
+        </NextLink>
 
         {isMobile && (
           <Popover trigger='click' isOpen={isOpen}>
@@ -87,12 +90,12 @@ export const Nav = (props: FlexProps) => {
           </Popover>
         )}
 
-        <Flex display={["none", null, null, "flex"]}>
+        <Flex height='full' display={["none", null, null, "flex"]}>
           {navigation.map((section) =>
             section.links && section.links?.length > 0 ? (
               <Popover key={section._key} trigger='hover' openDelay={0.8}>
                 <PopoverTrigger>
-                  <Button ml={8} variant='link' color='white'>
+                  <Button ml={8} height='full' variant='link' color='white'>
                     {section?.title}
                   </Button>
                 </PopoverTrigger>
@@ -101,17 +104,24 @@ export const Nav = (props: FlexProps) => {
                     <VStack color='white'>
                       {section.links.map((link) =>
                         link._type === "internalLink" ? (
-                          <Link as={NextLink} href='/' passHref>
-                            <Stack direction={"row"} align={"center"}>
-                              <Box>
-                                <Text
-                                  transition={"all .3s ease"}
-                                  fontWeight={"bold"}
-                                >
-                                  {link.title}
-                                </Text>
-                                <Text fontSize={"sm"}>{link.description}</Text>
-                              </Box>
+                          <Link
+                            as={NextLink}
+                            // @ts-ignore
+                            href={link?.link?.slug.current}
+                            passHref
+                          >
+                            <Stack
+                              cursor='pointer'
+                              direction='column'
+                              align='center'
+                            >
+                              <Text
+                                transition={"all .3s ease"}
+                                fontWeight={"bold"}
+                              >
+                                {link.title}
+                              </Text>
+                              <Text fontSize={"sm"}>{link.description}</Text>
                             </Stack>
                           </Link>
                         ) : (

@@ -62,7 +62,10 @@ function LocationsPage({ pageData }: { pageData: LocationPageResponse }) {
                   align={["center", "flex-start"]}
                 >
                   <Heading size='xl'>{region.name}</Heading>
-                  <NextLink passHref href={`/locations/${region.slug.current}`}>
+                  <NextLink
+                    passHref
+                    href={`/wiki/locations/${region.slug.current}`}
+                  >
                     <HStack as='a' spacing={1}>
                       <Text fontSize='sm' textTransform='uppercase'>
                         See All
@@ -99,7 +102,7 @@ function LocationsPage({ pageData }: { pageData: LocationPageResponse }) {
                     <VStack mt={2} justify='start' align='start'>
                       <NextLink
                         passHref
-                        href={`/locations/${region.slug.current}/${region?.notableBuild?.slug?.current}`}
+                        href={`/wiki/locations/${region.slug.current}/${region?.notableBuild?.slug?.current}`}
                       >
                         <HStack as='a' spacing={1}>
                           <Text
@@ -114,7 +117,7 @@ function LocationsPage({ pageData }: { pageData: LocationPageResponse }) {
                       </NextLink>
                       <NextLink
                         passHref
-                        href={`/locations/${region.slug.current}/${region.recentlyUpdated?.slug?.current}`}
+                        href={`/wiki/locations/${region.slug.current}/${region.recentlyUpdated?.slug?.current}`}
                       >
                         <HStack as='a' spacing={1}>
                           <Text

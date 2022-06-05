@@ -139,6 +139,7 @@ const Card = ({ title = "", href = "", subtitle = "", image = "" }) => {
       justifyContent='space-between'
       cursor='pointer'
       p={4}
+      transition='all .3s ease'
       _hover={{
         bg: "primaryGlare",
         outline: "1.5px solid black",
