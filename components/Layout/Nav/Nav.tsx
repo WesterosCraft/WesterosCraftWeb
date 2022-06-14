@@ -93,15 +93,15 @@ export const Nav = (props: FlexProps) => {
         <Flex height='full' display={["none", null, null, "flex"]}>
           {navigation.map((section) =>
             section.links && section.links?.length > 0 ? (
-              <Popover key={section._key} trigger='hover' openDelay={0.8}>
+              <Popover key={section._key} trigger='click' openDelay={0.8}>
                 <PopoverTrigger>
                   <Button ml={8} height='full' variant='link' color='white'>
                     {section?.title}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent bgColor='#22261F'>
-                  <PopoverBody>
-                    <VStack color='white'>
+                <PopoverContent borderRadius={0}>
+                  <PopoverBody p={4}>
+                    <VStack spacing={4}>
                       {section.links.map((link) =>
                         link._type === "internalLink" ? (
                           <Link
@@ -111,17 +111,16 @@ export const Nav = (props: FlexProps) => {
                             passHref
                           >
                             <Stack
+                              width='full'
                               cursor='pointer'
                               direction='column'
-                              align='center'
+                              align='start'
+                              spacing={1}
                             >
-                              <Text
-                                transition={"all .3s ease"}
-                                fontWeight={"bold"}
-                              >
+                              <Text transition='all .3s ease' fontWeight='bold'>
                                 {link.title}
                               </Text>
-                              <Text fontSize={"sm"}>{link.description}</Text>
+                              <Text fontSize='sm'>{link.description}</Text>
                             </Stack>
                           </Link>
                         ) : (
