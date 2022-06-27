@@ -4,14 +4,12 @@ import {
   Center,
   Container,
   Heading,
-  Input,
   useColorModeValue,
   Flex,
-  Grid,
   Box,
   LinkBox,
   LinkOverlay,
-  Image,
+  // Image,
   Divider,
   Text,
   HStack,
@@ -24,6 +22,7 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
+import Image from "next/image";
 import { sanityClient } from "../../lib/sanity.server";
 import type { ReactElement } from "react";
 import Link from "next/link";
@@ -87,7 +86,7 @@ export default function Home({ pageData }: any) {
           Join, explore, and enjoy!
         </Text>
       </Container>
-      <Container maxW='container.xl' mt={12} mb={20}>
+      <Container maxW='container.xl' mt={20} mb={20}>
         <Cards />
       </Container>
     </Center>
@@ -164,8 +163,14 @@ const Card = ({ title = "", href = "", subtitle = "", image = "" }) => {
             mb={2}
             overflow='hidden'
           >
-            <Box alignSelf='flex-end'>
-              <Image src={image} alt={title} />
+            <Box
+              alignSelf='flex-end'
+              position='relative'
+              width={362}
+              maxHeight='300px'
+              height='full'
+            >
+              <Image layout='fill' src={image} alt={title} />
             </Box>
           </Flex>
         </Box>

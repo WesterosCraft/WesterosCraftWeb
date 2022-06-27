@@ -9,7 +9,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import { LOCATIONS } from "./data/locations";
+import { LOCATIONS } from "../../../constants/locations";
 import { toLower, startCase } from "lodash";
 import { useRouter } from "next/router";
 

@@ -17,6 +17,7 @@ import {
   Stack,
   Box,
   Text,
+  ButtonGroup,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { BarsIcon } from "../../Icons/Bars";
@@ -45,7 +46,7 @@ export const Nav = (props: FlexProps) => {
       <Container
         px={0}
         h='full'
-        justifyContent='space-between'
+        // justifyContent='space-between'
         flexDirection='row'
         centerContent
         maxWidth='container.xl'
@@ -89,55 +90,67 @@ export const Nav = (props: FlexProps) => {
             </Portal>
           </Popover>
         )}
-
-        <Flex height='full' display={["none", null, null, "flex"]}>
-          {navigation.map((section) =>
-            section.links && section.links?.length > 0 ? (
-              <Popover key={section._key} trigger='click' openDelay={0.8}>
-                <PopoverTrigger>
-                  <Button ml={8} height='full' variant='link' color='white'>
-                    {section?.title}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent borderRadius={0}>
-                  <PopoverBody p={4}>
-                    <VStack spacing={4}>
-                      {section.links.map((link) =>
-                        link._type === "internalLink" ? (
-                          <Link
-                            as={NextLink}
-                            // @ts-ignore
-                            href={link?.link?.slug.current}
-                            passHref
-                          >
-                            <Stack
-                              width='full'
-                              cursor='pointer'
-                              direction='column'
-                              align='start'
-                              spacing={1}
+        <Flex height='full' w='full' justify='space-between'>
+          <Flex display={["none", null, null, "flex"]}>
+            {navigation.map((section) =>
+              section.links && section.links?.length > 0 ? (
+                <Popover key={section._key} trigger='click' openDelay={0.8}>
+                  <PopoverTrigger>
+                    <Button ml={8} height='full' variant='link' color='white'>
+                      {section?.title}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent borderRadius={0}>
+                    <PopoverBody p={4}>
+                      <VStack spacing={4}>
+                        {section.links.map((link) =>
+                          link._type === "internalLink" ? (
+                            <Link
+                              as={NextLink}
+                              // @ts-ignore
+                              href={link?.link?.slug.current}
+                              passHref
                             >
-                              <Text transition='all .3s ease' fontWeight='bold'>
-                                {link.title}
-                              </Text>
-                              <Text fontSize='sm'>{link.description}</Text>
-                            </Stack>
-                          </Link>
-                        ) : (
-                          <Link color='white' key={link._key}>
-                            {link?.title}
-                          </Link>
-                        )
-                      )}
-                    </VStack>
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
-            ) : (
-              <Button ml={8} variant='link' key={section?._key} color='white'>
-                {section?.title}
+                              <Stack
+                                width='full'
+                                cursor='pointer'
+                                direction='column'
+                                align='start'
+                                spacing={1}
+                              >
+                                <Text
+                                  transition='all .3s ease'
+                                  fontWeight='bold'
+                                >
+                                  {link.title}
+                                </Text>
+                                <Text fontSize='sm'>{link.description}</Text>
+                              </Stack>
+                            </Link>
+                          ) : (
+                            <Link color='white' key={link._key}>
+                              {link?.title}
+                            </Link>
+                          )
+                        )}
+                      </VStack>
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
+              ) : (
+                <Button ml={8} variant='link' key={section?._key} color='white'>
+                  {section?.title}
+                </Button>
+              )
+            )}
+          </Flex>
+          {!isMobile && (
+            <ButtonGroup alignItems='center'>
+              <Button fontSize='sm' colorScheme='whiteAlpha' variant='outline'>
+                Apply to Build
               </Button>
-            )
+              <Button fontSize='sm'>Explore Westeros</Button>
+            </ButtonGroup>
           )}
         </Flex>
       </Container>
