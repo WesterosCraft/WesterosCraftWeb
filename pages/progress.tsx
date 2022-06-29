@@ -15,11 +15,10 @@ import { sanityClient } from "../lib/sanity.server";
 import { ProgressTable } from "../components/ProgressTable";
 
 export default function Progress({ pageData, allLocations }) {
-  console.log("👾 ~ Progress ~ allLocations", allLocations);
   return (
     <Container px={0} w='full' centerContent maxW='container.xl'>
       <Flex w='full' as='section' direction='row'>
-        <ProgressTable />
+        <ProgressTable tableData={allLocations} />
         {/* <ProgressSidebar />
         <ProgressContent /> */}
       </Flex>

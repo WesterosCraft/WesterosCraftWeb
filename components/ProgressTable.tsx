@@ -1,90 +1,92 @@
+import { Box, Heading, Text, VStack, SimpleGrid } from "@chakra-ui/react";
 import React, { Fragment, useMemo } from "react";
 import { useTable, useFilters } from "react-table";
 
-export const ProgressTable = () => {
-  const data = React.useMemo(
-    () => [
-      {
-        col1: "Hollister",
-        col2: "Shirt",
-      },
-      {
-        col1: "Abercrombie",
-        col2: "Shorts",
-      },
-      {
-        col1: "Whatever",
-        col2: "T-Shirt",
-      },
-      {
-        col1: "Hollister",
-        col2: "Shorts",
-      },
-      {
-        col1: "Abercrombie",
-        col2: "Jacket",
-      },
-      {
-        col1: "Whatever",
-        col2: "Hoodie",
-      },
-      {
-        col1: "Hollister",
-        col2: "T-Shirt",
-      },
-      {
-        col1: "Abercrombie",
-        col2: "Shorts",
-      },
-      {
-        col1: "Whatever",
-        col2: "Tank Top",
-      },
-    ],
-    []
-  );
+export const ProgressTable = ({ tableData }) => {
+  const data = React.useMemo(() => tableData, [tableData]);
 
-  const columns = React.useMemo(
+  // const columns = React.useMemo(
+  //   () => [
+  //     {
+  //       Header: "Brand",
+  //       accessor: "col1", // accessor is the "key" in the data
+  //       Filter: SelectColumnFilter,
+  //       filter: MultipleFilter,
+  //     },
+  //     {
+  //       Header: "Type",
+  //       accessor: "col2",
+  //       Filter: "",
+  //       filter: "",
+  //     },
+  //   ],
+  //   []
+  // );
+
+  const columns = useMemo(
     () => [
       {
-        Header: "Brand",
-        accessor: "col1", // accessor is the "key" in the data
-        Filter: SelectColumnFilter,
-        filter: MultipleFilter,
+        Header: "Title",
+        accessor: "title",
+        Cell: ({ cell: { value } }: any) => <Text size='sm'>{value}</Text>,
       },
-      {
-        Header: "Type",
-        accessor: "col2",
-        Filter: "",
-        filter: "",
-      },
+      // {
+      //   Header: "Region",
+      //   accessor: "region",
+      //   Filter: SelectColumnFilter,
+      //   filter: "includes",
+      //   defaultCanFilter: true,
+      //   // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
+      // },
+      // {
+      //   Header: "Status",
+      //   accessor: "projectStatus",
+      //   Filter: SelectColumnFilter,
+      //   filter: "includes",
+      //   defaultCanFilter: true,
+      //   // Cell: ({ cell: { value } }: any) => <StatusTag>{value}</StatusTag>,
+      // },
+      // {
+      //   Header: "Type",
+      //   accessor: "buildType",
+      //   Filter: SelectColumnFilter,
+      //   filter: "includes",
+      //   defaultCanFilter: true,
+      //   // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
+      // },
     ],
     []
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useFilters);
+
   return (
     <>
       <table {...getTableProps()} className='text-sm'>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr key={headerGroup.key} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                <th key={column.key} {...column.getHeaderProps()}>
+                  {/* <div>{column.canFilter ? column.render("Filter") : null}</div> */}
                 </th>
               ))}
             </tr>
           ))}
         </thead>
       </table>
-      <table {...getTableProps()} style={{ border: "solid 1px blue" }}>
-        <thead>
+      <Box
+        width='full'
+        {...getTableProps()}
+        style={{ border: "solid 1px blue" }}
+      >
+        {/* <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr key={headerGroup.key} {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th
+                  key={column.key}
                   {...column.getHeaderProps()}
                   style={{
                     borderBottom: "solid 3px red",
@@ -98,31 +100,35 @@ export const ProgressTable = () => {
               ))}
             </tr>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+        </thead> */}
+        <SimpleGrid minChildWidth={300} {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
+            console.log("👾 ~ {rows.map ~ row", row);
             return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map((cell) => {
+              <VStack key={row.key} {...row.getRowProps()}>
+                <Text>{row.original.title}</Text>
+                {/* {row.cells.map((cell) => {
                   return (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        padding: "10px",
-                        border: "solid 1px gray",
-                        background: "papayawhip",
-                      }}
-                    >
-                      {cell.render("Cell")}
-                    </td>
+                    <Box {...cell.getCellProps()}>{cell.render("Cell")}</Box>
+                    // <td
+                    //   key={cell.key}
+
+                    //   style={{
+                    //     padding: "10px",
+                    //     border: "solid 1px gray",
+                    //     background: "papayawhip",
+                    //   }}
+                    // >
+                    //   {cell.render("Cell")}
+                    // </td>
                   );
-                })}
-              </tr>
+                })} */}
+              </VStack>
             );
           })}
-        </tbody>
-      </table>
+        </SimpleGrid>
+      </Box>
     </>
   );
 };
