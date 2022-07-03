@@ -1,11 +1,19 @@
-import { Box, Heading, Text, VStack, SimpleGrid, CheckboxGroup, Checkbox } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Text,
+  VStack,
+  SimpleGrid,
+  CheckboxGroup,
+  Checkbox,
+  Grid,
+} from '@chakra-ui/react';
 import React, { Fragment, useMemo } from 'react';
 import { useTable, useFilters } from 'react-table';
 
 //github.com/TanStack/table/discussions/2350
 
-https: export const ProgressTable = ({ tableData }) => {
-  console.log('🚀 ~ file: ProgressTable.tsx ~ line 6 ~ ProgressTable ~ tableData', tableData[0]);
+export const ProgressTable = ({ tableData }) => {
   const data = React.useMemo(() => tableData, [tableData]);
 
   const columns = useMemo(
@@ -22,7 +30,7 @@ https: export const ProgressTable = ({ tableData }) => {
         Header: 'Region',
         accessor: 'region.name',
         Filter: SelectColumnFilter,
-        // filter: 'includes',
+        filter: 'includesSome',
         defaultCanFilter: true,
         // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
       },
@@ -30,7 +38,8 @@ https: export const ProgressTable = ({ tableData }) => {
         Header: 'Status',
         accessor: 'projectStatus',
         Filter: SelectColumnFilter,
-        // filter: 'includes',
+        filter: 'includesSome',
+
         defaultCanFilter: true,
         Cell: ({ cell: { value } }: any) => <Text>{value}</Text>,
       },
@@ -38,7 +47,8 @@ https: export const ProgressTable = ({ tableData }) => {
         Header: 'Type',
         accessor: 'buildType.title',
         Filter: SelectColumnFilter,
-        // filter: 'includes',
+        filter: 'includesSome',
+
         defaultCanFilter: true,
         // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
       },
@@ -92,14 +102,6 @@ https: export const ProgressTable = ({ tableData }) => {
       </Box>
     </>
   );
-};
-
-export const MultipleFilter = (rows, filler, filterValue) => {
-  const arr = [];
-  rows?.forEach((val) => {
-    if (filterValue.includes(val.original.col1)) arr.push(val);
-  });
-  return arr;
 };
 
 function setFilteredParams(filterArr, val) {
