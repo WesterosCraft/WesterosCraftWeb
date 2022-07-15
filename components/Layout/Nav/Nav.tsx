@@ -108,7 +108,7 @@ export const Nav = (props: FlexProps) => {
                             <Link
                               as={NextLink}
                               // @ts-ignore
-                              href={link?.link?.slug.current}
+                              href={`/${link?.link?.slug.current}`}
                               passHref
                             >
                               <Stack

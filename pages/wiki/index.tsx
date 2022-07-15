@@ -100,7 +100,7 @@ const Cards = () => (
         title: "Guides",
         subtitle:
           "View in depth guides on how to explore and play on our server.",
-        href: "/guides",
+        href: "/wiki/guides",
         image:
           "https://cdn.sanity.io/images/1as7cn02/production/a1e3f84a67270e65cba4daee16005c5611639d65-1000x755.png",
       },
@@ -108,14 +108,14 @@ const Cards = () => (
         title: "Locations",
         subtitle:
           "View a single comprehensive list of every build we have to offer.",
-        href: "/locations",
+        href: "/wiki/locations",
         image:
           "https://cdn.sanity.io/images/1as7cn02/production/6aa4f30c3b90f86ee2f16625f65531a0c041894d-1000x563.png",
       },
       {
         title: "Blocks",
         subtitle: "Check out a repository of all our custom designed blocks.",
-        href: "/blocks",
+        href: "/wiki/blocks",
         image:
           "https://cdn.sanity.io/images/1as7cn02/production/340028327aee54d8558a2ecfbfb364b68795f265-1457x759.png",
       },

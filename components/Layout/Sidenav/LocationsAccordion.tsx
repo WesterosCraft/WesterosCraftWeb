@@ -50,7 +50,7 @@ export const LocationsAccordion = ({ onNavigate }: LocationsAccordionProps) => {
 
   return (
     <>
-      <Link passHref href={`/locations`}>
+      <Link passHref href={`/wiki/locations`}>
         <a>
           <Button
             _focus={focusStyles}
@@ -84,7 +84,7 @@ export const LocationsAccordion = ({ onNavigate }: LocationsAccordionProps) => {
       >
         {sortedLocations.map(([key, value], i) => (
           <AccordionItem key={i} border={0}>
-            <Link passHref href={`/locations/${key}`}>
+            <Link passHref href={`/wiki/locations/${key}`}>
               <h2>
                 <AccordionButton
                   pl={5}
@@ -113,7 +113,7 @@ export const LocationsAccordion = ({ onNavigate }: LocationsAccordionProps) => {
                 <Link
                   key={i}
                   passHref
-                  href={`/locations/${key}/${loc?.slug?.current}`}
+                  href={`/wiki/locations/${key}/${loc?.slug?.current}`}
                 >
                   <a>
                     <Button
