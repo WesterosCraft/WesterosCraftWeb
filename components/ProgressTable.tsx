@@ -1,53 +1,136 @@
+import React from "react";
 import {
-  Box,
-  Heading,
-  Text,
-  VStack,
-  SimpleGrid,
-  CheckboxGroup,
-  Checkbox,
-  Grid,
-} from '@chakra-ui/react';
-import React, { Fragment, useMemo } from 'react';
-import { useTable, useFilters } from 'react-table';
+  useTable,
+  useSortBy,
+  useFilters,
+  useSortByuseFilters,
+  useGlobalFilter,
+  useAsyncDebounce,
+} from "react-table";
+import matchSorter from "match-sorter";
+import { Checkbox, FormLabel, SimpleGrid, Text } from "@chakra-ui/react";
 
-//github.com/TanStack/table/discussions/2350
+// Define a default UI for filtering
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}) {
+  const count = preFilteredRows.length;
 
-export const ProgressTable = ({ tableData }) => {
+  return (
+    <input
+      value={filterValue || ""}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  );
+}
+
+function MultiCheckBoxColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  const options = React.useMemo(() => {
+    let counts = {};
+    preFilteredRows.forEach((x) => {
+      x = x.values[id].toString();
+
+      counts[x] = (counts[x] || 0) + 1;
+    });
+    return counts;
+  }, [id, preFilteredRows]);
+
+  const [checked, setChecked] = React.useState(Object.keys(options));
+
+  const onChange = (e) => {
+    const t = e.target.name.toString();
+
+    if (checked && checked.includes(t)) {
+      setFilter(checked.filter((v) => v !== t));
+      // setChecked((p) => p.filter((v) => v !== t));
+      setChecked((prevChecked) => {
+        if (prevChecked.length === 1) return Object.keys(options);
+        return prevChecked.filter((v) => v !== t);
+      });
+    } else {
+      setFilter([...checked, t]);
+      setChecked((prevChecked) => [...prevChecked, t]);
+    }
+  };
+
+  return (
+    <SimpleGrid>
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => {
+          setChecked(Object.keys(options));
+          setFilter([]);
+        }}
+      >
+        Show <span>All</span>
+      </div>
+
+      {Object.entries(options)
+        .sort()
+        .map(([option, count], i) => {
+          return (
+            <Checkbox
+              key={i}
+              type='checkbox'
+              name={option}
+              id={option}
+              isChecked={checked.includes(option)}
+              onChange={onChange}
+            >
+              {`${option} (${count})`}
+            </Checkbox>
+          );
+        })}
+    </SimpleGrid>
+  );
+}
+
+function fuzzyTextFilterFn(rows, id, filterValue) {
+  return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
+}
+
+// Let the table remove the filter if the string is empty
+// fuzzyTextFilterFn.autoRemove = (val) => !val;
+
+export function ProgressTable({ tableData }) {
   const data = React.useMemo(() => tableData, [tableData]);
 
-  const columns = useMemo(
+  const columns = React.useMemo(
     () => [
       {
         // Header: 'Title',
-        accessor: 'title',
-        disableFilters: true,
-        // Filter: SelectColumnFilter,
-        // defaultCanFilter: false,
-        Cell: ({ cell: { value } }: any) => <Text size="sm">{value}</Text>,
+        accessor: "title",
+        // Filter: CheckBoxColumnFilter,
+        defaultCanFilter: false,
+        Cell: ({ cell: { value } }: any) => <Text size='sm'>{value}</Text>,
       },
       {
-        Header: 'Region',
-        accessor: 'region.name',
-        Filter: SelectColumnFilter,
-        filter: 'includesSome',
+        Header: "Region",
+        accessor: "region.name",
+        Filter: MultiCheckBoxColumnFilter,
+        filter: "includesSome",
         defaultCanFilter: true,
         // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
       },
       {
-        Header: 'Status',
-        accessor: 'projectStatus',
-        Filter: SelectColumnFilter,
-        filter: 'includesSome',
+        Header: "Status",
+        accessor: "projectStatus",
+        Filter: MultiCheckBoxColumnFilter,
+        filter: "includesSome",
 
         defaultCanFilter: true,
         Cell: ({ cell: { value } }: any) => <Text>{value}</Text>,
       },
       {
-        Header: 'Type',
-        accessor: 'buildType.title',
-        Filter: SelectColumnFilter,
-        filter: 'includesSome',
+        Header: "Type",
+        accessor: "buildType.title",
+        Filter: MultiCheckBoxColumnFilter,
+        filter: "includesSome",
 
         defaultCanFilter: true,
         // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
@@ -55,91 +138,107 @@ export const ProgressTable = ({ tableData }) => {
     ],
     []
   );
+  // Use the state and functions returned from useTable to build your UI
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
-    { columns, data },
-    useFilters
+  const filterTypes = React.useMemo(
+    () => ({
+      multiSelect: (rows, id, filterValues) => {
+        console.log("👾 ~ ProgressTable ~ filterValues", filterValues);
+        if (filterValues.length === 0) return rows;
+        return rows.filter((r) => filterValues.includes(r.values[id]));
+      },
+    }),
+    []
   );
 
+  const defaultColumn = React.useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
+    }),
+    []
+  );
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state,
+    visibleColumns,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+  } = useTable(
+    {
+      columns,
+      data,
+      defaultColumn, // Be sure to pass the defaultColumn option
+      filterTypes,
+    },
+    useFilters, // useFilters!
+    useGlobalFilter, // useGlobalFilter!
+    useSortBy
+  );
+
+  // Render the UI for your table
   return (
-    <>
-      <VStack
-        align="flex-start"
-        spacing={3}
-        width={280}
-        px={6}
-        py={8}
-        {...getTableProps()}
-        className="text-sm"
-      >
-        {headerGroups.map((headerGroup) => (
-          <CheckboxGroup size="sm" key={headerGroup.key} {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(
-              (column) =>
-                column.Header && (
-                  <>
-                    <Text>{column?.Header}</Text>
-                    <VStack key={column.key} align="flex-start" {...column.getHeaderProps()}>
-                      {column?.canFilter ? column.render('Filter') : null}
-                    </VStack>
-                  </>
-                )
-            )}
-          </CheckboxGroup>
-        ))}
-      </VStack>
-      <Box width="full" {...getTableProps()} style={{ border: 'solid 1px blue' }}>
-        <SimpleGrid minChildWidth={300} {...getTableBodyProps()}>
-          {rows.map((row) => {
+    <React.Fragment>
+      <hr />
+      {headerGroups.map((headerGroup, i) => (
+        <div key={i} {...headerGroup.getHeaderGroupProps()}>
+          {headerGroup.headers.map((column: any) => (
+            <div key={column.render("Header")}>
+              {column.canFilter ? column.render("Header") : null}
+              <div>{column.canFilter ? column.render("Filter") : null}</div>
+            </div>
+          ))}
+        </div>
+      ))}
+
+      <table {...getTableProps()}>
+        <thead>
+          {headerGroups.map((headerGroup, i) => (
+            <tr key={i} {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column, x) => (
+                // Add the sorting props to control sorting. For this example
+                // we can add them into the header props
+                <th
+                  key={x}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
+                >
+                  {column.render("Header")}
+
+                  {/* Add a sort direction indicator */}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
             prepareRow(row);
             return (
-              <VStack key={row.key} {...row.getRowProps()}>
-                <Text>{row.original.title}</Text>
-              </VStack>
+              <tr key={i} {...row.getRowProps()}>
+                {row.cells.map((cell, x) => {
+                  return (
+                    <td key={x} {...cell.getCellProps()}>
+                      {cell.render("Cell")}
+                    </td>
+                  );
+                })}
+              </tr>
             );
           })}
-        </SimpleGrid>
-      </Box>
-    </>
-  );
-};
-
-function setFilteredParams(filterArr, val) {
-  // if (val === undefined) return undefined;
-  if (filterArr.includes(val)) {
-    filterArr = filterArr.filter((n) => {
-      return n !== val;
-    });
-  } else filterArr.push(val);
-
-  if (filterArr.length === 0) filterArr = undefined;
-  return filterArr;
-}
-
-function SelectColumnFilter({ column: { filterValue = [], setFilter, preFilteredRows, id } }) {
-  const options = useMemo(() => {
-    const options = new Set();
-    preFilteredRows.forEach((row) => {
-      options.add(row.values[id]);
-    });
-    return [...options.values()];
-  }, [id, preFilteredRows]);
-
-  return (
-    <>
-      {options.map((option: string, i) => {
-        return (
-          <Checkbox
-            key={i}
-            value={option}
-            onChange={(e) => {
-              setFilter(setFilteredParams(filterValue, e.target.value));
-            }}
-          >
-            {option}
-          </Checkbox>
-        );
-      })}
-    </>
+        </tbody>
+      </table>
+    </React.Fragment>
   );
 }
