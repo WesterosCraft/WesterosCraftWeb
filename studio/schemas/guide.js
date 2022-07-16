@@ -52,16 +52,9 @@ export default {
     },
     {
       name: "guideCategory",
-      type: "string",
       title: "Guide category",
-      options: {
-        list: [
-          { title: 'How To', value: 'howTo' },
-          { title: "Resources", value: "resources" },
-          { title: "New Builders", value: "newBuilders" },
-          { title: "Project Planning", value: "projectPlanning" },
-        ],
-      },
+      type: "reference",
+      to: { type: "category" },
       group: "details",
       validation: (Rule) => Rule.required(),
     },

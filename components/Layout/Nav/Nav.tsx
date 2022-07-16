@@ -106,6 +106,7 @@ export const Nav = (props: FlexProps) => {
                         {section.links.map((link) =>
                           link._type === "internalLink" ? (
                             <Link
+                              key={link._key}
                               as={NextLink}
                               // @ts-ignore
                               href={`/${link?.link?.slug.current}`}
