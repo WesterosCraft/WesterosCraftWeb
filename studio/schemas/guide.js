@@ -56,7 +56,8 @@ export default {
       title: "Guide category",
       options: {
         list: [
-          { title: "Getting Started", value: "gettingStarted" },
+          { title: 'How To', value: 'howTo' },
+          { title: "Resources", value: "resources" },
           { title: "New Builders", value: "newBuilders" },
           { title: "Project Planning", value: "projectPlanning" },
         ],
