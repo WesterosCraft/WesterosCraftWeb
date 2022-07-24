@@ -1,141 +1,109 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Img,
-  SimpleGrid,
-  Spacer,
-  Stack,
-  Text,
-  Center,
-  Badge,
-  HStack,
-  useColorModeValue as mode,
-} from "@chakra-ui/react";
-import type { ReactElement } from "react";
-import { OneColumnLayout } from "../components";
+import type { ReactElement } from 'react';
+import { Box, Center, Text } from '@chakra-ui/react';
+import { OneColumnLayout } from '../components';
+import { Hero } from '../components/Hero';
+import { VideoFeature } from '../components/VideoFeature';
+import { GetStaticProps } from 'next';
+import { sanityClient } from '../lib/sanity.server';
 
-export default function Home() {
+export interface HomePageData {
+  createdAt: Date;
+  id: string;
+  rev: string;
+  type: string;
+  updatedAt: Date;
+  heroCopy: string;
+  heroHeading1: string;
+  heroHeading2: string;
+  heroImageSlider: HeroImageSlider[];
+  heroOutlineButton: HeroButton;
+  heroSolidButton: HeroButton;
+  heroSubheading: string;
+  title: string;
+}
+
+export interface HeroImageSlider {
+  key: string;
+  type: string;
+  location: Location;
+  slideImage: SlideImage;
+}
+
+export interface Location {
+  title: string;
+}
+
+export interface SlideImage {
+  metadata: Metadata;
+  url: string;
+}
+
+export interface Metadata {
+  lqip: string;
+}
+
+export interface Internal {
+  slug: { current: string };
+  type: string;
+}
+
+export interface SlideImage {
+  type: string;
+  asset: Internal;
+}
+
+export interface HeroButton {
+  type: string;
+  internal: Internal;
+  linkText: string;
+}
+
+export default function Home({ pageData }: { pageData: HomePageData }) {
+  console.log('👾 ~ Home ~ pageData', pageData);
   return (
-    <Box
-      width='full'
-      as='section'
-      // bg={mode("gray.50", "gray.800")}
-      pb='24'
-      pos='relative'
-      px={{ base: "6", lg: "12" }}
-    >
-      <Box maxW='7xl' mx='auto'>
-        <Box
-          maxW={{ lg: "md", xl: "xl" }}
-          pt={{ base: "20", lg: "40" }}
-          pb={{ base: "16", lg: "24" }}
-        >
-          <HStack
-            className='group'
-            as='a'
-            href='#'
-            px='2'
-            py='1'
-            bg={mode("gray.200", "gray.700")}
-            rounded='full'
-            fontSize='sm'
-            mb='8'
-            display='inline-flex'
-            minW='18rem'
-          >
-            <Badge
-              px='2'
-              variant='solid'
-              colorScheme='green'
-              rounded='full'
-              textTransform='capitalize'
-            >
-              New
-            </Badge>
-            <Box fontWeight='medium'>Introducing the new Chakra API</Box>
-            <Box
-              aria-hidden
-              transition='0.2s all'
-              _groupHover={{ transform: "translateX(2px)" }}
-              // as={HiArrowRight}
-              display='inline-block'
-            />
-          </HStack>
-          <Heading
-            as='h1'
-            size='3xl'
-            lineHeight='1'
-            fontWeight='extrabold'
-            letterSpacing='tight'
-          >
-            Connect and engage with{" "}
-            <Box
-              as='mark'
-              color={mode("blue.500", "blue.300")}
-              bg='transparent'
-            >
-              your customers globally
-            </Box>
-          </Heading>
-          <Text
-            mt={4}
-            fontSize='xl'
-            fontWeight='medium'
-            color={mode("gray.600", "gray.400")}
-          >
-            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-            lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-            fugiat aliqua.
-          </Text>
-          <Stack direction={{ base: "column", sm: "row" }} spacing='4' mt='8'>
-            <Button
-              size='lg'
-              colorScheme='blue'
-              height='14'
-              px='8'
-              fontSize='md'
-            >
-              Get Started Now
-            </Button>
-            <Button
-              size='lg'
-              bg='white'
-              color='gray.800'
-              _hover={{ bg: "gray.50" }}
-              height='14'
-              px='8'
-              shadow='base'
-              fontSize='md'
-            >
-              Talk to an expert
-            </Button>
-          </Stack>
-        </Box>
-      </Box>
-      <Box
-        pos={{ lg: "absolute" }}
-        insetY={{ lg: "0" }}
-        insetEnd={{ lg: "0" }}
-        bg='gray.50'
-        w={{ base: "full", lg: "50%" }}
-        height={{ base: "96", lg: "full" }}
-        sx={{
-          clipPath: { lg: "polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)" },
-        }}
-      >
-        <Img
-          height='100%'
-          width='100%'
-          objectFit='cover'
-          src='https://images.unsplash.com/photo-1551836022-b06985bceb24?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80'
-          alt='Lady working'
-        />
-      </Box>
-    </Box>
+    <Center flexDir="column" w="full">
+      <Hero
+        copy={pageData?.heroCopy}
+        subheading={pageData?.heroSubheading}
+        heading1={pageData?.heroHeading1}
+        outlineButton={pageData?.heroOutlineButton}
+        solidButton={pageData?.heroSolidButton}
+        heading2={pageData?.heroHeading2}
+        images={pageData?.heroImageSlider}
+      />
+      <Center w="full" bg="primaryRed" px={4} py={6}>
+        <Text color="white" fontSize="xl">
+          Celebrating 10 years of WesterosCraft
+        </Text>
+      </Center>
+      <VideoFeature />
+    </Center>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const pageData = await sanityClient.fetch(`*[_type == "home"]{
+    ...,
+    heroOutlineButton {
+      linkText,
+      internal->{ slug }
+    },
+    heroImageSlider[]{
+      ...,
+      location->{
+        title
+      },
+      "slideImage": slideImage.asset->{
+        url,
+        metadata {
+          lqip,
+        }
+      }
+    }
+  }[0]`);
+
+  return { props: { pageData }, revalidate: 60 };
+};
 
 Home.getLayout = function getLayout(page: ReactElement) {
   return <OneColumnLayout>{page}</OneColumnLayout>;
