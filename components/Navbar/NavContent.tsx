@@ -25,10 +25,10 @@ const MobileNavContext = (props: FlexProps) => {
           <ToggleButton isOpen={isOpen} onClick={onToggle} />
         </Box>
         <Box as="a" rel="home" mx="auto">
-          <Logo h="24px" iconColor="blue.400" />
+          <Logo h="24px" />
         </Box>
         <Box visibility={{ base: 'hidden', sm: 'visible' }}>
-          <Button as="a" colorScheme="blue">
+          <Button as="a" colorScheme="whiteAlpha">
             Get Started
           </Button>
         </Box>
@@ -56,15 +56,15 @@ const DesktopNavContent = (props: FlexProps) => {
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
       <Box as="a" href="#" rel="home">
         <VisuallyHidden>Envelope</VisuallyHidden>
-        <Logo h="6" iconColor="blue.500" />
+        <Logo h="6" />
       </Box>
       <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
         {links.map((link, idx) => (
           <Box as="li" key={idx} id={`nav__menuitem-${idx}`}>
-            {link.children ? (
+            {link.links ? (
               <Submenu.Desktop link={link} />
             ) : (
-              <NavLink.Desktop href={link.href}>{link.label}</NavLink.Desktop>
+              <NavLink.Desktop href={link.slug.current}>{link.title}</NavLink.Desktop>
             )}
           </Box>
         ))}

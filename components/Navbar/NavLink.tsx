@@ -15,7 +15,7 @@ const DesktopNavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>((props,
       py="6"
       fontWeight="semibold"
       aria-current={active ? 'page' : undefined}
-      color={mode('gray.600', 'gray.400')}
+      color='white'
       transition="all 0.2s"
       {...rest}
       _hover={{ color: 'gray.500' }}

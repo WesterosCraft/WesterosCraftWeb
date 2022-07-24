@@ -2,13 +2,13 @@ import { useNavMenu } from "./useNavMenu";
 import { Box, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/react";
 import * as React from "react";
 // import { FaChevronDown } from 'react-icons/fa'
-import { Link } from "./_data";
+import { Links } from "./_data";
 import { NavLink } from "./NavLink";
 import { NavMenu } from "./NavMenu";
 import { SubmenuItem as DesktopMenuItem } from "./SubmenuItem";
 
 interface SubmenuProps {
-  link: Link;
+  link: Links;
 }
 
 const DesktopSubmenu = (props: SubmenuProps) => {
@@ -25,7 +25,7 @@ const DesktopSubmenu = (props: SubmenuProps) => {
         fontWeight='semibold'
         {...getTriggerProps()}
       >
-        <Box>{link.label}</Box>
+        <Box>{link.title}</Box>
         <Box
           marginStart='2'
           // as={FaChevronDown}
@@ -36,12 +36,12 @@ const DesktopSubmenu = (props: SubmenuProps) => {
       <NavMenu {...getMenuProps()} animate={isOpen ? "open" : "closed"}>
         <Box maxW='7xl' mx='auto' px='8'>
           <SimpleGrid spacing='10' columns={2}>
-            {link.children?.map((item, idx) => (
+            {link.links?.map((item, idx) => (
               <DesktopMenuItem
                 key={idx}
-                title={item.label}
-                href={item.href}
-                icon={item.icon}
+                title={item.title}
+                href={item.slug?.current as string}
+                // icon={item.icon}
               >
                 {item.description}
               </DesktopMenuItem>
@@ -67,7 +67,7 @@ const MobileSubMenu = (props: SubmenuProps) => {
         onClick={onToggle}
         paddingEnd='4'
       >
-        <Box flex='1'>{link.label}</Box>
+        <Box flex='1'>{link.title}</Box>
         <Box
           // as={FaChevronDown}
           transform={`rotate(${isOpen ? "180deg" : "0deg"})`}
@@ -75,9 +75,9 @@ const MobileSubMenu = (props: SubmenuProps) => {
       </NavLink.Mobile>
       <Collapse in={isOpen}>
         <Box pl='5'>
-          {link.children?.map((item, idx) => (
-            <NavLink.Mobile key={idx} href={item.href}>
-              {item.label}
+          {link.links?.map((item, idx) => (
+            <NavLink.Mobile key={idx} href={item.slug?.current}>
+              {item.title}
             </NavLink.Mobile>
           ))}
         </Box>

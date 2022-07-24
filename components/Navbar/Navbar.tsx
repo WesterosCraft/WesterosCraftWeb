@@ -1,4 +1,4 @@
-import { Box, useColorModeValue as mode } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import * as React from "react";
 import { NavContent } from "./NavContent";
 
@@ -6,7 +6,7 @@ export const Navbar = () => {
   return (
     <Box
       as='header'
-      bg={mode("white", "gray.800")}
+      bg="#22261F"
       position='relative'
       zIndex='10'
     >
