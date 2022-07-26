@@ -1,4 +1,19 @@
-import { Box, Flex, SimpleGrid, Img, Heading, Text, AspectRatio } from '@chakra-ui/react';
+import { useState } from 'react';
+import {
+  Box,
+  Flex,
+  SimpleGrid,
+  Img,
+  Heading,
+  Text,
+  AspectRatio,
+  Center,
+  Icon,
+} from '@chakra-ui/react';
+import ReactPlayer from 'react-player';
+import NextImage from 'next/future/image';
+import { PlayIcon } from './Icons/PlayIcon';
+import { ChakraNextImage } from './ChakraNextImage';
 
 const incentives = [
   {
@@ -29,20 +44,14 @@ export const VideoFeature = () => {
           <SimpleGrid alignItems="center" columns={[1, null, null, 2]} columnGap={16} rowGap={10}>
             <Box color="white">
               <Heading className="text-4xl font-extrabold tracking-tight text-gray-900">
-                Explore Westeros with ease
+                10 years of WesterosCraft
               </Heading>
               <Text mt={4}>
                 We've compiled our own custom modpack to help get you traveling the Kings Road as
                 easy as possible.
               </Text>
             </Box>
-            <AspectRatio ratio={16 / 9}>
-              <img
-                src="https://tailwindui.com/img/ecommerce-images/incentives-07-hero.jpg"
-                alt=""
-                className="object-center object-cover"
-              />
-            </AspectRatio>
+            <YoutubePlayer />
           </SimpleGrid>
           <SimpleGrid columns={[1, null, 3]} rowGap="10" columnGap="8" mt={16}>
             {incentives.map(incentive => (
@@ -76,71 +85,75 @@ export const VideoFeature = () => {
   );
 };
 
-// import {
-//   Box,
-//   Flex,
-//   Heading,
-//   HStack,
-//   Icon,
-//   Image,
-//   Link,
-//   Skeleton,
-//   Stack,
-//   useColorModeValue,
-// } from '@chakra-ui/react';
-// import * as React from 'react';
-// //   import { FaArrowRight } from 'react-icons/fa'
+const YoutubePlayer = () => {
+  const [isPlaying, setPlaying] = useState(false);
 
-// export const VideoFeature = () => (
-//   <Box maxW="7xl" mx="auto" px={{ base: '0', lg: '12' }} py={{ base: '0', lg: '12' }}>
-//     <Stack direction={{ base: 'column-reverse', lg: 'row' }} spacing={{ base: '0', lg: '20' }}>
-//       <Box
-//         width={{ lg: 'sm' }}
-//         transform={{ base: 'translateY(-50%)', lg: 'none' }}
-//         bg={{ base: useColorModeValue('red.50', 'gray.700'), lg: 'transparent' }}
-//         mx={{ base: '6', md: '8', lg: '0' }}
-//         px={{ base: '6', md: '8', lg: '0' }}
-//         py={{ base: '6', md: '8', lg: '12' }}
-//       >
-//         <Stack spacing={{ base: '8', lg: '10' }}>
-//           <Stack spacing={{ base: '2', lg: '4' }}>
-//             <Heading size="xl" color={useColorModeValue('red.500', 'red.300')}>
-//               Misguided
-//             </Heading>
-//             <Heading size="xl" fontWeight="normal">
-//               Refresh your wardrobe
-//             </Heading>
-//           </Stack>
-//           <HStack spacing="3">
-//             <Link color={useColorModeValue('red.500', 'red.300')} fontWeight="bold" fontSize="lg">
-//               Discover now
-//             </Link>
-//             <Icon
-//               color={useColorModeValue('red.500', 'red.300')}
-//               //   as={FaArrowRight}
-//             />
-//           </HStack>
-//         </Stack>
-//       </Box>
-//       <Flex flex="1" overflow="hidden">
-//         <Image
-//           src="https://images.unsplash.com/photo-1589156229687-496a31ad1d1f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
-//           alt="Lovely Image"
-//           fallback={<Skeleton />}
-//           maxH="450px"
-//           minW="300px"
-//           objectFit="cover"
-//           flex="1"
-//         />
-//         <Image
-//           display={{ base: 'none', sm: 'initial' }}
-//           src="https://images.unsplash.com/photo-1589156206699-bc21e38c8a7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=772&q=80"
-//           alt="Lovely Image"
-//           fallback={<Skeleton />}
-//           maxH="450px"
-//           objectFit="cover"
-//         />
-//       </Flex>
-//     </Stack>
-//   </Box>
-// );
+  const thumbnailLoader = ({ src, width = 768 }: { src: string; width: number | string }) => {
+    return `${src}?h=480&w=${width}&q=75`;
+  };
+
+  return (
+    <Box overflow="hidden" position="relative">
+      <AspectRatio ratio={16 / 9}>
+        <ReactPlayer
+          width="100%"
+          height="100%"
+          controls={true}
+          playing={isPlaying}
+          url="https://www.youtube.com/watch?v=fO_eKusKH60"
+          className="youtubeContainer"
+        />
+      </AspectRatio>
+      <Center
+        className="play-button"
+        borderRadius="full"
+        bg="whiteAlpha.600"
+        position="absolute"
+        top="50%"
+        transform="translateY(-50%)"
+        mx="auto"
+        left={0}
+        right={0}
+        bottom={0}
+        zIndex="dropdown"
+        width={88}
+        height={88}
+        display={isPlaying ? 'none' : 'flex'}
+        onClick={() => setPlaying(!isPlaying)}
+        cursor="pointer"
+        transition="all 150ms linear 0s"
+        _hover={{
+          bg: 'whiteAlpha.800',
+          '.thumbnail-icon': {
+            color: 'blackAlpha.900',
+          },
+        }}
+      >
+        <PlayIcon boxSize="28px" color="blackAlpha.700" transition="all 150ms linear 0s" />
+      </Center>
+      <Box
+        display={isPlaying ? 'none' : 'block'}
+        position="absolute"
+        top={0}
+        left={0}
+        width="100%"
+        height="100%"
+        zIndex="base"
+      >
+        <AspectRatio ratio={16 / 9} maxH={480}>
+          <NextImage
+            // loader={thumbnailLoader}
+            // layout="fill"
+            // objectFit="cover"
+            width={768}
+            height={432}
+            src="https://cdn.sanity.io/images/n9rqt6s5/production/48495c52fe0e3f8f904bbba681b998e3332aa445-1920x1080.jpg?h=480&w=3840&q=75"
+            // placeholder="blur"
+            // blurDataURL={thumbnailblur}
+            alt="Youtube Video"
+          />
+        </AspectRatio>
+      </Box>
+    </Box>
+  );
+};
