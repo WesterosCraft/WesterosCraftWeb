@@ -23,11 +23,11 @@ const incentives = [
 
 export const VideoFeature = () => {
   return (
-    <Box className="bg-gray-50">
+    <Box bg="primaryDark" w="full">
       <Box maxW="7xl" mx="auto" py={['32', '24']} px={[2, null, 4]}>
         <Box maxW={['2xl', null, null, 'none']} mx="auto" px="4">
           <SimpleGrid alignItems="center" columns={[1, null, null, 2]} columnGap={16} rowGap={10}>
-            <Box>
+            <Box color="white">
               <Heading className="text-4xl font-extrabold tracking-tight text-gray-900">
                 Explore Westeros with ease
               </Heading>
@@ -55,6 +55,7 @@ export const VideoFeature = () => {
                   <Img w={16} h={16} src={incentive.imageSrc} alt="" />
                 </Box>
                 <Box
+                  color="white"
                   mt={['0', '4', '6']}
                   ml={['6', null, '0']}
                   className="mt-4 sm:mt-0 sm:ml-6 lg:mt-6 lg:ml-0"
