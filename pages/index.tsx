@@ -59,7 +59,6 @@ export interface HeroButton {
 }
 
 export default function Home({ pageData }: { pageData: HomePageData }) {
-  console.log('👾 ~ Home ~ pageData', pageData);
   return (
     <Center flexDir="column" w="full">
       <Hero
@@ -73,7 +72,7 @@ export default function Home({ pageData }: { pageData: HomePageData }) {
       />
       <Center w="full" bg="primaryRed" px={4} py={6}>
         <Text color="white" fontSize="xl">
-          Celebrating 10 years of WesterosCraft
+          The Summer 2022 Rookery is out!
         </Text>
       </Center>
       <VideoFeature />

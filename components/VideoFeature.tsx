@@ -9,8 +9,14 @@ import {
   AspectRatio,
   Center,
   Icon,
+  Link,
+  HStack,
+  Stack,
+  useColorModeValue,
 } from '@chakra-ui/react';
-import ReactPlayer from 'react-player';
+import dynamic from 'next/dynamic';
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
+
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
 import { ChakraNextImage } from './ChakraNextImage';
@@ -39,9 +45,48 @@ const incentives = [
 export const VideoFeature = () => {
   return (
     <Box bg="primaryDark" w="full">
-      <Box maxW="7xl" mx="auto" py={['32', '24']} px={[2, null, 4]}>
+      <Box
+        maxW="7xl"
+        mx="auto"
+        py={['32', '24']}
+        px={[2, null, 4]}
+        borderLeftWidth="1px"
+        borderRightWidth="1px"
+        borderColor="primaryGold"
+      >
         <Box maxW={['2xl', null, null, 'none']} mx="auto" px="4">
-          <SimpleGrid alignItems="center" columns={[1, null, null, 2]} columnGap={16} rowGap={10}>
+          <Stack
+            direction={{ base: 'column-reverse', lg: 'row' }}
+            spacing={{ base: '0', lg: '20' }}
+          >
+            <Box
+              width={{ lg: 'sm' }}
+              transform={{ base: 'translateY(-50%)', lg: 'none' }}
+              bg={{ base: useColorModeValue('red.50', 'gray.700'), lg: 'transparent' }}
+              mx={{ base: '6', md: '8', lg: '0' }}
+              px={{ base: '6', md: '8', lg: '0' }}
+              py={{ base: '6', md: '8', lg: '12' }}
+            >
+              <Stack spacing={{ base: '8', lg: '10' }}>
+                <Stack spacing={{ base: '2', lg: '4' }}>
+                  <Heading size="xl" color="primaryGold">
+                    10 years of WesterosCraft
+                  </Heading>
+                </Stack>
+                <HStack color="white" spacing="3">
+                  <Text mt={4}>
+                    We've compiled our own custom modpack to help get you traveling the Kings Road
+                    as easy as possible.
+                  </Text>
+                  {/* <Icon color={useColorModeValue('red.500', 'red.300')} as={FaArrowRight} /> */}
+                </HStack>
+              </Stack>
+            </Box>
+            <Flex flex="1" overflow="hidden">
+              <YoutubePlayer />
+            </Flex>
+          </Stack>
+          {/* <SimpleGrid alignItems="center" columns={[1, null, null, 2]} columnGap={16} rowGap={10}>
             <Box color="white">
               <Heading className="text-4xl font-extrabold tracking-tight text-gray-900">
                 10 years of WesterosCraft
@@ -52,7 +97,7 @@ export const VideoFeature = () => {
               </Text>
             </Box>
             <YoutubePlayer />
-          </SimpleGrid>
+          </SimpleGrid> */}
           <SimpleGrid columns={[1, null, 3]} rowGap="10" columnGap="8" mt={16}>
             {incentives.map(incentive => (
               <Box
@@ -61,7 +106,16 @@ export const VideoFeature = () => {
                 className="sm:flex lg:block"
               >
                 <Box flexShrink={0}>
-                  <Img w={16} h={16} src={incentive.imageSrc} alt="" />
+                  <ChakraNextImage
+                    src="https://cdn.sanity.io/images/1as7cn02/production/5efefe0e5c56d8698d9d34961b02979e8f80212e-180x349.png"
+                    alt={` Banner`}
+                    placeholder="blur"
+                    // blurDataURL={pageData?.bannerImage?.metadata.lqip!}
+                    width={75}
+                    height={150}
+                  />
+                  {/* https://cdn.sanity.io/images/1as7cn02/production/5efefe0e5c56d8698d9d34961b02979e8f80212e-180x349.png */}
+                  {/* <Img w={16} h={16} src={incentive.imageSrc} alt="" /> */}
                 </Box>
                 <Box
                   color="white"
@@ -93,7 +147,12 @@ const YoutubePlayer = () => {
   };
 
   return (
-    <Box overflow="hidden" position="relative">
+    <Box
+      className="youtube-player"
+      // overflow="hidden"
+      width="full"
+      position="relative"
+    >
       <AspectRatio ratio={16 / 9}>
         <ReactPlayer
           width="100%"
