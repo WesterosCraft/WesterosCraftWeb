@@ -3,15 +3,15 @@ import NextImage from 'next/future/image';
 import { chakra, Box, Button, Heading, Stack, Text, IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
-import { HeroButton, HeroImageSlider } from '../pages';
+import { HeroImageSlider, OutlineButton } from '../pages';
 import { ChevronRightIcon } from './Icons/ChevronRight';
 
 interface HeroProps {
   copy: string;
   heading1: string;
   heading2: string;
-  outlineButton: HeroButton;
-  solidButton: HeroButton;
+  outlineButton: OutlineButton;
+  solidButton: OutlineButton;
   subheading: string;
   images: HeroImageSlider[];
 }
@@ -165,7 +165,7 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                   <ChakraNextUnwrappedImage
                     className="embla__slide__img"
                     priority={i === 0}
-                    placeholder="blur"
+                    // placeholder="blur"
                     blurDataURL={slide?.slideImage?.metadata?.lqip}
                     top="50%"
                     left="50%"

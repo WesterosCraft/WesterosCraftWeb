@@ -23,8 +23,8 @@ export const VideoFeature = ({
   thumbnailBlur,
 }: VideoFeatureProps) => {
   return (
-    <Box bg="primaryDark" w="full">
-      <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
+    <Box bg="primaryDark" w="full" className="videoFeature">
+      <Box maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
         <Box
           maxW={['2xl', null, null, 'none']}
           mx="auto"
@@ -33,31 +33,27 @@ export const VideoFeature = ({
           borderRightWidth="1px"
           borderColor="primaryGold"
           pb={['32', '24']}
+          className="container-border"
         >
-          <Stack
-            direction={{ base: 'column-reverse', lg: 'column' }}
-            spacing={{ base: '0', lg: '20' }}
-            align="center"
-          >
+          <Stack direction={'column'} align="center">
             <Box
+              className="text-wrapper"
               textAlign="center"
               width={{ lg: 'md' }}
-              transform={{ base: 'translateY(-50%)', lg: 'none' }}
               px={{ base: '6', md: '8', lg: '0' }}
               py={{ base: '6', md: '8', lg: '12' }}
             >
               <Stack spacing={{ base: '8', lg: '10' }}>
-                <Stack spacing={{ base: '2', lg: '4' }}>
-                  <Heading size="2xl" color="primaryGold">
-                    {heading}
-                  </Heading>
-                </Stack>
+                <Heading size="2xl" color="primaryGold">
+                  {heading}
+                </Heading>
+
                 <Text color="white" fontSize="xl" mt={4}>
                   {subheading}
                 </Text>
               </Stack>
             </Box>
-            <Flex flex="1" h="full" w="full" overflow="hidden" maxW={768}>
+            <Flex className="video-wrapper" flex="1" h="full" w="full" overflow="hidden" maxW={768}>
               <YoutubePlayer url={url} thumbnailUrl={thumbnailUrl} thumbnailBlur={thumbnailBlur} />
             </Flex>
           </Stack>

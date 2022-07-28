@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Box, Center, Text } from '@chakra-ui/react';
+import { Box, Center, Img, Text } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero } from '../components/Hero';
 import { VideoFeature } from '../components/VideoFeature';
@@ -31,7 +31,7 @@ export interface Hero {
   heading2: string;
   heroImageSlider: HeroImageSlider[];
   outlineButton: OutlineButton;
-  solidButton: Banner;
+  solidButton: OutlineButton;
   subheading: string;
 }
 
@@ -83,6 +83,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
       <Hero {...{ ...pageData?.hero, images: pageData?.hero?.heroImageSlider }} />
       <Banner bannerData={pageData?.banner} />
       <FeatureGrid features={pageData?.featureGrid.features} />
+
       <VideoFeature
         heading={pageData?.videoFeature.heading}
         subheading={pageData?.videoFeature.subheading}
