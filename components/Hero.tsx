@@ -155,7 +155,7 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
             }}
           >
             {slides?.map((slide, i) => (
-              <Box className="embla__slide" key={slide.key} position="relative" minWidth="full">
+              <Box className="embla__slide" key={slide._key} position="relative" minWidth="full">
                 <Box
                   className="embla__slide__inner"
                   position="relative"

@@ -1,3 +1,7 @@
+import featureGrid from './featureGrid';
+import hero from './hero';
+import videoFeature from './videoFeature';
+
 export default {
   title: 'Home',
   name: 'home',
@@ -5,13 +9,9 @@ export default {
   __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   groups: [
     {
-      name: 'details',
-      title: 'Details',
+      name: 'content',
+      title: 'Content',
       default: true,
-    },
-    {
-      name: 'hero',
-      title: 'Hero',
     },
     {
       name: 'media',
@@ -30,80 +30,15 @@ export default {
       description: 'Title of the page',
       validation: (Rule: any) => Rule.required(),
     },
+    hero,
     {
-      name: 'heroSubheading',
-      title: 'Hero Subheading',
-      type: 'string',
-      group: 'hero',
-    },
-    {
-      name: 'heroHeading1',
-      title: 'Hero Heading 1',
-      type: 'string',
-      group: 'hero',
-    },
-    {
-      name: 'heroHeading2',
-      title: 'Hero Heading 2',
-      type: 'string',
-      group: 'hero',
-    },
-    {
-      name: 'heroCopy',
-      title: 'Hero Copy',
-      type: 'string',
-      group: 'hero',
-    },
-    {
-      name: 'heroSolidButton',
-      title: 'Hero Solid Button',
+      name: 'banner',
+      title: 'Banner',
       type: 'customUrl',
-      group: 'hero',
+      group: 'content',
     },
-
-    {
-      name: 'heroOutlineButton',
-      title: 'Hero Outline Button',
-      type: 'customUrl',
-      group: 'hero',
-    },
-    {
-      title: 'Hero Image Slider',
-      name: 'heroImageSlider',
-      type: 'array',
-      group: 'hero',
-      of: [
-        {
-          title: 'Slide',
-          name: 'slide',
-          type: 'object',
-          fields: [
-            {
-              type: 'reference',
-              name: 'location',
-              validation: (Rule: any) => Rule.required(),
-              to: [
-                {
-                  type: 'location',
-                },
-              ],
-            },
-            {
-              type: 'image',
-              name: 'slideImage',
-              title: 'Slide Image',
-              validation: (Rule: any) => Rule.required(),
-            },
-          ],
-          preview: {
-            select: {
-              title: 'location.title',
-              media: 'slideImage',
-            },
-          },
-        },
-      ],
-    },
+    videoFeature,
+    featureGrid,
     { name: 'seoTitle', title: 'SEO title', type: 'string', group: 'seo' },
     { name: 'seoKeywords', title: 'Keywords', type: 'string', group: 'seo' },
     { name: 'seoSlug', title: 'Slug', type: 'slug', group: 'seo' },
