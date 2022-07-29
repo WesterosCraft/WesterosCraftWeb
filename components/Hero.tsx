@@ -165,7 +165,7 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                   <ChakraNextUnwrappedImage
                     className="embla__slide__img"
                     priority={i === 0}
-                    // placeholder="blur"
+                    placeholder="blur"
                     blurDataURL={slide?.slideImage?.metadata?.lqip}
                     top="50%"
                     left="50%"

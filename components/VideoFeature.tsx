@@ -39,7 +39,7 @@ export const VideoFeature = ({
             <Box
               className="text-wrapper"
               textAlign="center"
-              width={{ lg: 'md' }}
+              width={{ lg: 'lg' }}
               px={{ base: '6', md: '8', lg: '0' }}
               py={{ base: '6', md: '8', lg: '12' }}
             >

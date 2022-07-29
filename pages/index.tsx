@@ -6,6 +6,8 @@ import { VideoFeature } from '../components/VideoFeature';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../lib/sanity.server';
 import { FeatureGridProps, FeatureGrid } from '../components/FeatureGrid';
+import { TestimonialGrid, Testimonials } from '../components/Testimonials';
+import { Seo } from '../components/Seo';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -18,6 +20,7 @@ export interface HeroPageProps {
   title: string;
   videoFeature: VideoFeature;
   featureGrid: FeatureGridProps;
+  testimonialGrid: TestimonialGrid;
 }
 
 export interface Banner {
@@ -79,19 +82,23 @@ export interface VideoFeature {
 export default function Home({ pageData }: { pageData: HeroPageProps }) {
   console.log('👾 ~ Home ~ pageData', pageData);
   return (
-    <Center flexDir="column" w="full">
-      <Hero {...{ ...pageData?.hero, images: pageData?.hero?.heroImageSlider }} />
-      <Banner bannerData={pageData?.banner} />
-      <FeatureGrid features={pageData?.featureGrid.features} />
+    <>
+      <Seo />
+      <Center flexDir="column" w="full">
+        <Hero {...{ ...pageData?.hero, images: pageData?.hero?.heroImageSlider }} />
+        <Banner bannerData={pageData?.banner} />
+        <FeatureGrid features={pageData?.featureGrid.features} />
 
-      <VideoFeature
-        heading={pageData?.videoFeature.heading}
-        subheading={pageData?.videoFeature.subheading}
-        url={pageData?.videoFeature.videoLink}
-        thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
-        thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
-      />
-    </Center>
+        <VideoFeature
+          heading={pageData?.videoFeature.heading}
+          subheading={pageData?.videoFeature.subheading}
+          url={pageData?.videoFeature.videoLink}
+          thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
+          thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
+        />
+        <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />
+      </Center>
+    </>
   );
 }
 

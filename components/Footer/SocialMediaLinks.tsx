@@ -6,10 +6,15 @@ import { TwitterIcon } from '../Icons/TwitterIcon';
 import { YoutubeIcon } from '../Icons/YoutubeIcon';
 
 export const SocialMediaLinks = (props: ButtonGroupProps) => (
-  <ButtonGroup variant="ghost" color="gray.600" {...props}>
-    <IconButton as="a" href="#" aria-label="LinkedIn" icon={<DiscordIcon />} />
-    <IconButton as="a" href="#" aria-label="GitHub" icon={<TwitterIcon />} />
-    <IconButton as="a" href="#" aria-label="Twitter" icon={<InstagramIcon />} />
-    <IconButton as="a" href="#" aria-label="Twitter" icon={<YoutubeIcon />} />
+  <ButtonGroup variant="ghost" colorScheme="whiteAlpha" {...props}>
+    <IconButton as="a" href="#" aria-label="Discord" icon={<DiscordIcon fill="whiteAlpha.900" />} />
+    <IconButton as="a" href="#" aria-label="Twitter" icon={<TwitterIcon fill="whiteAlpha.900" />} />
+    <IconButton
+      as="a"
+      href="#"
+      aria-label="Instagram"
+      icon={<InstagramIcon fill="whiteAlpha.900" />}
+    />
+    <IconButton as="a" href="#" aria-label="Youtube" icon={<YoutubeIcon fill="whiteAlpha.900" />} />
   </ButtonGroup>
 );

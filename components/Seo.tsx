@@ -1,18 +1,23 @@
-import { NextSeo } from "next-seo";
-import { useRouter } from "next/router";
-import SEO from "../next-seo.config";
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
+import SEO from '../next-seo.config';
 
-export const Seo = ({ meta }: any) => {
+export interface SEO {
+  keywords?: string;
+  title?: string;
+  description?: string;
+}
+
+export const Seo = ({ title, keywords, description }: SEO) => {
   const router = useRouter();
-  const title = meta?.metaTitle ?? SEO.title;
-  const description = meta?.metaDescription ?? SEO.description;
-  const url = `${SEO.openGraph.url}${router.asPath.replace("/", "")}`;
-  const openGraphTitle = meta?.openGraphTitle ?? SEO.title;
-  const openGraphDescription = meta?.openGraphDescription ?? SEO.description;
-  const imageUrl =
-    (meta?.openGraphImage &&
-      `${meta?.openGraphImage}?format=auto&h=600&w=600`) ??
-    SEO.openGraph.images[0].url;
+  const metaTitle = title ?? SEO.title;
+  const metaDescription = description ?? SEO.description;
+  const url = `${SEO.openGraph.url}${router.asPath.replace('/', '')}`;
+  const openGraphTitle = title ?? SEO.title;
+  const openGraphDescription = description ?? SEO.description;
+  // const imageUrl =
+  //   (meta?.openGraphImage && `${meta?.openGraphImage}?format=auto&h=600&w=600`) ??
+  //   SEO.openGraph.images[0].url;
 
   return (
     <NextSeo
@@ -23,14 +28,14 @@ export const Seo = ({ meta }: any) => {
         url,
         title: openGraphTitle,
         description: openGraphDescription,
-        images: [
-          {
-            url: imageUrl,
-            alt: description,
-            width: 1280,
-            height: 720,
-          },
-        ],
+        // images: [
+        //   {
+        //     url: imageUrl,
+        //     alt: description,
+        //     width: 1280,
+        //     height: 720,
+        //   },
+        // ],
       }}
     />
   );

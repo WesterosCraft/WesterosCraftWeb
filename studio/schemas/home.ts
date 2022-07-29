@@ -1,5 +1,7 @@
 import featureGrid from './featureGrid';
 import hero from './hero';
+import seo from './seo';
+import testimonialGrid from './testimonialGrid';
 import videoFeature from './videoFeature';
 
 export default {
@@ -39,14 +41,7 @@ export default {
     },
     videoFeature,
     featureGrid,
-    { name: 'seoTitle', title: 'SEO title', type: 'string', group: 'seo' },
-    { name: 'seoKeywords', title: 'Keywords', type: 'string', group: 'seo' },
-    { name: 'seoSlug', title: 'Slug', type: 'slug', group: 'seo' },
-    {
-      name: 'seoImage',
-      title: 'SEO Image',
-      type: 'image',
-      group: ['seo', 'media'],
-    },
+    testimonialGrid,
+    seo,
   ],
 };
