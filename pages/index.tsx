@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Box, Center, Img, Text } from '@chakra-ui/react';
+import { Center, Box, Divider } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero } from '../components/Hero';
 import { VideoFeature } from '../components/VideoFeature';
@@ -7,7 +7,9 @@ import { GetStaticProps } from 'next';
 import { sanityClient } from '../lib/sanity.server';
 import { FeatureGridProps, FeatureGrid } from '../components/FeatureGrid';
 import { TestimonialGrid, Testimonials } from '../components/Testimonials';
-import { Seo } from '../components/Seo';
+import { Seo, SEOProps } from '../components/Seo';
+import { Banner, BannerProps } from '../components/Banner';
+import { ImageGridFeature } from '../components/ImageGridFeature';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -15,17 +17,13 @@ export interface HeroPageProps {
   _rev: string;
   _type: string;
   _updatedAt: Date;
-  banner: Banner;
+  banner: BannerProps;
   hero: Hero;
   title: string;
   videoFeature: VideoFeature;
   featureGrid: FeatureGridProps;
   testimonialGrid: TestimonialGrid;
-}
-
-export interface Banner {
-  _type: string;
-  linkText: string;
+  seo: SEOProps;
 }
 
 export interface Hero {
@@ -83,7 +81,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
   console.log('👾 ~ Home ~ pageData', pageData);
   return (
     <>
-      <Seo />
+      <Seo title={pageData?.seo?.title} />
       <Center flexDir="column" w="full">
         <Hero {...{ ...pageData?.hero, images: pageData?.hero?.heroImageSlider }} />
         <Banner bannerData={pageData?.banner} />
@@ -96,19 +94,10 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
           thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
           thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
         />
+        <ImageGridFeature />
         <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />
       </Center>
     </>
-  );
-}
-
-function Banner({ bannerData }: { bannerData: Banner }) {
-  return (
-    <Center w="full" bg="primaryRed" px={4} py={6}>
-      <Text color="white" fontSize="xl">
-        {bannerData?.linkText}
-      </Text>
-    </Center>
   );
 }
 

@@ -5,7 +5,7 @@ export default {
   group: 'seo',
   fields: [
     { name: 'title', title: 'title', type: 'string' },
-    { name: 'keywords', title: 'keywords', type: 'string' },
+    { name: 'description', title: 'description', type: 'string' },
     {
       name: 'seoImage',
       title: 'SEO Image',

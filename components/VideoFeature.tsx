@@ -1,6 +1,16 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import { Box, Flex, Heading, Text, AspectRatio, Center, HStack, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Heading,
+  Divider,
+  Text,
+  AspectRatio,
+  Center,
+  HStack,
+  Stack,
+} from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
@@ -35,6 +45,9 @@ export const VideoFeature = ({
           pb={['32', '24']}
           className="container-border"
         >
+          {/* <Center height="100px">
+            <Divider borderColor="primaryGold" orientation="vertical" />
+          </Center> */}
           <Stack direction={'column'} align="center">
             <Box
               className="text-wrapper"

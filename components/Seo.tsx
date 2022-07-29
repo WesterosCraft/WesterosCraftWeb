@@ -2,13 +2,12 @@ import { NextSeo } from 'next-seo';
 import { useRouter } from 'next/router';
 import SEO from '../next-seo.config';
 
-export interface SEO {
-  keywords?: string;
+export interface SEOProps {
   title?: string;
   description?: string;
 }
 
-export const Seo = ({ title, keywords, description }: SEO) => {
+export const Seo = ({ title, description }: SEOProps) => {
   const router = useRouter();
   const metaTitle = title ?? SEO.title;
   const metaDescription = description ?? SEO.description;

@@ -1,7 +1,7 @@
-import { HStack, Box, Flex, StackDivider, Text, VStack, Spacer, Stack } from '@chakra-ui/react';
+import { Box, Flex, StackDivider, Text, Spacer, Stack } from '@chakra-ui/react';
 import { CloseQuoteIcon } from './Icons/CloseQuoteIcon';
 import { OpenQuoteIcon } from './Icons/OpenQuoteIcon';
-import BrightSquares from '../public/bright-squares.png';
+import { SquareTexture } from './SquareTexture';
 
 export interface TestimonialGrid {
   testimonials: Testimonial[];
@@ -17,16 +17,7 @@ export interface Testimonial {
 
 export const Testimonials = ({ testimonials }: { testimonials: Testimonial[] }) => (
   <Box bg="primaryRed" w="full" className="videoFeature" position="relative">
-    <Box
-      userSelect="none"
-      position="absolute"
-      top="0"
-      left="0"
-      width="full"
-      height="full"
-      opacity={0.4}
-      backgroundImage={`url(${BrightSquares.src})`}
-    />
+    <SquareTexture />
     <Box mx="auto" py={{ base: '10', md: '12' }} px={[2, null, 4]} className="container">
       <Stack
         direction={{ base: 'column', lg: 'row' }}
