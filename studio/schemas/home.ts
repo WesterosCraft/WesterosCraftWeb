@@ -1,5 +1,6 @@
 import featureGrid from './featureGrid';
 import hero from './hero';
+import imageGridFeature from './imageGridFeature';
 import seo from './seo';
 import testimonialGrid from './testimonialGrid';
 import videoFeature from './videoFeature';
@@ -42,6 +43,7 @@ export default {
     videoFeature,
     featureGrid,
     testimonialGrid,
+    imageGridFeature,
     seo,
   ],
 };

@@ -36,7 +36,7 @@ export const VideoFeature = ({
     <Box bg="primaryDark" w="full" className="videoFeature">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
         <Box
-          maxW={['2xl', null, null, 'none']}
+          maxW={{ base: '2xl', lg: 'none' }}
           mx="auto"
           px="4"
           borderLeftWidth="1px"
@@ -48,7 +48,7 @@ export const VideoFeature = ({
           {/* <Center height="100px">
             <Divider borderColor="primaryGold" orientation="vertical" />
           </Center> */}
-          <Stack direction={'column'} align="center">
+          <Stack direction="column" align="center">
             <Box
               className="text-wrapper"
               textAlign="center"
@@ -56,12 +56,12 @@ export const VideoFeature = ({
               px={{ base: '6', md: '8', lg: '0' }}
               py={{ base: '6', md: '8', lg: '12' }}
             >
-              <Stack spacing={{ base: '8', lg: '10' }}>
+              <Stack spacing={{ base: '4', lg: '6' }}>
                 <Heading size="2xl" color="primaryGold">
                   {heading}
                 </Heading>
 
-                <Text color="white" fontSize="xl" mt={4}>
+                <Text color="white" fontSize="lg">
                   {subheading}
                 </Text>
               </Stack>

@@ -28,6 +28,7 @@ export const Testimonials = ({ testimonials }: { testimonials: Testimonial[] }) 
       >
         {testimonials.map(testi => (
           <Stack
+            mx="auto"
             direction={{ base: 'row', md: 'column' }}
             spacing={10}
             key={testi.author}
@@ -38,7 +39,8 @@ export const Testimonials = ({ testimonials }: { testimonials: Testimonial[] }) 
             py={4}
             position="relative"
             zIndex={2}
-            align={{ base: 'center' }}
+            alignItems="center"
+            justifyItems="center"
           >
             <Box position="relative">
               <OpenQuoteIcon fill="whiteAlpha.600" boxSize={8} />
