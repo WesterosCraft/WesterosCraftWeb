@@ -9,7 +9,7 @@ import { FeatureGridProps, FeatureGrid } from '../components/FeatureGrid';
 import { TestimonialGrid, Testimonials } from '../components/Testimonials';
 import { Seo, SEOProps } from '../components/Seo';
 import { Banner, BannerProps } from '../components/Banner';
-import { ImageGridFeature } from '../components/ImageGridFeature';
+import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -24,6 +24,7 @@ export interface HeroPageProps {
   featureGrid: FeatureGridProps;
   testimonialGrid: TestimonialGrid;
   seo: SEOProps;
+  imageGridFeature: ImageGridFeatureProps;
 }
 
 export interface Hero {
@@ -94,7 +95,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
           thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
           thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
         />
-        <ImageGridFeature />
+        <ImageGridFeature {...pageData?.imageGridFeature} />
         <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />
       </Center>
     </>
@@ -114,7 +115,7 @@ export const getStaticProps: GetStaticProps = async () => {
         "slideImage": slideImage.asset->{
           url,
           metadata {
-            lqip,
+            lqip
           }
         }
       },
@@ -140,7 +141,26 @@ export const getStaticProps: GetStaticProps = async () => {
       "videoThumbnail": videoThumbnail.asset->{
         url,
         metadata {
-          lqip,
+          lqip
+        }
+      }
+    },
+    imageGridFeature {
+      ...,
+      images[]{
+        ...,
+        asset->{
+          ...,
+          metadata {
+            lqip
+          }
+        }
+      },
+      links[]{
+        ...,
+        linkUrl {
+          linkText,
+          internal->{ slug }
         }
       }
     }

@@ -1,20 +1,72 @@
-import { Box, Stack, Text, Img, SimpleGrid, Heading, VStack, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Stack,
+  Text,
+  useHighlight,
+  SimpleGrid,
+  Heading,
+  VStack,
+  Button,
+  Flex,
+  chakra,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
-/* This example requires Tailwind CSS v2.0+ */
-const features = [
-  {
-    name: 'Locations',
-    description: 'View a single comprehensive list of every build we have to offer.',
-  },
-  {
-    name: 'Guides',
-    description: 'View in depth guides on how to explore and play on our server.',
-  },
-  { name: 'Blocks', description: 'Check out a repository of all our custom designed blocks.' },
-];
+import SanityImage from './SanityImage';
 
-export const ImageGridFeature = () => {
+export interface ImageGridFeatureProps {
+  heading: string;
+  images: Image[];
+  links: Link[];
+  subheading: string;
+}
+
+export interface Image {
+  _key: string;
+  _type: string;
+  asset: Asset;
+}
+
+export interface Asset {
+  metadata: Metadata;
+  url: string;
+}
+
+export interface Metadata {
+  lqip: string;
+}
+
+export interface Link {
+  _key: string;
+  _type: string;
+  description: string;
+  heading: string;
+  linkUrl: LinkURL;
+}
+
+export interface LinkURL {
+  internal: Internal | null;
+  linkText: string;
+}
+
+export interface Internal {
+  slug: Slug;
+}
+
+export interface Slug {
+  _type: string;
+  current: string;
+}
+
+export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGridFeatureProps) => {
+  //   const loader = ({ src, width = 355 }: { src: string; width: number | string }) => {
+  //     return `${src}?h=355&w=${width}&q=75&fit=crop&crop=center`;
+  //   };
+
+  const chunks = useHighlight({
+    text: heading,
+    query: ['400 locations'],
+  });
   return (
     <Box w="full" className="imageGridFeature">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
@@ -27,7 +79,7 @@ export const ImageGridFeature = () => {
           w="full"
           mx="auto"
           py={{ base: '24', sm: '32' }}
-          px={{ base: '10' }}
+          px={{ base: '4', md: '10' }}
           alignItems="center"
           justifyItems="center"
           rowGap="16"
@@ -35,63 +87,74 @@ export const ImageGridFeature = () => {
         >
           <Box maxW="sm">
             <Stack spacing={{ base: '4', lg: '6' }}>
-              <Heading size={{ base: '2xl' }}>Over 400 locations to discover</Heading>
-              <Text fontSize="lg">
-                Our community is well on our way to having a fully explorable map. You can keep up
-                with our progress in game anytime, or start exploring our expansive Wiki.
-              </Text>
+              <Heading size={{ base: '2xl' }}>
+                {chunks.map(({ match, text }) => {
+                  if (!match) return text;
+                  return <chakra.span color="primaryRed">{text}</chakra.span>;
+                })}
+              </Heading>
+              <Text fontSize="lg">{subheading}</Text>
             </Stack>
 
             <VStack mt="12">
-              {features.map(feature => (
-                <Box key={feature.name} w="full" pt="4" borderTopWidth="1px" borderColor="gray.200">
-                  <Text fontWeight="semibold">{feature.name}</Text>
+              {links.map(link => (
+                <Box key={link.heading} w="full" pt="4" borderTopWidth="1px" borderColor="gray.200">
+                  <Text fontWeight="semibold">{link.heading}</Text>
                   <Text mt="2" fontSize="sm">
-                    {feature.description}
+                    {link.description}
                   </Text>
-                  <NextLink href="/wiki" passHref>
-                    <Button
-                      fontWeight="md"
-                      color="primaryRed"
-                      variant="link"
-                      mt="3"
-                      fontSize="sm"
-                      fill="primaryRed"
-                      _hover={{
-                        textDecor: 'none',
-                        color: 'red.800',
-                        fill: 'red.800',
-                      }}
-                      rightIcon={<ArrowRightIcon />}
-                    >
-                      Read More
-                    </Button>
-                  </NextLink>
+                  <Flex
+                    mt="3"
+                    mb="2"
+                    justifyContent={{ base: 'flex-end', sm: 'flex-start' }}
+                    w="full"
+                  >
+                    <NextLink href={link.linkUrl.internal?.slug.current ?? '/wiki'} passHref>
+                      <Button
+                        isDisabled={link.linkUrl.linkText === 'Coming Soon'}
+                        fontWeight="md"
+                        color="primaryRed"
+                        variant="link"
+                        fontSize="sm"
+                        fill="primaryRed"
+                        _hover={{
+                          textDecor: 'none',
+                          color: 'red.800',
+                          fill: 'red.800',
+                        }}
+                        rightIcon={<ArrowRightIcon />}
+                      >
+                        {link.linkUrl.linkText}
+                      </Button>
+                    </NextLink>
+                  </Flex>
                 </Box>
               ))}
             </VStack>
           </Box>
           <SimpleGrid columns={2} gap={{ base: 4, sm: 6, lg: 8 }}>
-            <Img
-              src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-01.jpg"
-              alt="Walnut card tray with white powder coated steel divider and 3 punchout holes."
-              className="bg-gray-100 rounded-lg"
-            />
-            <Img
-              src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-02.jpg"
-              alt="Top down view of walnut card tray with embedded magnets and card groove."
-              className="bg-gray-100 rounded-lg"
-            />
-            <Img
-              src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-03.jpg"
-              alt="Side of walnut card tray with card groove and recessed card area."
-              className="bg-gray-100 rounded-lg"
-            />
-            <Img
-              src="https://tailwindui.com/img/ecommerce-images/product-feature-03-detail-04.jpg"
-              alt="Walnut card tray filled with cards and card angled in dedicated groove."
-              className="bg-gray-100 rounded-lg"
-            />
+            {images.map(image => (
+              <SanityImage
+                src={image.asset}
+                width={355}
+                height={355}
+                placeholder="blur"
+                fit="crop"
+                crop="center"
+                quality={100}
+                blurDataURL={image.asset.metadata.lqip}
+              />
+              //   <ChakraNextImage
+              //     key={image._key}
+              //     loader={loader}
+              //     width={355}
+              //     height={355}
+              //     src={image.asset.url}
+              //     placeholder="blur"
+              //     blurDataURL={image.asset.metadata.lqip}
+              //     alt="Wiki image"
+              //   />
+            ))}
           </SimpleGrid>
         </Stack>
       </Box>
