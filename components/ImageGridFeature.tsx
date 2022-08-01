@@ -88,9 +88,13 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           <Box maxW="sm">
             <Stack spacing={{ base: '4', lg: '6' }}>
               <Heading size={{ base: '2xl' }}>
-                {chunks.map(({ match, text }) => {
+                {chunks.map(({ match, text }, i) => {
                   if (!match) return text;
-                  return <chakra.span color="primaryRed">{text}</chakra.span>;
+                  return (
+                    <chakra.span key={i} color="primaryRed">
+                      {text}
+                    </chakra.span>
+                  );
                 })}
               </Heading>
               <Text fontSize="lg">{subheading}</Text>
@@ -135,6 +139,7 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           <SimpleGrid columns={2} gap={{ base: 4, sm: 6, lg: 8 }}>
             {images.map(image => (
               <SanityImage
+                key={image._key}
                 src={image.asset}
                 width={355}
                 height={355}

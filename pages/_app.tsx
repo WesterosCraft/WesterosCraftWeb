@@ -12,6 +12,9 @@ import SEO from '../next-seo.config';
 
 import '../public/stylesheet.css';
 
+import '@fontsource/karla/400.css';
+import '@fontsource/karla/500.css';
+
 // if (typeof window !== "undefined") {
 //   if (process.env.NODE_ENV === "production") {
 //     galite("create", process.env.NEXT_PUBLIC_GA_TRACKING_ID ?? "", "auto");

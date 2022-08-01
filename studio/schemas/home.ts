@@ -1,3 +1,4 @@
+import alternatingFeature from './alternatingFeature';
 import featureGrid from './featureGrid';
 import hero from './hero';
 import imageGridFeature from './imageGridFeature';
@@ -9,7 +10,7 @@ export default {
   title: 'Home',
   name: 'home',
   type: 'document',
-  __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
+  // __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   groups: [
     {
       name: 'content',
@@ -44,6 +45,7 @@ export default {
     featureGrid,
     testimonialGrid,
     imageGridFeature,
+    alternatingFeature,
     seo,
   ],
 };

@@ -55,7 +55,7 @@ const DesktopNavContent = (props: FlexProps) => {
   return (
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
       <Box as="a" href="#" rel="home">
-        <VisuallyHidden>Envelope</VisuallyHidden>
+        <VisuallyHidden>WesterosCraft</VisuallyHidden>
         <Logo h="6" />
       </Box>
       <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
@@ -73,7 +73,7 @@ const DesktopNavContent = (props: FlexProps) => {
         <Box as="a" href="#" color="white" fontWeight="bold">
           Apply
         </Box>
-        <Button as="a" href="#" colorScheme="whiteAlpha" fontWeight="bold">
+        <Button as="a" href="#" bg="primaryGold" fontWeight="bold">
           Explore Westeros
         </Button>
       </HStack>

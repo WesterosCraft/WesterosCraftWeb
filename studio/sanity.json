@@ -17,9 +17,7 @@
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
@@ -34,6 +32,10 @@
     {
       "implements": "part:@sanity/form-builder/input/file/asset-sources",
       "path": "./parts/assetSources.js"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./structure/index.ts"
     }
   ]
 }

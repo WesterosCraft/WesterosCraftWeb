@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Center, Box, Divider } from '@chakra-ui/react';
+import { Center, Box, Heading, VStack } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero } from '../components/Hero';
 import { VideoFeature } from '../components/VideoFeature';
@@ -10,6 +10,8 @@ import { TestimonialGrid, Testimonials } from '../components/Testimonials';
 import { Seo, SEOProps } from '../components/Seo';
 import { Banner, BannerProps } from '../components/Banner';
 import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
+import { ServerFeatureGrid } from '../components/ServerFeatureGrid';
+import { AlternatingFeature, AlternatingFeatures } from '../components/AlternatingFeature';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -25,6 +27,7 @@ export interface HeroPageProps {
   testimonialGrid: TestimonialGrid;
   seo: SEOProps;
   imageGridFeature: ImageGridFeatureProps;
+  alternatingGridFeature: AlternatingFeatures;
 }
 
 export interface Hero {
@@ -86,16 +89,49 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
       <Center flexDir="column" w="full">
         <Hero {...{ ...pageData?.hero, images: pageData?.hero?.heroImageSlider }} />
         <Banner bannerData={pageData?.banner} />
-        <FeatureGrid features={pageData?.featureGrid.features} />
-
-        <VideoFeature
-          heading={pageData?.videoFeature.heading}
-          subheading={pageData?.videoFeature.subheading}
-          url={pageData?.videoFeature.videoLink}
-          thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
-          thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
-        />
-        <ImageGridFeature {...pageData?.imageGridFeature} />
+        <Box w="full" bg="primaryDark">
+          <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
+            <Center
+              pt="14"
+              pb="8"
+              borderLeft="1px"
+              borderRight="1px"
+              borderBottom="1px"
+              borderColor="primaryGold"
+            >
+              <VStack>
+                <Heading color="white" size="2xl">
+                  Start your journey
+                </Heading>
+              </VStack>
+            </Center>
+          </Box>
+          <FeatureGrid features={pageData?.featureGrid.features} />
+          <ServerFeatureGrid />
+          <VideoFeature
+            heading={pageData?.videoFeature.heading}
+            subheading={pageData?.videoFeature.subheading}
+            url={pageData?.videoFeature.videoLink}
+            thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
+            thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
+          />
+        </Box>
+        <Box w="full">
+          <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
+            <Center
+              pt="14"
+              pb="8"
+              borderLeft="1px"
+              borderRight="1px"
+              borderBottom="1px"
+              borderColor="black"
+            >
+              <Heading size="2xl">Explore</Heading>
+            </Center>
+          </Box>
+          <ImageGridFeature {...pageData?.imageGridFeature} />
+          <AlternatingFeature {...pageData?.alternatingGridFeature} />
+        </Box>
         <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />
       </Center>
     </>

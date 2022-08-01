@@ -10,12 +10,15 @@ import {
   Center,
   HStack,
   Stack,
+  Img,
 } from '@chakra-ui/react';
+
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
+import { Longclaw } from './Icons/LongClaw';
 
 interface VideoFeatureProps {
   heading: string;
@@ -33,7 +36,7 @@ export const VideoFeature = ({
   thumbnailBlur,
 }: VideoFeatureProps) => {
   return (
-    <Box bg="primaryDark" w="full" className="videoFeature">
+    <Box w="full" className="videoFeature">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
         <Box
           maxW={{ base: '2xl', lg: 'none' }}
@@ -42,12 +45,10 @@ export const VideoFeature = ({
           borderLeftWidth="1px"
           borderRightWidth="1px"
           borderColor="primaryGold"
+          pt={['32', '24']}
           pb={['32', '24']}
           className="container-border"
         >
-          {/* <Center height="100px">
-            <Divider borderColor="primaryGold" orientation="vertical" />
-          </Center> */}
           <Stack direction="column" align="center">
             <Box
               className="text-wrapper"

@@ -12,11 +12,12 @@ export default {
     {
       name: 'external',
       type: 'url',
-      title: 'URL',
+      title: 'External Url',
       hidden: ({ parent, value }) => !value && parent?.internal,
     },
     {
       name: 'internal',
+      title: 'Internal Url',
       type: 'reference',
       to: [{ type: 'location' }, { type: 'guide' }, { type: 'page' }],
       hidden: ({ parent, value }) => !value && parent?.external,

@@ -28,7 +28,7 @@ export interface Asset {
 
 export const FeatureGrid = ({ features }: { features: Feature[] }) => {
   return (
-    <Box bg="primaryDark" w="full">
+    <Box w="full">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
         <Box
           maxW={['2xl', null, null, 'none']}
@@ -37,7 +37,8 @@ export const FeatureGrid = ({ features }: { features: Feature[] }) => {
           borderLeftWidth="1px"
           borderRightWidth="1px"
           borderColor="primaryGold"
-          py={['32', '24']}
+          pt={['20', '24']}
+          pb={['24', '32']}
         >
           <SimpleGrid columns={[1, null, 3]} rowGap="10" columnGap="8">
             {features.map(feature => (

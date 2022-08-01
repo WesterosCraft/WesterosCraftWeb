@@ -57,7 +57,7 @@ export const Hero = ({
               {heading2}
             </Box>
           </Heading>
-          <Text mt={4} fontSize="xl" fontWeight="medium" color="gray.600">
+          <Text mt={4} fontSize={{ base: 'lg', sm: 'xl' }} fontWeight="medium" color="gray.600">
             {copy}
           </Text>
           <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
