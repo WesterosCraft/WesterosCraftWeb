@@ -1,43 +1,42 @@
-import * as React from "react";
+import * as React from 'react';
 // import { IoCalendar, IoGrid, IoHelpBuoy } from 'react-icons/io5'
 // import { MdWeb } from 'react-icons/md'
 
 export interface Links {
-  _key:   string;
-  _type:  string;
+  _key?: string;
+  _type?: string;
   links?: LinkElement[];
-  title:  string;
-  slug?:  Slug;
+  title?: string;
+  slug?: Slug;
 }
 
 export interface LinkElement {
-  _key:        string;
-  _type:       LinkType;
+  _key: string;
+  _type: LinkType;
   description: string;
-  link?:       LinkLink;
-  title:       string;
-  slug?:       Slug;
+  link?: LinkLink;
+  title: string;
+  slug?: Slug;
 }
 
 export enum LinkType {
-  ExternalLink = "externalLink",
-  InternalLink = "internalLink",
+  ExternalLink = 'externalLink',
+  InternalLink = 'internalLink',
 }
 
 export interface LinkLink {
   _type: string;
-  slug:  Slug;
+  slug: Slug;
 }
 
 export interface Slug {
-  _type:   SlugType;
+  _type: SlugType;
   current: string;
 }
 
 export enum SlugType {
-  Slug = "slug",
+  Slug = 'slug',
 }
-
 
 export const links = [
   {
@@ -201,40 +200,4 @@ export const links = [
     },
     title: 'Map',
   },
-];
-
-
-// export const links: Link[] = [
-//   { label: "For Designers", href: "#" },
-//   { label: "For Teams", href: "#" },
-//   {
-//     label: "Resources",
-//     children: [
-//       {
-//         label: "Get Help",
-//         description: "Read our documentation and FAQs, or get in touch.",
-//         href: "#",
-//         // icon: <IoHelpBuoy />,
-//       },
-//       {
-//         label: "Events & Meetups",
-//         description: "Discover and join your local Sketch community.",
-//         href: "#",
-//         // icon: <IoCalendar />,
-//       },
-//       {
-//         label: "Extensions",
-//         description: "Do even more with Assistants, plugins and integrations.",
-//         href: "#",
-//         // icon: <IoGrid />,
-//       },
-//       {
-//         label: "Blog",
-//         description: "Get updates, articles and insights from the team.",
-//         href: "#",
-//         // icon: <MdWeb />,
-//       },
-//     ],
-//   },
-//   { label: "Pricing", href: "#" },
-// ];
+] as Links[];

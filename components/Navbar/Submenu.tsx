@@ -1,11 +1,11 @@
-import { useNavMenu } from "./useNavMenu";
-import { Box, Collapse, SimpleGrid, useDisclosure } from "@chakra-ui/react";
-import * as React from "react";
+import { useNavMenu } from './useNavMenu';
+import { Box, Collapse, SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import * as React from 'react';
 // import { FaChevronDown } from 'react-icons/fa'
-import { Links } from "./_data";
-import { NavLink } from "./NavLink";
-import { NavMenu } from "./NavMenu";
-import { SubmenuItem as DesktopMenuItem } from "./SubmenuItem";
+import { Links } from './_data';
+import { NavLink } from './NavLink';
+import { NavMenu } from './NavMenu';
+import { SubmenuItem as DesktopMenuItem } from './SubmenuItem';
 
 interface SubmenuProps {
   link: Links;
@@ -17,25 +17,25 @@ const DesktopSubmenu = (props: SubmenuProps) => {
   return (
     <>
       <NavLink.Desktop
-        display='flex'
-        alignItems='center'
-        as='button'
-        type='button'
-        px='4'
-        fontWeight='semibold'
+        display="flex"
+        alignItems="center"
+        as="button"
+        type="button"
+        px="4"
+        fontWeight="semibold"
         {...getTriggerProps()}
       >
         <Box>{link.title}</Box>
         <Box
-          marginStart='2'
+          marginStart="2"
           // as={FaChevronDown}
-          fontSize='xs'
+          fontSize="xs"
         />
       </NavLink.Desktop>
 
-      <NavMenu {...getMenuProps()} animate={isOpen ? "open" : "closed"}>
-        <Box maxW='7xl' mx='auto' px='8'>
-          <SimpleGrid spacing='10' columns={2}>
+      <NavMenu {...getMenuProps()} animate={isOpen ? 'open' : 'closed'}>
+        <Box maxW="7xl" mx="auto" px="8">
+          <SimpleGrid spacing="10" columns={2}>
             {link.links?.map((item, idx) => (
               <DesktopMenuItem
                 key={idx}
@@ -60,21 +60,21 @@ const MobileSubMenu = (props: SubmenuProps) => {
   return (
     <Box>
       <NavLink.Mobile
-        as='button'
-        textAlign='start'
-        type='button'
-        cursor='pointer'
+        as="button"
+        textAlign="start"
+        type="button"
+        cursor="pointer"
         onClick={onToggle}
-        paddingEnd='4'
+        paddingEnd="4"
       >
-        <Box flex='1'>{link.title}</Box>
+        <Box flex="1">{link.title}</Box>
         <Box
           // as={FaChevronDown}
-          transform={`rotate(${isOpen ? "180deg" : "0deg"})`}
+          transform={`rotate(${isOpen ? '180deg' : '0deg'})`}
         />
       </NavLink.Mobile>
       <Collapse in={isOpen}>
-        <Box pl='5'>
+        <Box pl="5">
           {link.links?.map((item, idx) => (
             <NavLink.Mobile key={idx} href={item.slug?.current}>
               {item.title}

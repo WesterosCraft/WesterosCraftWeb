@@ -1,5 +1,5 @@
-import { Box, SimpleGrid, Img, Center, VStack, Stack } from '@chakra-ui/react';
-import Longclaw from '../public/longclaw.png';
+import { Box, Img, Center, VStack, Stack } from '@chakra-ui/react';
+// import Longclaw from '../public/longclaw.png';
 
 export const ServerFeatureGrid = () => {
   return (

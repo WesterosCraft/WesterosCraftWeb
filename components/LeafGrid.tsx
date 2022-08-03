@@ -1,18 +1,7 @@
 import Side1 from '../public/side1.png';
 import Side2 from '../public/side2.png';
 import Side3 from '../public/side3.png';
-import {
-  Box,
-  Flex,
-  Heading,
-  Divider,
-  Text,
-  AspectRatio,
-  Center,
-  HStack,
-  Stack,
-  Img,
-} from '@chakra-ui/react';
+import { HStack, Img } from '@chakra-ui/react';
 
 export const LeafGrid = () => (
   <HStack spacing={8} mx="auto">

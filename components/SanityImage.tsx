@@ -5,6 +5,7 @@ import { urlFor } from '../lib/sanity';
 interface MyImageProps extends Omit<ImageProps, 'src'> {
   src: SanityImageSource;
   width: number;
+  alt: string;
   quality?: number;
   blur?: number;
   fit?: 'crop' | 'clip' | 'fill' | 'fillmax' | 'max' | 'scale' | 'min';
@@ -17,6 +18,7 @@ export default function SanityImage({
   src,
   fit,
   crop,
+  alt,
   ...props
 }: MyImageProps) {
   const baseURL = 'https://cdn.sanity.io/images/';
@@ -24,6 +26,7 @@ export default function SanityImage({
   return (
     <Image
       {...props}
+      alt={alt}
       loader={() => {
         let url =
           urlFor(src)

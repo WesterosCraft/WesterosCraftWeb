@@ -38,7 +38,7 @@ const MobileNavContext = (props: FlexProps) => {
           link.links ? (
             <Submenu.Mobile key={idx} link={link} />
           ) : (
-            <NavLink.Mobile key={idx} href={link.slug.current}>
+            <NavLink.Mobile key={idx} href={link?.slug?.current}>
               {link.title}
             </NavLink.Mobile>
           ),
@@ -64,7 +64,7 @@ const DesktopNavContent = (props: FlexProps) => {
             {link.links ? (
               <Submenu.Desktop link={link} />
             ) : (
-              <NavLink.Desktop href={link.slug.current}>{link.title}</NavLink.Desktop>
+              <NavLink.Desktop href={link?.slug?.current}>{link.title}</NavLink.Desktop>
             )}
           </Box>
         ))}
@@ -73,7 +73,7 @@ const DesktopNavContent = (props: FlexProps) => {
         <Box as="a" href="#" color="white" fontWeight="bold">
           Apply
         </Box>
-        <Button as="a" href="#" bg="primaryGold" fontWeight="bold">
+        <Button as="a" href="#" bg="white" fontWeight="bold">
           Explore Westeros
         </Button>
       </HStack>

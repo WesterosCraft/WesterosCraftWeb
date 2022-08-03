@@ -133,7 +133,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             </Center>
           </Box>
           <ImageGridFeature {...pageData?.imageGridFeature} />
-          <LeafGrid />
+          {/* <LeafGrid /> */}
           <AlternatingFeature {...pageData?.alternatingGridFeature} />
         </Box>
         <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />
