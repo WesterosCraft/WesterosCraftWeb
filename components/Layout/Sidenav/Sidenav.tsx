@@ -25,15 +25,15 @@ import { PipeIcon } from '../../Icons/Pipe';
 
 const tabs = [
   {
-    href: '/guides',
+    href: '/wiki/guides',
     label: 'Guides',
   },
   {
-    href: '/locations',
+    href: '/wiki/locations',
     label: 'Locations',
   },
   {
-    href: '/blocks',
+    href: '/wiki/blocks',
     label: 'Blocks',
   },
 ];

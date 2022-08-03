@@ -1,151 +1,96 @@
 import React from "react";
 import {
+  Select,
+  Box,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Flex,
+  Input,
+  Button,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
+import {
   useTable,
+  usePagination,
   useSortBy,
   useFilters,
-  useSortByuseFilters,
+  useGroupBy,
+  useExpanded,
+  useRowSelect,
   useGlobalFilter,
   useAsyncDebounce,
 } from "react-table";
-import matchSorter from "match-sorter";
-import { Checkbox, FormLabel, SimpleGrid, Text } from "@chakra-ui/react";
+import "regenerator-runtime/runtime";
+import { matchSorter } from "match-sorter";
 
-// Define a default UI for filtering
-function DefaultColumnFilter({
-  column: { filterValue, preFilteredRows, setFilter },
-}) {
-  const count = preFilteredRows.length;
+const ProgressTable = ({ data }: any) => {
+  console.log("👾 ~ ProgressTable ~ data", data);
 
-  return (
-    <input
-      value={filterValue || ""}
-      onChange={(e) => {
-        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-      }}
-      placeholder={`Search ${count} records...`}
-    />
-  );
-}
-
-function MultiCheckBoxColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
-}) {
-  const options = React.useMemo(() => {
-    let counts = {};
-    preFilteredRows.forEach((x) => {
-      x = x.values[id].toString();
-
-      counts[x] = (counts[x] || 0) + 1;
-    });
-    return counts;
-  }, [id, preFilteredRows]);
-
-  const [checked, setChecked] = React.useState(Object.keys(options));
-
-  const onChange = (e) => {
-    const t = e.target.name.toString();
-
-    if (checked && checked.includes(t)) {
-      setFilter(checked.filter((v) => v !== t));
-      // setChecked((p) => p.filter((v) => v !== t));
-      setChecked((prevChecked) => {
-        if (prevChecked.length === 1) return Object.keys(options);
-        return prevChecked.filter((v) => v !== t);
-      });
-    } else {
-      setFilter([...checked, t]);
-      setChecked((prevChecked) => [...prevChecked, t]);
-    }
-  };
-
-  return (
-    <SimpleGrid>
-      <div
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          setChecked(Object.keys(options));
-          setFilter([]);
-        }}
-      >
-        Show <span>All</span>
-      </div>
-
-      {Object.entries(options)
-        .sort()
-        .map(([option, count], i) => {
-          return (
-            <Checkbox
-              key={i}
-              type='checkbox'
-              name={option}
-              id={option}
-              isChecked={checked.includes(option)}
-              onChange={onChange}
-            >
-              {`${option} (${count})`}
-            </Checkbox>
-          );
-        })}
-    </SimpleGrid>
-  );
-}
-
-function fuzzyTextFilterFn(rows, id, filterValue) {
-  return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
-}
-
-// Let the table remove the filter if the string is empty
-// fuzzyTextFilterFn.autoRemove = (val) => !val;
-
-export function ProgressTable({ tableData }) {
-  const data = React.useMemo(() => tableData, [tableData]);
-
+  //   {
+  //     "buildType": {
+  //         "title": "Castle"
+  //     },
+  //     "projectStatus": "notStarted",
+  //     "region": {
+  //         "name": "North"
+  //     },
+  //     "slug": {
+  //         "_type": "slug",
+  //         "current": "blackpool1"
+  //     },
+  //     "title": "Blackpool"
+  // }
   const columns = React.useMemo(
     () => [
       {
-        // Header: 'Title',
+        Header: "Name",
         accessor: "title",
-        // Filter: CheckBoxColumnFilter,
-        defaultCanFilter: false,
         Cell: ({ cell: { value } }: any) => <Text size='sm'>{value}</Text>,
-      },
-      {
-        Header: "Region",
-        accessor: "region.name",
-        Filter: MultiCheckBoxColumnFilter,
-        filter: "includesSome",
-        defaultCanFilter: true,
-        // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
       },
       {
         Header: "Status",
         accessor: "projectStatus",
-        Filter: MultiCheckBoxColumnFilter,
-        filter: "includesSome",
-
+        Filter: SelectColumnFilter,
+        filter: "includes",
         defaultCanFilter: true,
-        Cell: ({ cell: { value } }: any) => <Text>{value}</Text>,
+        Cell: ({ cell: { value } }: any) => <>{value}</>,
+      },
+      {
+        Header: "Region",
+        accessor: "region.name",
+        Filter: SelectColumnFilter,
+        filter: "includes",
+        defaultCanFilter: true,
+        Cell: ({ cell: { value } }: any) => <>{value}</>,
       },
       {
         Header: "Type",
         accessor: "buildType.title",
-        Filter: MultiCheckBoxColumnFilter,
-        filter: "includesSome",
-
+        Filter: SelectColumnFilter,
+        filter: "includes",
         defaultCanFilter: true,
-        // Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
+        Cell: ({ cell: { value } }: any) => <>{value}</>,
       },
     ],
     []
   );
-  // Use the state and functions returned from useTable to build your UI
-
   const filterTypes = React.useMemo(
     () => ({
-      multiSelect: (rows, id, filterValues) => {
-        console.log("👾 ~ ProgressTable ~ filterValues", filterValues);
-        if (filterValues.length === 0) return rows;
-        return rows.filter((r) => filterValues.includes(r.values[id]));
+      fuzzyText: fuzzyTextFilterFn,
+      text: (rows: any, id: any, filterValue: any) => {
+        return rows.filter((row: any) => {
+          const rowValue = row.values[id];
+          return rowValue !== undefined
+            ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+            : true;
+        });
       },
     }),
     []
@@ -155,6 +100,8 @@ export function ProgressTable({ tableData }) {
     () => ({
       // Let's set up our default Filter UI
       Filter: DefaultColumnFilter,
+      // And also our default editable cell
+      // Cell: EditableCell,
     }),
     []
   );
@@ -163,82 +110,241 @@ export function ProgressTable({ tableData }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    nextPage,
+    previousPage,
     state,
-    visibleColumns,
+    setPageSize,
+    state: { pageIndex, pageSize },
     preGlobalFilteredRows,
     setGlobalFilter,
   } = useTable(
     {
       columns,
       data,
-      defaultColumn, // Be sure to pass the defaultColumn option
+      defaultColumn,
       filterTypes,
+      //   updateMyData,
+      //   autoResetPage: !skipReset,
+      //   autoResetSelectedRows: !skipReset,
+      disableMultiSort: true,
     },
-    useFilters, // useFilters!
-    useGlobalFilter, // useGlobalFilter!
-    useSortBy
+    useGlobalFilter,
+    useFilters,
+    useGroupBy,
+    useSortBy,
+    useExpanded,
+    usePagination,
+    useRowSelect
   );
 
   // Render the UI for your table
   return (
-    <React.Fragment>
-      <hr />
-      {headerGroups.map((headerGroup, i) => (
-        <div key={i} {...headerGroup.getHeaderGroupProps()}>
-          {headerGroup.headers.map((column: any) => (
-            <div key={column.render("Header")}>
-              {column.canFilter ? column.render("Header") : null}
-              <div>{column.canFilter ? column.render("Filter") : null}</div>
-            </div>
+    <>
+      <Flex width='full' justifyContent='flex-end'>
+        <Select
+          mr={4}
+          width='120px'
+          value={pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[10, 20, 30, 40, 50].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
           ))}
-        </div>
-      ))}
-
-      <table {...getTableProps()}>
-        <thead>
+        </Select>
+        <GlobalFilter
+          preGlobalFilteredRows={preGlobalFilteredRows}
+          globalFilter={state.globalFilter}
+          setGlobalFilter={setGlobalFilter}
+        />
+      </Flex>
+      <Table
+        fontSize='sm'
+        width='full'
+        size='md'
+        my={3}
+        borderWidth='1px'
+        borderColor='gray.200'
+        variant='striped'
+        {...getTableProps()}
+      >
+        <Thead>
           {headerGroups.map((headerGroup, i) => (
-            <tr key={i} {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column, x) => (
-                // Add the sorting props to control sorting. For this example
-                // we can add them into the header props
-                <th
-                  key={x}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render("Header")}
-
-                  {/* Add a sort direction indicator */}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
+            <Tr {...headerGroup.getHeaderGroupProps()} key={i}>
+              {headerGroup.headers.map((column, i) => (
+                <Th {...column.getHeaderProps()} key={i}>
+                  <div>
+                    <span {...column.getSortByToggleProps()}>
+                      {column.render("Header")}
+                      {/* Add a sort direction indicator */}
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
+                  </div>
+                  {/* Render the columns filter UI */}
+                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                </Th>
               ))}
-            </tr>
+            </Tr>
           ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+        </Thead>
+        <Tbody {...getTableBodyProps()}>
+          {page.map((row, i) => {
             prepareRow(row);
             return (
-              <tr key={i} {...row.getRowProps()}>
-                {row.cells.map((cell, x) => {
+              <Tr {...row.getRowProps()} key={i}>
+                {row.cells.map((cell, i) => {
                   return (
-                    <td key={x} {...cell.getCellProps()}>
+                    <Td {...cell.getCellProps()} key={i}>
                       {cell.render("Cell")}
-                    </td>
+                    </Td>
                   );
                 })}
-              </tr>
+              </Tr>
             );
           })}
-        </tbody>
-      </table>
-    </React.Fragment>
+        </Tbody>
+      </Table>
+      {/*
+        Pagination can be built however you'd like.
+        This is just a very basic UI implementation:
+      */}
+      <Flex
+        direction='row'
+        align='center'
+        justifyContent='flex-end'
+        className='pagination'
+      >
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={() => previousPage()}
+          disabled={!canPreviousPage}
+        >
+          Previous
+        </Button>
+        <Box px={4}>
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>
+        </Box>
+        <Button
+          variant='outline'
+          size='sm'
+          onClick={() => nextPage()}
+          disabled={!canNextPage}
+        >
+          Next
+        </Button>
+      </Flex>
+    </>
+  );
+};
+
+// Define a default UI for filtering
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}: any) {
+  const count = preFilteredRows.length;
+
+  return (
+    <Input
+      size='xs'
+      value={filterValue || ""}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} builds...`}
+    />
   );
 }
+
+function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}: any) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set();
+    preFilteredRows.forEach((row: any) => {
+      options.add(row.values[id]);
+    });
+    // @ts-ignore
+    return [...options.values()];
+  }, [id, preFilteredRows]);
+
+  // Render a multi-select box
+  return (
+    <Select
+      size='xs'
+      value={filterValue}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined);
+      }}
+    >
+      <option value=''>All</option>
+      {options.map((option: any, i) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </Select>
+  );
+}
+
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}: any) {
+  const count = preGlobalFilteredRows.length;
+  const [value, setValue] = React.useState(globalFilter);
+  const onChange = useAsyncDebounce((value) => {
+    setGlobalFilter(value || undefined);
+  }, 200);
+
+  return (
+    <Input
+      maxW={300}
+      size='md'
+      value={value || ""}
+      onChange={(e) => {
+        setValue(e.target.value);
+        onChange(e.target.value);
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  );
+}
+
+function fuzzyTextFilterFn(rows: any, id: any, filterValue: any) {
+  return matchSorter(rows, filterValue, {
+    keys: [(row: any) => row.values[id]],
+  });
+}
+
+// Let the table remove the filter if the string is empty
+fuzzyTextFilterFn.autoRemove = (val: any) => !val;
+
+// Define a custom filter filter function!
+function filterGreaterThan(rows: any, id: any, filterValue: any) {
+  return rows.filter((row: any) => {
+    const rowValue = row.values[id];
+    return rowValue >= filterValue;
+  });
+}
+
+filterGreaterThan.autoRemove = (val: any) => typeof val !== "number";
+
+export default ProgressTable;

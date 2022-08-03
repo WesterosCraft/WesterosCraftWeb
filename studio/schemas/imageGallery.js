@@ -1,5 +1,3 @@
-import { string } from "prop-types";
-
 export default {
   name: "imageGallery",
   type: "object",
