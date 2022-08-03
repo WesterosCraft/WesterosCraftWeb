@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "echo 'Building Sanity to public/studio' && cd studio && sanity build ../public/studio -y && cd .. && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "cd studio && rm -rf node_modules && yarn install"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.4",
