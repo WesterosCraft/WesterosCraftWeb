@@ -139,6 +139,7 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           <SimpleGrid columns={2} gap={{ base: 4, sm: 6, lg: 8 }}>
             {images.map(image => (
               <SanityImage
+                alt={image._key}
                 key={image._key}
                 src={image.asset}
                 width={355}
