@@ -18,7 +18,6 @@ const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
-import { Longclaw } from './Icons/LongClaw';
 
 interface VideoFeatureProps {
   heading: string;

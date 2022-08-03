@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Center, Box, Heading, VStack } from '@chakra-ui/react';
+import { Center, Box, Heading, VStack, Img, SimpleGrid } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero } from '../components/Hero';
 import { VideoFeature } from '../components/VideoFeature';
@@ -12,6 +12,8 @@ import { Banner, BannerProps } from '../components/Banner';
 import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
 import { ServerFeatureGrid } from '../components/ServerFeatureGrid';
 import { AlternatingFeature, AlternatingFeatures } from '../components/AlternatingFeature';
+import { LeafGrid } from '../components/LeafGrid';
+import Longclaw from '../public/longclaw.png';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -107,6 +109,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             </Center>
           </Box>
           <FeatureGrid features={pageData?.featureGrid.features} />
+
           <ServerFeatureGrid />
           <VideoFeature
             heading={pageData?.videoFeature.heading}
@@ -130,6 +133,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             </Center>
           </Box>
           <ImageGridFeature {...pageData?.imageGridFeature} />
+          <LeafGrid />
           <AlternatingFeature {...pageData?.alternatingGridFeature} />
         </Box>
         <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />

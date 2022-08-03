@@ -81,7 +81,7 @@ export const AlternatingFeature = ({ features }: AlternatingFeatures) => {
                   maxH={{ base: '280', lg: '400' }}
                   pointerEvents="none"
                 >
-                  <iframe src={item.imageLink} />
+                  <iframe loading="lazy" src={item.imageLink} />
                 </AspectRatio>
               </Box>
               <Box
