@@ -162,20 +162,13 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                   overflow="hidden"
                   height="full"
                 >
-                  <ChakraNextUnwrappedImage
+                  <NextImage
                     className="embla__slide__img"
                     priority={i === 0}
                     placeholder="blur"
                     blurDataURL={slide?.slideImage?.metadata?.lqip}
-                    top="50%"
-                    left="50%"
-                    position="absolute"
-                    display="block"
-                    minHeight="100%"
-                    minWidth="100%"
-                    maxWidth="none"
-                    transform="translate(-50%, -50%)"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: 'cover' }}
                     src={slide?.slideImage?.url}
                     alt={slide?.location?.title ?? 'Westeros Location'}
                   />

@@ -30,6 +30,7 @@ export interface HeroPageProps {
   seo: SEOProps;
   imageGridFeature: ImageGridFeatureProps;
   alternatingGridFeature: AlternatingFeatures;
+  serverFeatureGrid: any;
 }
 
 export interface Hero {
@@ -110,7 +111,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
           </Box>
           <FeatureGrid features={pageData?.featureGrid.features} />
 
-          <ServerFeatureGrid />
+          <ServerFeatureGrid {...pageData?.serverFeatureGrid} />
           <VideoFeature
             heading={pageData?.videoFeature.heading}
             subheading={pageData?.videoFeature.subheading}
@@ -182,6 +183,18 @@ export const getStaticProps: GetStaticProps = async () => {
         url,
         metadata {
           lqip
+        }
+      }
+    },
+    serverFeatureGrid {
+      ...,
+      image {
+        asset->{
+          _id,
+          _rev,
+          metadata {
+            lqip
+          }
         }
       }
     },

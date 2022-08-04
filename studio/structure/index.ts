@@ -10,6 +10,7 @@ const pageList = [
   'region',
   'category',
   'buildCategory',
+  'home',
 ];
 
 const hiddenDocTypes = (listItem: any) => !pageList.includes(listItem.getId());
@@ -26,7 +27,7 @@ const structure = () =>
             // Sets a title for our new list
             .title('Pages')
             .items([
-              S.documentListItem().schemaType('home').id('home'),
+              S.documentListItem().schemaType('home').id('8f0dcf71-3eb0-4032-a2c4-8f919aaa8908'),
               S.documentListItem().schemaType('page').id('page'),
             ]),
         ),
