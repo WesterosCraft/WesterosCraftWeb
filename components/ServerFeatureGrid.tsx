@@ -1,4 +1,4 @@
-import { Box, Img, Center, VStack, Stack } from '@chakra-ui/react';
+import { Box, Img, Center, VStack, Stack, Text, StackDivider } from '@chakra-ui/react';
 // import Longclaw from '../public/longclaw.png';
 
 export const ServerFeatureGrid = () => {
@@ -13,8 +13,9 @@ export const ServerFeatureGrid = () => {
           spacing={12}
           mx="auto"
           w="full"
+          pr={4}
         >
-          <Center ml={-24}>
+          <Center ml={{ base: 0, '2xl': -24 }}>
             <Img
               minW={750}
               src={
@@ -22,23 +23,17 @@ export const ServerFeatureGrid = () => {
               }
             />
           </Center>
-          <VStack w="full" spacing={12}>
-            <Box
-              w="full"
-              height={200}
-              border="1px solid"
-              borderColor="primaryGold"
-              position="relative"
-            >
+          <VStack w="full" spacing={12} divider={<StackDivider />}>
+            <Box w="full" height={200}>
+              <VStack align="flex-start" color="White">
+                <Text fontSize="xl">WesterosCraft Creative Server</Text>
+              </VStack>
               {/* <Img position="absolute" top={-10} left={4} width={85} src={Longclaw.src} /> */}
             </Box>
-            <Box
-              w="full"
-              height={200}
-              border="1px solid"
-              borderColor="primaryGold"
-              position="relative"
-            >
+            <Box w="full" height={200}>
+              <VStack align="flex-start" color="White">
+                <Text fontSize="xl">WesterosCraft Creative Server</Text>
+              </VStack>
               {/* <Img position="absolute" top={-10} left={4} width={85} src={Longclaw.src} /> */}
             </Box>
           </VStack>

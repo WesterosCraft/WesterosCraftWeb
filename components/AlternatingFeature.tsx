@@ -1,37 +1,16 @@
 import {
   AspectRatio,
   Box,
-  Flex,
   Heading,
-  HStack,
+  Button,
   Icon,
-  Image,
-  Img,
   Link,
-  Skeleton,
   Stack,
   Text,
-  useColorModeValue,
   VStack,
 } from '@chakra-ui/react';
 import * as React from 'react';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
-
-const items = [
-  {
-    src: 'https://mc.westeroscraft.com/?nogui=true&zoom=4&x=2870&z=13000',
-    heading: 'Tour Westeros from your browser',
-    subheading: 'View our custom live map of our server, with high resolution details a zoom away.',
-    linkText: 'View the Map',
-  },
-  {
-    src: 'https://mc.westeroscraft.com/?nogui=true&zoom=4&x=2870&z=13000',
-    heading: 'Keep up with the community',
-    subheading:
-      'The Rookery is a community created magazine that details all the latest happenings in the realm of WesterosCraft. Sign up to keep up to date with the server!',
-    linkText: 'Read the Rookery',
-  },
-];
 
 export interface AlternatingFeatures {
   features: Feature[];
@@ -95,12 +74,20 @@ export const AlternatingFeature = ({ features }: AlternatingFeatures) => {
                     <Heading size="xl">{item.heading}</Heading>
                     <Text>{item.subheading}</Text>
                   </Stack>
-                  <HStack spacing="3">
-                    <Link fontWeight="bold" fontSize="lg">
+                  <Box>
+                    <Button
+                      color="primaryRed"
+                      variant="link"
+                      rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
+                      _hover={{
+                        textDecor: 'none',
+                        color: 'red.800',
+                        fill: 'red.800',
+                      }}
+                    >
                       {item.link.linkText}
-                    </Link>
-                    <Icon color="primaryRed" as={ArrowRightIcon} />
-                  </HStack>
+                    </Button>
+                  </Box>
                 </Stack>
               </Box>
             </Stack>

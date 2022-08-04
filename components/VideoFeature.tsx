@@ -104,7 +104,7 @@ const YoutubePlayer = ({ url, thumbnailUrl, thumbnailBlur }: YoutubePlayerProps)
       <Center
         className="play-button"
         borderRadius="full"
-        bg="whiteAlpha.600"
+        bg="whiteAlpha.800"
         position="absolute"
         top="50%"
         transform="translateY(-50%)"
@@ -120,7 +120,7 @@ const YoutubePlayer = ({ url, thumbnailUrl, thumbnailBlur }: YoutubePlayerProps)
         cursor="pointer"
         transition="all 150ms linear 0s"
         _hover={{
-          bg: 'whiteAlpha.800',
+          bg: 'white',
           '.thumbnail-icon': {
             color: 'blackAlpha.900',
           },

@@ -3,6 +3,7 @@ import featureGrid from './featureGrid';
 import hero from './hero';
 import imageGridFeature from './imageGridFeature';
 import seo from './seo';
+import serverFeatureGrid from './serverFeatureGrid';
 import testimonialGrid from './testimonialGrid';
 import videoFeature from './videoFeature';
 
@@ -46,6 +47,7 @@ export default {
     testimonialGrid,
     imageGridFeature,
     alternatingFeature,
+    serverFeatureGrid,
     seo,
   ],
 };
