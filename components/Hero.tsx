@@ -3,17 +3,57 @@ import NextImage from 'next/future/image';
 import { chakra, Box, Button, Heading, Stack, Text, IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
-import { HeroImageSlider, OutlineButton } from '../pages';
 import { ChevronRightIcon } from './Icons/ChevronRight';
+import { urlFor } from '../lib/sanity';
 
-interface HeroProps {
+export interface HeroProps {
   copy: string;
   heading1: string;
   heading2: string;
+  heroImageSlider: HeroImageSlider[];
   outlineButton: OutlineButton;
-  solidButton: OutlineButton;
+  solidButton: SolidButton;
   subheading: string;
-  images: HeroImageSlider[];
+}
+
+export interface HeroImageSlider {
+  _key: string;
+  _type: string;
+  location: Location;
+  slideImage: SlideImage;
+}
+
+export interface Location {
+  title: string;
+}
+
+export interface SlideImage {
+  _id: string;
+  _rev: string;
+  metadata: Metadata;
+}
+
+export interface Metadata {
+  lqip: string;
+}
+
+export interface OutlineButton {
+  internal: Internal;
+  linkText: string;
+}
+
+export interface Internal {
+  slug: Slug;
+}
+
+export interface Slug {
+  _type: string;
+  current: string;
+}
+
+export interface SolidButton {
+  _type: string;
+  linkText: string;
 }
 
 export const Hero = ({
@@ -23,7 +63,7 @@ export const Hero = ({
   heading2,
   outlineButton,
   solidButton,
-  images,
+  heroImageSlider,
 }: HeroProps) => {
   return (
     <Box
@@ -52,7 +92,8 @@ export const Hero = ({
           </Text>
 
           <Heading as="h1" size="3xl" lineHeight="1.1" fontWeight="extrabold" letterSpacing="tight">
-            {heading1}{' '}
+            {heading1}
+            {'  '}{' '}
             <Box as="mark" color="primaryRed" bg="transparent">
               {heading2}
             </Box>
@@ -106,7 +147,7 @@ export const Hero = ({
           clipPath: { lg: 'polygon(8% 0%, 100% 0%, 100% 100%, 0% 100%)' },
         }}
       >
-        <HeroCarousel slides={images} />
+        <HeroCarousel slides={heroImageSlider} />
       </Box>
     </Box>
   );
@@ -169,7 +210,7 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                     blurDataURL={slide?.slideImage?.metadata?.lqip}
                     fill
                     style={{ objectFit: 'cover' }}
-                    src={slide?.slideImage?.url}
+                    src={urlFor(slide?.slideImage).url()}
                     alt={slide?.location?.title ?? 'Westeros Location'}
                   />
                   <Heading size="lg" color="white" position="absolute" bottom="4" left="8">

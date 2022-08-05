@@ -1,5 +1,6 @@
-import { Box, SimpleGrid, Text, Img } from '@chakra-ui/react';
-import { ChakraNextImage } from './ChakraNextImage';
+import { Box, SimpleGrid, Text, Center } from '@chakra-ui/react';
+import NextImage from 'next/future/image';
+import { urlFor } from '../lib/sanity';
 
 export interface FeatureGridProps {
   features: Feature[];
@@ -14,24 +15,21 @@ export interface Feature {
 }
 
 export interface Banner {
-  _type: string;
-  url: string;
-  metadata: {
-    lqip: string;
-  };
+  _id: string;
+  _rev: string;
+  metadata: Metadata;
 }
 
-export interface Asset {
-  _ref: string;
-  _type: string;
+export interface Metadata {
+  lqip: string;
 }
 
-export const FeatureGrid = ({ features }: { features: Feature[] }) => {
+export const FeatureGrid = ({ features }: FeatureGridProps) => {
   return (
     <Box w="full">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
         <Box
-          maxW={['2xl', null, null, 'none']}
+          // maxW={['2xl', null, null, 'none']}
           mx="auto"
           px="4"
           borderLeftWidth="1px"
@@ -42,17 +40,23 @@ export const FeatureGrid = ({ features }: { features: Feature[] }) => {
         >
           <SimpleGrid columns={[1, null, 3]} rowGap="10" columnGap="8">
             {features.map(feature => (
-              <Box p={6} display={['flex', null, 'block']} key={feature.heading} textAlign="center">
-                <Box flexShrink={0}>
-                  <ChakraNextImage
-                    src={feature.banner.url}
+              <Box
+                p={6}
+                display={['flex', null, 'block']}
+                flexDirection="column"
+                key={feature.heading}
+                textAlign="center"
+              >
+                <Center>
+                  <NextImage
+                    src={urlFor(feature?.banner).url()}
                     alt="Banner"
                     blurDataURL={feature?.banner?.metadata.lqip!}
                     width={75}
                     height={150}
                   />
-                </Box>
-                <Box color="white" mt={['0', '4', '6']} ml={['6', null, '0']}>
+                </Center>
+                <Box maxW="md" color="white" mt={['0', '4', '6']} mx="auto">
                   <Text fontWeight="semibold" color="primaryGold" fontSize="lg">
                     {feature.heading}
                   </Text>

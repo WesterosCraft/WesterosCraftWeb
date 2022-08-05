@@ -7,6 +7,7 @@ const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
+import { urlFor } from '../lib/sanity';
 
 export interface VideoFeatureProps {
   heading: string;
@@ -16,8 +17,9 @@ export interface VideoFeatureProps {
 }
 
 export interface VideoThumbnail {
+  _id: string;
+  _rev: string;
   metadata: Metadata;
-  url: string;
 }
 
 export interface Metadata {
@@ -34,7 +36,7 @@ export const VideoFeature = ({
     <Box w="full" className="videoFeature">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
         <Box
-          maxW={{ base: '2xl', lg: 'none' }}
+          // maxW={{ base: '2xl', lg: 'none' }}
           mx="auto"
           px="4"
           borderLeftWidth="1px"
@@ -65,7 +67,7 @@ export const VideoFeature = ({
             <Flex className="video-wrapper" flex="1" h="full" w="full" overflow="hidden" maxW={768}>
               <YoutubePlayer
                 url={videoLink}
-                thumbnailUrl={videoThumbnail.url}
+                thumbnailUrl={urlFor(videoThumbnail).url()}
                 thumbnailBlur={videoThumbnail.metadata.lqip}
               />
             </Flex>
@@ -140,8 +142,6 @@ const YoutubePlayer = ({ url, thumbnailUrl, thumbnailBlur }: YoutubePlayerProps)
         <AspectRatio ratio={16 / 9} maxH={480}>
           <NextImage
             loader={thumbnailLoader}
-            // layout="fill"
-            // objectFit="cover"
             width={768}
             height={432}
             src={thumbnailUrl}

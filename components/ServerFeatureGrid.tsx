@@ -68,28 +68,38 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
     <Box w="full" className="serverFeatureGrid">
       <Box position="relative" maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
         <Stack
-          direction={{ base: 'column', lg: 'row' }}
+          direction={{ base: 'column-reverse', lg: 'row' }}
           borderLeftWidth="1px"
           borderRightWidth="1px"
           borderColor="primaryGold"
           spacing={8}
           mx="auto"
           w="full"
-          pr={4}
+          px={4}
         >
-          <Center ml={{ base: 0, '2xl': -24 }}>
+          <Center ml={{ base: 0, '2xl': -24 }} minW={{ base: 'auto', xl: 750 }}>
             <NextImage
               width={778}
               height={486}
-              style={{ minWidth: 750 }}
+              // style={{  }}
               placeholder="blur"
               blurDataURL={image.asset.metadata.lqip}
               src={urlFor(image.asset).url()}
             />
           </Center>
           <Box>
-            <Heading color="primaryGold">{heading}</Heading>
-            <VStack justify="center" mt="8" color="white" divider={<StackDivider />}>
+            <Heading textAlign={{ base: 'center', lg: 'left' }} color="primaryGold">
+              {heading}
+            </Heading>
+            <VStack
+              maxW="xl"
+              justify="center"
+              align="center"
+              mt="8"
+              mx="auto"
+              color="white"
+              divider={<StackDivider />}
+            >
               {servers.map(server => (
                 <Box key={server.heading} w="full" py={4}>
                   <HStack align="flex-start">
@@ -118,7 +128,7 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
                               //   color: 'red.800',
                               //   fill: 'red.800',
                               // }}
-                              rightIcon={<ArrowRightIcon />}
+                              // rightIcon={<ArrowRightIcon />}
                             >
                               {server.leftButton.linkText}
                             </Button>
@@ -137,7 +147,7 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
                               //   color: 'red.800',
                               //   fill: 'red.800',
                               // }}
-                              rightIcon={<ArrowRightIcon />}
+                              // rightIcon={<ArrowRightIcon />}
                             >
                               {server.rightButton.linkText}
                             </Button>

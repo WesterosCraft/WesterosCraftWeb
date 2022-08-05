@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { Center, Box, Heading, VStack, Img, SimpleGrid } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
-import { Hero } from '../components/Hero';
+import { Hero, HeroProps } from '../components/Hero';
 import { VideoFeatureProps, VideoFeature } from '../components/VideoFeature';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../lib/sanity.server';
@@ -22,7 +22,7 @@ export interface HeroPageProps {
   _type: string;
   _updatedAt: Date;
   banner: BannerProps;
-  hero: Hero;
+  hero: HeroProps;
   title: string;
   videoFeature: VideoFeatureProps;
   featureGrid: FeatureGridProps;
@@ -39,8 +39,8 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
     <>
       <Seo title={pageData?.seo?.title} />
       <Center flexDir="column" w="full">
-        <Hero {...{ ...pageData?.hero, images: pageData?.hero?.heroImageSlider }} />
-        <Banner bannerData={pageData?.banner} />
+        <Hero {...pageData?.hero} />
+        <Banner {...pageData?.banner} />
         <Box w="full" bg="primaryDark">
           <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
             <Center
@@ -58,8 +58,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
               </VStack>
             </Center>
           </Box>
-          <FeatureGrid features={pageData?.featureGrid.features} />
-
+          <FeatureGrid {...pageData?.featureGrid} />
           <ServerFeatureGrid {...pageData?.serverFeatureGrid} />
           <VideoFeature {...pageData?.videoFeature} />
         </Box>
@@ -97,7 +96,8 @@ export const getStaticProps: GetStaticProps = async () => {
           title
         },
         "slideImage": slideImage.asset->{
-          url,
+          _id,
+          _rev,
           metadata {
             lqip
           }
@@ -113,7 +113,8 @@ export const getStaticProps: GetStaticProps = async () => {
       features[]{
         ...,
         "banner": banner.asset->{
-          url,
+          _id,
+          _rev,
           metadata {
             lqip
           }
@@ -123,7 +124,8 @@ export const getStaticProps: GetStaticProps = async () => {
     videoFeature {
       ...,
       "videoThumbnail": videoThumbnail.asset->{
-        url,
+        _id,
+        _rev,
         metadata {
           lqip
         }
@@ -146,7 +148,8 @@ export const getStaticProps: GetStaticProps = async () => {
       images[]{
         ...,
         asset->{
-          ...,
+          _id,
+          _rev,
           metadata {
             lqip
           }

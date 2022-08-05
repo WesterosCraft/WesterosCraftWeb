@@ -6,12 +6,12 @@ export interface BannerProps {
   linkText: string;
 }
 
-export const Banner = ({ bannerData }: { bannerData: BannerProps }) => {
+export const Banner = ({ linkText }: BannerProps) => {
   return (
     <Center w="full" bg="primaryRed" px={4} py={6} position="relative">
       <SquareTexture />
       <Text color="white" fontSize="xl">
-        {bannerData?.linkText}
+        {linkText}
       </Text>
     </Center>
   );
