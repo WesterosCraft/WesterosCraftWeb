@@ -6,7 +6,7 @@ import { VideoFeatureProps, VideoFeature } from '../components/VideoFeature';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../lib/sanity.server';
 import { FeatureGridProps, FeatureGrid } from '../components/FeatureGrid';
-import { TestimonialGrid, Testimonials } from '../components/Testimonials';
+import { TestimonialsProps, Testimonials } from '../components/Testimonials';
 import { Seo, SEOProps } from '../components/Seo';
 import { Banner, BannerProps } from '../components/Banner';
 import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
@@ -26,7 +26,7 @@ export interface HeroPageProps {
   title: string;
   videoFeature: VideoFeatureProps;
   featureGrid: FeatureGridProps;
-  testimonialGrid: TestimonialGrid;
+  testimonialGrid: TestimonialsProps;
   seo: SEOProps;
   imageGridFeature: ImageGridFeatureProps;
   alternatingGridFeature: AlternatingFeatures;
@@ -79,7 +79,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
           {/* <LeafGrid /> */}
           <AlternatingFeature {...pageData?.alternatingGridFeature} />
         </Box>
-        <Testimonials testimonials={pageData?.testimonialGrid?.testimonials} />
+        <Testimonials {...pageData?.testimonialGrid} />
       </Center>
     </>
   );

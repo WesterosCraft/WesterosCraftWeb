@@ -3,7 +3,7 @@ import { CloseQuoteIcon } from './Icons/CloseQuoteIcon';
 import { OpenQuoteIcon } from './Icons/OpenQuoteIcon';
 import { SquareTexture } from './SquareTexture';
 
-export interface TestimonialGrid {
+export interface TestimonialsProps {
   testimonials: Testimonial[];
 }
 
@@ -15,7 +15,7 @@ export interface Testimonial {
   quote: string;
 }
 
-export const Testimonials = ({ testimonials }: { testimonials: Testimonial[] }) => (
+export const Testimonials = ({ testimonials }: TestimonialsProps) => (
   <Box bg="primaryRed" w="full" className="videoFeature" position="relative">
     <SquareTexture />
     <Box mx="auto" py={{ base: '10', md: '12' }} px={[2, null, 4]} className="container">
@@ -29,12 +29,12 @@ export const Testimonials = ({ testimonials }: { testimonials: Testimonial[] }) 
         {testimonials.map(testi => (
           <Stack
             mx="auto"
-            direction={{ base: 'row', md: 'column' }}
-            spacing={10}
+            direction={{ base: 'column' }}
+            spacing={{ base: 6, lg: 10 }}
             key={testi.author}
             color="white"
             w="full"
-            maxW="lg"
+            maxW="xl"
             px={6}
             py={4}
             position="relative"
@@ -50,7 +50,7 @@ export const Testimonials = ({ testimonials }: { testimonials: Testimonial[] }) 
                 <CloseQuoteIcon fill="whiteAlpha.600" boxSize={8} />
               </Flex>
             </Box>
-            <Box textAlign="right" w="full">
+            <Box textAlign={{ base: 'center', lg: 'right' }} w="full">
               <Text fontWeight="semibold">{`- ${testi.author}`}</Text>
               <Text>{testi.position}</Text>
             </Box>
