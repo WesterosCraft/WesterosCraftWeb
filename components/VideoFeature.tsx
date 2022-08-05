@@ -1,17 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import {
-  Box,
-  Flex,
-  Heading,
-  Divider,
-  Text,
-  AspectRatio,
-  Center,
-  HStack,
-  Stack,
-  Img,
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, AspectRatio, Center, Stack } from '@chakra-ui/react';
 
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
@@ -19,20 +8,27 @@ const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
 
-interface VideoFeatureProps {
+export interface VideoFeatureProps {
   heading: string;
   subheading: string;
+  videoLink: string;
+  videoThumbnail: VideoThumbnail;
+}
+
+export interface VideoThumbnail {
+  metadata: Metadata;
   url: string;
-  thumbnailUrl: string;
-  thumbnailBlur: string;
+}
+
+export interface Metadata {
+  lqip: string;
 }
 
 export const VideoFeature = ({
   heading,
   subheading,
-  url,
-  thumbnailUrl,
-  thumbnailBlur,
+  videoLink,
+  videoThumbnail,
 }: VideoFeatureProps) => {
   return (
     <Box w="full" className="videoFeature">
@@ -67,7 +63,11 @@ export const VideoFeature = ({
               </Stack>
             </Box>
             <Flex className="video-wrapper" flex="1" h="full" w="full" overflow="hidden" maxW={768}>
-              <YoutubePlayer url={url} thumbnailUrl={thumbnailUrl} thumbnailBlur={thumbnailBlur} />
+              <YoutubePlayer
+                url={videoLink}
+                thumbnailUrl={videoThumbnail.url}
+                thumbnailBlur={videoThumbnail.metadata.lqip}
+              />
             </Flex>
           </Stack>
         </Box>

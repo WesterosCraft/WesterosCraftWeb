@@ -2,7 +2,7 @@ import type { ReactElement } from 'react';
 import { Center, Box, Heading, VStack, Img, SimpleGrid } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero } from '../components/Hero';
-import { VideoFeature } from '../components/VideoFeature';
+import { VideoFeatureProps, VideoFeature } from '../components/VideoFeature';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../lib/sanity.server';
 import { FeatureGridProps, FeatureGrid } from '../components/FeatureGrid';
@@ -10,7 +10,7 @@ import { TestimonialGrid, Testimonials } from '../components/Testimonials';
 import { Seo, SEOProps } from '../components/Seo';
 import { Banner, BannerProps } from '../components/Banner';
 import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
-import { ServerFeatureGrid } from '../components/ServerFeatureGrid';
+import { ServerFeatureGrid, ServerFeatureGridProps } from '../components/ServerFeatureGrid';
 import { AlternatingFeature, AlternatingFeatures } from '../components/AlternatingFeature';
 import { LeafGrid } from '../components/LeafGrid';
 import Longclaw from '../public/longclaw.png';
@@ -24,64 +24,13 @@ export interface HeroPageProps {
   banner: BannerProps;
   hero: Hero;
   title: string;
-  videoFeature: VideoFeature;
+  videoFeature: VideoFeatureProps;
   featureGrid: FeatureGridProps;
   testimonialGrid: TestimonialGrid;
   seo: SEOProps;
   imageGridFeature: ImageGridFeatureProps;
   alternatingGridFeature: AlternatingFeatures;
-  serverFeatureGrid: any;
-}
-
-export interface Hero {
-  copy: string;
-  heading1: string;
-  heading2: string;
-  heroImageSlider: HeroImageSlider[];
-  outlineButton: OutlineButton;
-  solidButton: OutlineButton;
-  subheading: string;
-}
-
-export interface HeroImageSlider {
-  _key: string;
-  _type: string;
-  location: Location;
-  slideImage: VideoThumbnail;
-}
-
-export interface Location {
-  title: string;
-}
-
-export interface VideoThumbnail {
-  metadata: Metadata;
-  url: string;
-}
-
-export interface Metadata {
-  lqip: string;
-}
-
-export interface OutlineButton {
-  internal: Internal;
-  linkText: string;
-}
-
-export interface Internal {
-  slug: Slug;
-}
-
-export interface Slug {
-  _type: string;
-  current: string;
-}
-
-export interface VideoFeature {
-  heading: string;
-  subheading: string;
-  videoLink: string;
-  videoThumbnail: VideoThumbnail;
+  serverFeatureGrid: ServerFeatureGridProps;
 }
 
 export default function Home({ pageData }: { pageData: HeroPageProps }) {
@@ -112,13 +61,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
           <FeatureGrid features={pageData?.featureGrid.features} />
 
           <ServerFeatureGrid {...pageData?.serverFeatureGrid} />
-          <VideoFeature
-            heading={pageData?.videoFeature.heading}
-            subheading={pageData?.videoFeature.subheading}
-            url={pageData?.videoFeature.videoLink}
-            thumbnailUrl={pageData?.videoFeature.videoThumbnail?.url}
-            thumbnailBlur={pageData?.videoFeature.videoThumbnail?.metadata?.lqip}
-          />
+          <VideoFeature {...pageData?.videoFeature} />
         </Box>
         <Box w="full">
           <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
