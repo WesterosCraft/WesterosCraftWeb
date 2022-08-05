@@ -18,12 +18,13 @@ import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 
 const links = [
   {
-    heading: 'Locations',
-    description: 'View a single comprehensive list of every build we have to offer.',
+    heading: 'Creative',
+    description: 'Get started exploring Westeros and see the building process happen for yourself!',
   },
   {
-    heading: 'Locations',
-    description: 'View a single comprehensive list of every build we have to offer.',
+    heading: 'Survival',
+    description:
+      'Join our vanilla Minecraft server and get to know our community while playing the game you know and love.',
   },
 ];
 
@@ -51,13 +52,13 @@ export const ServerFeatureGrid = ({ image }: any) => {
               src={urlFor(image.asset).url()}
             />
           </Center>
-          <VStack mt="12" color="white" divider={<StackDivider />}>
+          <VStack justify="center" mt="12" color="white" divider={<StackDivider />}>
             {links.map(link => (
-              <Box key={link.heading} w="full">
-                <Text fontWeight="semibold">{link.heading}</Text>
-                <Text mt="2" fontSize="sm">
-                  {link.description}
+              <Box key={link.heading} w="full" py={4}>
+                <Text fontWeight="semibold" fontSize="2xl">
+                  {link.heading}
                 </Text>
+                <Text mt="2">{link.description}</Text>
                 <Flex
                   mt="3"
                   mb="2"
