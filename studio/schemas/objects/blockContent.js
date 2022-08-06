@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLinkRenderer } from '../components/externalLinkRenderer';
+import { ExternalLinkRenderer } from '../../components/externalLinkRenderer';
 
 import { FiAlignCenter } from 'react-icons/fa';
 /**

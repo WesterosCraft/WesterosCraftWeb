@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Center, Box, Heading, VStack, Img, SimpleGrid } from '@chakra-ui/react';
+import { Center, Box, Heading, VStack, Img, SimpleGrid, Icon, IconProps } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero, HeroProps } from '../components/Hero';
 import { VideoFeatureProps, VideoFeature } from '../components/VideoFeature';
@@ -11,9 +11,10 @@ import { Seo, SEOProps } from '../components/Seo';
 import { Banner, BannerProps } from '../components/Banner';
 import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
 import { ServerFeatureGrid, ServerFeatureGridProps } from '../components/ServerFeatureGrid';
-import { AlternatingFeature, AlternatingFeatures } from '../components/AlternatingFeature';
+import { AlternatingFeature, AlternatingFeatureProps } from '../components/AlternatingFeature';
 import { LeafGrid } from '../components/LeafGrid';
 import Longclaw from '../public/longclaw.png';
+import { BladesGrid } from '../components/BladeGrid';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -27,10 +28,10 @@ export interface HeroPageProps {
   videoFeature: VideoFeatureProps;
   featureGrid: FeatureGridProps;
   testimonialGrid: TestimonialsProps;
-  seo: SEOProps;
   imageGridFeature: ImageGridFeatureProps;
-  alternatingGridFeature: AlternatingFeatures;
+  alternatingGridFeature: AlternatingFeatureProps;
   serverFeatureGrid: ServerFeatureGridProps;
+  seo: SEOProps;
 }
 
 export default function Home({ pageData }: { pageData: HeroPageProps }) {
@@ -76,7 +77,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             </Center>
           </Box>
           <ImageGridFeature {...pageData?.imageGridFeature} />
-          {/* <LeafGrid /> */}
+
           <AlternatingFeature {...pageData?.alternatingGridFeature} />
         </Box>
         <Testimonials {...pageData?.testimonialGrid} />
@@ -160,6 +161,19 @@ export const getStaticProps: GetStaticProps = async () => {
         linkUrl {
           linkText,
           internal->{ slug }
+        }
+      }
+    },
+    alternatingGridFeature {
+      ...,
+      features[]{
+        ...,
+        "image": image.asset->{
+          _id,
+          _rev,
+          metadata {
+            lqip
+          }
         }
       }
     }

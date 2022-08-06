@@ -15,11 +15,6 @@ export default {
           type: 'object',
           fields: [
             {
-              name: 'imageLink',
-              title: 'Image Link',
-              type: 'url',
-            },
-            {
               name: 'image',
               type: 'image',
               title: 'Image',

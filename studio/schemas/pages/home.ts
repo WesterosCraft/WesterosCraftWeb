@@ -1,11 +1,11 @@
-import alternatingFeature from './alternatingFeature';
-import featureGrid from './featureGrid';
-import hero from './hero';
-import imageGridFeature from './imageGridFeature';
-import seo from './seo';
-import serverFeatureGrid from './serverFeatureGrid';
-import testimonialGrid from './testimonialGrid';
-import videoFeature from './videoFeature';
+import alternatingFeature from '../objects/alternatingFeature';
+import featureGrid from '../objects/featureGrid';
+import hero from '../objects/hero';
+import imageGridFeature from '../objects/imageGridFeature';
+import seo from '../objects/seo';
+import serverFeatureGrid from '../objects/serverFeatureGrid';
+import testimonialGrid from '../objects/testimonialGrid';
+import videoFeature from '../objects/videoFeature';
 
 export default {
   title: 'Home',

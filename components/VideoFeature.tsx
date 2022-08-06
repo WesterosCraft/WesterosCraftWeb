@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-import { Box, Flex, Heading, Text, AspectRatio, Center, Stack } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text, AspectRatio, Center, Stack, Divider } from '@chakra-ui/react';
 
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
@@ -8,6 +8,7 @@ const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
 import { urlFor } from '../lib/sanity';
+import { LeafGrid } from './LeafGrid';
 
 export interface VideoFeatureProps {
   heading: string;

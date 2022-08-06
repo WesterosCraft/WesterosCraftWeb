@@ -12,7 +12,9 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
-import SanityImage from './SanityImage';
+import NextImage from 'next/future/image';
+import { urlFor } from '../lib/sanity';
+// import SanityImage from './SanityImage';
 
 export interface ImageGridFeatureProps {
   heading: string;
@@ -59,10 +61,6 @@ export interface Slug {
 }
 
 export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGridFeatureProps) => {
-  //   const loader = ({ src, width = 355 }: { src: string; width: number | string }) => {
-  //     return `${src}?h=355&w=${width}&q=75&fit=crop&crop=center`;
-  //   };
-
   const chunks = useHighlight({
     text: heading,
     query: ['400 locations'],
@@ -138,17 +136,18 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           </Box>
           <SimpleGrid columns={2} gap={{ base: 4, sm: 6, lg: 8 }}>
             {images.map(image => (
-              <SanityImage
+              <NextImage
                 alt={image._key}
                 key={image._key}
-                src={image.asset}
+                src={urlFor(image.asset).url()}
                 width={355}
                 height={355}
                 placeholder="blur"
-                fit="crop"
-                crop="center"
                 quality={100}
                 blurDataURL={image.asset.metadata.lqip}
+                loader={({ src, width = 355 }) => {
+                  return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
+                }}
               />
               //   <ChakraNextImage
               //     key={image._key}

@@ -81,7 +81,6 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
             <NextImage
               width={778}
               height={486}
-              // style={{  }}
               placeholder="blur"
               blurDataURL={image.asset.metadata.lqip}
               src={urlFor(image.asset).url()}
@@ -114,7 +113,7 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
                           <Text mt="3">{server.description}</Text>
                         </Box>
                       </VStack>
-                      <HStack w="full">
+                      <HStack w="full" spacing={4}>
                         {server.leftButton && (
                           <NextLink href="/" passHref>
                             <Button
@@ -123,12 +122,6 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
                               variant="link"
                               fontSize="sm"
                               fill="primaryGold"
-                              // _hover={{
-                              //   textDecor: 'none',
-                              //   color: 'red.800',
-                              //   fill: 'red.800',
-                              // }}
-                              // rightIcon={<ArrowRightIcon />}
                             >
                               {server.leftButton.linkText}
                             </Button>
@@ -142,12 +135,6 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
                               variant="link"
                               fontSize="sm"
                               fill="primaryGold"
-                              // _hover={{
-                              //   textDecor: 'none',
-                              //   color: 'red.800',
-                              //   fill: 'red.800',
-                              // }}
-                              // rightIcon={<ArrowRightIcon />}
                             >
                               {server.rightButton.linkText}
                             </Button>
