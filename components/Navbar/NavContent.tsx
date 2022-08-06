@@ -70,9 +70,18 @@ const DesktopNavContent = (props: FlexProps) => {
         ))}
       </HStack>
       <HStack spacing="8" minW="240px" justify="space-between">
-        <Box as="a" href="#" color="white" fontWeight="bold">
+        <Button
+          variant="ghost"
+          _hover={{
+            bg: 'whiteAlpha.200',
+          }}
+          as="a"
+          href="#"
+          color="white"
+          fontWeight="bold"
+        >
           Apply
-        </Box>
+        </Button>
         <Button as="a" href="#" bg="white" fontWeight="bold">
           Explore Westeros
         </Button>

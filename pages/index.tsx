@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Center, Box, Heading, VStack, Img, SimpleGrid, Icon, IconProps } from '@chakra-ui/react';
+import { Center, Box, Heading, VStack } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero, HeroProps } from '../components/Hero';
 import { VideoFeatureProps, VideoFeature } from '../components/VideoFeature';
@@ -14,7 +14,6 @@ import { ServerFeatureGrid, ServerFeatureGridProps } from '../components/ServerF
 import { AlternatingFeature, AlternatingFeatureProps } from '../components/AlternatingFeature';
 import { LeafGrid } from '../components/LeafGrid';
 import Longclaw from '../public/longclaw.png';
-import { BladesGrid } from '../components/BladeGrid';
 
 export interface HeroPageProps {
   _createdAt: Date;

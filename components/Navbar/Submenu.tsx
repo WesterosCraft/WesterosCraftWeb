@@ -1,5 +1,13 @@
 import { useNavMenu } from './useNavMenu';
-import { Box, Collapse, SimpleGrid, useDisclosure } from '@chakra-ui/react';
+import {
+  Box,
+  Collapse,
+  SimpleGrid,
+  useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+} from '@chakra-ui/react';
 import * as React from 'react';
 // import { FaChevronDown } from 'react-icons/fa'
 import { Links } from './_data';
@@ -13,17 +21,17 @@ interface SubmenuProps {
 
 const DesktopSubmenu = (props: SubmenuProps) => {
   const { link } = props;
-  const { isOpen, getMenuProps, getTriggerProps } = useNavMenu();
   return (
-    <>
-      <NavLink.Desktop
+    <Menu>
+      <MenuButton
         display="flex"
         alignItems="center"
-        as="button"
-        type="button"
         px="4"
         fontWeight="semibold"
-        {...getTriggerProps()}
+        color="white"
+        _hover={{
+          color: 'gray.500',
+        }}
       >
         <Box>{link.title}</Box>
         <Box
@@ -31,10 +39,10 @@ const DesktopSubmenu = (props: SubmenuProps) => {
           // as={FaChevronDown}
           fontSize="xs"
         />
-      </NavLink.Desktop>
+      </MenuButton>
 
-      <NavMenu {...getMenuProps()} animate={isOpen ? 'open' : 'closed'}>
-        <Box maxW="7xl" mx="auto" px="8">
+      <MenuList bg="gray.700">
+        <Box maxW="7xl" mx="auto" p="4">
           <SimpleGrid spacing="10" columns={2}>
             {link.links?.map((item, idx) => (
               <DesktopMenuItem
@@ -48,8 +56,8 @@ const DesktopSubmenu = (props: SubmenuProps) => {
             ))}
           </SimpleGrid>
         </Box>
-      </NavMenu>
-    </>
+      </MenuList>
+    </Menu>
   );
 };
 

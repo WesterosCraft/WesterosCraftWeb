@@ -149,16 +149,6 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                   return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
                 }}
               />
-              //   <ChakraNextImage
-              //     key={image._key}
-              //     loader={loader}
-              //     width={355}
-              //     height={355}
-              //     src={image.asset.url}
-              //     placeholder="blur"
-              //     blurDataURL={image.asset.metadata.lqip}
-              //     alt="Wiki image"
-              //   />
             ))}
           </SimpleGrid>
         </Stack>

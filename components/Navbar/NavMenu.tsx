@@ -1,7 +1,7 @@
-import { useColorModeValue } from '@chakra-ui/react'
-import { Variants } from 'framer-motion'
-import * as React from 'react'
-import { MotionBox, MotionBoxProps } from './MotionBox'
+import { useColorModeValue } from '@chakra-ui/react';
+import { Variants } from 'framer-motion';
+import * as React from 'react';
+import { MotionBox, MotionBoxProps } from './MotionBox';
 
 export const NavMenu = (props: MotionBoxProps) => (
   <MotionBox
@@ -19,7 +19,7 @@ export const NavMenu = (props: MotionBoxProps) => (
     pb="12"
     {...props}
   />
-)
+);
 
 const variants: Variants = {
   init: {
@@ -42,4 +42,4 @@ const variants: Variants = {
       display: 'none',
     },
   },
-}
+};

@@ -102,7 +102,7 @@ export const Hero = ({
             {copy}
           </Text>
           <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
-            <NextLink href={solidButton?.internal?.slug?.current ?? '/'}>
+            <NextLink href={'/'}>
               <Button
                 size="lg"
                 bg="black"
