@@ -1,7 +1,7 @@
 import { useColorModeValue } from '@chakra-ui/react';
 import { Variants } from 'framer-motion';
 import * as React from 'react';
-import { MotionBox, MotionBoxProps } from './MotionBox';
+import { MotionBox, MotionBoxProps } from '../MotionBox';
 
 export const NavMenu = (props: MotionBoxProps) => (
   <MotionBox

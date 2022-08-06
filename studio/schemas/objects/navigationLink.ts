@@ -7,7 +7,7 @@ export default {
       title: 'title',
       targetTitle: 'target.title',
     },
-    prepare: ({ title, targetTitle }) => ({
+    prepare: ({ title, targetTitle }: any) => ({
       title: title || targetTitle,
     }),
   },

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Box,
   Button,
@@ -6,9 +7,8 @@ import {
   HStack,
   useDisclosure,
   VisuallyHidden,
-  useColorModeValue as mode,
 } from '@chakra-ui/react';
-import * as React from 'react';
+import NextLink from 'next/link';
 import { Logo } from './Logo';
 import { NavLink } from './NavLink';
 import { NavMenu } from './NavMenu';
@@ -56,7 +56,9 @@ const DesktopNavContent = (props: FlexProps) => {
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
       <Box as="a" href="#" rel="home">
         <VisuallyHidden>WesterosCraft</VisuallyHidden>
-        <Logo h="6" />
+        <NextLink href="/">
+          <Logo h="6" />
+        </NextLink>
       </Box>
       <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
         {links.map((link, idx) => (
@@ -70,21 +72,23 @@ const DesktopNavContent = (props: FlexProps) => {
         ))}
       </HStack>
       <HStack spacing="8" minW="240px" justify="space-between">
-        <Button
-          variant="ghost"
-          _hover={{
-            bg: 'whiteAlpha.200',
-          }}
-          as="a"
-          href="#"
-          color="white"
-          fontWeight="bold"
-        >
-          Apply
-        </Button>
-        <Button as="a" href="#" bg="white" fontWeight="bold">
-          Explore Westeros
-        </Button>
+        <NextLink href="/wiki" passHref>
+          <Button
+            variant="ghost"
+            _hover={{
+              bg: 'whiteAlpha.200',
+            }}
+            color="white"
+            fontWeight="bold"
+          >
+            Wiki
+          </Button>
+        </NextLink>
+        <NextLink href="/join" passHref>
+          <Button bg="white" fontWeight="bold">
+            Explore Westeros
+          </Button>
+        </NextLink>
       </HStack>
     </Flex>
   );

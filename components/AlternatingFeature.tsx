@@ -13,8 +13,6 @@ import {
 import NextImage from 'next/future/image';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import { urlFor } from '../lib/sanity';
-import { BladesGrid } from './BladeGrid';
-import { LeafGrid } from './LeafGrid';
 
 export interface AlternatingFeatureProps {
   features: Feature[];
