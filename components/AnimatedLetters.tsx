@@ -11,7 +11,7 @@ export const AnimatedLetters = ({ text }: { text: string }) => {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.03, delayChildren: 0.04 * i },
+      transition: { delay: 0.3, staggerChildren: 0.03, delayChildren: 0.04 * i },
     }),
   };
 
@@ -19,28 +19,25 @@ export const AnimatedLetters = ({ text }: { text: string }) => {
   const child = {
     visible: {
       opacity: 1,
-      //   x: 0,
-      y: 0,
+      y: `0em`,
       transition: {
-        type: 'spring',
-        damping: 12,
-        stiffness: 100,
+        duration: 1,
+        ease: [0.2, 0.65, 0.3, 0.9],
       },
     },
     hidden: {
       opacity: 0,
-      //   x: -20,
-      y: 10,
-      transition: {
-        type: 'spring',
-        damping: 12,
-        stiffness: 100,
-      },
+      y: `0.25em`,
     },
   };
 
   return (
-    <MotionBox whileInView="visible" variants={container} initial="hidden">
+    <MotionBox
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={container}
+      initial="hidden"
+    >
       {letters.map((letter, index) => (
         <motion.span variants={child} key={index}>
           {letter === ' ' ? '\u00A0' : letter}

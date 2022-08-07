@@ -1,6 +1,5 @@
 import {
   Box,
-  Flex,
   Center,
   VStack,
   Stack,
@@ -14,8 +13,9 @@ import {
 import NextLink from 'next/link';
 import NextImage from 'next/future/image';
 import { urlFor } from '../lib/sanity';
+import { MotionBox } from './MotionBox';
 // import Longclaw from '../public/longclaw.png';
-import { ArrowRightIcon } from './Icons/ArrowRightIcon';
+// import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 
 export interface ServerFeatureGridProps {
   heading: string;
@@ -87,9 +87,18 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
             />
           </Center>
           <Box>
-            <Heading textAlign={{ base: 'center', lg: 'left' }} color="primaryGold">
-              {heading}
-            </Heading>
+            <MotionBox
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              // @ts-ignore
+              transition={{ delay: 0.2 }}
+              margin="120px 0px 0px 0px"
+            >
+              <Heading textAlign={{ base: 'center', lg: 'left' }} color="primaryGold">
+                {heading}
+              </Heading>
+            </MotionBox>
             <VStack
               maxW="xl"
               justify="center"

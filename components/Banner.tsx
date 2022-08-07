@@ -13,10 +13,15 @@ export const Banner = ({ linkText, external }: BannerProps) => {
       <SquareTexture />
       <Box position="relative" zIndex={5}>
         <NextLink href={external || ''} passHref>
-          <Link isExternal={typeof external === 'string' ? true : false}>
-            <Text color="white" fontSize="xl">
-              {linkText}
-            </Text>
+          <Link
+            color="white"
+            isExternal={typeof external === 'string' ? true : false}
+            _hover={{
+              textDecor: 'none',
+              color: 'gray.400',
+            }}
+          >
+            <Text fontSize="xl">{linkText}</Text>
           </Link>
         </NextLink>
       </Box>

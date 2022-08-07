@@ -87,7 +87,7 @@ export const Hero = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             // @ts-ignore
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.3 }}
           >
             <Text
               color="primaryRed"
