@@ -5,9 +5,37 @@ export default {
   group: 'content',
   fields: [
     {
-      name: 'image',
+      name: 'leftImage',
       type: 'image',
-      title: 'Image',
+      title: 'Left Image',
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          title: 'Title',
+          name: 'title',
+          type: 'string',
+          isHighlighted: true,
+        },
+        {
+          title: 'Description',
+          name: 'description',
+          type: 'string',
+          isHighlighted: true,
+        },
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          isHighlighted: true,
+        },
+      ],
+    },
+    {
+      name: 'rightImage',
+      type: 'image',
+      title: 'Right Image',
       options: {
         hotspot: true,
       },

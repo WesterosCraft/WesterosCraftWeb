@@ -12,8 +12,6 @@ import { Banner, BannerProps } from '../components/Banner';
 import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGridFeature';
 import { ServerFeatureGrid, ServerFeatureGridProps } from '../components/ServerFeatureGrid';
 import { AlternatingFeature, AlternatingFeatureProps } from '../components/AlternatingFeature';
-import { LeafGrid } from '../components/LeafGrid';
-import Longclaw from '../public/longclaw.png';
 import { AnimatedLetters } from '../components/AnimatedLetters';
 
 export interface HeroPageProps {
@@ -35,7 +33,6 @@ export interface HeroPageProps {
 }
 
 export default function Home({ pageData }: { pageData: HeroPageProps }) {
-  console.log('👾 ~ Home ~ pageData', pageData);
   return (
     <>
       <Seo title={pageData?.seo?.title} />
@@ -74,7 +71,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
               borderColor="black"
             >
               <Heading size="2xl">
-                <AnimatedLetters text="Explore" />
+                <AnimatedLetters text="Explore the Seven Kingdoms" />
               </Heading>
             </Center>
           </Box>
@@ -136,7 +133,16 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     serverFeatureGrid {
       ...,
-      image {
+      leftImage {
+        asset->{
+          _id,
+          _rev,
+          metadata {
+            lqip
+          }
+        }
+      },
+      rightImage {
         asset->{
           _id,
           _rev,

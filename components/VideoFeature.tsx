@@ -8,6 +8,7 @@ const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
 import { urlFor } from '../lib/sanity';
+import { MotionBox } from './MotionBox';
 
 export interface VideoFeatureProps {
   heading: string;
@@ -54,22 +55,50 @@ export const VideoFeature = ({
               py={{ base: '6', md: '8', lg: '12' }}
             >
               <Stack spacing={{ base: '4', lg: '6' }}>
-                <Heading size="2xl" color="primaryGold">
-                  {heading}
-                </Heading>
-
-                <Text color="white" fontSize="lg">
-                  {subheading}
-                </Text>
+                <MotionBox
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  // @ts-ignore
+                  transition={{ delay: 0.3 }}
+                >
+                  <Heading size="2xl" color="primaryGold">
+                    {heading}
+                  </Heading>
+                </MotionBox>
+                <MotionBox
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  // @ts-ignore
+                  transition={{ delay: 0.5 }}
+                >
+                  <Text color="white" fontSize="lg">
+                    {subheading}
+                  </Text>
+                </MotionBox>
               </Stack>
             </Box>
-            <Flex className="video-wrapper" flex="1" h="full" w="full" overflow="hidden" maxW={768}>
+            <MotionBox
+              display="flex"
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-140px' }}
+              // @ts-ignore
+              transition={{ delay: 0.5 }}
+              className="video-wrapper"
+              flex="1"
+              h="full"
+              w="full"
+              overflow="hidden"
+              maxW={768}
+            >
               <YoutubePlayer
                 url={videoLink}
                 thumbnailUrl={urlFor(videoThumbnail).url()}
                 thumbnailBlur={videoThumbnail.metadata.lqip}
               />
-            </Flex>
+            </MotionBox>
           </Stack>
         </Box>
       </Box>

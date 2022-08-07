@@ -11,10 +11,12 @@ import {
   chakra,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { motion } from 'framer-motion';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import NextImage from 'next/future/image';
 import { urlFor } from '../lib/sanity';
-// import SanityImage from './SanityImage';
+import { MotionBox } from './MotionBox';
+import { child, container } from '../constants/animation';
 
 export interface ImageGridFeatureProps {
   heading: string;
@@ -73,7 +75,6 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           borderColor="black"
           borderLeftWidth="1px"
           borderRightWidth="1px"
-          // maxW={{ base: '2xl', lg: 'none' }}
           w="full"
           mx="auto"
           py={{ base: '24', sm: '32' }}
@@ -85,22 +86,55 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
         >
           <Box maxW="sm">
             <Stack spacing={{ base: '4', lg: '6' }}>
-              <Heading size={{ base: '2xl' }}>
-                {chunks.map(({ match, text }, i) => {
-                  if (!match) return text;
-                  return (
-                    <chakra.span key={i} color="primaryRed">
-                      {text}
-                    </chakra.span>
-                  );
-                })}
-              </Heading>
-              <Text fontSize="lg">{subheading}</Text>
+              <MotionBox
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                // @ts-ignore
+                transition={{ delay: 0.3 }}
+              >
+                <Heading size={{ base: '2xl' }}>
+                  {chunks.map(({ match, text }, i) => {
+                    if (!match) return text;
+                    return (
+                      <chakra.span key={i} color="primaryRed">
+                        {text}
+                      </chakra.span>
+                    );
+                  })}
+                </Heading>
+              </MotionBox>
+              <MotionBox
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                // @ts-ignore
+                transition={{ delay: 0.5 }}
+              >
+                <Text fontSize="lg">{subheading}</Text>
+              </MotionBox>
             </Stack>
 
-            <VStack mt="12">
-              {links.map(link => (
-                <Box key={link.heading} w="full" pt="4" borderTopWidth="1px" borderColor="gray.200">
+            <VStack
+              as={motion.div}
+              variants={container}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              // @ts-ignore
+              transition={{ delay: 0.3 }}
+              mt="12"
+            >
+              {links.map((link, index) => (
+                <MotionBox
+                  variants={child}
+                  viewport={{ once: true, margin: '-100px' }}
+                  key={index}
+                  w="full"
+                  pt="4"
+                  borderTopWidth="1px"
+                  borderColor="gray.200"
+                >
                   <Text fontWeight="semibold">{link.heading}</Text>
                   <Text mt="2" fontSize="sm">
                     {link.description}
@@ -130,25 +164,40 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                       </Button>
                     </NextLink>
                   </Flex>
-                </Box>
+                </MotionBox>
               ))}
             </VStack>
           </Box>
-          <SimpleGrid columns={2} gap={{ base: 4, sm: 6, lg: 8 }}>
+          <SimpleGrid
+            as={motion.div}
+            columns={2}
+            gap={{ base: 4, sm: 6, lg: 8 }}
+            variants={container}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            // @ts-ignore
+            transition={{ delay: 0.3 }}
+          >
             {images.map(image => (
-              <NextImage
-                loader={({ src, width = 355 }) => {
-                  return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
-                }}
-                alt={image._key}
+              <MotionBox
+                variants={child}
+                viewport={{ once: true, margin: '-100px' }}
                 key={image._key}
-                src={urlFor(image.asset).url()}
-                width={355}
-                height={355}
-                placeholder="blur"
-                quality={100}
-                blurDataURL={image.asset.metadata.lqip}
-              />
+              >
+                <NextImage
+                  loader={({ src, width = 355 }) => {
+                    return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
+                  }}
+                  alt={image._key}
+                  src={urlFor(image.asset).url()}
+                  width={355}
+                  height={355}
+                  placeholder="blur"
+                  quality={100}
+                  blurDataURL={image.asset.metadata.lqip}
+                />
+              </MotionBox>
             ))}
           </SimpleGrid>
         </Stack>

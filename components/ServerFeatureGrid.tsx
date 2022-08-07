@@ -11,23 +11,27 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { motion } from 'framer-motion';
 import NextImage from 'next/future/image';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
+import { container, child } from '../constants/animation';
+
 // import Longclaw from '../public/longclaw.png';
 // import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 
 export interface ServerFeatureGridProps {
   heading: string;
-  image: Image;
+  leftImage: TImage;
+  rightImage: TImage;
   servers: Server[];
 }
 
-export interface Image {
-  asset: ImageAsset;
+export interface TImage {
+  asset: LeftImageAsset;
 }
 
-export interface ImageAsset {
+export interface LeftImageAsset {
   _id: string;
   _rev: string;
   metadata: Metadata;
@@ -63,7 +67,12 @@ export interface TButton {
   linkText: string;
 }
 
-export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGridProps) => {
+export const ServerFeatureGrid = ({
+  heading,
+  leftImage,
+  rightImage,
+  servers,
+}: ServerFeatureGridProps) => {
   return (
     <Box w="full" className="serverFeatureGrid">
       <Box position="relative" maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
@@ -78,28 +87,62 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
           px={4}
         >
           <Center ml={{ base: 0, '2xl': -24 }} minW={{ base: 'auto', xl: 750 }}>
-            <NextImage
-              width={778}
-              height={486}
-              placeholder="blur"
-              blurDataURL={image.asset.metadata.lqip}
-              src={urlFor(image.asset).url()}
-            />
+            <Center>
+              {leftImage && (
+                <MotionBox
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  // @ts-ignore
+                  transition={{ delay: 1 }}
+                  alignSelf="flex-end"
+                  mb="14"
+                >
+                  <NextImage
+                    width={312}
+                    height={386}
+                    placeholder="blur"
+                    blurDataURL={leftImage.asset.metadata.lqip}
+                    src={urlFor(leftImage.asset).url()}
+                    alt="Baratheon"
+                  />
+                </MotionBox>
+              )}
+              {rightImage && (
+                <MotionBox
+                  alignSelf="flex-end"
+                  initial={{ opacity: 0, x: 10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  // @ts-ignore
+                  transition={{ delay: 0.5 }}
+                >
+                  <NextImage
+                    width={312}
+                    height={386}
+                    placeholder="blur"
+                    blurDataURL={rightImage.asset.metadata.lqip}
+                    src={urlFor(rightImage.asset).url()}
+                    alt="Targaryen"
+                  />
+                </MotionBox>
+              )}
+            </Center>
           </Center>
           <Box>
             <MotionBox
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: '-100px' }}
               // @ts-ignore
-              transition={{ delay: 0.2 }}
-              margin="120px 0px 0px 0px"
+              transition={{ delay: 0.3 }}
             >
               <Heading textAlign={{ base: 'center', lg: 'left' }} color="primaryGold">
-                {heading}
+                {heading ?? ''}
               </Heading>
             </MotionBox>
             <VStack
+              as={motion.div}
               maxW="xl"
               justify="center"
               align="center"
@@ -107,9 +150,21 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
               mx="auto"
               color="white"
               divider={<StackDivider />}
+              variants={container}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              // @ts-ignore
+              transition={{ delay: 0.3 }}
             >
-              {servers.map(server => (
-                <Box key={server.heading} w="full" py={4}>
+              {servers.map((server, index) => (
+                <MotionBox
+                  variants={child}
+                  viewport={{ once: true, margin: '-100px' }}
+                  key={index}
+                  w="full"
+                  py={4}
+                >
                   <HStack align="flex-start">
                     <Img src={urlFor(server.icon.asset).url()} />
                     <VStack align="flex-start" spacing={6}>
@@ -152,7 +207,7 @@ export const ServerFeatureGrid = ({ heading, image, servers }: ServerFeatureGrid
                       </HStack>
                     </VStack>
                   </HStack>
-                </Box>
+                </MotionBox>
               ))}
             </VStack>
           </Box>

@@ -1,4 +1,6 @@
 import { Box, Flex, StackDivider, Text, Spacer, Stack } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
+import { child, container } from '../constants/animation';
 import { CloseQuoteIcon } from './Icons/CloseQuoteIcon';
 import { OpenQuoteIcon } from './Icons/OpenQuoteIcon';
 import { SquareTexture } from './SquareTexture';
@@ -20,18 +22,28 @@ export const Testimonials = ({ testimonials }: TestimonialsProps) => (
     <SquareTexture />
     <Box mx="auto" py={{ base: '10', md: '12' }} px={[2, null, 4]} className="container">
       <Stack
+        as={motion.div}
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-100px' }}
+        // @ts-ignore
+        transition={{ delay: 0.3 }}
         direction={{ base: 'column', lg: 'row' }}
         w="full"
         justify="space-between"
         align="center"
         divider={<StackDivider borderColor="white" />}
       >
-        {testimonials.map(testi => (
+        {testimonials.map((testi, i) => (
           <Stack
+            as={motion.div}
+            variants={child}
+            viewport={{ once: true, margin: '-100px' }}
             mx="auto"
             direction={{ base: 'column' }}
             spacing={{ base: 6, lg: 10 }}
-            key={testi.author}
+            key={i}
             color="white"
             w="full"
             maxW="xl"

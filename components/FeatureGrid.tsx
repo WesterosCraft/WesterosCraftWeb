@@ -1,5 +1,6 @@
 import { Box, Text, Center } from '@chakra-ui/react';
 import NextImage from 'next/future/image';
+import { container, child } from '../constants/animation';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
 
@@ -26,38 +27,6 @@ export interface Metadata {
 }
 
 export const FeatureGrid = ({ features }: FeatureGridProps) => {
-  // Variants for Container
-  const container = {
-    hidden: { opacity: 0 },
-    visible: (i = 1) => ({
-      opacity: 1,
-      transition: { delay: 0.1, staggerChildren: 0.3, delayChildren: 0.4 * i },
-    }),
-  };
-
-  // Variants for each letter
-  const child = {
-    visible: {
-      opacity: 1,
-      //   x: 0,
-      y: 0,
-      transition: {
-        type: 'spring',
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-    hidden: {
-      opacity: 0,
-      //   x: -20,
-      y: 15,
-      transition: {
-        type: 'spring',
-        damping: 12,
-        stiffness: 100,
-      },
-    },
-  };
   return (
     <Box w="full">
       <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
@@ -81,10 +50,16 @@ export const FeatureGrid = ({ features }: FeatureGridProps) => {
             variants={container}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-100px' }}
           >
             {features.map((feature, index) => (
-              <MotionBox key={index} variants={child} p={6} textAlign="center">
+              <MotionBox
+                key={index}
+                variants={child}
+                p={6}
+                viewport={{ once: true, margin: '-100px' }}
+                textAlign="center"
+              >
                 <Center>
                   <NextImage
                     src={urlFor(feature?.banner).url()}

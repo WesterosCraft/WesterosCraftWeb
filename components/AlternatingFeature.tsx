@@ -13,6 +13,7 @@ import {
 import NextImage from 'next/future/image';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import { urlFor } from '../lib/sanity';
+import { MotionBox } from './MotionBox';
 
 export interface AlternatingFeatureProps {
   features: Feature[];
@@ -66,7 +67,15 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
               }
               spacing={{ base: '0', lg: '12' }}
             >
-              <Box w="full" overflow="hidden">
+              <MotionBox
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-100px' }}
+                // @ts-ignore
+                transition={{ delay: 0.3 }}
+                w="full"
+                overflow="hidden"
+              >
                 <AspectRatio
                   ratio={[4 / 3, null, 16 / 9]}
                   maxH={{ base: '280', lg: '400' }}
@@ -80,7 +89,7 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
                     blurDataURL={item.image?.metadata?.lqip}
                   />
                 </AspectRatio>
-              </Box>
+              </MotionBox>
               <Box
                 width={{ lg: 'lg' }}
                 mx={{ base: '6', md: '8', lg: '0' }}
@@ -89,10 +98,32 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
               >
                 <Stack spacing={{ base: '8', lg: '10' }}>
                   <Stack spacing={{ base: '2', lg: '4' }}>
-                    <Heading size="xl">{item.heading}</Heading>
-                    <Text>{item.subheading}</Text>
+                    <MotionBox
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      // @ts-ignore
+                      transition={{ delay: 0.3 }}
+                    >
+                      <Heading size="xl">{item.heading}</Heading>
+                    </MotionBox>
+                    <MotionBox
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-100px' }}
+                      // @ts-ignore
+                      transition={{ delay: 0.5 }}
+                    >
+                      <Text>{item.subheading}</Text>
+                    </MotionBox>
                   </Stack>
-                  <Box>
+                  <MotionBox
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    // @ts-ignore
+                    transition={{ delay: 0.5 }}
+                  >
                     <Button
                       color="primaryRed"
                       variant="link"
@@ -105,7 +136,7 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
                     >
                       {item.link.linkText}
                     </Button>
-                  </Box>
+                  </MotionBox>
                 </Stack>
               </Box>
             </Stack>
