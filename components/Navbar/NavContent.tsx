@@ -44,7 +44,7 @@ const MobileNavContext = (props: FlexProps) => {
           ),
         )}
         <Button colorScheme="blue" w="full" size="lg" mt="5">
-          Try for free
+          Join Server
         </Button>
       </NavMenu>
     </>
@@ -71,25 +71,12 @@ const DesktopNavContent = (props: FlexProps) => {
           </Box>
         ))}
       </HStack>
-      <HStack spacing="8" minW="240px" justify="space-between">
-        <NextLink href="/wiki" passHref>
-          <Button
-            variant="ghost"
-            _hover={{
-              bg: 'whiteAlpha.200',
-            }}
-            color="white"
-            fontWeight="bold"
-          >
-            Wiki
-          </Button>
-        </NextLink>
-        <NextLink href="/join" passHref>
-          <Button bg="white" fontWeight="bold">
-            Explore Westeros
-          </Button>
-        </NextLink>
-      </HStack>
+
+      <NextLink href="/join" passHref>
+        <Button bg="white" fontWeight="bold">
+          Join Server
+        </Button>
+      </NextLink>
     </Flex>
   );
 };

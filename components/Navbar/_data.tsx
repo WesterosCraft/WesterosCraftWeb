@@ -234,6 +234,16 @@ export const links = [
       _type: 'slug',
       current: 'http://mc.westeroscraft.com/',
     },
+    title: 'Wiki',
+  },
+
+  {
+    _key: '0fb3c9e302f5',
+    _type: 'externalLink',
+    slug: {
+      _type: 'slug',
+      current: 'http://mc.westeroscraft.com/',
+    },
     title: 'Discord',
   },
 ] as Links[];

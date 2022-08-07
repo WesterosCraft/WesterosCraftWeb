@@ -17,9 +17,6 @@ import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
 import { container, child } from '../constants/animation';
 
-// import Longclaw from '../public/longclaw.png';
-// import { ArrowRightIcon } from './Icons/ArrowRightIcon';
-
 export interface ServerFeatureGridProps {
   heading: string;
   leftImage: TImage;
@@ -86,7 +83,7 @@ export const ServerFeatureGrid = ({
           w="full"
           px={4}
         >
-          <Center ml={{ base: 0, '2xl': -24 }} minW={{ base: 'auto', xl: 750 }}>
+          <Center ml={{ base: 0, '2xl': -32 }} minW={{ base: 'auto', xl: 750 }}>
             <Center>
               {leftImage && (
                 <MotionBox
@@ -165,19 +162,25 @@ export const ServerFeatureGrid = ({
                   w="full"
                   py={4}
                 >
-                  <HStack align="flex-start">
+                  <Stack
+                    direction={{ base: 'column', sm: 'row' }}
+                    align={{ base: 'center', sm: 'flex-start' }}
+                  >
                     <Img src={urlFor(server.icon.asset).url()} />
-                    <VStack align="flex-start" spacing={6}>
-                      <VStack align="flex-start" spacing={1}>
+                    <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={6}>
+                      <VStack
+                        align={{ base: 'center', sm: 'flex-start' }}
+                        textAlign={{ base: 'center', sm: 'left' }}
+                        spacing={1}
+                      >
                         <Text fontWeight="semibold" fontSize="2xl">
                           {server.heading}
                         </Text>
                         <Text fontSize="sm">{server.subheading}</Text>
-                        <Box>
-                          <Text mt="3">{server.description}</Text>
-                        </Box>
+
+                        <Text mt="3">{server.description}</Text>
                       </VStack>
-                      <HStack w="full" spacing={4}>
+                      <HStack justify={{ base: 'center', sm: 'flex-start' }} w="full" spacing={4}>
                         {server.leftButton && (
                           <NextLink href="/" passHref>
                             <Button
@@ -206,7 +209,7 @@ export const ServerFeatureGrid = ({
                         )}
                       </HStack>
                     </VStack>
-                  </HStack>
+                  </Stack>
                 </MotionBox>
               ))}
             </VStack>

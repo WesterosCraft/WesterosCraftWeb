@@ -44,6 +44,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             <Center
               pt="14"
               pb="8"
+              px="4"
               borderLeft="1px"
               borderRight="1px"
               borderBottom="1px"
@@ -65,13 +66,14 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             <Center
               pt="14"
               pb="8"
+              px="4"
               borderLeft="1px"
               borderRight="1px"
               borderBottom="1px"
               borderColor="black"
             >
               <Heading size="2xl">
-                <AnimatedLetters text="Explore the Seven Kingdoms" />
+                <AnimatedLetters text="Explore the Realm" />
               </Heading>
             </Center>
           </Box>
