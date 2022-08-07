@@ -14,6 +14,7 @@ import { ServerFeatureGrid, ServerFeatureGridProps } from '../components/ServerF
 import { AlternatingFeature, AlternatingFeatureProps } from '../components/AlternatingFeature';
 import { LeafGrid } from '../components/LeafGrid';
 import Longclaw from '../public/longclaw.png';
+import { AnimatedLetters } from '../components/AnimatedLetters';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -34,6 +35,7 @@ export interface HeroPageProps {
 }
 
 export default function Home({ pageData }: { pageData: HeroPageProps }) {
+  console.log('👾 ~ Home ~ pageData', pageData);
   return (
     <>
       <Seo title={pageData?.seo?.title} />
@@ -52,7 +54,7 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
             >
               <VStack>
                 <Heading color="white" size="2xl">
-                  Start your journey
+                  <AnimatedLetters text="Start your journey" />
                 </Heading>
               </VStack>
             </Center>
@@ -71,7 +73,9 @@ export default function Home({ pageData }: { pageData: HeroPageProps }) {
               borderBottom="1px"
               borderColor="black"
             >
-              <Heading size="2xl">Explore</Heading>
+              <Heading size="2xl">
+                <AnimatedLetters text="Explore" />
+              </Heading>
             </Center>
           </Box>
           <ImageGridFeature {...pageData?.imageGridFeature} />

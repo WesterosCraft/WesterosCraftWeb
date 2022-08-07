@@ -137,6 +137,9 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           <SimpleGrid columns={2} gap={{ base: 4, sm: 6, lg: 8 }}>
             {images.map(image => (
               <NextImage
+                loader={({ src, width = 355 }) => {
+                  return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
+                }}
                 alt={image._key}
                 key={image._key}
                 src={urlFor(image.asset).url()}
@@ -145,9 +148,6 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                 placeholder="blur"
                 quality={100}
                 blurDataURL={image.asset.metadata.lqip}
-                loader={({ src, width = 355 }) => {
-                  return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
-                }}
               />
             ))}
           </SimpleGrid>

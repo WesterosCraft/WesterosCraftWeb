@@ -9,12 +9,12 @@ import {
   VisuallyHidden,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { Logo } from './Logo';
 import { NavLink } from './NavLink';
 import { NavMenu } from './NavMenu';
 import { Submenu } from './Submenu';
 import { ToggleButton } from './ToggleButton';
 import { links } from './_data';
+import { Logo } from './Logo';
 
 const MobileNavContext = (props: FlexProps) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -54,12 +54,12 @@ const MobileNavContext = (props: FlexProps) => {
 const DesktopNavContent = (props: FlexProps) => {
   return (
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
-      <Box as="a" href="#" rel="home">
-        <VisuallyHidden>WesterosCraft</VisuallyHidden>
-        <NextLink href="/">
+      <NextLink href="/" passHref>
+        <Box as="a" rel="home">
+          <VisuallyHidden>WesterosCraft</VisuallyHidden>
           <Logo h="6" />
-        </NextLink>
-      </Box>
+        </Box>
+      </NextLink>
       <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
         {links.map((link, idx) => (
           <Box as="li" key={idx} id={`nav__menuitem-${idx}`}>

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import NextImage from 'next/future/image';
-import { chakra, Box, Button, Heading, Stack, Text, IconButton } from '@chakra-ui/react';
+import { Box, Button, Heading, Stack, Text, IconButton } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronRightIcon } from './Icons/ChevronRight';
 import { urlFor } from '../lib/sanity';
+import { MotionBox } from './MotionBox';
 
 export interface HeroProps {
   copy: string;
@@ -81,60 +82,89 @@ export const Hero = ({
           pt={{ base: '20', lg: '40' }}
           pb={{ base: '16', lg: '24' }}
         >
-          <Text
-            color="primaryRed"
-            textTransform="uppercase"
-            mb="8"
-            fontWeight="semibold"
-            letterSpacing="wide"
+          <MotionBox
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            // @ts-ignore
+            transition={{ delay: 0.2 }}
           >
-            {subheading}
-          </Text>
-
-          <Heading as="h1" size="3xl" lineHeight="1.1" fontWeight="extrabold" letterSpacing="tight">
-            {heading1}
-            {'  '}{' '}
-            <Box as="mark" color="primaryRed" bg="transparent">
-              {heading2}
-            </Box>
-          </Heading>
-          <Text mt={4} fontSize={{ base: 'lg', sm: 'xl' }} fontWeight="medium" color="gray.600">
-            {copy}
-          </Text>
-          <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
-            <NextLink href={'/'}>
-              <Button
-                size="lg"
-                bg="black"
-                _hover={{ bg: 'blackAlpha.700' }}
-                color="white"
-                height="14"
-                px="8"
-                fontSize="md"
-              >
-                {solidButton?.linkText ?? ''}
-              </Button>
-            </NextLink>
-            <NextLink href={outlineButton?.internal?.slug?.current} passHref>
-              <Button
-                variant="outline"
-                size="lg"
-                bg="transparent"
-                color="gray.800"
-                borderColor="black"
-                _hover={{
-                  backgroundColor: 'black',
-                  color: 'white',
-                }}
-                height="14"
-                px="8"
-                shadow="base"
-                fontSize="md"
-              >
-                {outlineButton?.linkText ?? ''}
-              </Button>
-            </NextLink>
-          </Stack>
+            <Text
+              color="primaryRed"
+              textTransform="uppercase"
+              mb="8"
+              fontWeight="semibold"
+              letterSpacing="wide"
+            >
+              {subheading}
+            </Text>
+          </MotionBox>
+          <MotionBox
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            // @ts-ignore
+            transition={{ delay: 0.5 }}
+          >
+            <Heading
+              as="h1"
+              size="3xl"
+              lineHeight="1.1"
+              fontWeight="extrabold"
+              letterSpacing="tight"
+            >
+              {heading1}
+              {'  '}{' '}
+              <Box as="mark" color="primaryRed" bg="transparent">
+                {heading2}
+              </Box>
+            </Heading>
+          </MotionBox>
+          <MotionBox
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            // @ts-ignore
+            transition={{ delay: 0.7 }}
+          >
+            <Text mt={4} fontSize={{ base: 'lg', sm: 'xl' }} fontWeight="medium" color="gray.600">
+              {copy}
+            </Text>
+            <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
+              <NextLink href={'/'}>
+                <Button
+                  size="lg"
+                  bg="black"
+                  _hover={{ bg: 'blackAlpha.700' }}
+                  color="white"
+                  height="14"
+                  px="8"
+                  fontSize="md"
+                >
+                  {solidButton?.linkText ?? ''}
+                </Button>
+              </NextLink>
+              <NextLink href={outlineButton?.internal?.slug?.current} passHref>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  bg="transparent"
+                  color="gray.800"
+                  borderColor="black"
+                  _hover={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                  }}
+                  height="14"
+                  px="8"
+                  shadow="base"
+                  fontSize="md"
+                >
+                  {outlineButton?.linkText ?? ''}
+                </Button>
+              </NextLink>
+            </Stack>
+          </MotionBox>
         </Box>
       </Box>
       <Box
@@ -212,6 +242,7 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                     style={{ objectFit: 'cover' }}
                     src={urlFor(slide?.slideImage).url()}
                     alt={slide?.location?.title ?? 'Westeros Location'}
+                    sizes="50vw"
                   />
                   <Heading size="lg" color="white" position="absolute" bottom="4" left="8">
                     {slide?.location?.title ?? ''}
@@ -237,18 +268,3 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
     </>
   );
 }
-
-const ChakraNextUnwrappedImage = chakra(NextImage, {
-  shouldForwardProp: prop =>
-    [
-      'width',
-      'height',
-      'src',
-      'alt',
-      'quality',
-      'placeholder',
-      'blurDataURL',
-      'loader',
-      'layout',
-    ].includes(prop),
-});

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Image, HeadingProps, HStack, chakra } from '@chakra-ui/react';
+import { Image, HStack, chakra, StackProps } from '@chakra-ui/react';
 
-export const Logo = (props: HeadingProps) => {
+export const Logo = (props: StackProps) => {
   return (
-    <HStack align="center" justify="center">
+    <HStack align="center" justify="center" {...props}>
       <Image
         src="/shield-logomark.png"
         width="36px"
