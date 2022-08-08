@@ -54,22 +54,24 @@ const MobileNavContext = (props: FlexProps) => {
 const DesktopNavContent = (props: FlexProps) => {
   return (
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
-      <NextLink href="/" passHref>
-        <Box as="a" rel="home">
-          <VisuallyHidden>WesterosCraft</VisuallyHidden>
-          <Logo h="6" />
-        </Box>
-      </NextLink>
-      <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
-        {links.map((link, idx) => (
-          <Box as="li" key={idx} id={`nav__menuitem-${idx}`}>
-            {link.links ? (
-              <Submenu.Desktop link={link} />
-            ) : (
-              <NavLink.Desktop href={link?.slug?.current}>{link.title}</NavLink.Desktop>
-            )}
+      <HStack spacing={8}>
+        <NextLink href="/" passHref>
+          <Box as="a" rel="home">
+            <VisuallyHidden>WesterosCraft</VisuallyHidden>
+            <Logo h="6" />
           </Box>
-        ))}
+        </NextLink>
+        <HStack as="ul" id="nav__primary-menu" aria-label="Main Menu" listStyleType="none">
+          {links.map((link, idx) => (
+            <Box as="li" key={idx} id={`nav__menuitem-${idx}`}>
+              {link.links ? (
+                <Submenu.Desktop link={link} />
+              ) : (
+                <NavLink.Desktop href={link?.slug?.current}>{link.title}</NavLink.Desktop>
+              )}
+            </Box>
+          ))}
+        </HStack>
       </HStack>
 
       <NextLink href="/join" passHref>

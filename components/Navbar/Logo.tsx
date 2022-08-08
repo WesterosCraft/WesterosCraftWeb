@@ -18,7 +18,7 @@ export const Logo = (props: StackProps) => {
         viewBox="0 0 593.39 81.56"
         style={{
           fill: 'white',
-          height: '26px',
+          height: '24px',
           cursor: 'pointer',
           textRendering: 'optimizeSpeed',
         }}
