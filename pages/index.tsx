@@ -32,7 +32,7 @@ export interface HeroPageProps {
   seo: SEOProps;
 }
 
-export default function Home({ pageData }: { pageData: HeroPageProps }) {
+export default function HomePage({ pageData }: { pageData: HeroPageProps }) {
   return (
     <>
       <Seo title={pageData?.seo?.title} />
@@ -192,6 +192,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: { pageData }, revalidate: 60 };
 };
 
-Home.getLayout = function getLayout(page: ReactElement) {
+HomePage.getLayout = function getLayout(page: ReactElement) {
   return <OneColumnLayout>{page}</OneColumnLayout>;
 };

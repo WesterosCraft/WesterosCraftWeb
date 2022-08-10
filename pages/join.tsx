@@ -1,4 +1,6 @@
-import { Flex, Container, Table, Td, Thead, Th, chakra, Tbody, Tr } from '@chakra-ui/react';
+import type { ReactElement } from 'react';
+import { Flex, Container } from '@chakra-ui/react';
+import { OneColumnLayout } from '../components';
 
 export default function JoinPage() {
   return (
@@ -9,3 +11,7 @@ export default function JoinPage() {
     </Container>
   );
 }
+
+JoinPage.getLayout = function getLayout(page: ReactElement) {
+  return <OneColumnLayout>{page}</OneColumnLayout>;
+};

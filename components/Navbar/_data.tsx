@@ -125,6 +125,16 @@ export const links = [
         },
         title: 'Forums',
       },
+      {
+        _key: 'db9bcffdd8c8',
+        _type: 'externalLink',
+        description: 'Where we plan all of our builds',
+        slug: {
+          _type: 'slug',
+          current: 'https://forum.westeroscraft.com/',
+        },
+        title: 'Donate',
+      },
       // {
       //   _key: '7d3fa5a7d122',
       //   _type: 'externalLink',
