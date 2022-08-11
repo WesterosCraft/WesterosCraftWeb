@@ -1,63 +1,76 @@
-import { useNavMenu } from './useNavMenu';
 import {
   Box,
   Collapse,
   SimpleGrid,
   useDisclosure,
-  Menu,
-  MenuButton,
-  MenuList,
+  Popover,
+  PopoverTrigger,
+  Button,
+  Text,
+  PopoverContent,
+  PopoverArrow,
 } from '@chakra-ui/react';
 import * as React from 'react';
-// import { FaChevronDown } from 'react-icons/fa'
 import { Links } from './_data';
 import { NavLink } from './NavLink';
-import { NavMenu } from './NavMenu';
 import { SubmenuItem as DesktopMenuItem } from './SubmenuItem';
+import { ChevronDownIcon } from '../Icons/ChevronDown';
 
 interface SubmenuProps {
   link: Links;
 }
 
-const DesktopSubmenu = (props: SubmenuProps) => {
-  const { link } = props;
+const DesktopSubmenu = ({ link }: SubmenuProps) => {
   return (
-    <Menu>
-      <MenuButton
-        display="flex"
-        alignItems="center"
-        px="4"
-        fontWeight="semibold"
-        color="white"
-        _hover={{
-          color: 'gray.500',
-        }}
-      >
-        <Box>{link.title}</Box>
-        <Box
-          marginStart="2"
-          // as={FaChevronDown}
-          fontSize="xs"
-        />
-      </MenuButton>
+    <Popover trigger="hover" offset={[2, 2]}>
+      <PopoverTrigger>
+        <Button
+          height="auto"
+          variant="ghost"
+          display="flex"
+          alignItems="center"
+          px="4"
+          py="6"
+          color="white"
+          fill="white"
+          _focus={{
+            bg: 'inherit',
+          }}
+          _hover={{
+            cursor: 'default',
+            color: 'primaryGlare',
+            fill: 'primaryGlare',
+          }}
+          // _hover={{
+          //   fill: 'white',
+          //   cursor: 'default',
+          //   color: 'gray.500',
+          // }}
+          rightIcon={<ChevronDownIcon boxSize={3} />}
+        >
+          <Text>{link.title}</Text>
+        </Button>
+      </PopoverTrigger>
 
-      <MenuList bg="gray.700">
-        <Box maxW="7xl" mx="auto" p="4">
-          <SimpleGrid spacing="10" columns={2}>
-            {link.links?.map((item, idx) => (
-              <DesktopMenuItem
-                key={idx}
-                title={item.title}
-                href={item.slug?.current as string}
-                // icon={item.icon}
-              >
-                {item.description}
-              </DesktopMenuItem>
-            ))}
-          </SimpleGrid>
-        </Box>
-      </MenuList>
-    </Menu>
+      <PopoverContent bg="white" w="2xl" p={5} borderRadius="none" borderColor="primaryDark">
+        <PopoverArrow />
+
+        <SimpleGrid spacing="4" columns={2}>
+          {link?.links?.map((item, idx) => (
+            <DesktopMenuItem
+              key={idx}
+              title={item.title}
+              href={item.link?.slug?.current || '/'}
+              isExternal={item._type === 'externalLink'}
+              icon={item.icon}
+              // icon={item.icon}
+            >
+              {item.description}
+            </DesktopMenuItem>
+          ))}
+        </SimpleGrid>
+      </PopoverContent>
+    </Popover>
   );
 };
 
@@ -84,7 +97,7 @@ const MobileSubMenu = (props: SubmenuProps) => {
       <Collapse in={isOpen}>
         <Box pl="5">
           {link.links?.map((item, idx) => (
-            <NavLink.Mobile key={idx} href={item.slug?.current}>
+            <NavLink.Mobile key={idx} href={item.link?.slug.current}>
               {item.title}
             </NavLink.Mobile>
           ))}

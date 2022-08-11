@@ -1,50 +1,4 @@
 export const navigation = [
-  // {
-  //   _key: '6ffa819f1469',
-  //   _type: 'navigation.section',
-  //   links: [
-  //     {
-  //       _key: 'a695e1d2b0e0',
-  //       _type: 'internalLink',
-  //       description: 'Learn more about the project',
-  //       link: {
-  //         _type: 'about',
-  //         slug: {
-  //           _type: 'slug',
-  //           current: 'about',
-  //         },
-  //       },
-  //       title: 'About Us',
-  //     },
-  //     {
-  //       _key: '86d12d05e6cc',
-  //       _type: 'internalLink',
-  //       description: 'Check up on our progress',
-  //       link: {
-  //         _type: 'progress',
-  //         slug: {
-  //           _type: 'slug',
-  //           current: 'progress',
-  //         },
-  //       },
-  //       title: 'Progress',
-  //     },
-  //     {
-  //       _key: 'b4bc4c9e15c1',
-  //       _type: 'internalLink',
-  //       description: 'Our quarterly newsletter',
-  //       link: {
-  //         _type: 'rookery',
-  //         slug: {
-  //           _type: 'slug',
-  //           current: 'rookery',
-  //         },
-  //       },
-  //       title: 'Rookery',
-  //     },
-  //   ],
-  //   title: 'About',
-  // },
   {
     _key: 'f5af68f6384b',
     _type: 'navigation.section',
@@ -79,9 +33,11 @@ export const navigation = [
         _key: 'db9bcffdd8c8',
         _type: 'externalLink',
         description: 'Where we plan all of our builds',
-        slug: {
-          _type: 'slug',
-          current: 'https://forum.westeroscraft.com/',
+        link: {
+          slug: {
+            _type: 'slug',
+            current: 'https://forum.westeroscraft.com/',
+          },
         },
         title: 'Forums',
       },

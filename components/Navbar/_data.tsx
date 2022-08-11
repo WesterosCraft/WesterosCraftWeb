@@ -14,6 +14,7 @@ export interface LinkElement {
   _key: string;
   _type: LinkType;
   description: string;
+  icon?: 'pyke' | 'nightswatch' | 'dreadfort' | 'casterlyrock';
   link?: LinkLink;
   title: string;
   slug?: Slug;
@@ -39,52 +40,6 @@ export enum SlugType {
 }
 
 export const links = [
-  // {
-  //   _key: '6ffa819f1469',
-  //   _type: 'navigation.section',
-  //   links: [
-  //     {
-  //       _key: 'a695e1d2b0e0',
-  //       _type: 'internalLink',
-  //       description: 'Learn more about the project',
-  //       link: {
-  //         _type: 'about',
-  //         slug: {
-  //           _type: 'slug',
-  //           current: 'about',
-  //         },
-  //       },
-  //       title: 'About Us',
-  //     },
-  //     {
-  //       _key: '86d12d05e6cc',
-  //       _type: 'internalLink',
-  //       description: 'Check up on our progress',
-  //       link: {
-  //         _type: 'progress',
-  //         slug: {
-  //           _type: 'slug',
-  //           current: 'progress',
-  //         },
-  //       },
-  //       title: 'Progress',
-  //     },
-  //     {
-  //       _key: 'b4bc4c9e15c1',
-  //       _type: 'internalLink',
-  //       description: 'Our quarterly newsletter',
-  //       link: {
-  //         _type: 'rookery',
-  //         slug: {
-  //           _type: 'slug',
-  //           current: 'rookery',
-  //         },
-  //       },
-  //       title: 'Rookery',
-  //     },
-  //   ],
-  //   title: 'About',
-  // },
   {
     _key: 'f5af68f6384b',
     _type: 'navigation.section',
@@ -101,6 +56,7 @@ export const links = [
           },
         },
         title: 'Progress',
+        icon: 'pyke',
       },
       {
         _key: 'b4bc4c9e15c1',
@@ -114,57 +70,34 @@ export const links = [
           },
         },
         title: 'Rookery',
+        icon: 'nightswatch',
       },
       {
         _key: 'db9bcffdd8c8',
         _type: 'externalLink',
         description: 'Where we plan all of our builds',
-        slug: {
-          _type: 'slug',
-          current: 'https://forum.westeroscraft.com/',
+        link: {
+          slug: {
+            _type: 'slug',
+            current: 'https://forum.westeroscraft.com/',
+          },
         },
         title: 'Forums',
+        icon: 'dreadfort',
       },
       {
         _key: 'db9bcffdd8c8',
         _type: 'externalLink',
         description: 'Where we plan all of our builds',
-        slug: {
-          _type: 'slug',
-          current: 'https://forum.westeroscraft.com/',
+        link: {
+          slug: {
+            _type: 'slug',
+            current: 'https://ko-fi.com/westeroscraft',
+          },
         },
         title: 'Donate',
+        icon: 'casterlyrock',
       },
-      // {
-      //   _key: '7d3fa5a7d122',
-      //   _type: 'externalLink',
-      //   description: 'Chat and hang out with the community',
-      //   slug: {
-      //     _type: 'slug',
-      //     current: 'https://discord.com/invite/pBS5TH4',
-      //   },
-      //   title: 'Discord',
-      // },
-      // {
-      //   _key: 'acc44cb59aa6',
-      //   _type: 'externalLink',
-      //   description: 'Swag courtesy of our creative community',
-      //   slug: {
-      //     _type: 'slug',
-      //     current: 'https://www.redbubble.com/people/westeroscraft/shop?asc=u',
-      //   },
-      //   title: 'Merch',
-      // },
-      // {
-      //   _key: '1fef25524647',
-      //   _type: 'externalLink',
-      //   description: 'If you think you got the skills, help us build',
-      //   slug: {
-      //     _type: 'slug',
-      //     current: 'https://forum.westeroscraft.com/form/builder-application.3/select',
-      //   },
-      //   title: 'Apply',
-      // },
     ],
     title: 'Community',
   },
@@ -180,9 +113,10 @@ export const links = [
           _type: 'modpack',
           slug: {
             _type: 'slug',
-            current: 'modpack',
+            current: 'join',
           },
         },
+        icon: 'stormsend',
         title: 'Modpack',
       },
       {
@@ -196,6 +130,7 @@ export const links = [
             current: 'wiki',
           },
         },
+        icon: 'summerhall',
         title: 'Downloads',
       },
       {
@@ -209,6 +144,7 @@ export const links = [
             current: 'frequently-asked-questions',
           },
         },
+        icon: 'highgarden',
         title: 'FAQ',
       },
       {
@@ -222,6 +158,7 @@ export const links = [
             current: 'guides',
           },
         },
+        icon: 'sunspear',
         title: 'Rules & Guides',
       },
     ],
