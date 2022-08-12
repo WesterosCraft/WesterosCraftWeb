@@ -19,6 +19,7 @@ import file from './objects/file';
 import page from './documents/page';
 import category from './objects/category';
 import home from './pages/home';
+import join from './pages/join';
 import rookery from './pages/rookery';
 import siteConfig from './documents/siteConfig';
 import navigation from './objects/navigation';
@@ -43,6 +44,7 @@ export default createSchema({
     youtubeVideo,
     home,
     rookery,
+    join,
     blockContent,
     customUrl,
     imageGallery,

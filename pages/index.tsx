@@ -108,6 +108,10 @@ export const getStaticProps: GetStaticProps = async () => {
       outlineButton {
         linkText,
         internal->{ slug }
+      },
+      solidButton {
+        linkText,
+        internal->{ slug }
       }
     },
     featureGrid {

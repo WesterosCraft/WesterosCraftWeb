@@ -41,11 +41,6 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
             color: 'primaryGlare',
             fill: 'primaryGlare',
           }}
-          // _hover={{
-          //   fill: 'white',
-          //   cursor: 'default',
-          //   color: 'gray.500',
-          // }}
           rightIcon={<ChevronDownIcon boxSize={3} />}
         >
           <Text>{link.title}</Text>
@@ -89,10 +84,7 @@ const MobileSubMenu = (props: SubmenuProps) => {
         paddingEnd="4"
       >
         <Box flex="1">{link.title}</Box>
-        <Box
-          // as={FaChevronDown}
-          transform={`rotate(${isOpen ? '180deg' : '0deg'})`}
-        />
+        <Box as={ChevronDownIcon} transform={`rotate(${isOpen ? '180deg' : '0deg'})`} />
       </NavLink.Mobile>
       <Collapse in={isOpen}>
         <Box pl="5">

@@ -145,7 +145,10 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                     justifyContent={{ base: 'flex-end', sm: 'flex-start' }}
                     w="full"
                   >
-                    <NextLink href={link.linkUrl.internal?.slug.current ?? '/wiki'} passHref>
+                    <NextLink
+                      href={`/wiki/${link.linkUrl.internal?.slug.current}` ?? '/wiki'}
+                      passHref
+                    >
                       <Button
                         isDisabled={link.linkUrl.linkText === 'Coming Soon'}
                         fontWeight="md"

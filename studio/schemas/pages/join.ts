@@ -1,8 +1,8 @@
 import seo from '../objects/seo';
 
 export default {
-  name: 'rookery',
-  title: 'Rookery',
+  name: 'join',
+  title: 'Join',
   type: 'document',
   __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   groups: [
@@ -36,6 +36,14 @@ export default {
         maxLength: 96,
       },
       validation: Rule => Rule.required(),
+    },
+    {
+      name: 'mainImage',
+      title: 'Main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     },
     seo,
   ],

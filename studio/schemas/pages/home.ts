@@ -11,7 +11,7 @@ export default {
   title: 'Home',
   name: 'home',
   type: 'document',
-  // __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
+  __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   groups: [
     {
       name: 'content',

@@ -1,5 +1,6 @@
-import { Flex, HStack, Img, Link, Text, HTMLChakraProps } from '@chakra-ui/react';
+import { Flex, HStack, Link, Text, HTMLChakraProps } from '@chakra-ui/react';
 import * as React from 'react';
+import NextImage from 'next/image';
 import NextLink from 'next/link';
 import PykeIcon from '../../public/icons/pyke96.png';
 import NightsWatchIcon from '../../public/icons/nightswatch96.png';
@@ -49,7 +50,7 @@ export const SubmenuItem = ({
       {...rest}
     >
       <HStack cursor="pointer" spacing={3} align="flex-start" p="3" _hover={{ bg: 'gray.100' }}>
-        <Img width={9} height={9} src={iconMap[icon ?? 'default']} />
+        <NextImage width="36px" height="36px" src={iconMap[icon ?? 'default']} />
 
         <Flex
           display="flex"

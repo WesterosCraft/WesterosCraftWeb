@@ -1,7 +1,3 @@
-import * as React from 'react';
-// import { IoCalendar, IoGrid, IoHelpBuoy } from 'react-icons/io5'
-// import { MdWeb } from 'react-icons/md'
-
 export interface Links {
   _key?: string;
   _type?: string;
@@ -88,7 +84,7 @@ export const links = [
       {
         _key: 'db9bcffdd8c8',
         _type: 'externalLink',
-        description: 'Where we plan all of our builds',
+        description: 'Help keep the server running',
         link: {
           slug: {
             _type: 'slug',
@@ -124,10 +120,9 @@ export const links = [
         _type: 'internalLink',
         description: 'A knowledge base of all of our builds',
         link: {
-          _type: 'wiki',
           slug: {
             _type: 'slug',
-            current: 'wiki',
+            current: 'downloads',
           },
         },
         icon: 'summerhall',
@@ -150,12 +145,12 @@ export const links = [
       {
         _key: '0e2307ba6efd',
         _type: 'internalLink',
-        description: 'All the guides to get you started.',
+        description: 'All the guides to get you started',
         link: {
           _type: 'allGuides',
           slug: {
             _type: 'slug',
-            current: 'guides',
+            current: 'wiki/guides',
           },
         },
         icon: 'sunspear',
@@ -176,10 +171,10 @@ export const links = [
   },
   {
     _key: '0fb3c9e302f5',
-    _type: 'externalLink',
+    _type: 'internalLink',
     slug: {
       _type: 'slug',
-      current: 'http://mc.westeroscraft.com/',
+      current: 'wiki',
     },
     title: 'Wiki',
   },
@@ -189,7 +184,7 @@ export const links = [
     _type: 'externalLink',
     slug: {
       _type: 'slug',
-      current: 'http://mc.westeroscraft.com/',
+      current: 'https://discord.com/invite/pBS5TH4',
     },
     title: 'Discord',
   },

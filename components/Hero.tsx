@@ -53,7 +53,7 @@ export interface Slug {
 }
 
 export interface SolidButton {
-  _type: string;
+  internal: Internal;
   linkText: string;
 }
 
@@ -131,7 +131,7 @@ export const Hero = ({
               {copy}
             </Text>
             <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
-              <NextLink href={'/'}>
+              <NextLink href={solidButton?.internal?.slug?.current}>
                 <Button
                   size="lg"
                   bg="black"
