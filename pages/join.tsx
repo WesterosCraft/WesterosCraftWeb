@@ -6,6 +6,7 @@ import { sanityClient } from '../lib/sanity.server';
 import { Seo } from '../components/Seo';
 import Longclaw from '../public/longclaw.png';
 import { ContainerBorder } from '../components/ContainerBorder';
+import ManualModpackTiers from '../components/ManualModpackTiers';
 
 export default function JoinPage({ pageData }) {
   console.log('🚀 ~ file: join.tsx ~ line 8 ~ JoinPage ~ pageData', pageData);
@@ -29,6 +30,21 @@ export default function JoinPage({ pageData }) {
             <Img mt="12" width="80px" alt="Longclaw" src={Longclaw.src} />
           </Center>
         </ContainerBorder>
+        <Box w="full" bg="primaryDark">
+          <ContainerBorder variant="dark" py={{ base: '24', sm: '32' }}>
+            <Center flexDirection="column" color="white">
+              <Heading color="primaryGold">Get Started</Heading>
+              <Text>
+                WesterosCraft uses several mods and plugins to aid our realistic and book accurate
+                version of Westeros. In order to get you in the server and exploring what we've
+                built so far as easy as possible, we've compiled several ways you can get the mods
+                and plugins you need to be able to connect below. Be sure to read the guides
+                thoroughly, and if you need any help, feel free to check out the tech support forum!
+              </Text>
+            </Center>
+          </ContainerBorder>
+        </Box>
+        <ManualModpackTiers />
       </Flex>
     </>
   );

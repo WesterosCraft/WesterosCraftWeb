@@ -47,10 +47,10 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent bg="white" w="2xl" p={5} borderRadius="none" borderColor="primaryDark">
+      <PopoverContent bg="white" w="sm" p={5} borderRadius="none" borderColor="primaryDark">
         <PopoverArrow />
 
-        <SimpleGrid spacing="4" columns={2}>
+        <SimpleGrid spacing="4" columns={1}>
           {link?.links?.map((item, idx) => (
             <DesktopMenuItem
               key={idx}
