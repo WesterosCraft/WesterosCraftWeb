@@ -14,13 +14,13 @@ export const ContainerBorder = ({
   ...rest
 }: ContainerBorderProps) => {
   return (
-    <Box w="full" className={className}>
+    <Box as="section" w="full" className={className}>
       <Box maxW="7xl" mx="auto" px={[2, null, 5]}>
         <Stack
           w="full"
           mx="auto"
-          borderLeftWidth={{ base: '0', sm: '1px' }}
-          borderRightWidth={{ base: '0', sm: '1px' }}
+          borderLeftWidth={{ base: '0', sm: '1.5px' }}
+          borderRightWidth={{ base: '0', sm: '1.5px' }}
           borderColor={variant === 'light' ? 'primaryDark' : 'primaryGold'}
           {...rest}
         >

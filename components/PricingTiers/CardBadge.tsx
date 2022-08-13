@@ -1,11 +1,11 @@
-import { Flex, FlexProps, Text, useColorModeValue } from '@chakra-ui/react'
-import * as React from 'react'
+import { Flex, FlexProps, Text } from '@chakra-ui/react';
+import * as React from 'react';
 
 export const CardBadge = (props: FlexProps) => {
-  const { children, ...flexProps } = props
+  const { children, ...flexProps } = props;
   return (
     <Flex
-      bg={useColorModeValue('blue.500', 'blue.200')}
+      bg="primaryRed"
       position="absolute"
       right={-20}
       top={6}
@@ -21,10 +21,10 @@ export const CardBadge = (props: FlexProps) => {
         textTransform="uppercase"
         fontWeight="bold"
         letterSpacing="wider"
-        color={useColorModeValue('white', 'gray.800')}
+        color="white"
       >
         {children}
       </Text>
     </Flex>
-  )
-}
+  );
+};
