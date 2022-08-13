@@ -9,6 +9,7 @@ import NextImage from 'next/future/image';
 import { PlayIcon } from './Icons/PlayIcon';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
+import { ContainerBorder } from './ContainerBorder';
 
 export interface VideoFeatureProps {
   heading: string;
@@ -34,75 +35,62 @@ export const VideoFeature = ({
   videoThumbnail,
 }: VideoFeatureProps) => {
   return (
-    <Box w="full" className="videoFeature">
-      <Box maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
+    <ContainerBorder variant="dark" pt={['24']} pb={['24']} px="4">
+      <Stack direction="column" align="center">
         <Box
-          mx="auto"
-          px="4"
-          borderLeftWidth="1px"
-          borderRightWidth="1px"
-          borderColor="primaryGold"
-          pt={['24']}
-          pb={['24']}
-          className="container-border"
+          className="text-wrapper"
+          textAlign="center"
+          width={{ lg: 'lg' }}
+          px={{ base: '6', md: '8', lg: '0' }}
+          py={{ base: '6', md: '8', lg: '12' }}
         >
-          <Stack direction="column" align="center">
-            <Box
-              className="text-wrapper"
-              textAlign="center"
-              width={{ lg: 'lg' }}
-              px={{ base: '6', md: '8', lg: '0' }}
-              py={{ base: '6', md: '8', lg: '12' }}
-            >
-              <Stack spacing={{ base: '4', lg: '6' }}>
-                <MotionBox
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  // @ts-ignore
-                  transition={{ delay: 0.3 }}
-                >
-                  <Heading size="2xl" color="primaryGold">
-                    {heading}
-                  </Heading>
-                </MotionBox>
-                <MotionBox
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  // @ts-ignore
-                  transition={{ delay: 0.5 }}
-                >
-                  <Text color="white" fontSize="lg">
-                    {subheading}
-                  </Text>
-                </MotionBox>
-              </Stack>
-            </Box>
+          <Stack spacing={{ base: '4', lg: '6' }}>
             <MotionBox
-              display="flex"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-140px' }}
+              viewport={{ once: true, margin: '-100px' }}
+              // @ts-ignore
+              transition={{ delay: 0.3 }}
+            >
+              <Heading size="2xl" color="primaryGold">
+                {heading}
+              </Heading>
+            </MotionBox>
+            <MotionBox
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
               // @ts-ignore
               transition={{ delay: 0.5 }}
-              className="video-wrapper"
-              flex="1"
-              h="full"
-              w="full"
-              overflow="hidden"
-              maxW={768}
             >
-              <YoutubePlayer
-                url={videoLink}
-                thumbnailUrl={urlFor(videoThumbnail).url()}
-                thumbnailBlur={videoThumbnail.metadata.lqip}
-              />
+              <Text color="white" fontSize="lg">
+                {subheading}
+              </Text>
             </MotionBox>
           </Stack>
         </Box>
-      </Box>
-    </Box>
+        <MotionBox
+          display="flex"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-140px' }}
+          // @ts-ignore
+          transition={{ delay: 0.5 }}
+          className="video-wrapper"
+          flex="1"
+          h="full"
+          w="full"
+          overflow="hidden"
+          maxW={768}
+        >
+          <YoutubePlayer
+            url={videoLink}
+            thumbnailUrl={urlFor(videoThumbnail).url()}
+            thumbnailBlur={videoThumbnail.metadata.lqip}
+          />
+        </MotionBox>
+      </Stack>
+    </ContainerBorder>
   );
 };
 

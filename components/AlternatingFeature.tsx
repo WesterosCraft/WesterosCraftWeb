@@ -14,6 +14,7 @@ import NextImage from 'next/future/image';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
+import { ContainerBorder } from './ContainerBorder';
 
 export interface AlternatingFeatureProps {
   features: Feature[];
@@ -45,104 +46,96 @@ export interface Link {
 
 export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
   return (
-    <Box w="full" className="AlternatingFeature">
-      <Box w="full" maxW="7xl" mx="auto" px={[2, null, 4]}>
-        <VStack
+    <ContainerBorder
+      spacing={{ base: '16', lg: '24' }}
+      pb={{ base: '24', sm: '32' }}
+      px={{ base: '4', md: '10' }}
+    >
+      {features.map((item, index) => (
+        <Stack
+          key={index}
           w="full"
-          spacing={{ base: '16', lg: '24' }}
-          borderColor="black"
-          borderLeftWidth="1px"
-          borderRightWidth="1px"
-          pb={{ base: '24', sm: '32' }}
-          px={{ base: '4', md: '10' }}
+          direction={
+            index % 2 === 0
+              ? { base: 'column-reverse', lg: 'row' }
+              : { base: 'column-reverse', lg: 'row-reverse' }
+          }
+          spacing={{ base: '0', lg: '12' }}
         >
-          {features.map((item, index) => (
-            <Stack
-              key={index}
-              w="full"
-              direction={
-                index % 2 === 0
-                  ? { base: 'column-reverse', lg: 'row' }
-                  : { base: 'column-reverse', lg: 'row-reverse' }
-              }
-              spacing={{ base: '0', lg: '12' }}
+          <MotionBox
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            // @ts-ignore
+            transition={{ delay: 0.3 }}
+            w="full"
+            overflow="hidden"
+          >
+            <AspectRatio
+              ratio={[4 / 3, null, 16 / 9]}
+              maxH={{ base: '280', lg: '400' }}
+              pointerEvents="none"
             >
+              <NextImage
+                src={urlFor(item.image).quality(100).url()}
+                placeholder="blur"
+                width={650}
+                height={450}
+                blurDataURL={item.image?.metadata?.lqip}
+              />
+            </AspectRatio>
+          </MotionBox>
+          <Box
+            width={{ lg: 'lg' }}
+            mx={{ base: '6', md: '8', lg: '0' }}
+            px={{ base: '6', md: '8', lg: '0' }}
+            py={{ base: '6', md: '8', lg: '12' }}
+          >
+            <Stack spacing={{ base: '8', lg: '10' }}>
+              <Stack spacing={{ base: '2', lg: '4' }}>
+                <MotionBox
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  // @ts-ignore
+                  transition={{ delay: 0.3 }}
+                >
+                  <Heading size="xl">{item.heading}</Heading>
+                </MotionBox>
+                <MotionBox
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  // @ts-ignore
+                  transition={{ delay: 0.5 }}
+                >
+                  <Text>{item.subheading}</Text>
+                </MotionBox>
+              </Stack>
               <MotionBox
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 // @ts-ignore
-                transition={{ delay: 0.3 }}
-                w="full"
-                overflow="hidden"
+                transition={{ delay: 0.5 }}
               >
-                <AspectRatio
-                  ratio={[4 / 3, null, 16 / 9]}
-                  maxH={{ base: '280', lg: '400' }}
-                  pointerEvents="none"
+                <Button
+                  color="primaryRed"
+                  variant="link"
+                  rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
+                  _hover={{
+                    textDecor: 'none',
+                    color: 'red.800',
+                    fill: 'red.800',
+                  }}
                 >
-                  <NextImage
-                    src={urlFor(item.image).quality(100).url()}
-                    placeholder="blur"
-                    width={650}
-                    height={450}
-                    blurDataURL={item.image?.metadata?.lqip}
-                  />
-                </AspectRatio>
+                  {item.link.linkText}
+                </Button>
               </MotionBox>
-              <Box
-                width={{ lg: 'lg' }}
-                mx={{ base: '6', md: '8', lg: '0' }}
-                px={{ base: '6', md: '8', lg: '0' }}
-                py={{ base: '6', md: '8', lg: '12' }}
-              >
-                <Stack spacing={{ base: '8', lg: '10' }}>
-                  <Stack spacing={{ base: '2', lg: '4' }}>
-                    <MotionBox
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      // @ts-ignore
-                      transition={{ delay: 0.3 }}
-                    >
-                      <Heading size="xl">{item.heading}</Heading>
-                    </MotionBox>
-                    <MotionBox
-                      initial={{ opacity: 0, y: 10 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: '-100px' }}
-                      // @ts-ignore
-                      transition={{ delay: 0.5 }}
-                    >
-                      <Text>{item.subheading}</Text>
-                    </MotionBox>
-                  </Stack>
-                  <MotionBox
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-100px' }}
-                    // @ts-ignore
-                    transition={{ delay: 0.5 }}
-                  >
-                    <Button
-                      color="primaryRed"
-                      variant="link"
-                      rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
-                      _hover={{
-                        textDecor: 'none',
-                        color: 'red.800',
-                        fill: 'red.800',
-                      }}
-                    >
-                      {item.link.linkText}
-                    </Button>
-                  </MotionBox>
-                </Stack>
-              </Box>
             </Stack>
-          ))}
-        </VStack>
-      </Box>
-    </Box>
+          </Box>
+        </Stack>
+      ))}
+    </ContainerBorder>
   );
 };

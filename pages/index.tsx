@@ -13,6 +13,7 @@ import { ImageGridFeature, ImageGridFeatureProps } from '../components/ImageGrid
 import { ServerFeatureGrid, ServerFeatureGridProps } from '../components/ServerFeatureGrid';
 import { AlternatingFeature, AlternatingFeatureProps } from '../components/AlternatingFeature';
 import { AnimatedLetters } from '../components/AnimatedLetters';
+import { ContainerBorder } from '../components/ContainerBorder';
 
 export interface HeroPageProps {
   _createdAt: Date;
@@ -40,45 +41,26 @@ export default function HomePage({ pageData }: { pageData: HeroPageProps }) {
         <Hero {...pageData?.hero} />
         <Banner {...pageData?.banner} />
         <Box w="full" bg="primaryDark">
-          <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
-            <Center
-              pt="14"
-              pb="8"
-              px="4"
-              borderLeft="1px"
-              borderRight="1px"
-              borderBottom="1px"
-              borderColor="primaryGold"
-            >
-              <VStack>
-                <Heading color="white" size="2xl">
-                  <AnimatedLetters text="Start your journey" />
-                </Heading>
-              </VStack>
+          <ContainerBorder variant="dark" pt="14" pb="8" px="4" borderBottomWidth="1px">
+            <Center>
+              <Heading color="white" size="2xl">
+                <AnimatedLetters text="Start your journey" />
+              </Heading>
             </Center>
-          </Box>
+          </ContainerBorder>
           <FeatureGrid {...pageData?.featureGrid} />
           <ServerFeatureGrid {...pageData?.serverFeatureGrid} />
           <VideoFeature {...pageData?.videoFeature} />
         </Box>
         <Box w="full">
-          <Box maxW="7xl" mx="auto" px={[2, null, 4]}>
-            <Center
-              pt="14"
-              pb="8"
-              px="4"
-              borderLeft="1px"
-              borderRight="1px"
-              borderBottom="1px"
-              borderColor="black"
-            >
+          <ContainerBorder pt="14" pb="8" px="4" borderBottom="1px">
+            <Center>
               <Heading size="2xl">
                 <AnimatedLetters text="Explore the Realm" />
               </Heading>
             </Center>
-          </Box>
+          </ContainerBorder>
           <ImageGridFeature {...pageData?.imageGridFeature} />
-
           <AlternatingFeature {...pageData?.alternatingGridFeature} />
         </Box>
         <Testimonials {...pageData?.testimonialGrid} />

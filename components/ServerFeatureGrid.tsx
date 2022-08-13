@@ -9,6 +9,7 @@ import {
   HStack,
   Img,
   Heading,
+  Link,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
@@ -16,6 +17,7 @@ import NextImage from 'next/future/image';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
 import { container, child } from '../constants/animation';
+import { ContainerBorder } from './ContainerBorder';
 
 export interface ServerFeatureGridProps {
   heading: string;
@@ -71,151 +73,143 @@ export const ServerFeatureGrid = ({
   servers,
 }: ServerFeatureGridProps) => {
   return (
-    <Box w="full" className="serverFeatureGrid">
-      <Box position="relative" maxW="7xl" mx="auto" px={[2, null, 4]} className="container">
-        <Stack
-          direction={{ base: 'column-reverse', lg: 'row' }}
-          borderLeftWidth="1px"
-          borderRightWidth="1px"
-          borderColor="primaryGold"
-          spacing={8}
-          mx="auto"
-          w="full"
-          px={4}
-        >
-          <Center ml={{ base: 0, '2xl': -32 }} minW={{ base: 'auto', xl: 750 }}>
-            <Center>
-              {leftImage && (
-                <MotionBox
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  // @ts-ignore
-                  transition={{ delay: 1 }}
-                  alignSelf="flex-end"
-                  mb="14"
-                >
-                  <NextImage
-                    width={312}
-                    height={386}
-                    placeholder="blur"
-                    blurDataURL={leftImage.asset.metadata.lqip}
-                    src={urlFor(leftImage.asset).url()}
-                    alt="Baratheon"
-                  />
-                </MotionBox>
-              )}
-              {rightImage && (
-                <MotionBox
-                  alignSelf="flex-end"
-                  initial={{ opacity: 0, x: 10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-100px' }}
-                  // @ts-ignore
-                  transition={{ delay: 0.5 }}
-                >
-                  <NextImage
-                    width={312}
-                    height={386}
-                    placeholder="blur"
-                    blurDataURL={rightImage.asset.metadata.lqip}
-                    src={urlFor(rightImage.asset).url()}
-                    alt="Targaryen"
-                  />
-                </MotionBox>
-              )}
-            </Center>
-          </Center>
-          <Box>
+    <ContainerBorder
+      variant="dark"
+      spacing={8}
+      px={4}
+      direction={{ base: 'column-reverse', lg: 'row' }}
+    >
+      <Center ml={{ base: 0, '2xl': -32 }} minW={{ base: 'auto', xl: 750 }}>
+        <Center>
+          {leftImage && (
             <MotionBox
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               // @ts-ignore
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 1 }}
+              alignSelf="flex-end"
+              mb="14"
             >
-              <Heading textAlign={{ base: 'center', lg: 'left' }} color="primaryGold">
-                {heading ?? ''}
-              </Heading>
+              <NextImage
+                width={312}
+                height={386}
+                placeholder="blur"
+                blurDataURL={leftImage.asset.metadata.lqip}
+                src={urlFor(leftImage.asset).url()}
+                alt="Baratheon"
+              />
             </MotionBox>
-            <VStack
-              as={motion.div}
-              maxW="xl"
-              justify="center"
-              align="center"
-              mt="8"
-              mx="auto"
-              color="white"
-              divider={<StackDivider />}
-              variants={container}
-              initial="hidden"
-              whileInView="visible"
+          )}
+          {rightImage && (
+            <MotionBox
+              alignSelf="flex-end"
+              initial={{ opacity: 0, x: 10 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               // @ts-ignore
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.5 }}
             >
-              {servers.map((server, index) => (
-                <MotionBox
-                  variants={child}
-                  viewport={{ once: true, margin: '-100px' }}
-                  key={index}
-                  w="full"
-                  py={4}
-                >
-                  <Stack
-                    direction={{ base: 'column', sm: 'row' }}
+              <NextImage
+                width={312}
+                height={386}
+                placeholder="blur"
+                blurDataURL={rightImage.asset.metadata.lqip}
+                src={urlFor(rightImage.asset).url()}
+                alt="Targaryen"
+              />
+            </MotionBox>
+          )}
+        </Center>
+      </Center>
+      <Box>
+        <MotionBox
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          // @ts-ignore
+          transition={{ delay: 0.3 }}
+        >
+          <Heading textAlign={{ base: 'center', lg: 'left' }} color="primaryGold">
+            {heading ?? ''}
+          </Heading>
+        </MotionBox>
+        <VStack
+          as={motion.div}
+          maxW="xl"
+          justify="center"
+          align="center"
+          mt="8"
+          mx="auto"
+          color="white"
+          divider={<StackDivider />}
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          // @ts-ignore
+          transition={{ delay: 0.3 }}
+        >
+          {servers.map((server, index) => (
+            <MotionBox
+              variants={child}
+              viewport={{ once: true, margin: '-100px' }}
+              key={index}
+              w="full"
+              py={4}
+            >
+              <Stack
+                direction={{ base: 'column', sm: 'row' }}
+                align={{ base: 'center', sm: 'flex-start' }}
+              >
+                <Img src={urlFor(server.icon.asset).url()} />
+                <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={6}>
+                  <VStack
                     align={{ base: 'center', sm: 'flex-start' }}
+                    textAlign={{ base: 'center', sm: 'left' }}
+                    spacing={1}
                   >
-                    <Img src={urlFor(server.icon.asset).url()} />
-                    <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={6}>
-                      <VStack
-                        align={{ base: 'center', sm: 'flex-start' }}
-                        textAlign={{ base: 'center', sm: 'left' }}
-                        spacing={1}
-                      >
-                        <Text fontWeight="semibold" fontSize="2xl">
-                          {server.heading}
-                        </Text>
-                        <Text fontSize="sm">{server.subheading}</Text>
+                    <Text fontWeight="semibold" fontSize="2xl">
+                      {server.heading}
+                    </Text>
+                    <Text fontSize="sm">{server.subheading}</Text>
 
-                        <Text mt="3">{server.description}</Text>
-                      </VStack>
-                      <HStack justify={{ base: 'center', sm: 'flex-start' }} w="full" spacing={4}>
-                        {server.leftButton && (
-                          <NextLink href="/" passHref>
-                            <Button
-                              fontWeight="md"
-                              color="primaryGold"
-                              variant="link"
-                              fontSize="sm"
-                              fill="primaryGold"
-                            >
-                              {server.leftButton.linkText}
-                            </Button>
-                          </NextLink>
-                        )}
-                        {server.rightButton && (
-                          <NextLink href="/" passHref>
-                            <Button
-                              fontWeight="md"
-                              color="primaryGold"
-                              variant="link"
-                              fontSize="sm"
-                              fill="primaryGold"
-                            >
-                              {server.rightButton.linkText}
-                            </Button>
-                          </NextLink>
-                        )}
-                      </HStack>
-                    </VStack>
-                  </Stack>
-                </MotionBox>
-              ))}
-            </VStack>
-          </Box>
-        </Stack>
+                    <Text mt="3">{server.description}</Text>
+                  </VStack>
+                  <HStack justify={{ base: 'center', sm: 'flex-start' }} w="full" spacing={4}>
+                    {server.leftButton && (
+                      <NextLink href="/" passHref>
+                        <Link
+                          fontWeight="md"
+                          color="white"
+                          textDecor="underline"
+                          textDecorationColor="primaryRed"
+                          textUnderlineOffset="3px"
+                        >
+                          {server.leftButton.linkText}
+                        </Link>
+                      </NextLink>
+                    )}
+                    {server.rightButton && (
+                      <NextLink href="/" passHref>
+                        <Link
+                          fontWeight="md"
+                          color="white"
+                          textDecor="underline"
+                          textDecorationColor="primaryRed"
+                          textUnderlineOffset="3px"
+                        >
+                          {server.rightButton.linkText}
+                        </Link>
+                      </NextLink>
+                    )}
+                  </HStack>
+                </VStack>
+              </Stack>
+            </MotionBox>
+          ))}
+        </VStack>
       </Box>
-    </Box>
+    </ContainerBorder>
   );
 };
