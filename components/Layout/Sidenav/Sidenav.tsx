@@ -83,7 +83,7 @@ export const Sidenav = () => {
         top={0}
         width="full"
         zIndex={100}
-        defaultIndex={tabs.findIndex((tab) => router.pathname.includes(tab.href))}
+        defaultIndex={tabs.findIndex(tab => router.pathname.includes(tab.href))}
         align={tabAlignment as 'start' | 'end' | 'center'}
         isFitted={tabFitted}
         boxShadow={['lg', null, null, 'none']}
@@ -144,7 +144,7 @@ export const Sidenav = () => {
                     <Link key={tab.label} href={tab.href} passHref>
                       <Tab id={`tab-${i}`}>{tab.label}</Tab>
                     </Link>
-                  )
+                  ),
                 )}
               </TabList>
               <Input
