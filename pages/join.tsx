@@ -6,7 +6,6 @@ import { sanityClient } from '../lib/sanity.server';
 import { Seo } from '../components/Seo';
 import Longclaw from '../public/longclaw.png';
 import { ContainerBorder } from '../components/ContainerBorder';
-import ManualModpackTiers from '../components/ManualModpackTiers';
 import { PricingTiers } from '../components/PricingTiers/PricingTiers';
 import { TwoTiers } from '../components/TwoTiers/TwoTiers';
 

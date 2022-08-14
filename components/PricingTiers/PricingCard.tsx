@@ -1,4 +1,4 @@
-import { Flex, Icon, List, ListIcon, ListItem, Text, VStack } from '@chakra-ui/react';
+import { Flex, List, ListIcon, ListItem, Text, VStack } from '@chakra-ui/react';
 import * as React from 'react';
 import { SquareCheckIcon } from '../Icons/SquareCheckIcon';
 import { Card, CardProps } from './Card';
@@ -11,18 +11,16 @@ export interface PricingCardData {
 
 interface PricingCardProps extends CardProps {
   data: PricingCardData;
-  icon: React.ElementType;
   button: React.ReactElement;
 }
 
 export const PricingCard = (props: PricingCardProps) => {
-  const { data, icon, button, ...rest } = props;
+  const { data, button, ...rest } = props;
   const { features, description, name } = data;
 
   return (
     <Card {...rest}>
       <VStack spacing={6}>
-        <Icon aria-hidden as={icon} fontSize="4xl" fill="white" />
         <Text color="primaryGold" fontSize="2xl" fontWeight="extrabold">
           {name}
         </Text>

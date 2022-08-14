@@ -1,8 +1,6 @@
-import { Box, SimpleGrid, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import { ContainerBorder } from '../ContainerBorder';
-import { CurseForgeIcon } from '../Icons/CurseForge';
-import { ActionButton } from './ActionButton';
 import { PricingCard } from './PricingCard';
 
 const data = [
@@ -49,7 +47,6 @@ export const PricingTiers = () => (
     <SimpleGrid
       columns={{ base: 1, lg: 3 }}
       spacing={{ base: '8', lg: '0' }}
-      // maxW="7xl"
       mx="-6"
       justifyItems="center"
       alignItems="center"
@@ -59,7 +56,6 @@ export const PricingTiers = () => (
           key={card.name}
           isRecommended={card?.isRecommended ?? false}
           transform={{ lg: card?.isRecommended ? 'scale(1.05)' : undefined }}
-          icon={CurseForgeIcon}
           zIndex={card?.isRecommended ? '1' : undefined}
           data={{
             description: card.description,
@@ -67,9 +63,20 @@ export const PricingTiers = () => (
             features: card.features,
           }}
           button={
-            <ActionButton variant="outline" borderWidth="2px">
+            <Button
+              bg="primaryRed"
+              size="lg"
+              w="full"
+              fontWeight="extrabold"
+              py={{ md: '8' }}
+              borderWidth="1.5px"
+              _hover={{
+                color: 'primaryRed',
+                bg: 'white',
+              }}
+            >
               {card.buttonText}
-            </ActionButton>
+            </Button>
           }
         />
       ))}

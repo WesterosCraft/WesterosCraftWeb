@@ -69,16 +69,7 @@ interface PricingCardProps extends BoxProps {
 export const PricingCard = (props: PricingCardProps) => {
   const { features, name, description, onClick, price, duration, colorScheme: c, ...rest } = props;
   return (
-    <Box
-      bg={mode('white', 'gray.700')}
-      shadow="md"
-      w="full"
-      maxW="lg"
-      mx="auto"
-      rounded="lg"
-      overflow="hidden"
-      {...rest}
-    >
+    <Box bg="white" shadow="md" w="full" maxW="lg" mx="auto" overflow="hidden" {...rest}>
       <Box bg={`${c}.600`} px="8" py="8" color="white">
         <Text fontWeight="bold" fontSize="lg">
           {name}
