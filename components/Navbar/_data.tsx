@@ -174,7 +174,7 @@ export const links = [
     _type: 'internalLink',
     slug: {
       _type: 'slug',
-      current: 'wiki',
+      current: '/wiki',
     },
     title: 'Wiki',
   },

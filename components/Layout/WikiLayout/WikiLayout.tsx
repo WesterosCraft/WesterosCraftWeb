@@ -54,16 +54,17 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
         borderColor="gray.600"
       >
         <Flex h="full" id="app-container">
-          <Box w="72" bg="gray.800" color="white" fontSize="sm">
-            <Input
-              bg="gray.700"
-              color="gray.400"
-              // borderColor="primaryGold"
-              borderRadius="none"
-              display={['none', null, null, 'inherit']}
-              placeholder="Search"
-              my={4}
-            />
+          <Box w="72" bg="primaryDarkGlare" color="white" fontSize="sm">
+            <Box mx={4}>
+              <Input
+                bg="gray.700"
+                color="gray.400"
+                borderRadius="none"
+                display={['none', null, null, 'inherit']}
+                placeholder="Search"
+                my={4}
+              />
+            </Box>
             <Tabs
               isFitted
               variant="enclosed"
@@ -72,7 +73,13 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
             >
               <TabList>
                 {tabs.map(tab => (
-                  <Tab key={tab.label}>
+                  <Tab
+                    key={tab.label}
+                    _selected={{
+                      borderColor: 'inherit',
+                      borderBottomColor: 'primaryDarkGlare',
+                    }}
+                  >
                     <NextLink href={tab.href} passHref>
                       {tab.label}
                     </NextLink>
@@ -104,16 +111,6 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
                         <NavItem label="Subsription" />
                       </NavGroup>
                     </Stack>
-                    <Box>
-                      <Stack spacing="1">
-                        <NavItem subtle label="Settings" />
-                        <NavItem
-                          subtle
-                          label="Help & Support"
-                          endElement={<Circle size="2" bg="blue.400" />}
-                        />
-                      </Stack>
-                    </Box>
                   </Flex>
                 </TabPanel>
                 <TabPanel p={0}>
@@ -122,7 +119,7 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
               </TabPanels>
             </Tabs>
           </Box>
-          <Box flex="1" p="6">
+          <Box flex="1" p="6" overflow="auto">
             <Box w="full" h="full">
               {children}
             </Box>
