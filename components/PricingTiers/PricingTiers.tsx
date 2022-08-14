@@ -50,7 +50,7 @@ export const PricingTiers = () => (
       columns={{ base: 1, lg: 3 }}
       spacing={{ base: '8', lg: '0' }}
       // maxW="7xl"
-      mx="-5"
+      mx="-6"
       justifyItems="center"
       alignItems="center"
     >

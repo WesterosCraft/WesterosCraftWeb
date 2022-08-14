@@ -12,7 +12,7 @@ export const Card = (props: CardProps) => {
     <Box
       borderColor="primaryGold"
       borderWidth="1px"
-      bg="primaryDarkGlare"
+      bg="primaryDark"
       position="relative"
       px="6"
       pb="6"

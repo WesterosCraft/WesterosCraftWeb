@@ -8,9 +8,9 @@ import Longclaw from '../public/longclaw.png';
 import { ContainerBorder } from '../components/ContainerBorder';
 import ManualModpackTiers from '../components/ManualModpackTiers';
 import { PricingTiers } from '../components/PricingTiers/PricingTiers';
+import { TwoTiers } from '../components/TwoTiers/TwoTiers';
 
 export default function JoinPage({ pageData }) {
-  console.log('🚀 ~ file: join.tsx ~ line 8 ~ JoinPage ~ pageData', pageData);
   return (
     <>
       <Seo title={pageData?.seo?.title || pageData?.title} />
@@ -24,9 +24,9 @@ export default function JoinPage({ pageData }) {
         >
           <HStack spacing={12}>
             <Img mt="12" width="80px" alt="Longclaw" src={Longclaw.src} />
-            <Box>
+            <Box maxW="2xl">
               <Heading size={{ base: '2xl', sm: '3xl', lg: '4xl' }}>Join the Watch</Heading>
-              <Text fontSize="xl" maxW="3xl" mt="6">
+              <Text fontSize="2xl" maxW="3xl" mt="6">
                 We have several different ways to start exploring the server and have compiled
                 guides on all the suggested ways below! Be sure to read the guides in full.
               </Text>
@@ -36,14 +36,16 @@ export default function JoinPage({ pageData }) {
         <Box w="full" bg="primaryDark">
           <ContainerBorder variant="dark" py={{ base: '24', sm: '32' }}>
             <Center textAlign="center" flexDirection="column" color="white" maxW="2xl" mx="auto">
-              <Heading color="primaryGold">Getting Started</Heading>
-              <Text mt="4" fontSize="lg">
+              <Heading size={{ base: 'xl', sm: '3xl' }} color="primaryGold">
+                Getting Started
+              </Heading>
+              <Text mt="6" fontSize="xl">
                 WesterosCraft uses several mods and plugins to aid our realistic and book accurate
                 version of Westeros. In order to get you in the server and exploring what we've
                 built so far as easy as possible, we've compiled several ways you can get the mods
                 and plugins you need to be able to connect below.
               </Text>
-              <Text mt="4" fontSize="lg">
+              <Text mt="4" fontSize="xl">
                 Be sure to read the guides thoroughly, and if you need any help, feel free to check
                 out the tech support forum or the #techsupport Discord channel!
               </Text>
@@ -51,7 +53,8 @@ export default function JoinPage({ pageData }) {
           </ContainerBorder>
           <PricingTiers />
         </Box>
-        <ManualModpackTiers />
+        <TwoTiers />
+        {/* <ManualModpackTiers /> */}
       </Flex>
     </>
   );
