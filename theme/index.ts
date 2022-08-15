@@ -21,11 +21,11 @@ export const theme = {
     primaryDark: '#22261F',
     primaryDarkGlare: '#292D25',
     primaryDarkGlare2: '#595e56',
-    primaryGold: '#DAB636',
+    primaryGold: '#daaf3c',
     primaryRed: '#9B2C2C',
     crownlands: {
       light: '',
-      dark: '#a65348',
+      default: '#a65348',
       gradient: '',
     },
     westerlands: {
@@ -94,6 +94,65 @@ export const theme = {
     Heading: {
       baseStyle: {
         fontWeight: 'normal',
+      },
+    },
+    Progress: {
+      variants: {
+        crownlands: {
+          filledTrack: {
+            bg: 'crownlands.default',
+          },
+        },
+        westerlands: {
+          filledTrack: {
+            bg: 'westerlands.default',
+          },
+        },
+        reach: {
+          filledTrack: {
+            bg: 'reach.default',
+          },
+        },
+        stormlands: {
+          filledTrack: {
+            bg: 'stormlands.default',
+          },
+        },
+        vale: {
+          filledTrack: {
+            bg: 'vale.default',
+          },
+        },
+        dorne: {
+          filledTrack: {
+            bg: 'dorne.default',
+          },
+        },
+        theWall: {
+          filledTrack: {
+            bg: 'theWall.default',
+          },
+        },
+        north: {
+          filledTrack: {
+            bg: 'north.default',
+          },
+        },
+        riverlands: {
+          filledTrack: {
+            bg: 'riverlands.default',
+          },
+        },
+        ironIslands: {
+          filledTrack: {
+            bg: 'ironIslands.default',
+          },
+        },
+        beyondTheWall: {
+          filledTrack: {
+            bg: 'beyondTheWall.default',
+          },
+        },
       },
     },
   },

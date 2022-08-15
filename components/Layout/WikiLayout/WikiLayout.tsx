@@ -44,7 +44,7 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
   const router = useRouter();
 
   return (
-    <>
+    <Flex direction="column" height="100vh" className="wiki-layout">
       <Navbar />
       <Box
         height="100vh"
@@ -66,6 +66,7 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
               />
             </Box>
             <Tabs
+              size="sm"
               isFitted
               variant="enclosed"
               colorScheme="black"
@@ -126,6 +127,6 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
           </Box>
         </Flex>
       </Box>
-    </>
+    </Flex>
   );
 };
