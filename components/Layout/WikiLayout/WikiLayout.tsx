@@ -54,7 +54,7 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
         borderColor="gray.600"
       >
         <Flex h="full" id="app-container">
-          <Box w="72" bg="primaryDarkGlare" color="white" fontSize="sm">
+          <Box w="72" bg="primaryDark" color="white" fontSize="sm">
             <Box mx={4}>
               <Input
                 bg="gray.700"
@@ -78,7 +78,7 @@ export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
                     key={tab.label}
                     _selected={{
                       borderColor: 'inherit',
-                      borderBottomColor: 'primaryDarkGlare',
+                      borderBottomColor: 'primaryDark',
                     }}
                   >
                     <NextLink href={tab.href} passHref>
