@@ -9,7 +9,7 @@ import { ContainerBorder } from '../components/ContainerBorder';
 import { PricingTiers } from '../components/PricingTiers/PricingTiers';
 import { TwoTiers } from '../components/TwoTiers/TwoTiers';
 
-export default function JoinPage({ pageData }) {
+export default function JoinPage({ pageData }: any) {
   return (
     <>
       <Seo title={pageData?.seo?.title || pageData?.title} />
@@ -39,10 +39,10 @@ export default function JoinPage({ pageData }) {
                 Getting Started
               </Heading>
               <Text mt="6" fontSize="xl">
-                WesterosCraft uses several mods and plugins to aid our realistic and book accurate
+                {`WesterosCraft uses several mods and plugins to aid our realistic and book accurate
                 version of Westeros. In order to get you in the server and exploring what we've
                 built so far as easy as possible, we've compiled several ways you can get the mods
-                and plugins you need to be able to connect below.
+                and plugins you need to be able to connect below.`}
               </Text>
               <Text mt="4" fontSize="xl">
                 Be sure to read the guides thoroughly, and if you need any help, feel free to check

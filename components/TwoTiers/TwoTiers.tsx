@@ -12,8 +12,8 @@ export const TwoTiers = () => {
             Other Ways To Join
           </Heading>
           <Text mt="6" fontSize="xl" color="gray.600">
-            Don't want to download a third party program or for running into issues getting them to
-            work? There are other options for you!
+            {`Don't want to download a third party program or for running into issues getting them to
+            work? There are other options for you!`}
           </Text>
         </Box>
         <SimpleGrid alignItems="flex-start" mt="16" columns={{ base: 1, lg: 2 }} spacing="10">

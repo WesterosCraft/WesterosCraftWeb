@@ -30,7 +30,7 @@ export default function FourOhFourPage() {
             Uh oh! I think you’re lost.
           </Heading>
           <Text mt="6" color="black" fontSize="xl">
-            It looks like the page you’re looking for doesn't exist.
+            {`It looks like the page you’re looking for doesn't exist.`}
           </Text>
           <Box mt="8" className="mt-6">
             <NextLink href="/" passHref>
