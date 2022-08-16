@@ -22,6 +22,7 @@ export interface RegionsPage {
 export interface Region {
   heading: string;
   image: Image;
+  icon: Image;
   name: string;
   notableBuild: NotableBuild;
   ordinal: number;
@@ -83,6 +84,7 @@ function LocationsPage({ pageData }: { pageData: RegionsPage }) {
               heading={region.heading}
               description={region.subheading}
               image={urlFor(region?.image).url()}
+              icon={region?.icon ? urlFor(region?.icon).url() : undefined}
               slug={region.slug.current}
               percentComplete={region.percentComplete}
               blurDataURL={region.image.metadata.lqip}
@@ -114,6 +116,13 @@ export const getStaticProps: GetStaticProps = async () => {
       "percentComplete": round(count(*[_type == "location" && region._ref == ^._id && projectStatus == "completed"]) * 100 / count(*[_type == "location" && region._ref == ^._id])),
       "recentlyUpdated": *[ _type == "location" && region._ref == ^._id ] { title, _updatedAt, slug } | order(dateTime(_updatedAt) asc) [0] {...},
       "image": image.asset->{
+        _id,
+        _rev,
+        metadata {
+          lqip
+        }
+      },
+      "icon": icon.asset->{
         _id,
         _rev,
         metadata {

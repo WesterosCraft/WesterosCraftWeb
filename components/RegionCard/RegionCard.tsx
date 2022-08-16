@@ -9,7 +9,8 @@ import {
   Center,
   Link,
   Spacer,
-  Flex,
+  Img,
+  HStack,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import * as React from 'react';
@@ -33,6 +34,7 @@ interface RegionCard {
   recentlyUpdated: BuildDetail;
   percentComplete: number;
   blurDataURL: string;
+  icon?: string;
 }
 
 export const RegionCard = ({
@@ -45,6 +47,7 @@ export const RegionCard = ({
   percentComplete,
   blurDataURL,
   recentlyUpdated,
+  icon,
 }: RegionCard) => {
   const resolvedColor = `${camelCase(slug)}.default`;
   const [token] = useToken('colors', [resolvedColor]);
@@ -73,6 +76,7 @@ export const RegionCard = ({
               height={250}
               alt={name}
               blurDataURL={blurDataURL}
+              placeholder="blur"
             />
             <NextLink href={`/wiki/locations/${slug}`} passHref>
               <a>
@@ -93,9 +97,12 @@ export const RegionCard = ({
           </Stack>
           <Center>
             <Box maxW="md">
-              <Text as="h2" fontWeight="bold" fontSize="2xl">
-                {name}
-              </Text>
+              <HStack>
+                {icon && <Img width="32px" src={icon} alt={name} />}
+                <Text as="h2" fontWeight="bold" fontSize="2xl">
+                  {name}
+                </Text>
+              </HStack>
               <Text mt="2">{heading}</Text>
               <Box mt="2" fontSize="sm" noOfLines={2}>
                 {description}

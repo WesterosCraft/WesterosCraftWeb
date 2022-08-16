@@ -24,7 +24,7 @@ interface SubmenuProps {
 
 const DesktopSubmenu = ({ link }: SubmenuProps) => {
   return (
-    <Popover trigger="click" offset={[2, 2]}>
+    <Popover trigger="hover" offset={[2, 2]}>
       <PopoverTrigger>
         <Button
           height="auto"
