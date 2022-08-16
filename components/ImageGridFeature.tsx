@@ -172,7 +172,7 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
           <MotionBox variants={child} viewport={{ once: true, margin: '-100px' }} key={image._key}>
             <NextImage
               loader={({ src, width = 355 }) => {
-                return `${src}?h=355&w=${width}&q=100&fit=crop&crop=center`;
+                return `${src}?w=${width}&q=100&fit=crop&crop=center`;
               }}
               alt={image._key}
               src={urlFor(image.asset).url()}

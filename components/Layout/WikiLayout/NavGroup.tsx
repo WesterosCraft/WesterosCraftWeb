@@ -15,7 +15,7 @@ export const NavGroup = (props: NavGroupProps) => {
         fontWeight="semibold"
         textTransform="uppercase"
         letterSpacing="widest"
-        color="gray.500"
+        color="gray.300"
       >
         {label}
       </Text>

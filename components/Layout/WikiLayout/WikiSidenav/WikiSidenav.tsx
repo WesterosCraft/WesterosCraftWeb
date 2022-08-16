@@ -55,11 +55,23 @@ export const WikiSidenav = () => {
   const sortedLocations = Object.entries(locationsByRegion).sort();
 
   return (
-    <Box w="72" bg="primaryDark" color="white" fontSize="sm">
+    <Box
+      display={{ base: 'none', lg: 'block' }}
+      w="72"
+      bg="primaryDark"
+      color="white"
+      fontSize="sm"
+      overflowY="scroll"
+    >
       <Box mx={4}>
         <Input
-          bg="gray.700"
-          color="gray.400"
+          focusBorderColor="primaryGold"
+          border="none"
+          bg="primaryDarkGlare2"
+          color="white"
+          _placeholder={{
+            color: 'white',
+          }}
           borderRadius="none"
           display={['none', null, null, 'inherit']}
           placeholder="Search"

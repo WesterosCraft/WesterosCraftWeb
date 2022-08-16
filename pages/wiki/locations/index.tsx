@@ -64,7 +64,7 @@ export interface RecentlyUpdated {
 
 function LocationsPage({ pageData }: { pageData: RegionsPage }) {
   return (
-    <Container maxW="container.lg" px={[5, 12]}>
+    <Box maxW="container.lg" px={[5, 12]}>
       <NextSeo title={pageData?.title} description={pageData?.copy} />
       <Box mb={12} textAlign="center">
         <Heading size="2xl" mb={5}>
@@ -99,7 +99,7 @@ function LocationsPage({ pageData }: { pageData: RegionsPage }) {
             />
           ))}
       </Stack>
-    </Container>
+    </Box>
   );
 }
 

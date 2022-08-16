@@ -1,6 +1,7 @@
 import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
 import { Navbar } from '../../Navbar';
+import { MobileWikiSidenav } from './WikiSidenav/MobileWikiSidenav';
 import { WikiSidenav } from './WikiSidenav/WikiSidenav';
 
 interface WikiLayoutProps {
@@ -20,6 +21,7 @@ export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
         borderColor="gray.600"
       >
         <Flex h="full" id="app-container">
+          <MobileWikiSidenav />
           <WikiSidenav />
           <Box flex="1" p="6" overflow="auto">
             <Box w="full" h="full">
