@@ -1,31 +1,67 @@
 import type { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
-import {
-  Text,
-  Stack,
-  Heading,
-  Container,
-  Box,
-  HStack,
-  Grid,
-  GridItem,
-  Badge,
-  chakra,
-  VStack,
-} from '@chakra-ui/react';
-import { camelCase } from 'lodash';
-import NextLink from 'next/link';
-import { WikiLayout } from '../../../components';
+import { Text, Stack, Heading, Container, Box, chakra } from '@chakra-ui/react';
 import { sanityClient } from '../../../lib/sanity.server';
-import { ArrowUpRightIcon } from '../../../components/Icons/ArrowUpRight';
-import { LocationPageResponse } from '../../../types';
-import { ChakraNextImage } from '../../../components/ChakraNextImage';
 import { NextSeo } from 'next-seo';
-import { WikiLayoutNew } from '../../../components/Layout/WikiLayout/WikiLayout';
 import { RegionCard } from '../../../components/RegionCard/RegionCard';
+import { WikiLayout } from '../../../components/Layout/WikiLayout';
+import { urlFor } from '../../../lib/sanity';
 
-function LocationsPage({ pageData }: { pageData: LocationPageResponse }) {
-  console.log('👾 ~ LocationsPage ~ pageData', pageData);
+export interface RegionsPage {
+  _createdAt: Date;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: Date;
+  copy: string;
+  regions: Region[];
+  slug: Slug;
+  title: string;
+}
+
+export interface Region {
+  heading: string;
+  image: Image;
+  name: string;
+  notableBuild: NotableBuild;
+  ordinal: number;
+  percentComplete: number;
+  recentlyUpdated: RecentlyUpdated;
+  slug: Slug;
+  subheading: string;
+}
+
+export interface Image {
+  _id: string;
+  _rev: string;
+  metadata: Metadata;
+}
+
+export interface Metadata {
+  lqip: string;
+}
+
+export interface NotableBuild {
+  slug: Slug;
+  title: string;
+}
+
+export interface Slug {
+  _type: Type;
+  current: string;
+}
+
+export enum Type {
+  Slug = 'slug',
+}
+
+export interface RecentlyUpdated {
+  _updatedAt: Date;
+  slug: Slug;
+  title: string;
+}
+
+function LocationsPage({ pageData }: { pageData: RegionsPage }) {
   return (
     <Container maxW="container.lg" px={[5, 12]}>
       <NextSeo title={pageData?.title} description={pageData?.copy} />
@@ -46,9 +82,10 @@ function LocationsPage({ pageData }: { pageData: LocationPageResponse }) {
               name={region.name}
               heading={region.heading}
               description={region.subheading}
-              image={region?.image?.url}
+              image={urlFor(region?.image).url()}
               slug={region.slug.current}
               percentComplete={region.percentComplete}
+              blurDataURL={region.image.metadata.lqip}
               notableBuild={{
                 link: `/wiki/locations/${region.slug.current}/${region?.notableBuild?.slug?.current}`,
                 title: region?.notableBuild?.title,
@@ -77,7 +114,8 @@ export const getStaticProps: GetStaticProps = async () => {
       "percentComplete": round(count(*[_type == "location" && region._ref == ^._id && projectStatus == "completed"]) * 100 / count(*[_type == "location" && region._ref == ^._id])),
       "recentlyUpdated": *[ _type == "location" && region._ref == ^._id ] { title, _updatedAt, slug } | order(dateTime(_updatedAt) asc) [0] {...},
       "image": image.asset->{
-        url,
+        _id,
+        _rev,
         metadata {
           lqip
         }
@@ -93,7 +131,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 LocationsPage.getLayout = function getLayout(page: ReactElement) {
-  return <WikiLayoutNew>{page}</WikiLayoutNew>;
+  return <WikiLayout>{page}</WikiLayout>;
 };
 
 export default LocationsPage;

@@ -1,25 +1,6 @@
-import {
-  Box,
-  Circle,
-  Flex,
-  Stack,
-  TabList,
-  Tabs,
-  Tab,
-  Input,
-  TabPanels,
-  TabPanel,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
 import { Navbar } from '../../Navbar';
-import { NavGroup } from './NavGroup';
-import { NavItem } from './NavItem';
-import { Breadcrumbs } from '../../../components/Breadcrumbs';
-import { Sidenav } from '../Sidenav';
-import { LOCATIONS } from '../../../constants/locations';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import { WikiSidenav } from './WikiSidenav/WikiSidenav';
 
 interface WikiLayoutProps {
@@ -27,7 +8,7 @@ interface WikiLayoutProps {
   rightNav?: React.ReactNode;
 }
 
-export const WikiLayoutNew = ({ children, rightNav }: WikiLayoutProps) => {
+export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
   return (
     <Flex direction="column" height="100vh" className="wiki-layout">
       <Navbar />

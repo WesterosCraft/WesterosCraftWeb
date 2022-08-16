@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ReactElement } from 'react';
 import {
   Flex,
   Heading,
@@ -10,21 +10,16 @@ import {
   LinkBox,
   HStack,
   LinkOverlay,
-} from "@chakra-ui/react";
-import { GetStaticProps } from "next";
-import NextLink from "next/link";
-import { WikiLayout } from "../../../../components";
-import { sanityClient } from "../../../../lib/sanity.server";
-import { Breadcrumbs } from "../../../../components/Breadcrumbs";
-import {
-  Location,
-  RegionPageResponse,
-  ExtendedImage,
-  BuildCategory,
-} from "../../../../types";
-import { NextSeo } from "next-seo";
-import { nameFormatter } from "../../../../utils";
-import { ChakraNextImage } from "../../../../components/ChakraNextImage";
+} from '@chakra-ui/react';
+import { GetStaticProps } from 'next';
+import NextLink from 'next/link';
+import { sanityClient } from '../../../../lib/sanity.server';
+import { Breadcrumbs } from '../../../../components/Breadcrumbs';
+import { Location, RegionPageResponse, ExtendedImage, BuildCategory } from '../../../../types';
+import { NextSeo } from 'next-seo';
+import { nameFormatter } from '../../../../utils';
+import { ChakraNextImage } from '../../../../components/ChakraNextImage';
+import { WikiLayout } from '../../../../components/Layout/WikiLayout';
 
 interface RegionPageProps extends RegionPageResponse {
   extendedImage: ExtendedImage;
@@ -35,13 +30,13 @@ const RegionPage = ({ pageData }: { pageData: RegionPageProps }) => {
   return (
     <>
       <NextSeo title={pageData?.name} />
-      <Container maxW='container.lg' px={[5, 12]}>
+      <Container maxW="container.lg" px={[5, 12]}>
         <Breadcrumbs />
-        <Heading size='2xl' mb={12}>
+        <Heading size="2xl" mb={12}>
           {pageData?.name}
         </Heading>
-        <SimpleGrid minChildWidth='292px' spacing='24px'>
-          {pageData?.locations.map((loc) => (
+        <SimpleGrid minChildWidth="292px" spacing="24px">
+          {pageData?.locations.map(loc => (
             <LocationCard key={loc?.title} {...loc} />
           ))}
         </SimpleGrid>
@@ -56,7 +51,7 @@ interface LocationCardProps extends Location {
 }
 
 function LocationCard(cardData: LocationCardProps) {
-  const myLoader = ({ src = "" }) => {
+  const myLoader = ({ src = '' }) => {
     return `${src}?fit=crop&auto=format&crop=center&h=275&w=${352}&q=100`;
   };
 
@@ -64,24 +59,24 @@ function LocationCard(cardData: LocationCardProps) {
     <LinkBox
       as={Flex}
       flexShrink={0}
-      direction='column'
-      maxW='sm'
+      direction="column"
+      maxW="sm"
       p={4}
-      width='full'
-      outline='1.5px solid black'
+      width="full"
+      outline="1.5px solid black"
       _hover={{
-        bg: "primaryGlare",
-        outline: "1.5px solid black",
-        cursor: "pointer",
+        bg: 'primaryGlare',
+        outline: '1.5px solid black',
+        cursor: 'pointer',
       }}
     >
       <HStack>
-        <Heading letterSpacing={1.1} fontSize='md' width='full'>
+        <Heading letterSpacing={1.1} fontSize="md" width="full">
           {cardData?.title}
         </Heading>
-        <Text fontSize='sm'>{cardData?.extendedBuildCategory?.title}</Text>
+        <Text fontSize="sm">{cardData?.extendedBuildCategory?.title}</Text>
       </HStack>
-      <Divider borderBottomColor='black' mt={2} />
+      <Divider borderBottomColor="black" mt={2} />
       <LinkOverlay
         as={NextLink}
         passHref
@@ -91,31 +86,31 @@ function LocationCard(cardData: LocationCardProps) {
           <Flex
             mt={3}
             mb={2}
-            width='full'
+            width="full"
             height={275}
-            outline='1.5px solid black'
-            position='relative'
-            bgColor='primaryGlare'
+            outline="1.5px solid black"
+            position="relative"
+            bgColor="primaryGlare"
           >
             {cardData?.extendedImage?.url && (
               <ChakraNextImage
                 src={cardData?.extendedImage?.url}
                 blurDataURL={cardData?.extendedImage?.metadata?.lqip!}
-                placeholder='blur'
-                objectFit='cover'
-                objectPosition='center'
-                layout='fill'
+                placeholder="blur"
+                objectFit="cover"
+                objectPosition="center"
+                layout="fill"
                 loader={myLoader}
               />
             )}
           </Flex>
         </a>
       </LinkOverlay>
-      <HStack justify='space-between'>
-        <Text fontSize='xs' color='gray.700'>
+      <HStack justify="space-between">
+        <Text fontSize="xs" color="gray.700">
           {cardData?.house}
         </Text>
-        <Text fontSize='xs' color='gray.700'>
+        <Text fontSize="xs" color="gray.700">
           {nameFormatter(cardData?.projectStatus)}
         </Text>
       </HStack>
@@ -142,7 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       "extendedBuildCategory": buildCategory[0]-> { title }
       }
     }`,
-    { slug: params?.region }
+    { slug: params?.region },
   );
 
   return {
@@ -156,7 +151,7 @@ export const getStaticPaths = async () => {
   const paths = await sanityClient.fetch(
     `*[_type == "region"] {
         slug
-     }`
+     }`,
   );
 
   return {

@@ -1,5 +1,5 @@
-import type { ReactElement } from "react";
-import { WikiLayout } from "../../../components";
+import type { ReactElement } from 'react';
+import { WikiLayout } from '../../../components/Layout/WikiLayout';
 
 export default function BlocksPage() {
   return <div>blocks</div>;

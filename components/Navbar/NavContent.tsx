@@ -65,9 +65,11 @@ const DesktopNavContent = (props: FlexProps) => {
           {links.map((link, idx) => (
             <Box as="li" key={idx} id={`nav__menuitem-${idx}`}>
               {link.links ? (
-                <Submenu.Desktop link={link} />
+                <Submenu.Desktop key={idx} link={link} />
               ) : (
-                <NavLink.Desktop href={link?.slug?.current}>{link.title}</NavLink.Desktop>
+                <NavLink.Desktop key={idx} href={link?.slug?.current}>
+                  {link.title}
+                </NavLink.Desktop>
               )}
             </Box>
           ))}

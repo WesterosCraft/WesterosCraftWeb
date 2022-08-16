@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {
   Box,
   Collapse,
@@ -9,8 +10,9 @@ import {
   Text,
   PopoverContent,
   PopoverArrow,
+  Link,
 } from '@chakra-ui/react';
-import * as React from 'react';
+import NextLink from 'next/link';
 import { Links } from './_data';
 import { NavLink } from './NavLink';
 import { SubmenuItem as DesktopMenuItem } from './SubmenuItem';
@@ -22,7 +24,7 @@ interface SubmenuProps {
 
 const DesktopSubmenu = ({ link }: SubmenuProps) => {
   return (
-    <Popover trigger="hover" offset={[2, 2]}>
+    <Popover trigger="click" offset={[2, 2]}>
       <PopoverTrigger>
         <Button
           height="auto"
@@ -51,18 +53,30 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
         <PopoverArrow />
 
         <SimpleGrid spacing="4" columns={1}>
-          {link?.links?.map((item, idx) => (
-            <DesktopMenuItem
-              key={idx}
-              title={item.title}
-              href={item.link?.slug?.current || '/'}
-              isExternal={item._type === 'externalLink'}
-              icon={item.icon}
-              // icon={item.icon}
-            >
-              {item.description}
-            </DesktopMenuItem>
-          ))}
+          {link?.links?.map((item, idx) =>
+            item._type === 'externalLink' ? (
+              <Link
+                key={idx}
+                isExternal
+                _hover={{
+                  textDecor: 'none',
+                }}
+                href={item.link?.slug?.current}
+              >
+                <DesktopMenuItem title={item.title} icon={item.icon}>
+                  {item.description}
+                </DesktopMenuItem>
+              </Link>
+            ) : (
+              <NextLink key={idx} href={item.link?.slug?.current || `/${item.title}`}>
+                <a>
+                  <DesktopMenuItem title={item.title} icon={item.icon}>
+                    {item.description}
+                  </DesktopMenuItem>
+                </a>
+              </NextLink>
+            ),
+          )}
         </SimpleGrid>
       </PopoverContent>
     </Popover>

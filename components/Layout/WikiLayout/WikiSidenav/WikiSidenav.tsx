@@ -1,6 +1,6 @@
+import * as React from 'react';
 import {
   Box,
-  Flex,
   Stack,
   TabList,
   Tabs,
@@ -9,13 +9,18 @@ import {
   TabPanels,
   TabPanel,
   Text,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
 } from '@chakra-ui/react';
-import * as React from 'react';
-import { NavGroup } from '../NavGroup';
-import { NavItem } from '../NavItem';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import { LocationsAccordion } from './Locations';
+import { LOCATIONS } from '../../../../constants/locations';
+import { NavItem } from '../NavItem';
+import { NavGroup } from '../NavGroup';
+import startCase from 'lodash/startCase';
+import toLower from 'lodash/toLower';
 
 const tabs = [
   {
@@ -35,6 +40,20 @@ const tabs = [
 export const WikiSidenav = () => {
   const router = useRouter();
 
+  const locationsByRegion = LOCATIONS.reduce((acc, value) => {
+    // Group initialization
+    if (!acc[value.region.slug.current]) {
+      acc[value.region.slug.current] = [];
+    }
+
+    // Grouping
+    acc[value.region.slug.current].push(value);
+
+    return acc;
+  }, {} as any);
+
+  const sortedLocations = Object.entries(locationsByRegion).sort();
+
   return (
     <Box w="72" bg="primaryDark" color="white" fontSize="sm">
       <Box mx={4}>
@@ -53,6 +72,7 @@ export const WikiSidenav = () => {
         variant="enclosed"
         colorScheme="black"
         defaultIndex={tabs.findIndex(tab => router.pathname.includes(tab.href))}
+        isLazy
       >
         <TabList>
           {tabs.map(tab => (
@@ -62,10 +82,15 @@ export const WikiSidenav = () => {
                 borderColor: 'inherit',
                 borderBottomColor: 'primaryDark',
               }}
+              isDisabled={tab.label === 'Blocks'}
             >
-              <NextLink href={tab.href} passHref>
-                {tab.label}
-              </NextLink>
+              {tab.label === 'Blocks' ? (
+                tab.label
+              ) : (
+                <NextLink href={tab.href}>
+                  <a>{tab.label}</a>
+                </NextLink>
+              )}
             </Tab>
           ))}
         </TabList>
@@ -74,28 +99,34 @@ export const WikiSidenav = () => {
             <Text>guides</Text>
           </TabPanel>
           <TabPanel p={0} pt="6">
-            <LocationsAccordion />
-            {/* <Flex h="full" direction="column" px="4" py="4">
-              <Stack spacing="8" flex="1" overflow="auto" pt="8">
-                <Stack spacing="1">
-                  <NavItem active label="Get Started" />
-                  <NavItem label="Inbox" />
-                </Stack>
-                <NavGroup label="Your Business">
-                  <NavItem label="Transactions" />
-                  <NavItem label="Customers" />
-                  <NavItem label="Income" />
-                  <NavItem label="Transfer" />
-                </NavGroup>
-
-                <NavGroup label="Seller Tools">
-                  <NavItem label="Payment Pages" />
-                  <NavItem label="Invoices" />
-                  <NavItem label="Plans" />
-                  <NavItem label="Subsription" />
-                </NavGroup>
-              </Stack>
-            </Flex> */}
+            <Accordion
+              allowToggle
+              index={sortedLocations.findIndex(loc => router.asPath?.includes(loc?.[0]))}
+            >
+              {sortedLocations.map(([key, value], i) => (
+                <AccordionItem key={i} border={0}>
+                  <NextLink href={`/wiki/locations/${key}`}>
+                    <a>
+                      <AccordionButton _hover={{ bg: 'primaryDarkGlare' }}>
+                        <NavGroup label={startCase(toLower(key))} />
+                      </AccordionButton>
+                    </a>
+                  </NextLink>
+                  <AccordionPanel px={4}>
+                    <Stack spacing="1">
+                      {/* @ts-ignore */}
+                      {value?.map((loc: any, i) => (
+                        <NextLink key={i} href={`/wiki/locations/${key}/${loc?.slug?.current}`}>
+                          <a>
+                            <NavItem label={loc.title} />
+                          </a>
+                        </NextLink>
+                      ))}
+                    </Stack>
+                  </AccordionPanel>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </TabPanel>
           <TabPanel p={0}>
             <Text>blocks</Text>

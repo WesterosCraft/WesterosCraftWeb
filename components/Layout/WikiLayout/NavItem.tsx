@@ -15,11 +15,11 @@ export const NavItem = (props: NavItemProps) => {
   return (
     <HStack
       w="full"
-      px="3"
+      pr="3"
+      pl="5"
       py="2"
       cursor="pointer"
       userSelect="none"
-      rounded="md"
       transition="all 0.2s"
       bg={active ? 'gray.700' : undefined}
       _hover={{ bg: 'gray.700' }}

@@ -1,14 +1,14 @@
-import type { ReactElement } from "react";
-import { GetStaticProps } from "next";
-import { Heading, Box, Text, Container } from "@chakra-ui/react";
-import { WikiLayout } from "../../../../components";
-import { sanityClient } from "../../../../lib/sanity.server";
-import { ChakraNextImage } from "../../../../components/ChakraNextImage";
-import { ProjectDetails } from "../../../../components/ProjectDetails";
-import { RichText } from "../../../../components/RichText";
-import BrightSquares from "../../../../public/bright-squares.png";
-import { isEmpty } from "lodash";
-import { Breadcrumbs } from "../../../../components/Breadcrumbs";
+import type { ReactElement } from 'react';
+import { GetStaticProps } from 'next';
+import { Heading, Box, Text, Container } from '@chakra-ui/react';
+import { sanityClient } from '../../../../lib/sanity.server';
+import { ChakraNextImage } from '../../../../components/ChakraNextImage';
+import { ProjectDetails } from '../../../../components/ProjectDetails';
+import { RichText } from '../../../../components/RichText';
+import BrightSquares from '../../../../public/bright-squares.png';
+import { isEmpty } from 'lodash';
+import { Breadcrumbs } from '../../../../components/Breadcrumbs';
+import { WikiLayout } from '../../../../components/Layout/WikiLayout';
 
 export interface LocationPageProps {
   pageData: any;
@@ -17,7 +17,7 @@ export interface LocationPageProps {
 const LocationPage = ({ pageData }: LocationPageProps) => {
   return (
     <>
-      <Container maxW='container.lg' px={[5, 12]}>
+      <Container maxW="container.lg" px={[5, 12]}>
         <Breadcrumbs />
         <Heading mb={4}>{pageData?.title}</Heading>
         <WikiHero pageData={pageData} />
@@ -25,20 +25,16 @@ const LocationPage = ({ pageData }: LocationPageProps) => {
       <Box>
         <ProjectDetails
           pageData={pageData}
-          display={["inline-flex", null, null, null, null, "none"]}
-          className='page-project-details'
+          display={['inline-flex', null, null, null, null, 'none']}
+          className="page-project-details"
           ml={[0, null, 3]}
-          float={["none", null, "right"]}
+          float={['none', null, 'right']}
           mb={3}
           pr={[5, null, 12]}
-          width={["full", null, "auto"]}
+          width={['full', null, 'auto']}
           pl={[5, null, 0]}
         />
-        <Container
-          maxW='container.lg'
-          className='rich-text-container'
-          px={[5, 12]}
-        >
+        <Container maxW="container.lg" className="rich-text-container" px={[5, 12]}>
           {pageData?.body ? (
             <RichText value={pageData?.body} />
           ) : (
@@ -50,7 +46,7 @@ const LocationPage = ({ pageData }: LocationPageProps) => {
   );
 };
 
-const myLoader = ({ src = "", width = 976 }) => {
+const myLoader = ({ src = '', width = 976 }) => {
   return `${src}?fit=crop&auto=format&crop=center&h=350&w=${width}&q=90`;
 };
 
@@ -63,26 +59,26 @@ const WikiHero = ({ pageData }: LocationPageProps) => {
 
   return (
     <Box
-      position='relative'
+      position="relative"
       backgroundImage={!hasImage ? `url(${BrightSquares.src})` : undefined}
-      maxHeight='350px'
-      width='100%'
-      overflow='hidden'
+      maxHeight="350px"
+      width="100%"
+      overflow="hidden"
     >
       {pageData?.bannerImage?.url && (
         <Box
-          zIndex='1'
-          color='white'
-          position='absolute'
+          zIndex="1"
+          color="white"
+          position="absolute"
           bottom={[2, null, 5]}
           left={[2, null, 5]}
-          filter='drop-shadow(15px 11px 6px rgb(41, 41, 43, .80))'
+          filter="drop-shadow(15px 11px 6px rgb(41, 41, 43, .80))"
           maxW={[45, 65, null, 75]}
         >
           <ChakraNextImage
             src={pageData?.bannerImage?.url}
             alt={`${pageData?.title} Banner`}
-            placeholder='blur'
+            placeholder="blur"
             blurDataURL={pageData?.bannerImage?.metadata.lqip!}
             width={75}
             height={150}
@@ -93,7 +89,7 @@ const WikiHero = ({ pageData }: LocationPageProps) => {
         <ChakraNextImage
           src={pageData?.additionalImages?.[0]?.url}
           alt={pageData?.title}
-          placeholder='blur'
+          placeholder="blur"
           blurDataURL={pageData?.additionalImages?.[0]?.metadata?.lqip!}
           width={976}
           height={350}
@@ -124,7 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }`,
     {
       slug: params?.slug,
-    }
+    },
   );
 
   return {
@@ -135,9 +131,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const allLocations = await sanityClient.fetch(
-    `*[_type=="location"] { slug, region->{ slug } }`
-  );
+  const allLocations = await sanityClient.fetch(`*[_type=="location"] { slug, region->{ slug } }`);
   const paths = allLocations?.map((location: any) => ({
     params: {
       slug: location?.slug?.current,
@@ -158,9 +152,9 @@ LocationPage.getLayout = function getLayout(page: ReactElement) {
       rightNav={
         <ProjectDetails
           pageData={pageData}
-          as='nav'
-          role='navigation'
-          position='fixed'
+          as="nav"
+          role="navigation"
+          position="fixed"
           right={0}
           top={12}
           pt={10}

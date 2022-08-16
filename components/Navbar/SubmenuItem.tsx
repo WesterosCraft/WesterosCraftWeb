@@ -1,7 +1,6 @@
-import { Flex, HStack, Link, Text, HTMLChakraProps } from '@chakra-ui/react';
+import { Flex, HStack, Text, StackProps } from '@chakra-ui/react';
 import * as React from 'react';
 import NextImage from 'next/image';
-import NextLink from 'next/link';
 import PykeIcon from '../../public/icons/pyke96.png';
 import NightsWatchIcon from '../../public/icons/nightswatch96.png';
 import DreadfortIcon from '../../public/icons/dreadfort96.png';
@@ -11,22 +10,13 @@ import SummerhallIcon from '../../public/icons/summerhall96.png';
 import HighgardenIcon from '../../public/icons/highgarden96.png';
 import SunspearIcon from '../../public/icons/sunspear96.png';
 
-interface SubmenuItemProps extends HTMLChakraProps<'a'> {
+interface SubmenuItemProps extends StackProps {
   title: string;
   icon?: 'pyke' | 'nightswatch' | 'dreadfort' | 'casterlyrock' | 'stormsend';
-  isExternal: boolean;
   children: React.ReactNode;
-  href: string;
 }
 
-export const SubmenuItem = ({
-  title,
-  icon,
-  children,
-  href,
-  isExternal,
-  ...rest
-}: SubmenuItemProps) => {
+export const SubmenuItem = ({ title, icon, children, ...rest }: SubmenuItemProps) => {
   const iconMap = {
     pyke: PykeIcon.src,
     nightswatch: NightsWatchIcon.src,
@@ -40,40 +30,23 @@ export const SubmenuItem = ({
   };
 
   return (
-    <Link
-      as={isExternal ? undefined : NextLink}
-      _hover={{
-        textDecor: 'none',
-      }}
-      className="group"
-      href={href ?? `/${title}`}
+    <HStack
+      cursor="pointer"
+      spacing={3}
+      align="flex-start"
+      p="3"
+      _hover={{ bg: 'gray.100' }}
       {...rest}
     >
-      <HStack
-        as={isExternal ? undefined : 'a'}
-        cursor="pointer"
-        spacing={3}
-        align="flex-start"
-        p="3"
-        _hover={{ bg: 'gray.100' }}
-      >
-        <NextImage width="36px" height="36px" src={iconMap[icon ?? 'default']} />
+      <NextImage width="36px" height="36px" src={iconMap[icon ?? 'default']} />
 
-        <Flex
-          display="flex"
-          direction="column"
-          transition="all 0.2s"
-          _focus={{ shadow: 'outline' }}
-        >
-          <Text fontWeight="semibold" color="primaryDark">
-            {title}
-          </Text>
+      <Flex display="flex" direction="column" transition="all 0.2s" _focus={{ shadow: 'outline' }}>
+        <Text fontWeight="semibold" color="primaryDark">
+          {title}
+        </Text>
 
-          <Text as="dd" color="gray.500">
-            {children}
-          </Text>
-        </Flex>
-      </HStack>
-    </Link>
+        <Text color="gray.500">{children}</Text>
+      </Flex>
+    </HStack>
   );
 };

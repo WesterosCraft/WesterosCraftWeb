@@ -1,5 +1,4 @@
 import { Flex } from '@chakra-ui/react';
-import { SocialFooter } from '../SocialFooter';
 import { Navbar } from '../Navbar';
 import { Footer } from '../Footer/Footer';
 

@@ -32,6 +32,7 @@ interface RegionCard {
   notableBuild: BuildDetail;
   recentlyUpdated: BuildDetail;
   percentComplete: number;
+  blurDataURL: string;
 }
 
 export const RegionCard = ({
@@ -42,6 +43,7 @@ export const RegionCard = ({
   slug,
   notableBuild,
   percentComplete,
+  blurDataURL,
   recentlyUpdated,
 }: RegionCard) => {
   const resolvedColor = `${camelCase(slug)}.default`;
@@ -70,6 +72,7 @@ export const RegionCard = ({
               width={320}
               height={250}
               alt={name}
+              blurDataURL={blurDataURL}
             />
             <NextLink href={`/wiki/locations/${slug}`} passHref>
               <a>
