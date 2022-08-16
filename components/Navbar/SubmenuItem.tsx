@@ -49,7 +49,14 @@ export const SubmenuItem = ({
       href={href ?? `/${title}`}
       {...rest}
     >
-      <HStack cursor="pointer" spacing={3} align="flex-start" p="3" _hover={{ bg: 'gray.100' }}>
+      <HStack
+        as={isExternal ? undefined : 'a'}
+        cursor="pointer"
+        spacing={3}
+        align="flex-start"
+        p="3"
+        _hover={{ bg: 'gray.100' }}
+      >
         <NextImage width="36px" height="36px" src={iconMap[icon ?? 'default']} />
 
         <Flex
