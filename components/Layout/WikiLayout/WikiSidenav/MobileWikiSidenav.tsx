@@ -44,11 +44,9 @@ const MobileNavContext = (props: FlexProps) => {
         {...props}
       >
         <Box>
-          <ToggleButton isOpen={isOpen} onClick={onToggle} />
+          <Button onClick={onToggle}>Guides</Button>
+          <Button onClick={onToggle}>Locations</Button>
         </Box>
-        <Heading color="white" mx="6">
-          Wiki
-        </Heading>
         <Input size="sm" />
       </Flex>
       <NavMenu animate={isOpen ? 'open' : 'closed'}>

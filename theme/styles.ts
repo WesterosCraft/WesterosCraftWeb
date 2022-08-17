@@ -12,7 +12,7 @@ export const styles = {
       scrollbarColor:
         props.colorMode === 'dark'
           ? 'rgba(255, 255, 255, 0.2) transparent'
-          : 'rgba(0, 0, 0, 0.2) transparent',
+          : 'rgba(255, 255, 255, 0.35) transparent',
     },
     '.no-bg-scrollbar::-webkit-scrollbar, .no-bg-scrollbar::-webkit-scrollbar-track': {
       backgroundColor: 'transparent',
@@ -20,7 +20,7 @@ export const styles = {
     '.no-bg-scrollbar:hover::-webkit-scrollbar-thumb, .no-bg-scrollbar:focus::-webkit-scrollbar-thumb, .no-bg-scrollbar:focus-within::-webkit-scrollbar-thumb, .no-bg-scrollbar:active::-webkit-scrollbar-thumb':
       {
         backgroundColor:
-          props.colorMode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.2)',
+          props.colorMode === 'dark' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.35)',
         border: '4px solid transparent',
         backgroundClip: 'content-box',
         borderRadius: '10px',
@@ -30,7 +30,7 @@ export const styles = {
         backgroundColor:
           props.colorMode === 'dark'
             ? 'rgba(255, 255, 255, 0.35) !important'
-            : 'rgba(0, 0, 0, 0.35) !important',
+            : 'rgba(255, 255, 255, 0.35) !important',
       },
   }),
 };

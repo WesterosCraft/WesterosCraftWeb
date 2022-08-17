@@ -62,6 +62,7 @@ export const WikiSidenav = () => {
       color="white"
       fontSize="sm"
       overflowY="scroll"
+      className="no-bg-scrollbar"
     >
       <Box mx={4}>
         <Input
@@ -110,7 +111,7 @@ export const WikiSidenav = () => {
           <TabPanel p={0}>
             <Text>guides</Text>
           </TabPanel>
-          <TabPanel p={0} pt="6">
+          <TabPanel p={0} pt="6" mb="12">
             <Accordion
               allowToggle
               index={sortedLocations.findIndex(loc => router.asPath?.includes(loc?.[0]))}
