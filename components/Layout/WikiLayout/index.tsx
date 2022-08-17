@@ -20,7 +20,7 @@ export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
         borderTopWidth="1px"
         borderColor="gray.600"
       >
-        <Flex h="full" id="app-container">
+        <Flex h="full" flexDirection={{ base: 'column', lg: 'row' }} id="app-container">
           <MobileWikiSidenav />
           <WikiSidenav />
           <Box flex="1" p="6" overflow="auto">

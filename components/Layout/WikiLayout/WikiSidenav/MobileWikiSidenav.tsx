@@ -9,15 +9,24 @@ import {
   VisuallyHidden,
   Text,
   Center,
+  Input,
+  Heading,
 } from '@chakra-ui/react';
 import { NavMenu } from '../../../Navbar/NavMenu';
 import { ToggleButton } from '../../../Navbar/ToggleButton';
 
 export const MobileWikiSidenav = () => {
   return (
-    <Center maxH="12" as="header" w="full" bg="primaryDark" position="relative" zIndex="10">
-      <Box as="nav" aria-label="Main navigation" maxW="7xl" w="full" mx={{ base: '6', md: '8' }}>
-        <MobileNavContext display={{ base: 'flex', lg: 'none' }} />
+    <Center
+      display={{ base: 'flex', lg: 'none' }}
+      position="relative"
+      //   maxH="12"
+      as="header"
+      w="full"
+      bg="primaryDarkGlare"
+    >
+      <Box as="nav" aria-label="Wiki navigation" w="full" px="8" py="1">
+        <MobileNavContext />
       </Box>
     </Center>
   );
@@ -27,18 +36,20 @@ const MobileNavContext = (props: FlexProps) => {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-      <Flex align="center" justify="space-between" className="nav-content__mobile" {...props}>
-        <Box flexBasis="6rem">
+      <Flex
+        w="full"
+        align="center"
+        justify="space-between"
+        className="nav-content__mobile"
+        {...props}
+      >
+        <Box>
           <ToggleButton isOpen={isOpen} onClick={onToggle} />
         </Box>
-        {/* <Box as="a" rel="home" mx="auto">
-          <Logo h="24px" />
-        </Box> */}
-        {/* <Box visibility={{ base: 'hidden', sm: 'visible' }}>
-          <Button as="a" colorScheme="whiteAlpha">
-            Get Started
-          </Button>
-        </Box> */}
+        <Heading color="white" mx="6">
+          Wiki
+        </Heading>
+        <Input size="sm" />
       </Flex>
       <NavMenu animate={isOpen ? 'open' : 'closed'}>
         {/* {links.map((link, idx) =>
