@@ -11,6 +11,7 @@ import {
   Center,
   Input,
   Heading,
+  ButtonGroup,
 } from '@chakra-ui/react';
 import { NavMenu } from '../../../Navbar/NavMenu';
 import { ToggleButton } from '../../../Navbar/ToggleButton';
@@ -23,9 +24,9 @@ export const MobileWikiSidenav = () => {
       //   maxH="12"
       as="header"
       w="full"
-      bg="primaryDarkGlare"
+      bg="primaryDark"
     >
-      <Box as="nav" aria-label="Wiki navigation" w="full" px="8" py="1">
+      <Box as="nav" aria-label="Wiki navigation" w="full" px="8" py="2">
         <MobileNavContext />
       </Box>
     </Center>
@@ -33,7 +34,9 @@ export const MobileWikiSidenav = () => {
 };
 
 const MobileNavContext = (props: FlexProps) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const { isOpen: isGuidesOpen, onToggle: onGuidesToggle } = useDisclosure();
+  const { isOpen: isLocationsOpen, onToggle: onLocationsToggle } = useDisclosure();
+
   return (
     <>
       <Flex
@@ -43,13 +46,13 @@ const MobileNavContext = (props: FlexProps) => {
         className="nav-content__mobile"
         {...props}
       >
-        <Box>
-          <Button onClick={onToggle}>Guides</Button>
-          <Button onClick={onToggle}>Locations</Button>
-        </Box>
-        <Input size="sm" />
+        <ButtonGroup size="sm" variant="ghost" colorScheme="whiteAlpha">
+          <Button onClick={onGuidesToggle}>Guides</Button>
+          <Button onClick={onLocationsToggle}>Locations</Button>
+        </ButtonGroup>
+        <Input size="sm" ml="8" />
       </Flex>
-      <NavMenu animate={isOpen ? 'open' : 'closed'}>
+      <NavMenu animate={isGuidesOpen || isLocationsOpen ? 'open' : 'closed'}>
         {/* {links.map((link, idx) =>
           link.links ? (
             <Submenu.Mobile key={idx} link={link} />

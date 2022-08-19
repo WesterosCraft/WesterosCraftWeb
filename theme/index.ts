@@ -19,7 +19,7 @@ export const theme = {
     primaryShade: '#F9ECC8',
     primaryGlare: '#F6E2AA',
     primaryDark: '#22261F',
-    primaryDarkGlare: '#292D25',
+    primaryDarkGlare: '#333333',
     primaryDarkGlare2: '#595e56',
     primaryGold: '#daaf3c',
     primaryRed: '#9B2C2C',
