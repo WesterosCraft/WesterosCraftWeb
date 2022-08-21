@@ -7,8 +7,6 @@ import {
   HStack,
   useDisclosure,
   VisuallyHidden,
-  Input,
-  IconButton,
   Spacer,
   useBreakpointValue,
 } from '@chakra-ui/react';
@@ -19,9 +17,9 @@ import { Submenu } from './Submenu';
 import { ToggleButton } from './ToggleButton';
 import { links } from './_data';
 import { Logo } from './Logo';
-import { MagnifyingGlassIcon } from '../Icons/MagnifyingGlass';
 import { WikiSidenav } from '../Layout/WikiLayout/WikiSidenav/WikiSidenav';
 import { useRouter } from 'next/router';
+import { AlgoliaInput } from '../AlgoliaInput';
 
 interface MobileNavContextProps extends FlexProps {
   isWiki?: boolean;
@@ -72,27 +70,11 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
         </Box>
         {isWiki && (
           <>
-            <Input
-              focusBorderColor="primaryGold"
-              border="none"
-              bg="primaryDarkGlare2"
-              color="white"
-              _placeholder={{
-                color: 'white',
-              }}
-              borderRadius="none"
-              display={{ base: 'none', sm: 'inherit' }}
-              placeholder="Search Wiki"
-              mr="6"
-              ml={isWiki ? '4' : '0'}
-            />
             <Spacer />
-            <IconButton
-              display={{ base: 'inherit', sm: 'none' }}
-              variant="ghost"
-              fill="white"
-              icon={<MagnifyingGlassIcon />}
-              aria-label="Open Wiki search"
+            <AlgoliaInput
+              display={{ base: 'none', sm: 'inherit' }}
+              mr="6"
+              ml={isWiki ? '6' : '0'}
             />
           </>
         )}

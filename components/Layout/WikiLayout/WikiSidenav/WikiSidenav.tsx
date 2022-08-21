@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { NavItem } from '../NavItem';
 import { WIKI_TABS } from '../../../../constants/tabs';
 import { LocationsPanel } from './LocationsPanel';
+import { AlgoliaInput } from '../../../AlgoliaInput';
 
 const DesktopWikiSidenav = () => {
   return (
@@ -17,20 +18,8 @@ const DesktopWikiSidenav = () => {
       overflowY="scroll"
       className="no-bg-scrollbar"
     >
-      <Box mx={4}>
-        <Input
-          focusBorderColor="primaryGold"
-          border="none"
-          bg="primaryDarkGlare2"
-          color="white"
-          _placeholder={{
-            color: 'white',
-          }}
-          borderRadius="none"
-          display={['none', null, null, 'inherit']}
-          placeholder="Search"
-          my={4}
-        />
+      <Box m="4" display={['none', null, null, 'inherit']}>
+        <AlgoliaInput />
       </Box>
       <NextLink href="/wiki">
         <a>
