@@ -26,11 +26,11 @@ import Image from 'next/image';
 import { sanityClient } from '../../lib/sanity.server';
 import type { ReactElement } from 'react';
 import Link from 'next/link';
-import { OneColumnLayout } from '../../components';
 import { MagnifyingGlassIcon } from '../../components/Icons/MagnifyingGlass';
 import { AlgoliaSearch } from '../../components/AlgoliaSearch';
+import { WikiLayout } from '../../components/Layout/WikiLayout';
 
-export default function Home({ pageData }: any) {
+export default function Wiki({ pageData }: any) {
   const {
     isOpen: isSearchOpen,
     onOpen: onSearchOpen,
@@ -187,6 +187,6 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   };
 };
-Home.getLayout = function getLayout(page: ReactElement) {
-  return <OneColumnLayout>{page}</OneColumnLayout>;
+Wiki.getLayout = function getLayout(page: ReactElement) {
+  return <WikiLayout>{page}</WikiLayout>;
 };

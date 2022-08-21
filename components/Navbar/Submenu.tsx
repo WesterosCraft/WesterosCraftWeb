@@ -9,7 +9,6 @@ import {
   Button,
   Text,
   PopoverContent,
-  PopoverArrow,
   Link,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
@@ -20,11 +19,12 @@ import { ChevronDownIcon } from '../Icons/ChevronDown';
 
 interface SubmenuProps {
   link: Links;
+  isWiki?: boolean;
 }
 
 const DesktopSubmenu = ({ link }: SubmenuProps) => {
   return (
-    <Popover trigger="hover" offset={[2, 2]}>
+    <Popover trigger="hover" offset={[-1, -1]}>
       <PopoverTrigger>
         <Button
           height="auto"
@@ -49,14 +49,19 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent bg="white" w="sm" p={5} borderRadius="none" borderColor="primaryDark">
-        <PopoverArrow />
-
+      <PopoverContent
+        bg="primaryDark"
+        w="sm"
+        p={5}
+        borderRadius="none"
+        borderColor="primaryDarkGlare2"
+      >
         <SimpleGrid spacing="4" columns={1}>
           {link?.links?.map((item, idx) =>
             item._type === 'externalLink' ? (
               <Link
                 key={idx}
+                color="white"
                 isExternal
                 _hover={{
                   textDecor: 'none',
@@ -98,14 +103,18 @@ const MobileSubMenu = (props: SubmenuProps) => {
         paddingEnd="4"
       >
         <Box flex="1">{link.title}</Box>
-        <Box as={ChevronDownIcon} transform={`rotate(${isOpen ? '180deg' : '0deg'})`} />
+        <Box
+          as={ChevronDownIcon}
+          fill="white"
+          transform={`rotate(${isOpen ? '180deg' : '0deg'})`}
+        />
       </NavLink.Mobile>
       <Collapse in={isOpen}>
-        <Box pl="5">
+        <Box pl="5" w="full">
           {link.links?.map((item, idx) => (
-            <NavLink.Mobile key={idx} href={item.link?.slug.current}>
-              {item.title}
-            </NavLink.Mobile>
+            <NextLink key={idx} href={item.link?.slug?.current ?? '/'} passHref>
+              <NavLink.Mobile>{item.title}</NavLink.Mobile>
+            </NextLink>
           ))}
         </Box>
       </Collapse>

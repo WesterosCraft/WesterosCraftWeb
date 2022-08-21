@@ -35,17 +35,17 @@ export const SubmenuItem = ({ title, icon, children, ...rest }: SubmenuItemProps
       spacing={3}
       align="flex-start"
       p="3"
-      _hover={{ bg: 'gray.100' }}
+      _hover={{ bg: 'primaryDarkGlare2' }}
       {...rest}
     >
       <NextImage width="36px" height="36px" src={iconMap[icon ?? 'default']} />
 
       <Flex display="flex" direction="column" transition="all 0.2s" _focus={{ shadow: 'outline' }}>
-        <Text fontWeight="semibold" color="primaryDark">
+        <Text fontWeight="semibold" color="white">
           {title}
         </Text>
 
-        <Text color="gray.500">{children}</Text>
+        <Text color="gray.300">{children}</Text>
       </Flex>
     </HStack>
   );

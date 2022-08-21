@@ -1,7 +1,7 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, HStack, StackProps } from '@chakra-ui/react';
 import * as React from 'react';
 
-interface NavItemProps {
+interface NavItemProps extends StackProps {
   href?: string;
   label: string;
   subtle?: boolean;
@@ -11,7 +11,7 @@ interface NavItemProps {
 }
 
 export const NavItem = (props: NavItemProps) => {
-  const { active, subtle, children, label, endElement } = props;
+  const { active, subtle, children, label, endElement, ...rest } = props;
   return (
     <HStack
       w="full"
@@ -24,6 +24,7 @@ export const NavItem = (props: NavItemProps) => {
       bg={active ? 'gray.700' : undefined}
       _hover={{ bg: 'gray.700' }}
       _active={{ bg: 'gray.600' }}
+      {...rest}
     >
       <Box flex="1" fontWeight="inherit" color={subtle ? 'gray.400' : undefined}>
         {label}

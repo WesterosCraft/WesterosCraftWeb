@@ -24,10 +24,12 @@ const DesktopNavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>((props,
 });
 DesktopNavLink.displayName = 'DesktopNavLink';
 
-export const MobileNavLink = (props: NavLinkProps) => {
+export const MobileNavLink = React.forwardRef((props: NavLinkProps, ref) => {
   const { active, ...rest } = props;
   return (
     <chakra.a
+      cursor="pointer"
+      color="white"
       aria-current={active ? 'page' : undefined}
       w="full"
       display="flex"
@@ -35,10 +37,14 @@ export const MobileNavLink = (props: NavLinkProps) => {
       height="14"
       fontWeight="semibold"
       borderBottomWidth="1px"
+      // @ts-ignore
+      ref={ref}
       {...rest}
     />
   );
-};
+});
+
+MobileNavLink.displayName = 'MobileNavLink';
 
 export const NavLink = {
   Mobile: MobileNavLink,

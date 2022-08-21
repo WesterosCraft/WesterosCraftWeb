@@ -7,9 +7,9 @@ export interface Links {
 }
 
 export interface LinkElement {
-  _key: string;
-  _type: LinkType;
-  description: string;
+  _key?: string;
+  _type?: LinkType;
+  description?: string;
   icon?: 'pyke' | 'nightswatch' | 'dreadfort' | 'casterlyrock';
   link?: LinkLink;
   title: string;
@@ -22,12 +22,12 @@ export enum LinkType {
 }
 
 export interface LinkLink {
-  _type: string;
+  _type?: string;
   slug: Slug;
 }
 
 export interface Slug {
-  _type: SlugType;
+  _type?: SlugType;
   current: string;
 }
 

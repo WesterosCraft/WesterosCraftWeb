@@ -1,7 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import * as React from 'react';
 import { Navbar } from '../../Navbar';
-import { MobileWikiSidenav } from './WikiSidenav/MobileWikiSidenav';
 import { WikiSidenav } from './WikiSidenav/WikiSidenav';
 
 interface WikiLayoutProps {
@@ -12,7 +11,7 @@ interface WikiLayoutProps {
 export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
   return (
     <Flex direction="column" height="100vh" className="wiki-layout">
-      <Navbar />
+      <Navbar isWiki />
       <Box
         height="100vh"
         overflow="hidden"
@@ -21,8 +20,7 @@ export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
         borderColor="gray.600"
       >
         <Flex h="full" flexDirection={{ base: 'column', lg: 'row' }} id="app-container">
-          <MobileWikiSidenav />
-          <WikiSidenav />
+          <WikiSidenav.Desktop />
           <Box flex="1" p="6" overflow="auto">
             <Box w="full" h="full">
               {children}

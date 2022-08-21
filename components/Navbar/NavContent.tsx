@@ -7,6 +7,10 @@ import {
   HStack,
   useDisclosure,
   VisuallyHidden,
+  Input,
+  IconButton,
+  Spacer,
+  useBreakpointValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { NavLink } from './NavLink';
@@ -15,37 +19,112 @@ import { Submenu } from './Submenu';
 import { ToggleButton } from './ToggleButton';
 import { links } from './_data';
 import { Logo } from './Logo';
+import { MagnifyingGlassIcon } from '../Icons/MagnifyingGlass';
+import { WikiSidenav } from '../Layout/WikiLayout/WikiSidenav/WikiSidenav';
+import { useRouter } from 'next/router';
 
-const MobileNavContext = (props: FlexProps) => {
-  const { isOpen, onToggle } = useDisclosure();
+interface MobileNavContextProps extends FlexProps {
+  isWiki?: boolean;
+}
+
+const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
+  const router = useRouter();
+  const { isOpen, onClose, onToggle } = useDisclosure();
+  const isMobile = useBreakpointValue({ base: true, lg: false });
+
+  React.useEffect(() => {
+    if (!isMobile && isOpen) {
+      onClose();
+    }
+  }, [isMobile, onClose, isOpen]);
+
+  React.useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (
+        url?.split?.('/').pop() !== 'locations' &&
+        url?.split?.('/').pop() !== 'guides' &&
+        url?.split?.('/').pop() !== 'blocks'
+      ) {
+        onClose();
+      }
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      <Flex align="center" justify="space-between" className="nav-content__mobile" {...props}>
-        <Box flexBasis="6rem">
+      <Flex align="center" justify="space-between" className="nav-content__mobile" {...rest}>
+        <Box>
           <ToggleButton isOpen={isOpen} onClick={onToggle} />
         </Box>
-        <Box as="a" rel="home" mx="auto">
-          <Logo h="24px" />
+        <Box ml="4">
+          <NextLink href="/">
+            <a>
+              <Logo hideText={isWiki} />
+            </a>
+          </NextLink>
         </Box>
-        <Box visibility={{ base: 'hidden', sm: 'visible' }}>
-          <Button as="a" colorScheme="whiteAlpha">
-            Get Started
-          </Button>
+        {isWiki && (
+          <>
+            <Input
+              focusBorderColor="primaryGold"
+              border="none"
+              bg="primaryDarkGlare2"
+              color="white"
+              _placeholder={{
+                color: 'white',
+              }}
+              borderRadius="none"
+              display={{ base: 'none', sm: 'inherit' }}
+              placeholder="Search Wiki"
+              mr="6"
+              ml={isWiki ? '4' : '0'}
+            />
+            <Spacer />
+            <IconButton
+              display={{ base: 'inherit', sm: 'none' }}
+              variant="ghost"
+              fill="white"
+              icon={<MagnifyingGlassIcon />}
+              aria-label="Open Wiki search"
+            />
+          </>
+        )}
+        <Box display={{ base: isWiki ? 'none' : 'inherit', sm: 'inherit' }}>
+          <NextLink href="/join">
+            <a>
+              <Button size={{ base: 'sm', md: 'md' }} bg="white">
+                Get Started
+              </Button>
+            </a>
+          </NextLink>
         </Box>
       </Flex>
-      <NavMenu animate={isOpen ? 'open' : 'closed'}>
-        {links.map((link, idx) =>
-          link.links ? (
-            <Submenu.Mobile key={idx} link={link} />
-          ) : (
-            <NavLink.Mobile key={idx} href={link?.slug?.current}>
-              {link.title}
-            </NavLink.Mobile>
-          ),
+      <NavMenu animate={isOpen ? 'open' : 'closed'} bg="primaryDark">
+        {isWiki ? (
+          <WikiSidenav.Mobile />
+        ) : (
+          links.map((link, idx) =>
+            link.links ? (
+              <Submenu.Mobile key={idx} link={link} />
+            ) : (
+              <NavLink.Mobile key={idx} href={link?.slug?.current}>
+                {link.title}
+              </NavLink.Mobile>
+            ),
+          )
         )}
-        <Button colorScheme="blue" w="full" size="lg" mt="5">
-          Join Server
-        </Button>
+        <NextLink href="/join" passHref>
+          <Button bg="primaryRed" color="white" w="full" size="lg" mt="5">
+            Join Server
+          </Button>
+        </NextLink>
       </NavMenu>
     </>
   );

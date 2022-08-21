@@ -17,7 +17,7 @@ import * as React from 'react';
 import camelCase from 'lodash/camelCase';
 import tinycolor from 'tinycolor2';
 import NextLink from 'next/link';
-import { Card } from './Card';
+import { Card } from '../Card';
 
 interface BuildDetail {
   title: string;
