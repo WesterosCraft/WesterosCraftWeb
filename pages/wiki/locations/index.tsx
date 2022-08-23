@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
-import { Text, Stack, Heading, Container, Box, chakra } from '@chakra-ui/react';
+import { Text, Stack, Heading, Container, Box, chakra, SimpleGrid } from '@chakra-ui/react';
 import { sanityClient } from '../../../lib/sanity.server';
 import { NextSeo } from 'next-seo';
 import { RegionCard } from '../../../components/RegionCard/RegionCard';
@@ -64,42 +64,44 @@ export interface RecentlyUpdated {
 
 function LocationsPage({ pageData }: { pageData: RegionsPage }) {
   return (
-    <Box maxW="container.lg" px={[5, 12]}>
+    <>
       <NextSeo title={pageData?.title} description={pageData?.copy} />
-      <Box mb={12} textAlign="center">
-        <Heading size="2xl" mb={5}>
-          <chakra.span fontSize="3xl">The</chakra.span> Regions{' '}
-          <chakra.span fontSize="3xl">of</chakra.span> WesterosCraft
-        </Heading>
+      <Container maxW="container.xl" px={[0, 8, 12]}>
+        <Box mx="auto" maxW="2xl" mb={12} textAlign="center">
+          <Heading size="2xl" mb={5}>
+            <chakra.span fontSize="3xl">The</chakra.span> Regions{' '}
+            <chakra.span fontSize="3xl">of</chakra.span> WesterosCraft
+          </Heading>
 
-        <Text>{pageData?.copy}</Text>
-      </Box>
-      <Stack spacing={5}>
-        {pageData?.regions
-          .sort((a, b) => a.ordinal - b.ordinal)
-          .map(region => (
-            <RegionCard
-              key={region.name}
-              name={region.name}
-              heading={region.heading}
-              description={region.subheading}
-              image={urlFor(region?.image).url()}
-              icon={region?.icon ? urlFor(region?.icon).url() : undefined}
-              slug={region.slug.current}
-              percentComplete={region.percentComplete}
-              blurDataURL={region.image.metadata.lqip}
-              notableBuild={{
-                link: `/wiki/locations/${region.slug.current}/${region?.notableBuild?.slug?.current}`,
-                title: region?.notableBuild?.title,
-              }}
-              recentlyUpdated={{
-                link: `/wiki/locations/${region.slug.current}/${region?.recentlyUpdated?.slug?.current}`,
-                title: region?.recentlyUpdated?.title,
-              }}
-            />
-          ))}
-      </Stack>
-    </Box>
+          <Text>{pageData?.copy}</Text>
+        </Box>
+        <SimpleGrid columns={{ base: 1, md: 2 }} gridAutoRows="1fr" gap="12">
+          {pageData?.regions
+            .sort((a, b) => a.ordinal - b.ordinal)
+            .map(region => (
+              <RegionCard
+                key={region.name}
+                name={region.name}
+                heading={region.heading}
+                description={region.subheading}
+                image={urlFor(region?.image).url()}
+                icon={region?.icon ? urlFor(region?.icon).url() : undefined}
+                slug={region.slug.current}
+                percentComplete={region.percentComplete}
+                blurDataURL={region.image.metadata.lqip}
+                notableBuild={{
+                  link: `/wiki/locations/${region.slug.current}/${region?.notableBuild?.slug?.current}`,
+                  title: region?.notableBuild?.title,
+                }}
+                recentlyUpdated={{
+                  link: `/wiki/locations/${region.slug.current}/${region?.recentlyUpdated?.slug?.current}`,
+                  title: region?.recentlyUpdated?.title,
+                }}
+              />
+            ))}
+        </SimpleGrid>
+      </Container>
+    </>
   );
 }
 

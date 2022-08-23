@@ -1,31 +1,131 @@
 import type { ReactElement } from 'react';
-import { Text, VStack, Heading, Container, Box, SimpleGrid } from '@chakra-ui/react';
+import {
+  Text,
+  VStack,
+  Heading,
+  Container,
+  Box,
+  SimpleGrid,
+  Divider,
+  HStack,
+  Image,
+  LinkBox,
+  LinkOverlay,
+} from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../../../lib/sanity.server';
 import groupBy from 'lodash/groupBy';
 import { WikiLayout } from '../../../components/Layout/WikiLayout';
+import { urlFor } from '../../../lib/sanity';
+import NextLink from 'next/link';
 
-export default function GuidesPage({ pageData }: any) {
+export interface GuidesPageData {
+  _id: string;
+  description: null | string;
+  guideCategory: GuideCategory;
+  icon: Icon;
+  slug: Slug;
+  title: string;
+}
+
+export interface GuideCategory {
+  _type: GuideCategoryType;
+  title: Title;
+}
+
+export enum GuideCategoryType {
+  Category = 'category',
+}
+
+export enum Title {
+  GettingStarted = 'Getting Started',
+  HowTo = 'How To',
+  Resources = 'Resources',
+  RulesGuidelines = 'Rules & Guidelines',
+}
+
+export interface Icon {
+  _type: IconType;
+  asset: Asset;
+}
+
+export enum IconType {
+  Image = 'image',
+}
+
+export interface Asset {
+  _ref: string;
+  _type: AssetType;
+}
+
+export enum AssetType {
+  Reference = 'reference',
+}
+
+export interface Slug {
+  _type: SlugType;
+  current: string;
+}
+
+export enum SlugType {
+  Slug = 'slug',
+}
+
+export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
+  // @ts-ignore
+  const sortedGuideData = Object.entries(groupBy(pageData, o => o.guideCategory?.title)) as [
+    string,
+    GuidesPageData[],
+  ][];
+
   return (
-    <Container maxW="container.lg" px={[5, 12]}>
+    <Container maxW="container.xl" px={[5, 12]}>
       {/* <NextSeo title={pageData?.title ??} description={pageData?.copy} /> */}
       <Box mb={12} textAlign="center">
         <Heading size="2xl" mb={5}>
           Guides
         </Heading>
       </Box>
-      <VStack spacing={12}>
-        {Object.entries(groupBy(pageData, o => o.guideCategory?.title))?.map(([title, guides]) => (
-          <VStack key={title}>
+      <VStack w="full" spacing={12}>
+        {/* @ts-ignore */}
+        {sortedGuideData?.map(([title, guides]) => (
+          <VStack w="full" align="flex-start" key={title}>
             <Heading>{title}</Heading>
-            <SimpleGrid columns={3} spacing={4}>
-              {guides.map(guide => (
-                <GuideCard key={guide?._id}>
-                  <Text>{guide?.title}</Text>
-                  <Text fontSize="sm">{guide?.description}</Text>
-                </GuideCard>
-              ))}
-            </SimpleGrid>
+            <Divider borderColor="primaryRed" />
+            <Box w="full">
+              <SimpleGrid
+                gridAutoRows="1fr"
+                minChildWidth="298px"
+                mt="6"
+                columns={{ base: 2, md: 3 }}
+                gap={4}
+              >
+                {guides.map(guide => (
+                  <GuideCard key={guide?._id}>
+                    <LinkBox h="full">
+                      <HStack spacing={4} w="full" align="flex-start" justify="flex-start">
+                        <Image
+                          width="12"
+                          height="12"
+                          src={urlFor(guide.icon.asset).url()}
+                          alt={guide.title}
+                        />
+                        <NextLink href={`/wiki/guides/${guide?.slug?.current}`} passHref>
+                          <LinkOverlay>
+                            <Text fontSize="lg" fontWeight="medium">
+                              {guide?.title}
+                            </Text>
+                          </LinkOverlay>
+                        </NextLink>
+                      </HStack>
+                      <Text mt="2" fontSize="sm">
+                        {guide?.description}
+                      </Text>
+                    </LinkBox>
+                  </GuideCard>
+                ))}
+              </SimpleGrid>
+            </Box>
           </VStack>
         ))}
       </VStack>
@@ -47,7 +147,8 @@ export const getStaticProps: GetStaticProps = async () => {
       title,
       description,
       guideCategory->{ title, _type },
-      slug
+      slug,
+      icon
     }`);
 
   return {

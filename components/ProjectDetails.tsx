@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Heading,
   Flex,
@@ -23,11 +23,11 @@ import {
   Text,
   FlexProps,
   ButtonGroup,
-} from "@chakra-ui/react";
-import { isEmpty } from "lodash";
-import dayjs from "dayjs";
-import { ChakraNextImage } from "./ChakraNextImage";
-import ImageSlider from "./ImageSlider";
+} from '@chakra-ui/react';
+import { isEmpty } from 'lodash';
+import dayjs from 'dayjs';
+import { ChakraNextImage } from './ChakraNextImage';
+import ImageSlider from './ImageSlider';
 
 export interface ProjectDetailsProps extends FlexProps {
   pageData: any;
@@ -39,36 +39,36 @@ export const ProjectDetails = ({ pageData, ...rest }: ProjectDetailsProps) => {
   const projectDetailsMap = React.useMemo(
     () => [
       {
-        label: "Region",
+        label: 'Region',
         accessor: pageData?.region?.name,
       },
       {
-        label: "House",
+        label: 'House',
         accessor: pageData?.house,
       },
       {
-        label: "Status",
+        label: 'Status',
         accessor: pageData?.projectStatus,
       },
       {
-        label: "Type",
+        label: 'Type',
         accessor: pageData?.type,
       },
       {
-        label: "Warp",
+        label: 'Warp',
         accessor: pageData?.warp,
       },
       {
-        label: "Project Lead(s)",
+        label: 'Project Lead(s)',
         accessor: pageData?.projectLead,
       },
       {
-        label: "Date Started",
-        accessor: dayjs(pageData?.dateStarted).format("MMMM D, YYYY"),
+        label: 'Date Started',
+        accessor: dayjs(pageData?.dateStarted).format('MMMM D, YYYY'),
       },
       {
-        label: "Date Completed",
-        accessor: dayjs(pageData?.dateCompleted).format("MMMM D, YYYY"),
+        label: 'Date Completed',
+        accessor: dayjs(pageData?.dateCompleted).format('MMMM D, YYYY'),
       },
     ],
     [
@@ -80,122 +80,109 @@ export const ProjectDetails = ({ pageData, ...rest }: ProjectDetailsProps) => {
       pageData?.region?.name,
       pageData?.type,
       pageData?.warp,
-    ]
+    ],
   );
   return (
     <>
-      <Box zIndex={50} position='relative' mt={[5, 0]} {...rest}>
+      <Box zIndex={5} position="relative" mt={[5, 0]} {...rest}>
         <Flex
-          position='relative'
-          borderWidth='.5px'
-          borderStyle='solid'
-          width={["100%", null, "auto"]}
+          position="relative"
+          borderWidth=".5px"
+          borderStyle="solid"
+          width={['100%', null, 'auto']}
         >
-          <Table
-            size='sm'
-            variant='striped'
-            colorScheme='blackAlpha'
-            border='1.5px solid black'
-          >
+          <Table size="sm" variant="striped" colorScheme="blackAlpha" border="1.5px solid black">
             <Thead>
               <Tr>
                 <Th colSpan={2}>
-                  <Heading color='text' fontSize={["xl", null, null, "2xl"]}>
+                  <Heading color="text" fontSize={['xl', null, null, '2xl']}>
                     Project Details
                   </Heading>
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
-              {!isEmpty(pageData?.additionalImages) &&
-                pageData?.additionalImages && (
-                  <Tr>
-                    <Td textAlign='center' colSpan={2}>
-                      <ChakraNextImage
-                        src={
-                          pageData?.additionalImages?.[1]?.url ||
-                          pageData?.additionalImages?.[0]?.url
-                        }
-                        width={350}
-                        height={197}
-                        blurDataURL={
-                          pageData?.additionalImages?.[0]?.metadata?.lqip
-                        }
-                        alt='Project status display image'
-                      />
-                    </Td>
-                  </Tr>
-                )}
+              {!isEmpty(pageData?.additionalImages) && pageData?.additionalImages && (
+                <Tr>
+                  <Td textAlign="center" colSpan={2}>
+                    <ChakraNextImage
+                      src={
+                        pageData?.additionalImages?.[1]?.url || pageData?.additionalImages?.[0]?.url
+                      }
+                      width={350}
+                      height={197}
+                      blurDataURL={pageData?.additionalImages?.[0]?.metadata?.lqip}
+                      alt="Project status display image"
+                    />
+                  </Td>
+                </Tr>
+              )}
               {projectDetailsMap?.map(
-                (deet) =>
+                deet =>
                   deet.accessor && (
                     <Tr key={deet.label}>
-                      <Td fontSize='sm' fontWeight='bold'>
+                      <Td fontSize="sm" fontWeight="bold">
                         {deet.label}
                       </Td>
-                      <Td fontSize='sm'>{deet.accessor}</Td>
+                      <Td fontSize="sm">{deet.accessor}</Td>
                     </Tr>
-                  )
+                  ),
               )}
             </Tbody>
             {
               <Tfoot>
                 <Tr>
-                  <Td py={3} colSpan={2} textAlign='center'>
+                  <Td py={3} colSpan={2} textAlign="center">
                     <ButtonGroup>
-                      {pageData?.application !== "" && pageData?.application && (
+                      {pageData?.application !== '' && pageData?.application && (
                         <Link
-                          textDecoration='none'
+                          textDecoration="none"
                           href={pageData?.application}
                           isExternal
-                          _hover={{ textDecoration: "none" }}
+                          _hover={{ textDecoration: 'none' }}
                         >
                           <a>
                             <Button
-                              variant='primaryBlack'
-                              size='xs'
-                              colorScheme='gray'
-                              textDecoration='none'
+                              variant="primaryBlack"
+                              size="xs"
+                              colorScheme="gray"
+                              textDecoration="none"
                             >
                               View App
                             </Button>
                           </a>
                         </Link>
                       )}
-                      {pageData?.dynmapXcoord &&
-                        !isEmpty(pageData?.dynmapXcoord) && (
-                          <Link
-                            isExternal
-                            textDecoration='none'
-                            href={`https://mc.westeroscraft.com/?mapname=flat&zoom=${
-                              pageData?.dynmapZoom ?? "4"
-                            }&x=${pageData?.dynmapXcoord ?? "0"}&z=${
-                              pageData?.dynmapYcoord ?? "0"
-                            }`}
-                            _hover={{ textDecoration: "none" }}
-                          >
-                            <Button
-                              variant='outline'
-                              size='xs'
-                              colorScheme='gray'
-                              textDecoration='none'
-                            >
-                              View On Map
-                            </Button>
-                          </Link>
-                        )}
-                      {pageData?.additionalImages &&
-                        !isEmpty(pageData?.additionalImages) && (
+                      {pageData?.dynmapXcoord && !isEmpty(pageData?.dynmapXcoord) && (
+                        <Link
+                          isExternal
+                          textDecoration="none"
+                          href={`https://mc.westeroscraft.com/?mapname=flat&zoom=${
+                            pageData?.dynmapZoom ?? '4'
+                          }&x=${pageData?.dynmapXcoord ?? '0'}&z=${pageData?.dynmapYcoord ?? '0'}`}
+                          _hover={{ textDecoration: 'none' }}
+                        >
                           <Button
-                            onClick={onOpen}
-                            variant='primaryBlack'
-                            size='xs'
-                            colorScheme='gray'
-                            textDecoration='none'
+                            variant="outline"
+                            size="xs"
+                            colorScheme="gray"
+                            textDecoration="none"
                           >
-                            More Images
+                            View On Map
                           </Button>
-                        )}
+                        </Link>
+                      )}
+                      {pageData?.additionalImages && !isEmpty(pageData?.additionalImages) && (
+                        <Button
+                          onClick={onOpen}
+                          variant="primaryBlack"
+                          size="xs"
+                          colorScheme="gray"
+                          textDecoration="none"
+                        >
+                          More Images
+                        </Button>
+                      )}
                     </ButtonGroup>
                   </Td>
                 </Tr>
@@ -204,11 +191,11 @@ export const ProjectDetails = ({ pageData, ...rest }: ProjectDetailsProps) => {
           </Table>
         </Flex>
       </Box>
-      <Modal size='3xl' isOpen={isOpen} onClose={onClose}>
+      <Modal size="3xl" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            <Heading size='1xl'>{pageData?.title}</Heading>
+            <Heading size="1xl">{pageData?.title}</Heading>
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>

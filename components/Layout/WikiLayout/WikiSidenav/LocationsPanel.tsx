@@ -1,20 +1,5 @@
-import {
-  Box,
-  Stack,
-  TabList,
-  Tabs,
-  Tab,
-  Input,
-  TabPanels,
-  TabPanel,
-  Text,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-} from '@chakra-ui/react';
+import { Stack, Accordion, AccordionItem, AccordionButton, AccordionPanel } from '@chakra-ui/react';
 import NextLink from 'next/link';
-
 import { useRouter } from 'next/router';
 import { LOCATIONS } from '../../../../constants/locations';
 import { Submenu } from '../../../Navbar/Submenu';
@@ -95,16 +80,17 @@ const DesktopLocationsPanel = () => {
   const sortedLocations = Object.entries(locationsByRegion).sort() as [string, Location[]][];
 
   return (
-    <Accordion
-      allowToggle
-      index={sortedLocations.findIndex(loc => router.asPath?.includes(loc?.[0]))}
-    >
+    <Accordion index={sortedLocations.findIndex(loc => router.asPath?.includes(loc?.[0]))}>
       {sortedLocations.map(([key, value], i) => (
         <AccordionItem key={i} border={0}>
           <NextLink href={`/wiki/locations/${key}`}>
             <a>
-              <AccordionButton _hover={{ bg: 'primaryDarkGlare' }}>
-                <NavGroup label={startCase(toLower(key))} />
+              <AccordionButton
+                _hover={{ bg: 'primaryDarkGlare' }}
+                _activeLink={{ bg: 'primaryDarkGlare' }}
+                aria-current={router.query?.region === key ? 'page' : undefined}
+              >
+                <NavGroup active={router.query?.region === key} label={startCase(toLower(key))} />
               </AccordionButton>
             </a>
           </NextLink>
@@ -113,7 +99,7 @@ const DesktopLocationsPanel = () => {
               {value?.map((loc, i) => (
                 <NextLink key={i} href={`/wiki/locations/${key}/${loc?.slug?.current}`}>
                   <a>
-                    <NavItem label={loc.title} />
+                    <NavItem active={router.query?.slug === loc?.slug?.current} label={loc.title} />
                   </a>
                 </NextLink>
               ))}

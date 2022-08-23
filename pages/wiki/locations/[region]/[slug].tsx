@@ -9,6 +9,7 @@ import BrightSquares from '../../../../public/bright-squares.png';
 import { isEmpty } from 'lodash';
 import { Breadcrumbs } from '../../../../components/Breadcrumbs';
 import { WikiLayout } from '../../../../components/Layout/WikiLayout';
+import { NextSeo } from 'next-seo';
 
 export interface LocationPageProps {
   pageData: any;
@@ -17,12 +18,13 @@ export interface LocationPageProps {
 const LocationPage = ({ pageData }: LocationPageProps) => {
   return (
     <>
-      <Container maxW="container.lg" px={[5, 12]}>
+      <NextSeo title={pageData?.title} />
+      <Container maxW="container.xl" px={[0, 8, 12]}>
         <Breadcrumbs />
         <Heading mb={4}>{pageData?.title}</Heading>
         <WikiHero pageData={pageData} />
       </Container>
-      <Box>
+      <Box className="content-wrapper" pb="12">
         <ProjectDetails
           pageData={pageData}
           display={['inline-flex', null, null, null, null, 'none']}
@@ -34,7 +36,7 @@ const LocationPage = ({ pageData }: LocationPageProps) => {
           width={['full', null, 'auto']}
           pl={[5, null, 0]}
         />
-        <Container maxW="container.lg" className="rich-text-container" px={[5, 12]}>
+        <Container maxW="container.xl" className="rich-text-container" px={[0, 8, 12]}>
           {pageData?.body ? (
             <RichText value={pageData?.body} />
           ) : (

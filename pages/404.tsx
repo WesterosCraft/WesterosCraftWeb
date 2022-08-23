@@ -1,9 +1,10 @@
 import type { ReactElement } from 'react';
 import { OneColumnLayout } from '../components';
 import { Box, Button, Heading, Text } from '@chakra-ui/react';
-import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function FourOhFourPage() {
+  const router = useRouter();
   return (
     <>
       <Box
@@ -33,9 +34,9 @@ export default function FourOhFourPage() {
             {`It looks like the page you’re looking for doesn't exist.`}
           </Text>
           <Box mt="8" className="mt-6">
-            <NextLink href="/" passHref>
-              <Button size="lg">Go back home</Button>
-            </NextLink>
+            <Button size="lg" onClick={() => router.back()}>
+              Go back
+            </Button>
           </Box>
         </Box>
       </Box>

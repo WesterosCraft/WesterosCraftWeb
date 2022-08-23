@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Box, TabList, Tabs, Tab, Input, TabPanels, TabPanel, Text } from '@chakra-ui/react';
+import { Box, TabList, Tabs, Tab, Input, TabPanels, TabPanel } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { NavItem } from '../NavItem';
 import { WIKI_TABS } from '../../../../constants/tabs';
 import { LocationsPanel } from './LocationsPanel';
 import { AlgoliaInput } from '../../../AlgoliaInput';
+import { GuidesPanel } from './GuidesPanel';
 
 const DesktopWikiSidenav = () => {
+  const router = useRouter();
   return (
     <Box
       display={{ base: 'none', lg: 'block' }}
@@ -23,13 +25,13 @@ const DesktopWikiSidenav = () => {
       </Box>
       <NextLink href="/wiki">
         <a>
-          <NavItem label="Wiki" mb="4" />
+          <NavItem active={router.asPath === '/wiki'} label="Wiki" mb="4" />
         </a>
       </NextLink>
       <WikiNavTabs>
         <TabPanels>
-          <TabPanel p={0}>
-            <Text>guides</Text>
+          <TabPanel p={0} pt="6" mb="12">
+            <GuidesPanel.Desktop />
           </TabPanel>
           <TabPanel p={0} pt="6" mb="12">
             <LocationsPanel.Desktop />
@@ -41,6 +43,8 @@ const DesktopWikiSidenav = () => {
 };
 
 const MobileWikiSidenav = () => {
+  const router = useRouter();
+
   return (
     <Box color="white" fontSize="sm" overflowY="scroll" className="no-bg-scrollbar">
       <Box mb="6">
@@ -51,15 +55,15 @@ const MobileWikiSidenav = () => {
         </NextLink>
         <NextLink href="/wiki">
           <a>
-            <NavItem label="Wiki" />
+            <NavItem active={router.asPath === '/wiki'} label="Wiki" />
           </a>
         </NextLink>
       </Box>
 
       <WikiNavTabs>
         <TabPanels>
-          <TabPanel p={0}>
-            <Text>guides</Text>
+          <TabPanel p={0} pt="6" mb="12">
+            <GuidesPanel.Mobile />
           </TabPanel>
           <TabPanel p={0} pt="6" mb="12">
             <LocationsPanel.Mobile />
@@ -88,18 +92,18 @@ function WikiNavTabs({ children }: { children?: React.ReactNode }) {
     >
       <TabList ml={{ base: '0', lg: '4' }}>
         {WIKI_TABS.map(tab => (
-          <Tab
-            key={tab.label}
-            _selected={{
-              borderColor: 'inherit',
-              borderBottomColor: 'primaryDark',
-            }}
-            isDisabled={tab.label === 'Blocks'}
-          >
-            <NextLink href={tab.href}>
-              <a>{tab.label}</a>
-            </NextLink>
-          </Tab>
+          <NextLink key={tab.label} href={tab.href} passHref>
+            <Tab
+              as="a"
+              _selected={{
+                borderColor: 'inherit',
+                borderBottomColor: 'primaryDark',
+              }}
+              isDisabled={tab.label === 'Blocks'}
+            >
+              {tab.label}
+            </Tab>
+          </NextLink>
         ))}
       </TabList>
       {children}

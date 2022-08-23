@@ -5,7 +5,6 @@ import {
   Text,
   Container,
   SimpleGrid,
-  Box,
   Divider,
   LinkBox,
   HStack,
@@ -30,7 +29,7 @@ const RegionPage = ({ pageData }: { pageData: RegionPageProps }) => {
   return (
     <>
       <NextSeo title={pageData?.name} />
-      <Container maxW="container.lg" px={[5, 12]}>
+      <Container maxW="container.xl" px={[0, 8, 12]}>
         <Breadcrumbs />
         <Heading size="2xl" mb={12}>
           {pageData?.name}

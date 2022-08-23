@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Stack,
   Text,
   Wrap,
   useToken,
@@ -11,13 +10,13 @@ import {
   Spacer,
   Img,
   HStack,
+  Flex,
 } from '@chakra-ui/react';
-import Image from 'next/image';
+import NextImage from 'next/future/image';
 import * as React from 'react';
 import camelCase from 'lodash/camelCase';
 import tinycolor from 'tinycolor2';
 import NextLink from 'next/link';
-import { Card } from '../Card';
 
 interface BuildDetail {
   title: string;
@@ -56,54 +55,32 @@ export const RegionCard = ({
   const hoverColor = color.lighten().toString();
 
   return (
-    <Box as="section" py="4">
-      <Card>
-        <Stack
-          w="full"
-          h="full"
-          direction={{ base: 'column', md: 'row' }}
-          spacing={{ base: '3', md: '10' }}
-          align="center"
-          justify="center"
-        >
-          <Stack h="full" w="full" spacing="6" maxW="xs">
-            <Image
-              loader={({ src, width = 320 }) => {
+    <Box as="section" h="full">
+      <Box maxW="lg" h="full" mx="auto" border="1px solid black" p={{ base: '6' }}>
+        <Flex w="full" h="full" direction={{ base: 'column' }} align="center" justify="center">
+          <HStack justify="center" w="full">
+            {icon && <Img width="32px" src={icon} alt={name} />}
+            <Text as="h2" fontWeight="bold" fontSize="2xl">
+              {name}
+            </Text>
+          </HStack>
+          <Box mt="4" h="full" w="full" maxW="sm" mx="auto">
+            <NextImage
+              loader={({ src, width = 384 }) => {
                 return `${src}?&w=${width}&q=100&fit=crop&crop=center`;
               }}
               src={image}
-              width={320}
-              height={250}
+              width={384}
+              height={200}
               alt={name}
               blurDataURL={blurDataURL}
               placeholder="blur"
+              style={{ maxHeight: 200 }}
             />
-            <NextLink href={`/wiki/locations/${slug}`} passHref>
-              <a>
-                <Button
-                  width="full"
-                  bgColor={resolvedColor}
-                  _hover={{
-                    bgColor: hoverColor,
-                    color: color.isDark() ? 'white' : 'black',
-                  }}
-                  color={color.isDark() ? 'white' : 'black'}
-                  display={{ base: 'none', md: 'initial' }}
-                >
-                  View Locations
-                </Button>
-              </a>
-            </NextLink>
-          </Stack>
-          <Center>
-            <Box maxW="md">
-              <HStack>
-                {icon && <Img width="32px" src={icon} alt={name} />}
-                <Text as="h2" fontWeight="bold" fontSize="2xl">
-                  {name}
-                </Text>
-              </HStack>
-              <Text mt="2">{heading}</Text>
+          </Box>
+          <Center flexDirection="column" mt="4">
+            <Box maxW="md" mb="2">
+              <Text>{heading}</Text>
               <Box mt="2" fontSize="sm" noOfLines={2}>
                 {description}
               </Box>
@@ -129,9 +106,24 @@ export const RegionCard = ({
                 </Box>
               </Wrap>
             </Box>
+            <NextLink href={`/wiki/locations/${slug}`} passHref>
+              <a>
+                <Button
+                  width="full"
+                  bgColor={resolvedColor}
+                  _hover={{
+                    bgColor: hoverColor,
+                    color: color.isDark() ? 'white' : 'black',
+                  }}
+                  color={color.isDark() ? 'white' : 'black'}
+                >
+                  View Locations
+                </Button>
+              </a>
+            </NextLink>
           </Center>
-        </Stack>
-      </Card>
+        </Flex>
+      </Box>
     </Box>
   );
 };

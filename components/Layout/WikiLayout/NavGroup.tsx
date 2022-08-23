@@ -3,10 +3,11 @@ import * as React from 'react';
 
 interface NavGroupProps {
   label: string;
+  active?: boolean;
 }
 
 export const NavGroup = (props: NavGroupProps) => {
-  const { label } = props;
+  const { label, active } = props;
   return (
     <Box>
       <Text
@@ -15,7 +16,7 @@ export const NavGroup = (props: NavGroupProps) => {
         fontWeight="semibold"
         textTransform="uppercase"
         letterSpacing="widest"
-        color="gray.300"
+        color={active ? 'gray.200' : 'gray.300'}
       >
         {label}
       </Text>
