@@ -37,6 +37,20 @@ export default {
       },
       validation: (Rule: any) => Rule.required(),
     },
+    {
+      type: 'array',
+      name: 'editions',
+      title: 'Editions',
+      of: [
+        {
+          type: 'reference',
+          name: 'edition',
+          title: 'Edition',
+          to: [{ type: 'rookeryEdition' }],
+        },
+      ],
+      // _weak: true // enable if you don't want reference integrity checks
+    },
     seo,
   ],
 };

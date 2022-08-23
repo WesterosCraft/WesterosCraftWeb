@@ -25,6 +25,7 @@ import siteConfig from './documents/siteConfig';
 import navigation from './objects/navigation';
 import navigationSection from './objects/navigationSection';
 import navigationLink from './objects/navigationLink';
+import rookeryEdition from './objects/rookeryEdition';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -39,6 +40,7 @@ export default createSchema({
     location,
     region,
     buildCategory,
+    rookeryEdition,
     guide,
     callout,
     youtubeVideo,

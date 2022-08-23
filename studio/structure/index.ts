@@ -13,6 +13,7 @@ const pageList = [
   'home',
   'page',
   'join',
+  'rookeryEdition',
 ];
 
 const hiddenDocTypes = (listItem: any) => !pageList.includes(listItem.getId());
@@ -35,6 +36,7 @@ const structure = () =>
               S.documentListItem().schemaType('page').id('fa3f1012-af94-4d3b-aaf2-cc986c52d471'),
               S.documentListItem().schemaType('page').id('06cf936a-274f-4746-b210-b30f75b02074'),
               S.documentListItem().schemaType('page').id('af51b184-4e59-4b48-b04f-862580eb88a9'),
+              S.documentListItem().schemaType('rookery').id('e1eada00-e72d-44c2-8235-1c43b319bc81'),
             ]),
         ),
 
@@ -84,13 +86,13 @@ const structure = () =>
                     .params({ type: 'media.tag' }),
                 ),
               S.listItem()
-                .title('Rookeries')
+                .title('Rookery Editions')
                 // .icon(RiMapPin2Line)
                 .child(
-                  S.documentTypeList('rookery')
-                    .title('Rookeries')
+                  S.documentTypeList('rookeryEdition')
+                    .title('Rookery Edition')
                     .filter('_type == $type')
-                    .params({ type: 'rookery' }),
+                    .params({ type: 'rookeryEdition' }),
                 ),
               S.listItem()
                 .title('Regions')
