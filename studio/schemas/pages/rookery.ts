@@ -38,9 +38,15 @@ export default {
       validation: (Rule: any) => Rule.required(),
     },
     {
+      name: 'subheading',
+      title: 'Subheading',
+      type: 'text',
+    },
+    {
       type: 'array',
       name: 'editions',
       title: 'Editions',
+      description: 'First one in the list will be the latest edition',
       of: [
         {
           type: 'reference',
