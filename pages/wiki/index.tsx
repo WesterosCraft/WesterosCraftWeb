@@ -31,64 +31,31 @@ import { AlgoliaSearch } from '../../components/AlgoliaSearch';
 import { WikiLayout } from '../../components/Layout/WikiLayout';
 
 export default function Wiki({ pageData }: any) {
-  const {
-    isOpen: isSearchOpen,
-    onOpen: onSearchOpen,
-    onClose: onSearchClose,
-    onToggle: onSearchToggle,
-  } = useDisclosure();
+  console.log('👾 ~ Wiki ~ pageData', pageData);
 
   return (
-    <Center width="full" flexDirection="column">
-      <Container mt={20} maxW="container.sm" centerContent>
+    <Flex width="full" flexDirection="column" justify="flex-start" align="flex-start">
+      <Box>
         <Heading size="2xl" fontWeight="bold" letterSpacing="3px">
           WesterosCraft Wiki
         </Heading>
-
-        <Button
-          height="full"
-          mt={12}
-          width="full"
-          variant="unstyled"
-          outline="1.5px solid"
-          outlineColor="primaryDark"
-          onClick={onSearchOpen}
-        >
-          <HStack pl={5} justifyContent="space-between">
-            <HStack height={10} color="gray.400">
-              <MagnifyingGlassIcon fill="gray.400" />
-              <Text fontWeight="medium">Search the wiki</Text>
-            </HStack>
-            <Center px={4} height={10} color="white" bg="primaryDark">
-              <Text letterSpacing={1.1}>SEARCH</Text>
-            </Center>
-          </HStack>
-        </Button>
-        <Modal isOpen={isSearchOpen} onClose={onSearchClose} size="xl">
-          <ModalOverlay />
-          <ModalContent>
-            <ModalBody p={4}>
-              <AlgoliaSearch modalHandler={onSearchToggle} />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </Container>
-      <Container maxW="container.md" mt={8}>
-        <Text textAlign="center">
+      </Box>
+      <Box mt={8} maxW="container.md">
+        <Text textAlign="left">
           WesterosCraft is a Minecraft server dedicated to recreating the continent of Westeros.
           Westeros is part of the fictional world from the book series A Song of Ice and Fire ,
           which was adapted into a TV show by HBO and called Game of Thrones. In this Wiki you will
           find Information about our Projects, Rules, Guides and Tutorials. For the latest updates
           head to our homepage.
         </Text>
-        <Text mt={4} textAlign="center">
+        <Text mt={4} textAlign="left">
           Join, explore, and enjoy!
         </Text>
-      </Container>
+      </Box>
       <Container maxW="container.xl" mt={20} mb={20}>
         <Cards />
       </Container>
-    </Center>
+    </Flex>
   );
 }
 
@@ -108,13 +75,6 @@ const Cards = () => (
         href: '/wiki/locations',
         image:
           'https://cdn.sanity.io/images/1as7cn02/production/6aa4f30c3b90f86ee2f16625f65531a0c041894d-1000x563.png',
-      },
-      {
-        title: 'Blocks',
-        subtitle: 'Check out a repository of all our custom designed blocks.',
-        href: '/wiki/blocks',
-        image:
-          'https://cdn.sanity.io/images/1as7cn02/production/340028327aee54d8558a2ecfbfb364b68795f265-1457x759.png',
       },
     ].map((i, n) => (
       <Card key={n} {...i} />
@@ -178,7 +138,17 @@ const Card = ({ title = '', href = '', subtitle = '', image = '' }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const pageData = await sanityClient.fetch(`*[_type == "page" && slug.current == "wiki"]{
-    ...
+    ...,
+    "createdLocations": *[_type == 'location'] | order(dateCompleted desc)[0...6] {
+      slug,
+      house,
+      title
+    },
+    "updatedLocations": *[_type == 'location'] | order(_updatedAt desc)[0...6] {
+      slug,
+      house,
+      title
+    }
   }[0]`);
 
   return {

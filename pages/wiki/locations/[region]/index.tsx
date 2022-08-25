@@ -1,31 +1,55 @@
 import type { ReactElement } from 'react';
-import {
-  Flex,
-  Heading,
-  Text,
-  Container,
-  SimpleGrid,
-  Divider,
-  LinkBox,
-  HStack,
-  LinkOverlay,
-} from '@chakra-ui/react';
+import { Heading, Container, SimpleGrid } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
-import NextLink from 'next/link';
 import { sanityClient } from '../../../../lib/sanity.server';
 import { Breadcrumbs } from '../../../../components/Breadcrumbs';
-import { Location, RegionPageResponse, ExtendedImage, BuildCategory } from '../../../../types';
 import { NextSeo } from 'next-seo';
-import { nameFormatter } from '../../../../utils';
-import { ChakraNextImage } from '../../../../components/ChakraNextImage';
 import { WikiLayout } from '../../../../components/Layout/WikiLayout';
-
-interface RegionPageProps extends RegionPageResponse {
-  extendedImage: ExtendedImage;
-  extendedBuildCategory: BuildCategory;
+import { LocationCard } from '../../../../components/LocationCard';
+import { urlFor } from '../../../../lib/sanity';
+export interface RegionPageData {
+  locations: Location[];
+  name: string;
 }
 
-const RegionPage = ({ pageData }: { pageData: RegionPageProps }) => {
+export interface Location {
+  extendedBuildCategory: ExtendedBuildCategory;
+  extendedImage: ExtendedImage | null;
+  house: string;
+  projectStatus: string;
+  region: Region;
+  slug: Slug;
+  title: string;
+}
+
+export interface ExtendedBuildCategory {
+  title: string;
+}
+
+export interface ExtendedImage {
+  _id: string;
+  _rev: string;
+  metadata: Metadata;
+}
+
+export interface Metadata {
+  lqip: string;
+}
+
+export interface Region {
+  slug: Slug;
+}
+
+export interface Slug {
+  _type: Type;
+  current: string;
+}
+
+export enum Type {
+  Slug = 'slug',
+}
+
+const RegionPage = ({ pageData }: { pageData: RegionPageData }) => {
   return (
     <>
       <NextSeo title={pageData?.name} />
@@ -35,87 +59,23 @@ const RegionPage = ({ pageData }: { pageData: RegionPageProps }) => {
           {pageData?.name}
         </Heading>
         <SimpleGrid minChildWidth="292px" spacing="24px">
-          {pageData?.locations.map(loc => (
-            <LocationCard key={loc?.title} {...loc} />
+          {pageData?.locations?.map(loc => (
+            <LocationCard
+              key={loc?.title}
+              title={loc?.title}
+              category={loc?.extendedBuildCategory?.title}
+              image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
+              blurDataURL={loc.extendedImage?._rev ? loc.extendedImage.metadata.lqip : undefined}
+              link={`${loc?.region?.slug?.current}/${loc?.slug?.current}`}
+              projectStatus={loc?.projectStatus}
+              house={loc?.house}
+            />
           ))}
         </SimpleGrid>
       </Container>
     </>
   );
 };
-
-interface LocationCardProps extends Location {
-  extendedImage?: ExtendedImage;
-  extendedBuildCategory?: BuildCategory;
-}
-
-function LocationCard(cardData: LocationCardProps) {
-  const myLoader = ({ src = '' }) => {
-    return `${src}?fit=crop&auto=format&crop=center&h=275&w=${352}&q=100`;
-  };
-
-  return (
-    <LinkBox
-      as={Flex}
-      flexShrink={0}
-      direction="column"
-      maxW="sm"
-      p={4}
-      width="full"
-      outline="1.5px solid black"
-      _hover={{
-        bg: 'primaryGlare',
-        outline: '1.5px solid black',
-        cursor: 'pointer',
-      }}
-    >
-      <HStack>
-        <Heading letterSpacing={1.1} fontSize="md" width="full">
-          {cardData?.title}
-        </Heading>
-        <Text fontSize="sm">{cardData?.extendedBuildCategory?.title}</Text>
-      </HStack>
-      <Divider borderBottomColor="black" mt={2} />
-      <LinkOverlay
-        as={NextLink}
-        passHref
-        href={`${cardData?.region?.slug?.current}/${cardData?.slug?.current}`}
-      >
-        <a>
-          <Flex
-            mt={3}
-            mb={2}
-            width="full"
-            height={275}
-            outline="1.5px solid black"
-            position="relative"
-            bgColor="primaryGlare"
-          >
-            {cardData?.extendedImage?.url && (
-              <ChakraNextImage
-                src={cardData?.extendedImage?.url}
-                blurDataURL={cardData?.extendedImage?.metadata?.lqip!}
-                placeholder="blur"
-                objectFit="cover"
-                objectPosition="center"
-                layout="fill"
-                loader={myLoader}
-              />
-            )}
-          </Flex>
-        </a>
-      </LinkOverlay>
-      <HStack justify="space-between">
-        <Text fontSize="xs" color="gray.700">
-          {cardData?.house}
-        </Text>
-        <Text fontSize="xs" color="gray.700">
-          {nameFormatter(cardData?.projectStatus)}
-        </Text>
-      </HStack>
-    </LinkBox>
-  );
-}
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const pageData = await sanityClient.fetch(
@@ -128,7 +88,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         slug,
         region->{ slug },
         "extendedImage": additionalImages.images[0].asset->{
-        url,
+        _rev,
+        _id,
         metadata {
           lqip
         }
