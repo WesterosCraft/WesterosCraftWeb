@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Center, Box, Heading, VStack } from '@chakra-ui/react';
+import { Center, Box, Heading } from '@chakra-ui/react';
 import { OneColumnLayout } from '../components';
 import { Hero, HeroProps } from '../components/Hero';
 import { VideoFeatureProps, VideoFeature } from '../components/VideoFeature';

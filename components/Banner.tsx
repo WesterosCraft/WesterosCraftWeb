@@ -6,17 +6,19 @@ export interface BannerProps {
   linkText: string;
   link: string;
   isExternal?: boolean;
+  external?: string;
 }
 
-export const Banner = ({ linkText, link, isExternal }: BannerProps) => {
+export const Banner = ({ linkText, link, isExternal, external }: BannerProps) => {
   return (
     <Center textAlign="center" w="full" bg="primaryRed" px={4} py={6} position="relative">
       <SquareTexture />
       <Box position="relative" zIndex={5}>
-        {isExternal ? (
+        {isExternal || typeof external === 'string' ? (
           <Link
             color="white"
-            isExternal={isExternal}
+            isExternal={isExternal || typeof external === 'string'}
+            href={external}
             _hover={{
               textDecor: 'none',
               color: 'whiteAlpha.800',

@@ -2,6 +2,7 @@ import React from 'react';
 import { ExternalLinkRenderer } from '../../components/externalLinkRenderer';
 
 import { FiAlignCenter } from 'react-icons/fa';
+import { AiOutlineFile, AiOutlineExclamation } from 'react-icons/ai';
 /**
  * This is the schema definition for the rich text fields used for
  * for this blog studio. When you import it in schemas.js it can be
@@ -151,6 +152,7 @@ export default {
       name: 'callout',
       title: 'Callout',
       type: 'object',
+      icon: AiOutlineExclamation,
       fields: [
         {
           name: 'text',
@@ -163,6 +165,7 @@ export default {
       name: 'file',
       title: 'File',
       type: 'object',
+      icon: AiOutlineFile,
       fields: [{ name: 'fileField', title: 'File', type: 'internalFile' }],
     },
     {

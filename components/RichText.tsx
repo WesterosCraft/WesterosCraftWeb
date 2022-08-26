@@ -13,9 +13,10 @@ import {
   OrderedList,
 } from '@chakra-ui/react';
 import { PortableText } from '@portabletext/react';
-import { getFileAsset } from '@sanity/asset-utils';
+import { buildFileUrl, getFile } from '@sanity/asset-utils';
 import { ChakraNextImage } from './ChakraNextImage';
 import { urlFor } from '../lib/sanity';
+import { ExclamationIcon } from './Icons/ExclamationIcon';
 
 export const RichText = ({ value }: { value: any[] }) => {
   return (
@@ -30,7 +31,14 @@ export const RichText = ({ value }: { value: any[] }) => {
 
           if (heading !== false) {
             return (
-              <Heading mt={10} textAlign={center ? 'center' : 'left'} as={heading} size={size}>
+              <Heading
+                fontFamily="body"
+                fontWeight="semibold"
+                mt={10}
+                textAlign={center ? 'center' : 'left'}
+                as={heading}
+                size={size}
+              >
                 {props.children}
               </Heading>
             );
@@ -103,28 +111,34 @@ export const RichText = ({ value }: { value: any[] }) => {
                 bg="orange.100"
               >
                 <HStack width="full" display="flex" maxW="full">
-                  <Icon display={['none', 'block']} mr={4} color="orange.300" boxSize={12} />
-                  <Text wordBreak="break-word">{props?.node?.text}</Text>
+                  <ExclamationIcon
+                    display={['none', 'block']}
+                    mr={4}
+                    fill="orange.300"
+                    boxSize={12}
+                  />
+                  <Text wordBreak="break-word">{props?.value?.text}</Text>
                 </HStack>
               </Container>
             );
           },
-          videoFile: (props: any) => {
-            const file = getFileAsset(props?.node?.asset?._ref);
-            return (
-              file && (
-                <AspectRatio
-                  my={8}
-                  ratio={[4 / 3, null, 16 / 9]}
-                  maxH={550}
-                  sx={{
-                    iframe: { height: ['calc(100% * 17 / 20)', null, '100%'] },
-                  }}
-                >
-                  <iframe src={file.url} />
-                </AspectRatio>
-              )
-            );
+          file: (props: any) => {
+            const file = getFile(props?.value?.asset, {
+              projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID as string,
+              dataset: process.env.NEXT_PUBLIC_SANITY_DATASET as string,
+            });
+            return file?.asset?.url ? (
+              <AspectRatio
+                my={8}
+                ratio={[4 / 3, null, 16 / 9]}
+                maxH={550}
+                sx={{
+                  iframe: { height: ['calc(100% * 17 / 20)', null, '100%'] },
+                }}
+              >
+                <iframe loading="lazy" src={file?.asset?.url} />
+              </AspectRatio>
+            ) : null;
           },
         },
         marks: {

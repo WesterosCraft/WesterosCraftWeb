@@ -1,8 +1,11 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { ReactElement } from 'react';
 import { WikiLayout } from '../../../components/Layout/WikiLayout';
 import { sanityClient } from '../../../lib/sanity.server';
+import { NextSeo } from 'next-seo';
+import { Breadcrumbs } from '../../../components/Breadcrumbs';
+import { RichText } from '../../../components/RichText';
 
 export interface GuidePage {
   _createdAt: Date;
@@ -74,9 +77,20 @@ export interface Slug {
 
 export default function GuidePage({ pageData }: { pageData: GuidePage }) {
   return (
-    <Box>
-      <Heading>{pageData?.title}</Heading>
-    </Box>
+    <>
+      <NextSeo title={pageData?.title} />
+      <Box>
+        <Breadcrumbs />
+        <Heading mb={4}>{pageData?.title}</Heading>
+      </Box>
+      <Container px={0} maxW="container.xl" className="rich-text-container">
+        {pageData?.body ? (
+          <RichText value={pageData?.body} />
+        ) : (
+          <Text>Guide content coming soon!</Text>
+        )}
+      </Container>
+    </>
   );
 }
 
