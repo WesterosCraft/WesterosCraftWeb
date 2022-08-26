@@ -18,6 +18,7 @@ import groupBy from 'lodash/groupBy';
 import { WikiLayout } from '../../../components/Layout/WikiLayout';
 import { urlFor } from '../../../lib/sanity';
 import NextLink from 'next/link';
+import { NextSeo } from 'next-seo';
 
 export interface GuidesPageData {
   _id: string;
@@ -79,8 +80,8 @@ export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
   ][];
 
   return (
-    <Container maxW="container.xl" px={[5, 12]}>
-      {/* <NextSeo title={pageData?.title ??} description={pageData?.copy} /> */}
+    <>
+      <NextSeo title={pageData?.title ?? 'Guides'} />
       <Box mb={12} textAlign="center">
         <Heading size="2xl" mb={5}>
           Guides
@@ -91,14 +92,14 @@ export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
         {sortedGuideData?.map(([title, guides]) => (
           <VStack w="full" align="flex-start" key={title}>
             <Heading>{title}</Heading>
-            <Divider borderColor="primaryRed" />
+            <Divider borderColor="primaryDark" />
             <Box w="full">
               <SimpleGrid
                 gridAutoRows="1fr"
                 minChildWidth="298px"
-                mt="6"
+                mt="8"
                 columns={{ base: 2, md: 3 }}
-                gap={4}
+                gap="4"
               >
                 {guides.map(guide => (
                   <GuideCard key={guide?._id}>
@@ -129,7 +130,7 @@ export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
           </VStack>
         ))}
       </VStack>
-    </Container>
+    </>
   );
 }
 

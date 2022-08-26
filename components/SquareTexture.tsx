@@ -9,7 +9,7 @@ export const SquareTexture = (props: BoxProps) => (
     left="0"
     width="full"
     height="full"
-    opacity={0.4}
+    opacity={0.6}
     backgroundImage={`url(${BrightSquares.src})`}
     {...props}
   />

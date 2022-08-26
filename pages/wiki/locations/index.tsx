@@ -66,7 +66,7 @@ function LocationsPage({ pageData }: { pageData: RegionsPage }) {
   return (
     <>
       <NextSeo title={pageData?.title} description={pageData?.copy} />
-      <Container maxW="container.xl" px={[0, 8, 12]}>
+      <Box>
         <Box mx="auto" maxW="2xl" mb={12} textAlign="center">
           <Heading size="2xl" mb={5}>
             <chakra.span fontSize="3xl">The</chakra.span> Regions{' '}
@@ -100,7 +100,7 @@ function LocationsPage({ pageData }: { pageData: RegionsPage }) {
               />
             ))}
         </SimpleGrid>
-      </Container>
+      </Box>
     </>
   );
 }

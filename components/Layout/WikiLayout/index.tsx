@@ -1,5 +1,6 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Container, Flex, Spacer } from '@chakra-ui/react';
 import * as React from 'react';
+import { Footer } from '../../Footer/Footer';
 import { Navbar } from '../../Navbar';
 import { WikiSidenav } from './WikiSidenav/WikiSidenav';
 
@@ -21,9 +22,20 @@ export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
       >
         <Flex h="full" flexDirection={{ base: 'column', lg: 'row' }} id="app-container">
           <WikiSidenav.Desktop />
-          <Box flex="1" p="6" overflow="auto">
+          <Box
+            pr="20rem"
+            className="wiki-content"
+            flex="1"
+            px={{ base: 5, sm: 12 }}
+            pt="10"
+            overflow="auto"
+          >
             <Box w="full" h="full">
-              {children}
+              <Container maxW="5xl" px={0}>
+                {children}
+                <Spacer h="20" />
+              </Container>
+              <Footer variant="wiki" mx={{ base: -5, sm: -12 }} />
             </Box>
           </Box>
         </Flex>

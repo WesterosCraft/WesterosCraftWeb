@@ -1,14 +1,30 @@
-import { Box, Spacer, Stack, StackDivider } from '@chakra-ui/react';
+import { Box, BoxProps, Spacer, Stack, StackDivider } from '@chakra-ui/react';
 import * as React from 'react';
 import { Logo } from '../Navbar/Logo';
 import { Copyright } from './Copyright';
 import { LinkGrid } from './LinkGrid';
 import { SocialMediaLinks } from './SocialMediaLinks';
 
-export const Footer = () => (
-  <Box bg="primaryDark" as="footer" role="contentinfo" py="12" px={{ base: '4', md: '8' }}>
+export interface FooterProps extends BoxProps {
+  variant?: 'wiki';
+}
+
+export const Footer = ({ variant, ...rest }: FooterProps) => (
+  <Box
+    bg="primaryDark"
+    as="footer"
+    role="contentinfo"
+    py="12"
+    px={{ base: '4', md: '8' }}
+    {...rest}
+  >
     <Stack maxW="7xl" mx="auto" spacing="10" divider={<StackDivider />}>
-      <Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: '10', lg: '28' }}>
+      <Stack
+        direction={
+          variant === 'wiki' ? { base: 'column', xl: 'row' } : { base: 'column', lg: 'row' }
+        }
+        spacing={variant === 'wiki' ? { base: '10', xl: '20' } : { base: '10', lg: '28' }}
+      >
         <Box>
           <Logo />
         </Box>

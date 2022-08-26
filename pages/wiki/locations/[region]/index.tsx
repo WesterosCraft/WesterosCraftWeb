@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Heading, Container, SimpleGrid } from '@chakra-ui/react';
+import { Heading, Box, SimpleGrid } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../../../../lib/sanity.server';
 import { Breadcrumbs } from '../../../../components/Breadcrumbs';
@@ -53,7 +53,7 @@ const RegionPage = ({ pageData }: { pageData: RegionPageData }) => {
   return (
     <>
       <NextSeo title={pageData?.name} />
-      <Container maxW="container.xl" px={[0, 8, 12]}>
+      <Box>
         <Breadcrumbs />
         <Heading size="2xl" mb={12}>
           {pageData?.name}
@@ -72,7 +72,7 @@ const RegionPage = ({ pageData }: { pageData: RegionPageData }) => {
             />
           ))}
         </SimpleGrid>
-      </Container>
+      </Box>
     </>
   );
 };

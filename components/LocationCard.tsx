@@ -1,8 +1,7 @@
-import { Flex, Heading, Text, Divider, LinkBox, HStack, LinkOverlay } from '@chakra-ui/react';
+import { Flex, Text, Divider, LinkBox, HStack, LinkOverlay } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import NextImage from 'next/future/image';
 import { nameFormatter } from '../utils';
-import { BuildCategory } from '../types';
 
 export interface LocationCardProps {
   title: string;
@@ -24,7 +23,7 @@ export const LocationCard = ({
   projectStatus,
 }: LocationCardProps) => {
   const myLoader = ({ src = '' }) => {
-    return `${src}?fit=crop&auto=format&crop=center&h=275&w=${352}&q=100`;
+    return `${src}?fit=crop&auto=format&crop=center&w=${350}&q=100`;
   };
 
   return (
@@ -43,10 +42,10 @@ export const LocationCard = ({
       }}
     >
       <HStack>
-        <Heading letterSpacing={1.1} fontSize="md" width="full">
+        <Text letterSpacing={1.1} fontSize="lg" fontWeight="medium" width="full">
           {title}
-        </Heading>
-        <Text fontSize="sm">{category}</Text>
+        </Text>
+        <Text>{category}</Text>
       </HStack>
       <Divider borderBottomColor="black" mt={2} />
       <LinkOverlay as={NextLink} passHref href={link}>
@@ -65,11 +64,8 @@ export const LocationCard = ({
                 src={image}
                 blurDataURL={blurDataURL || undefined}
                 placeholder={blurDataURL ? 'blur' : undefined}
-                width={300}
-                height={300}
-                // objectFit="cover"
-                // objectPosition="center"
-                // layout="fill"
+                width={350}
+                height={275}
                 loader={myLoader}
               />
             )}
@@ -77,10 +73,10 @@ export const LocationCard = ({
         </a>
       </LinkOverlay>
       <HStack justify="space-between">
-        <Text fontSize="xs" color="gray.700">
+        <Text fontSize="sm" color="gray.700">
           {house}
         </Text>
-        <Text fontSize="xs" color="gray.700">
+        <Text fontSize="sm" color="gray.700">
           {nameFormatter(projectStatus)}
         </Text>
       </HStack>

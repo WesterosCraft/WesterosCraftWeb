@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
-import { Heading, Box, Text, Container } from '@chakra-ui/react';
+import { Heading, Box, Text, Container, Spacer } from '@chakra-ui/react';
 import { sanityClient } from '../../../../lib/sanity.server';
 import { ChakraNextImage } from '../../../../components/ChakraNextImage';
 import { ProjectDetails } from '../../../../components/ProjectDetails';
@@ -19,12 +19,12 @@ const LocationPage = ({ pageData }: LocationPageProps) => {
   return (
     <>
       <NextSeo title={pageData?.title} />
-      <Container maxW="container.xl" px={[0, 8, 12]}>
+      <Box>
         <Breadcrumbs />
         <Heading mb={4}>{pageData?.title}</Heading>
         <WikiHero pageData={pageData} />
-      </Container>
-      <Box className="content-wrapper" pb="12">
+      </Box>
+      <Box className="content-wrapper">
         <ProjectDetails
           pageData={pageData}
           display={['inline-flex', null, null, null, null, 'none']}
@@ -32,16 +32,15 @@ const LocationPage = ({ pageData }: LocationPageProps) => {
           ml={[0, null, 3]}
           float={['none', null, 'right']}
           mb={3}
-          pr={[5, null, 12]}
           width={['full', null, 'auto']}
-          pl={[5, null, 0]}
         />
-        <Container maxW="container.xl" className="rich-text-container" px={[0, 8, 12]}>
+        <Container px={0} maxW="container.xl" className="rich-text-container">
           {pageData?.body ? (
             <RichText value={pageData?.body} />
           ) : (
             <Text>Wiki content coming soon!</Text>
           )}
+          <Spacer display={{ base: 'none', xl: 'flex', '2xl': 'none' }} h="10" />
         </Container>
       </Box>
     </>
