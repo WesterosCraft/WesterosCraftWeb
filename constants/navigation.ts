@@ -128,7 +128,7 @@ export const navigation = [
             current: 'guides',
           },
         },
-        title: 'Rules & Guides',
+        title: 'Rules And Guides',
       },
     ],
     title: 'Resources',

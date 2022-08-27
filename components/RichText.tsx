@@ -8,12 +8,11 @@ import {
   AspectRatio,
   Container,
   HStack,
-  Icon,
   UnorderedList,
   OrderedList,
 } from '@chakra-ui/react';
 import { PortableText } from '@portabletext/react';
-import { buildFileUrl, getFile } from '@sanity/asset-utils';
+import { getFile } from '@sanity/asset-utils';
 import { ChakraNextImage } from './ChakraNextImage';
 import { urlFor } from '../lib/sanity';
 import { ExclamationIcon } from './Icons/ExclamationIcon';
@@ -66,13 +65,13 @@ export const RichText = ({ value }: { value: any[] }) => {
         types: {
           figure: ({ value }) => {
             return (
-              <Box
-                float={value?.float}
-                pr={value?.float === 'left' ? 4 : 0}
-                pl={value?.float === 'right' ? 4 : 0}
-                pt={4}
-              >
-                <Box p={2} border="1.5px solid black">
+              <Box>
+                <Box
+                  float={value?.float}
+                  pr={value?.float === 'left' ? 4 : 0}
+                  pl={value?.float === 'right' ? 4 : 0}
+                  pt={4}
+                >
                   <ChakraNextImage
                     alt={value?.alt}
                     src={urlFor(value?.image?.asset).url()}

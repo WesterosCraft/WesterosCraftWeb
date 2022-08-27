@@ -1,11 +1,12 @@
 import { Box, Container, Heading, Text } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { ReactElement } from 'react';
-import { WikiLayout } from '../../../components/Layout/WikiLayout';
-import { sanityClient } from '../../../lib/sanity.server';
+import { WikiLayout } from '../../../../components/Layout/WikiLayout';
+import { sanityClient } from '../../../../lib/sanity.server';
 import { NextSeo } from 'next-seo';
-import { Breadcrumbs } from '../../../components/Breadcrumbs';
-import { RichText } from '../../../components/RichText';
+import { Breadcrumbs } from '../../../../components/Breadcrumbs';
+import { RichText } from '../../../../components/RichText';
+import { slugify } from '../../../../utils';
 
 export interface GuidePage {
   _createdAt: Date;
@@ -81,13 +82,17 @@ export default function GuidePage({ pageData }: { pageData: GuidePage }) {
       <NextSeo title={pageData?.title} />
       <Box>
         <Breadcrumbs />
-        <Heading mb={4}>{pageData?.title}</Heading>
+        <Heading size="2xl" mb={12}>
+          {pageData?.title}
+        </Heading>
       </Box>
       <Container px={0} maxW="container.xl" className="rich-text-container">
         {pageData?.body ? (
           <RichText value={pageData?.body} />
         ) : (
-          <Text>Guide content coming soon!</Text>
+          <>
+            <Text>Guide content coming soon!</Text>
+          </>
         )}
       </Container>
     </>
@@ -112,10 +117,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const allGuides = await sanityClient.fetch(`*[_type=="guide"] { slug, region->{ slug } }`);
+  const allGuides = await sanityClient.fetch(`*[_type=="guide"] {
+    slug,
+    guideCategory->{
+      title, _type
+    }
+   }`);
+
   const paths = allGuides?.map((guide: any) => ({
     params: {
       slug: guide?.slug?.current,
+      category: slugify(guide?.guideCategory?.title),
     },
   }));
 

@@ -11,10 +11,10 @@ interface WikiLayoutProps {
 
 export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
   return (
-    <Flex direction="column" height="100vh" className="wiki-layout">
+    <Flex direction="column" className="wiki-layout" h="100vh">
       <Navbar isWiki />
       <Box
-        height="100vh"
+        h="full"
         overflow="hidden"
         position="relative"
         borderTopWidth="1px"
@@ -22,22 +22,25 @@ export const WikiLayout = ({ children, rightNav }: WikiLayoutProps) => {
       >
         <Flex h="full" flexDirection={{ base: 'column', lg: 'row' }} id="app-container">
           <WikiSidenav.Desktop />
-          <Box
+          <Flex
+            flexDirection="column"
+            alignSelf="stretch"
             pr="20rem"
             className="wiki-content"
             flex="1"
             px={{ base: 5, sm: 12 }}
             pt="10"
             overflow="auto"
+            h="full"
           >
             <Box w="full" h="full">
-              <Container maxW="5xl" px={0}>
+              <Box maxW="5xl" px={0} h="full">
                 {children}
                 <Spacer h="20" />
-              </Container>
-              <Footer variant="wiki" mx={{ base: -5, sm: -12 }} />
+                <Footer variant="wiki" mx={{ base: -5, sm: -12 }} />
+              </Box>
             </Box>
-          </Box>
+          </Flex>
         </Flex>
       </Box>
     </Flex>

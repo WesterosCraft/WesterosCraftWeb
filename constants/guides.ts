@@ -44,7 +44,7 @@ export const GUIDES = [
     description: null,
     guideCategory: {
       _type: 'category',
-      title: 'Rules & Guidelines',
+      title: 'Rules And Guidelines',
     },
     slug: {
       _type: 'slug',
@@ -136,7 +136,7 @@ export const GUIDES = [
     description: null,
     guideCategory: {
       _type: 'category',
-      title: 'Rules & Guidelines',
+      title: 'Rules And Guidelines',
     },
     slug: {
       _type: 'slug',
@@ -149,7 +149,7 @@ export const GUIDES = [
     description: null,
     guideCategory: {
       _type: 'category',
-      title: 'Rules & Guidelines',
+      title: 'Rules And Guidelines',
     },
     slug: {
       _type: 'slug',
@@ -202,7 +202,7 @@ export const GUIDES = [
     description: null,
     guideCategory: {
       _type: 'category',
-      title: 'Rules & Guidelines',
+      title: 'Rules And Guidelines',
     },
     slug: {
       _type: 'slug',
@@ -241,7 +241,7 @@ export const GUIDES = [
     description: null,
     guideCategory: {
       _type: 'category',
-      title: 'Rules & Guidelines',
+      title: 'Rules And Guidelines',
     },
     slug: {
       _type: 'slug',

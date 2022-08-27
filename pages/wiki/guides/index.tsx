@@ -42,7 +42,7 @@ export enum Title {
   GettingStarted = 'Getting Started',
   HowTo = 'How To',
   Resources = 'Resources',
-  RulesGuidelines = 'Rules & Guidelines',
+  RulesGuidelines = 'Rules And Guidelines',
 }
 
 export interface Icon {

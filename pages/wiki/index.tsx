@@ -125,7 +125,7 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
                 blurDataURL={
                   loc.extendedImage?._rev ? loc.extendedImage?.metadata?.lqip : undefined
                 }
-                link={`${loc?.region?.slug?.current}/${loc?.slug?.current}`}
+                link={`/wiki/locations/${loc?.region?.slug?.current}/${loc?.slug?.current}`}
                 projectStatus={loc?.projectStatus}
                 house={loc?.house}
               />

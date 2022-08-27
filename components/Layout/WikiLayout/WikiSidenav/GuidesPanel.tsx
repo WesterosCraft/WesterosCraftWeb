@@ -8,6 +8,8 @@ import { NavItem } from '../NavItem';
 import { NavGroup } from '../NavGroup';
 import { GUIDES } from '../../../../constants/guides';
 import groupBy from 'lodash/groupBy';
+import { slugify } from '../../../../utils';
+import { useRouter } from 'next/router';
 
 const MobileGuidesPanel = () => {
   const guidesByCategory = Object.entries(groupBy(GUIDES, o => o.guideCategory?.title));
@@ -20,9 +22,14 @@ const MobileGuidesPanel = () => {
             key={idx}
             link={{
               title: startCase(toLower(title)),
+              // @ts-ignore
               links: guides?.map(i => ({
                 ...i,
-                link: { slug: { current: `/wiki/guides/${i?.slug?.current}` } },
+                link: {
+                  slug: {
+                    current: `/wiki/guides/${slugify(i?.guideCategory?.title)}/${i?.slug?.current}`,
+                  },
+                },
               })),
             }}
           />
@@ -37,22 +44,41 @@ const MobileGuidesPanel = () => {
 };
 
 const DesktopGuidesPanel = () => {
+  const router = useRouter();
   const guidesByCategory = Object.entries(groupBy(GUIDES, o => o.guideCategory?.title));
 
   return (
-    <Accordion>
+    <Accordion
+      index={guidesByCategory.findIndex(guide => router.asPath?.includes(slugify(guide?.[0])))}
+    >
       {guidesByCategory.map(([title, guides], i) => (
         <AccordionItem key={i} border={0}>
-          <AccordionButton _hover={{ bg: 'primaryDarkGlare' }}>
-            <NavGroup label={startCase(toLower(title))} />
-          </AccordionButton>
+          <NextLink href={`/wiki/guides/${slugify(title)}`}>
+            <a>
+              <AccordionButton
+                _hover={{ bg: 'primaryDarkGlare' }}
+                _activeLink={{ bg: 'primaryDarkGlare' }}
+                aria-current={router.query?.category === slugify(title) ? 'page' : undefined}
+              >
+                <NavGroup label={title} />
+              </AccordionButton>
+            </a>
+          </NextLink>
 
           <AccordionPanel px={4}>
             <Stack spacing="1">
               {guides?.map((guide, i) => (
-                <NextLink key={i} href={`/wiki/guides/${guide?.slug?.current}`}>
+                <NextLink
+                  key={i}
+                  href={`/wiki/guides/${slugify(guide?.guideCategory?.title)}/${
+                    guide?.slug?.current
+                  }`}
+                >
                   <a>
-                    <NavItem label={guide.title} />
+                    <NavItem
+                      active={router.query?.slug === guide?.slug?.current}
+                      label={guide.title}
+                    />
                   </a>
                 </NextLink>
               ))}
