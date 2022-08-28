@@ -14,7 +14,7 @@ export default function FourOhFourPage() {
         backgroundPosition="top"
         style={{
           backgroundImage:
-            'url("https://images.unsplash.com/photo-1545972154-9bb223aac798?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3050&q=80&exp=8&con=-15&sat=-75")',
+            'url("https://cdn.sanity.io/images/1as7cn02/production/3e2bc743d2a8ced02f3087cc3fc265dea5050114-1440x847.jpg?auto=format")',
         }}
       >
         <Box
@@ -24,19 +24,21 @@ export default function FourOhFourPage() {
           py={{ base: '16', sm: '24', lg: '48' }}
           textAlign="center"
         >
-          <Text textTransform="uppercase" fontWeight="semibold" color="black" opacity={0.5}>
-            404 error
-          </Text>
-          <Heading mt="2" size={{ base: '2xl', sm: '3xl' }} color="white">
-            Uh oh! I think you’re lost.
-          </Heading>
-          <Text mt="6" color="black" fontSize="xl">
-            {`It looks like the page you’re looking for doesn't exist.`}
-          </Text>
-          <Box mt="8" className="mt-6">
-            <Button size="lg" onClick={() => router.back()}>
-              Go back
-            </Button>
+          <Box bg="blackAlpha.600" maxW="4xl" py="8" mx="auto">
+            <Text textTransform="uppercase" fontWeight="semibold" color="white" opacity={0.8}>
+              404 error
+            </Text>
+            <Heading mt="2" size={{ base: '2xl', sm: '3xl' }} color="white">
+              Uh oh! I think you’re lost.
+            </Heading>
+            <Text mt="6" color="white" fontSize="xl">
+              {`It looks like the page you’re looking for doesn't exist.`}
+            </Text>
+            <Box mt="8" className="mt-6">
+              <Button size="lg" onClick={() => router.back()}>
+                Go back
+              </Button>
+            </Box>
           </Box>
         </Box>
       </Box>

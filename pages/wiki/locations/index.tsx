@@ -67,13 +67,13 @@ function LocationsPage({ pageData }: { pageData: RegionsPage }) {
     <>
       <NextSeo title={pageData?.title} description={pageData?.copy} />
       <Box>
-        <Box mx="auto" maxW="2xl" mb={12} textAlign="center">
+        <Box textAlign={{ base: 'center', md: 'left' }} mx="auto" mb={12}>
           <Heading size="2xl" mb={5}>
             <chakra.span fontSize="3xl">The</chakra.span> Regions{' '}
             <chakra.span fontSize="3xl">of</chakra.span> WesterosCraft
           </Heading>
 
-          <Text>{pageData?.copy}</Text>
+          <Text maxW="2xl">{pageData?.copy}</Text>
         </Box>
         <SimpleGrid columns={{ base: 1, md: 2 }} gridAutoRows="1fr" gap="12">
           {pageData?.regions

@@ -98,9 +98,8 @@ export default function GuidePage({ pageData }: { pageData: GuidePage }) {
             </>
           )
         )}
-        {pageData?.pageBuilder.map((item, i) => (
-          <PageBuilderZone key={i} {...item} />
-        ))}
+        {!isEmpty(pageData?.pageBuilder) &&
+          pageData?.pageBuilder?.map((item, i) => <PageBuilderZone key={i} {...item} />)}
       </Container>
     </>
   );

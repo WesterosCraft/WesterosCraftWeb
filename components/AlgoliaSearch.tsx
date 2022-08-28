@@ -1,23 +1,23 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from 'react';
 import {
   Flex,
-  Heading,
+  Text,
   VStack,
   Box,
   InputGroup,
   Input,
   InputLeftElement,
   Spinner,
-} from "@chakra-ui/react";
-import algoliaClient from "algoliasearch/lite";
-import debounce from "lodash/debounce";
-import NextLink from "next/link";
-import { MagnifyingGlassIcon } from "./Icons/MagnifyingGlass";
+} from '@chakra-ui/react';
+import algoliaClient from 'algoliasearch/lite';
+import debounce from 'lodash/debounce';
+import NextLink from 'next/link';
+import { MagnifyingGlassIcon } from './Icons/MagnifyingGlass';
 
 const searchClient = algoliaClient(
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID ?? "undefined",
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY ?? "undefined"
-).initIndex("Wiki");
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID ?? 'undefined',
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY ?? 'undefined',
+).initIndex('Wiki');
 
 const search = (query: string, params = {}) =>
   searchClient.search(query, {
@@ -47,24 +47,26 @@ export interface Title {
 }
 const Results = ({ results, modalHandler }: any) => {
   return (
-    <VStack direction='column' spacing={2} width='full' mt={4}>
+    <VStack direction="column" spacing={2} width="full" mt={4}>
       {results?.map((result: any) => (
         <NextLink href={result.url} passHref key={result?.objectID}>
           <Flex
             onClick={modalHandler}
-            width='full'
-            borderRadius='lg'
+            width="full"
+            borderRadius="lg"
             py={5}
             px={4}
-            align='center'
-            justify='space-between'
+            align="center"
+            justify="space-between"
             _hover={{
-              color: "white",
-              bg: "red.700",
+              color: 'white',
+              bg: 'red.700',
             }}
-            cursor='pointer'
+            cursor="pointer"
           >
-            <Heading fontSize='lg'>{result.title}</Heading>
+            <Text fontWeight="medium" fontSize="xl">
+              {result.title}
+            </Text>
             {/* <Icon as={FaLink} /> */}
           </Flex>
         </NextLink>
@@ -79,29 +81,29 @@ type Props = {
 
 export const AlgoliaSearch = ({ modalHandler }: Props) => {
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<
-    Array<{ objectID: string; title: string; url: string }>
-  >([]);
-  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<Array<{ objectID: string; title: string; url: string }>>(
+    [],
+  );
+  const [query, setQuery] = useState('');
 
   // This is the solution
   const debouncedSearch = useMemo(
     () =>
-      debounce((currentQuery) => {
+      debounce(currentQuery => {
         search(currentQuery).then(({ hits }) => {
           //@ts-ignore
           setResults(hits);
           setLoading(false);
         });
       }, 850),
-    []
+    [],
   );
 
   const updateResults = useCallback(
     (value: any) => {
       debouncedSearch(value);
     },
-    [debouncedSearch]
+    [debouncedSearch],
   );
 
   const handleChange = useCallback(
@@ -115,30 +117,25 @@ export const AlgoliaSearch = ({ modalHandler }: Props) => {
         setLoading(false);
       }
     },
-    [updateResults]
+    [updateResults],
   );
 
   return (
-    <Box width='full'>
-      <InputGroup maxWidth={756} shadow='sm'>
-        <InputLeftElement pointerEvents='none'>
-          <MagnifyingGlassIcon fill='gray.300' />
+    <Box width="full">
+      <InputGroup maxWidth={756} shadow="sm">
+        <InputLeftElement pointerEvents="none">
+          <MagnifyingGlassIcon fill="gray.300" />
         </InputLeftElement>
         <Input
-          variant='flushed'
-          size='lg'
-          placeholder='Search the wiki'
+          focusBorderColor="primaryRed"
+          variant="flushed"
+          size="lg"
+          placeholder="Search the wiki"
           onChange={handleChange}
         />
       </InputGroup>
-      <Flex
-        direction='column'
-        align='center'
-        justify='center'
-        width='full'
-        mx='auto'
-      >
-        {loading && <Spinner size='lg' mt={4} />}
+      <Flex direction="column" align="center" justify="center" width="full" mx="auto">
+        {loading && <Spinner size="lg" mt={4} />}
         {results.length > 0 ? (
           <Results results={results} modalHandler={modalHandler} />
         ) : (
