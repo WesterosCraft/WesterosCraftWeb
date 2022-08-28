@@ -77,88 +77,91 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
   return (
     <>
       <NextSeo title={pageData?.title} description={pageData?.copy} />
-
-      <Box textAlign={{ base: 'center', md: 'left' }}>
-        <Heading size="2xl" fontWeight="bold" letterSpacing="3px">
-          WesterosCraft Wiki
-        </Heading>
-      </Box>
-      <Box maxW="2xl" mt={8} textAlign={{ base: 'center', md: 'left' }}>
-        <Text>
-          WesterosCraft is a Minecraft server dedicated to recreating the continent of Westeros.
-          Westeros is part of the fictional world from the book series <i>A Song of Ice and Fire</i>
-          , which was adapted into a TV show by HBO called <i>Game of Thrones</i>. In this Wiki you
-          will find Information about our Projects, Rules, Guides and Tutorials. For the latest
-          updates head to our homepage.
-        </Text>
-        <Text mt={4}>Join, explore, and enjoy!</Text>
-      </Box>
-      <Box mt="10">
-        <Cards />
-      </Box>
-      <Box mt="12" mb="16">
-        <Banner
-          link="https://discord.com/invite/pBS5TH4"
-          linkText="Connect with the WesterosCraft community on Discord!"
-          isExternal
-        />
-      </Box>
-      <VStack w="full" spacing="12">
-        <Box w="full">
-          <VStack align="flex-start">
-            <Heading>Recently Created</Heading>
-            <Divider borderColor="primaryDark" />
-          </VStack>
-          <SimpleGrid
-            gridAutoRows="1fr"
-            minChildWidth="298px"
-            mt="8"
-            columns={{ base: 1, md: 2, lg: 3 }}
-            gap="4"
-          >
-            {pageData?.createdLocations.map(loc => (
-              <LocationCard
-                key={loc?.title}
-                title={loc?.title}
-                category={loc?.extendedBuildCategory?.title}
-                image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
-                blurDataURL={
-                  loc.extendedImage?._rev ? loc.extendedImage?.metadata?.lqip : undefined
-                }
-                link={`/wiki/locations/${loc?.region?.slug?.current}/${loc?.slug?.current}`}
-                projectStatus={loc?.projectStatus}
-                house={loc?.house}
-              />
-            ))}
-          </SimpleGrid>
+      <Box>
+        <Box textAlign={{ base: 'center', md: 'left' }}>
+          <Heading size="2xl" fontWeight="bold" letterSpacing="3px">
+            WesterosCraft Wiki
+          </Heading>
         </Box>
-        <Box w="full">
-          <VStack align="flex-start">
-            <Heading>Recently Updated</Heading>
-            <Divider borderColor="primaryDark" />
-          </VStack>
-          <SimpleGrid
-            gridAutoRows="1fr"
-            minChildWidth="298px"
-            mt="8"
-            columns={{ base: 1, md: 2, lg: 3 }}
-            spacing="8"
-          >
-            {pageData?.updatedLocations.map(loc => (
-              <LocationCard
-                key={loc?.title}
-                title={loc?.title}
-                category={loc?.extendedBuildCategory?.title}
-                image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
-                blurDataURL={loc.extendedImage?._rev ? loc.extendedImage.metadata.lqip : undefined}
-                link={`${loc?.region?.slug?.current}/${loc?.slug?.current}`}
-                projectStatus={loc?.projectStatus}
-                house={loc?.house}
-              />
-            ))}
-          </SimpleGrid>
+        <Box maxW="2xl" mt={8} textAlign={{ base: 'center', md: 'left' }}>
+          <Text>
+            WesterosCraft is a Minecraft server dedicated to recreating the continent of Westeros.
+            Westeros is part of the fictional world from the book series{' '}
+            <i>A Song of Ice and Fire</i>, which was adapted into a TV show by HBO called{' '}
+            <i>Game of Thrones</i>. In this Wiki you will find Information about our Projects,
+            Rules, Guides and Tutorials. For the latest updates head to our homepage.
+          </Text>
+          <Text mt={4}>Join, explore, and enjoy!</Text>
         </Box>
-      </VStack>
+        <Box mt="10">
+          <Cards />
+        </Box>
+        <Box mt="12" mb="16">
+          <Banner
+            link="https://discord.com/invite/pBS5TH4"
+            linkText="Connect with the WesterosCraft community on Discord!"
+            isExternal
+          />
+        </Box>
+        <VStack w="full" spacing="12">
+          <Box w="full">
+            <VStack align="flex-start">
+              <Heading>Recently Created</Heading>
+              <Divider borderColor="primaryDark" />
+            </VStack>
+            <SimpleGrid
+              gridAutoRows="1fr"
+              minChildWidth="298px"
+              mt="8"
+              columns={{ base: 1, md: 2, lg: 3 }}
+              gap="4"
+            >
+              {pageData?.createdLocations.map(loc => (
+                <LocationCard
+                  key={loc?.title}
+                  title={loc?.title}
+                  category={loc?.extendedBuildCategory?.title}
+                  image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
+                  blurDataURL={
+                    loc.extendedImage?._rev ? loc.extendedImage?.metadata?.lqip : undefined
+                  }
+                  link={`/wiki/locations/${loc?.region?.slug?.current}/${loc?.slug?.current}`}
+                  projectStatus={loc?.projectStatus}
+                  house={loc?.house}
+                />
+              ))}
+            </SimpleGrid>
+          </Box>
+          <Box w="full">
+            <VStack align="flex-start">
+              <Heading>Recently Updated</Heading>
+              <Divider borderColor="primaryDark" />
+            </VStack>
+            <SimpleGrid
+              gridAutoRows="1fr"
+              minChildWidth="298px"
+              mt="8"
+              columns={{ base: 1, md: 2, lg: 3 }}
+              spacing="8"
+            >
+              {pageData?.updatedLocations.map(loc => (
+                <LocationCard
+                  key={loc?.title}
+                  title={loc?.title}
+                  category={loc?.extendedBuildCategory?.title}
+                  image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
+                  blurDataURL={
+                    loc.extendedImage?._rev ? loc.extendedImage.metadata.lqip : undefined
+                  }
+                  link={`${loc?.region?.slug?.current}/${loc?.slug?.current}`}
+                  projectStatus={loc?.projectStatus}
+                  house={loc?.house}
+                />
+              ))}
+            </SimpleGrid>
+          </Box>
+        </VStack>
+      </Box>
     </>
   );
 }

@@ -3,7 +3,6 @@ import {
   Text,
   VStack,
   Heading,
-  Container,
   Box,
   SimpleGrid,
   Divider,
@@ -19,6 +18,7 @@ import { WikiLayout } from '../../../components/Layout/WikiLayout';
 import { urlFor } from '../../../lib/sanity';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
+import { GuideCard } from '../../../components/GuideCard';
 
 export interface GuidesPageData {
   _id: string;
@@ -102,28 +102,7 @@ export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
                 gap="4"
               >
                 {guides.map(guide => (
-                  <GuideCard key={guide?._id}>
-                    <LinkBox h="full">
-                      <HStack spacing={4} w="full" align="flex-start" justify="flex-start">
-                        <Image
-                          width="12"
-                          height="12"
-                          src={urlFor(guide.icon.asset).url()}
-                          alt={guide.title}
-                        />
-                        <NextLink href={`/wiki/guides/${guide?.slug?.current}`} passHref>
-                          <LinkOverlay>
-                            <Text fontSize="lg" fontWeight="medium">
-                              {guide?.title}
-                            </Text>
-                          </LinkOverlay>
-                        </NextLink>
-                      </HStack>
-                      <Text mt="2" fontSize="sm">
-                        {guide?.description}
-                      </Text>
-                    </LinkBox>
-                  </GuideCard>
+                  <GuideCard key={guide?._id} {...guide} />
                 ))}
               </SimpleGrid>
             </Box>
@@ -131,14 +110,6 @@ export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
         ))}
       </VStack>
     </>
-  );
-}
-
-function GuideCard({ children }: any) {
-  return (
-    <VStack p={4} outline="1.5px solid black">
-      {children}
-    </VStack>
   );
 }
 

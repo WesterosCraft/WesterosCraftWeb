@@ -7,6 +7,8 @@ import { NextSeo } from 'next-seo';
 import { Breadcrumbs } from '../../../../components/Breadcrumbs';
 import { RichText } from '../../../../components/RichText';
 import { slugify } from '../../../../utils';
+import { isEmpty } from 'lodash';
+import { PageBuilderZone } from '../../../../components/PageBuilderZone';
 
 export interface GuidePage {
   _createdAt: Date;
@@ -90,10 +92,15 @@ export default function GuidePage({ pageData }: { pageData: GuidePage }) {
         {pageData?.body ? (
           <RichText value={pageData?.body} />
         ) : (
-          <>
-            <Text>Guide content coming soon!</Text>
-          </>
+          isEmpty(pageData?.pageBuilder) && (
+            <>
+              <Text>Guide content coming soon!</Text>
+            </>
+          )
         )}
+        {pageData?.pageBuilder.map((item, i) => (
+          <PageBuilderZone key={i} {...item} />
+        ))}
       </Container>
     </>
   );

@@ -1,4 +1,4 @@
-import { Flex, Text, Divider, LinkBox, HStack, LinkOverlay } from '@chakra-ui/react';
+import { Flex, Text, Divider, LinkBox, HStack, LinkOverlay, Box, Spacer } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import NextImage from 'next/future/image';
 import { nameFormatter } from '../utils';
@@ -23,7 +23,7 @@ export const LocationCard = ({
   projectStatus,
 }: LocationCardProps) => {
   const myLoader = ({ src = '' }) => {
-    return `${src}?fit=crop&auto=format&crop=center&w=${350}&q=100`;
+    return `${src}?fit=crop&auto=format&crop=center&w=${352}&h=275&q=100`;
   };
 
   return (
@@ -50,28 +50,39 @@ export const LocationCard = ({
       <Divider borderBottomColor="black" mt={2} />
       <LinkOverlay as={NextLink} passHref href={link}>
         <a>
-          <Flex
-            mt={3}
-            mb={2}
-            width="full"
-            height={275}
-            outline="1.5px solid black"
-            position="relative"
-            bgColor="primaryGlare"
-          >
-            {image && (
+          {image ? (
+            <Flex
+              mt={3}
+              mb={2}
+              width="full"
+              height="auto"
+              outline="1.5px solid black"
+              position="relative"
+              bgColor="primaryGlare"
+            >
               <NextImage
                 src={image}
                 blurDataURL={blurDataURL || undefined}
                 placeholder={blurDataURL ? 'blur' : undefined}
-                width={350}
+                width={352}
                 height={275}
                 loader={myLoader}
               />
-            )}
-          </Flex>
+            </Flex>
+          ) : (
+            <Spacer
+              mt={3}
+              mb={2}
+              outline="1.5px solid black"
+              position="relative"
+              className="spacer"
+              h={229}
+              bgColor="primaryGlare"
+            />
+          )}
         </a>
       </LinkOverlay>
+      <Spacer />
       <HStack justify="space-between">
         <Text fontSize="sm" color="gray.700">
           {house}
