@@ -2,7 +2,6 @@ import type { ReactElement } from 'react';
 import {
   Heading,
   VStack,
-  Container,
   Text,
   Box,
   SimpleGrid,

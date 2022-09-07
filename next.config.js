@@ -21,6 +21,10 @@ module.exports = {
         source: '/modpack',
         destination: '/join',
       },
+      {
+        source: '/progress',
+        destination: '/about',
+      },
     ];
   },
 };

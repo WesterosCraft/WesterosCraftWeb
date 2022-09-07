@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Select,
   Box,
@@ -13,7 +13,7 @@ import {
   Button,
   Heading,
   Text,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 import {
   useTable,
   usePagination,
@@ -24,12 +24,12 @@ import {
   useRowSelect,
   useGlobalFilter,
   useAsyncDebounce,
-} from "react-table";
-import "regenerator-runtime/runtime";
-import { matchSorter } from "match-sorter";
+} from 'react-table';
+import 'regenerator-runtime/runtime';
+import { matchSorter } from 'match-sorter';
 
 const ProgressTable = ({ data }: any) => {
-  console.log("👾 ~ ProgressTable ~ data", data);
+  // console.log("👾 ~ ProgressTable ~ data", data);
 
   //   {
   //     "buildType": {
@@ -48,36 +48,36 @@ const ProgressTable = ({ data }: any) => {
   const columns = React.useMemo(
     () => [
       {
-        Header: "Name",
-        accessor: "title",
-        Cell: ({ cell: { value } }: any) => <Text size='sm'>{value}</Text>,
+        Header: 'Name',
+        accessor: 'title',
+        Cell: ({ cell: { value } }: any) => <Text size="sm">{value}</Text>,
       },
       {
-        Header: "Status",
-        accessor: "projectStatus",
+        Header: 'Status',
+        accessor: 'projectStatus',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
         defaultCanFilter: true,
         Cell: ({ cell: { value } }: any) => <>{value}</>,
       },
       {
-        Header: "Region",
-        accessor: "region.name",
+        Header: 'Region',
+        accessor: 'region.name',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
         defaultCanFilter: true,
         Cell: ({ cell: { value } }: any) => <>{value}</>,
       },
       {
-        Header: "Type",
-        accessor: "buildType.title",
+        Header: 'Type',
+        accessor: 'buildType.title',
         Filter: SelectColumnFilter,
-        filter: "includes",
+        filter: 'includes',
         defaultCanFilter: true,
         Cell: ({ cell: { value } }: any) => <>{value}</>,
       },
     ],
-    []
+    [],
   );
   const filterTypes = React.useMemo(
     () => ({
@@ -86,14 +86,12 @@ const ProgressTable = ({ data }: any) => {
         return rows.filter((row: any) => {
           const rowValue = row.values[id];
           return rowValue !== undefined
-            ? String(rowValue)
-                .toLowerCase()
-                .startsWith(String(filterValue).toLowerCase())
+            ? String(rowValue).toLowerCase().startsWith(String(filterValue).toLowerCase())
             : true;
         });
       },
     }),
-    []
+    [],
   );
 
   const defaultColumn = React.useMemo(
@@ -103,7 +101,7 @@ const ProgressTable = ({ data }: any) => {
       // And also our default editable cell
       // Cell: EditableCell,
     }),
-    []
+    [],
   );
 
   const {
@@ -139,22 +137,22 @@ const ProgressTable = ({ data }: any) => {
     useSortBy,
     useExpanded,
     usePagination,
-    useRowSelect
+    useRowSelect,
   );
 
   // Render the UI for your table
   return (
     <>
-      <Flex width='full' justifyContent='flex-end'>
+      <Flex width="full" justifyContent="flex-end">
         <Select
           mr={4}
-          width='120px'
+          width="120px"
           value={pageSize}
-          onChange={(e) => {
+          onChange={e => {
             setPageSize(Number(e.target.value));
           }}
         >
-          {[10, 20, 30, 40, 50].map((pageSize) => (
+          {[10, 20, 30, 40, 50].map(pageSize => (
             <option key={pageSize} value={pageSize}>
               Show {pageSize}
             </option>
@@ -167,13 +165,13 @@ const ProgressTable = ({ data }: any) => {
         />
       </Flex>
       <Table
-        fontSize='sm'
-        width='full'
-        size='md'
+        fontSize="sm"
+        width="full"
+        size="md"
         my={3}
-        borderWidth='1px'
-        borderColor='gray.200'
-        variant='striped'
+        borderWidth="1px"
+        borderColor="gray.200"
+        variant="striped"
         {...getTableProps()}
       >
         <Thead>
@@ -183,17 +181,13 @@ const ProgressTable = ({ data }: any) => {
                 <Th {...column.getHeaderProps()} key={i}>
                   <div>
                     <span {...column.getSortByToggleProps()}>
-                      {column.render("Header")}
+                      {column.render('Header')}
                       {/* Add a sort direction indicator */}
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔽"
-                          : " 🔼"
-                        : ""}
+                      {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
                     </span>
                   </div>
                   {/* Render the columns filter UI */}
-                  <div>{column.canFilter ? column.render("Filter") : null}</div>
+                  <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </Th>
               ))}
             </Tr>
@@ -207,7 +201,7 @@ const ProgressTable = ({ data }: any) => {
                 {row.cells.map((cell, i) => {
                   return (
                     <Td {...cell.getCellProps()} key={i}>
-                      {cell.render("Cell")}
+                      {cell.render('Cell')}
                     </Td>
                   );
                 })}
@@ -220,15 +214,10 @@ const ProgressTable = ({ data }: any) => {
         Pagination can be built however you'd like.
         This is just a very basic UI implementation:
       */}
-      <Flex
-        direction='row'
-        align='center'
-        justifyContent='flex-end'
-        className='pagination'
-      >
+      <Flex direction="row" align="center" justifyContent="flex-end" className="pagination">
         <Button
-          variant='outline'
-          size='sm'
+          variant="outline"
+          size="sm"
           onClick={() => previousPage()}
           disabled={!canPreviousPage}
         >
@@ -239,12 +228,7 @@ const ProgressTable = ({ data }: any) => {
             {pageIndex + 1} of {pageOptions.length}
           </strong>
         </Box>
-        <Button
-          variant='outline'
-          size='sm'
-          onClick={() => nextPage()}
-          disabled={!canNextPage}
-        >
+        <Button variant="outline" size="sm" onClick={() => nextPage()} disabled={!canNextPage}>
           Next
         </Button>
       </Flex>
@@ -253,16 +237,14 @@ const ProgressTable = ({ data }: any) => {
 };
 
 // Define a default UI for filtering
-function DefaultColumnFilter({
-  column: { filterValue, preFilteredRows, setFilter },
-}: any) {
+function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }: any) {
   const count = preFilteredRows.length;
 
   return (
     <Input
-      size='xs'
-      value={filterValue || ""}
-      onChange={(e) => {
+      size="xs"
+      value={filterValue || ''}
+      onChange={e => {
         setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
       }}
       placeholder={`Search ${count} builds...`}
@@ -270,9 +252,7 @@ function DefaultColumnFilter({
   );
 }
 
-function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
-}: any) {
+function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }: any) {
   // Calculate the options for filtering
   // using the preFilteredRows
   const options = React.useMemo(() => {
@@ -287,13 +267,13 @@ function SelectColumnFilter({
   // Render a multi-select box
   return (
     <Select
-      size='xs'
+      size="xs"
       value={filterValue}
-      onChange={(e) => {
+      onChange={e => {
         setFilter(e.target.value || undefined);
       }}
     >
-      <option value=''>All</option>
+      <option value="">All</option>
       {options.map((option: any, i) => (
         <option key={i} value={option}>
           {option}
@@ -303,23 +283,19 @@ function SelectColumnFilter({
   );
 }
 
-function GlobalFilter({
-  preGlobalFilteredRows,
-  globalFilter,
-  setGlobalFilter,
-}: any) {
+function GlobalFilter({ preGlobalFilteredRows, globalFilter, setGlobalFilter }: any) {
   const count = preGlobalFilteredRows.length;
   const [value, setValue] = React.useState(globalFilter);
-  const onChange = useAsyncDebounce((value) => {
+  const onChange = useAsyncDebounce(value => {
     setGlobalFilter(value || undefined);
   }, 200);
 
   return (
     <Input
       maxW={300}
-      size='md'
-      value={value || ""}
-      onChange={(e) => {
+      size="md"
+      value={value || ''}
+      onChange={e => {
         setValue(e.target.value);
         onChange(e.target.value);
       }}
@@ -345,6 +321,6 @@ function filterGreaterThan(rows: any, id: any, filterValue: any) {
   });
 }
 
-filterGreaterThan.autoRemove = (val: any) => typeof val !== "number";
+filterGreaterThan.autoRemove = (val: any) => typeof val !== 'number';
 
 export default ProgressTable;

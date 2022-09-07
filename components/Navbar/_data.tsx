@@ -43,15 +43,15 @@ export const links = [
       {
         _key: '86d12d05e6cc',
         _type: 'internalLink',
-        description: 'Check up on our progress',
+        description: 'Read about us, our process and progress',
         link: {
           _type: 'progress',
           slug: {
             _type: 'slug',
-            current: 'progress',
+            current: 'about',
           },
         },
-        title: 'Progress',
+        title: 'About',
         icon: 'pyke',
       },
       {

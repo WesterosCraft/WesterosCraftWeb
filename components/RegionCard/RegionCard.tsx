@@ -67,7 +67,7 @@ export const RegionCard = ({
           <Box mt="4" h="full" w="full" maxW="sm" mx="auto">
             <NextImage
               loader={({ src, width = 384 }) => {
-                return `${src}?&w=${width}&q=100&fit=crop&crop=center`;
+                return `${src}?w=${width}&q=100&fit=crop&crop=center`;
               }}
               src={image}
               width={384}

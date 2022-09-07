@@ -61,6 +61,9 @@ export default {
               name: 'slideImage',
               title: 'Slide Image',
               validation: (Rule: any) => Rule.required(),
+              options: {
+                hotspot: true,
+              },
             },
           ],
           preview: {

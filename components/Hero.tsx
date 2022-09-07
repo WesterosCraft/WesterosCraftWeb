@@ -242,7 +242,8 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                     style={{ objectFit: 'cover' }}
                     src={urlFor(slide?.slideImage).url()}
                     alt={slide?.location?.title ?? 'Westeros Location'}
-                    sizes="80vw"
+                    sizes="50vw"
+                    quality={100}
                   />
                   <Heading size="lg" color="white" position="absolute" bottom="4" left="8">
                     {slide?.location?.title ?? ''}
