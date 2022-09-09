@@ -1,15 +1,5 @@
 import * as React from 'react';
-import {
-  AspectRatio,
-  Box,
-  Heading,
-  Button,
-  Icon,
-  Link,
-  Stack,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { AspectRatio, Box, Heading, Button, Icon, Link, Stack, Text } from '@chakra-ui/react';
 import NextImage from 'next/future/image';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import { urlFor } from '../lib/sanity';
@@ -81,6 +71,7 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
                 placeholder="blur"
                 width={650}
                 height={450}
+                alt={item?.heading ?? ''}
                 blurDataURL={item.image?.metadata?.lqip}
               />
             </AspectRatio>

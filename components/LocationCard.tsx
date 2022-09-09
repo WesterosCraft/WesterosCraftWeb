@@ -66,6 +66,7 @@ export const LocationCard = ({
                 placeholder={blurDataURL ? 'blur' : undefined}
                 width={352}
                 height={275}
+                alt={title ?? ''}
                 loader={myLoader}
               />
             </Flex>
