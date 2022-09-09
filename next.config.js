@@ -1,9 +1,4 @@
 module.exports = {
-  experimental: {
-    images: {
-      allowFutureImage: true,
-    },
-  },
   reactStrictMode: true,
   images: {
     domains: ['cdn.sanity.io'],
@@ -20,10 +15,6 @@ module.exports = {
       {
         source: '/modpack',
         destination: '/join',
-      },
-      {
-        source: '/progress',
-        destination: '/about',
       },
     ];
   },

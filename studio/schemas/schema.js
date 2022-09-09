@@ -21,6 +21,8 @@ import category from './objects/category';
 import home from './pages/home';
 import join from './pages/join';
 import rookery from './pages/rookery';
+import progress from './pages/progress';
+import about from './pages/about';
 import siteConfig from './documents/siteConfig';
 import navigation from './objects/navigation';
 import navigationSection from './objects/navigationSection';
@@ -37,6 +39,7 @@ export default createSchema({
     // The following are document types which will appear
     // in the studio.
     page,
+    about,
     location,
     region,
     buildCategory,
@@ -44,6 +47,7 @@ export default createSchema({
     guide,
     callout,
     youtubeVideo,
+    progress,
     home,
     rookery,
     join,

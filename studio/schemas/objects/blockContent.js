@@ -59,6 +59,7 @@ export default {
           { title: 'Emphasis', value: 'em' },
           { title: 'Underline', value: 'underline' },
           { title: 'Strike', value: 'strike-through' },
+          { title: 'Dropcap', value: 'dropcap' },
         ],
         // https://www.sanity.io/guides/portable-text-internal-and-external-links
         annotations: [

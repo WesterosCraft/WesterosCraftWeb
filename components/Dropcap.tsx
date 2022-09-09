@@ -17,7 +17,8 @@ const Dropcap = ({ children }: any) => {
         lineHeight: 0.75,
         fontSize: '3.00rem',
         fontStyle: 'normal',
-        border: '2px solid brown',
+        border: '2px solid',
+        borderColor: 'primaryRed',
         padding: '0.4em 0.45em',
         minWidth: '5.5rem',
         minHeight: '6rem',
@@ -25,7 +26,7 @@ const Dropcap = ({ children }: any) => {
       }}
       _before={{
         content: "''",
-        borderColor: 'brown',
+        borderColor: 'primaryRed',
         borderStyle: 'dashed',
         position: 'absolute',
         borderRightWidth: '2px',
@@ -36,7 +37,7 @@ const Dropcap = ({ children }: any) => {
       }}
       _after={{
         content: "''",
-        borderColor: 'brown',
+        borderColor: 'primaryRed',
         borderStyle: 'dashed',
         position: 'absolute',
         width: 'calc(100% - 0.1em)',
