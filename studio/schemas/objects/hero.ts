@@ -65,6 +65,17 @@ export default {
                 hotspot: true,
               },
             },
+            {
+              type: 'string',
+              name: 'textColor',
+              title: 'Text Color',
+              options: {
+                list: [
+                  { title: 'dark', value: 'dark' },
+                  { title: 'light', value: 'light' },
+                ],
+              },
+            },
           ],
           preview: {
             select: {

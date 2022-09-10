@@ -1,4 +1,4 @@
-import { Box, BoxProps, Spacer, Stack, StackDivider } from '@chakra-ui/react';
+import { Box, BoxProps, Spacer, Stack, StackDivider, VStack, Link } from '@chakra-ui/react';
 import * as React from 'react';
 import { Logo } from '../Navbar/Logo';
 import { Copyright } from './Copyright';
@@ -25,9 +25,12 @@ export const Footer = ({ variant, ...rest }: FooterProps) => (
         }
         spacing={variant === 'wiki' ? { base: '10', xl: '20' } : { base: '10', lg: '28' }}
       >
-        <Box>
+        <VStack align="flex-start" spacing="4">
           <Logo />
-        </Box>
+          <Link color="white" href="mailto:westeroscraft@gmail.com">
+            westeroscraft@gmail.com
+          </Link>
+        </VStack>
         <Spacer />
         <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: '10', md: '20' }}>
           <LinkGrid spacing={{ base: '10', md: '20', lg: '28' }} flex="1" />
