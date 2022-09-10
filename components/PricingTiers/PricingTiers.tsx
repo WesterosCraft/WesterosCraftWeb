@@ -1,4 +1,4 @@
-import { Box, Button, SimpleGrid } from '@chakra-ui/react';
+import { Button, SimpleGrid } from '@chakra-ui/react';
 import * as React from 'react';
 import { ContainerBorder } from '../ContainerBorder';
 import { PricingCard } from './PricingCard';

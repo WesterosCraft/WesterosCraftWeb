@@ -132,36 +132,40 @@ export const Hero = ({
             </Text>
             <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
               <NextLink href={solidButton?.internal?.slug?.current}>
-                <Button
-                  size="lg"
-                  bg="black"
-                  _hover={{ bg: 'blackAlpha.700' }}
-                  color="white"
-                  height="14"
-                  px="8"
-                  fontSize="md"
-                >
-                  {solidButton?.linkText ?? ''}
-                </Button>
+                <a>
+                  <Button
+                    size="lg"
+                    bg="black"
+                    _hover={{ bg: 'blackAlpha.700' }}
+                    color="white"
+                    height="14"
+                    px="8"
+                    fontSize="md"
+                  >
+                    {solidButton?.linkText ?? ''}
+                  </Button>
+                </a>
               </NextLink>
               <NextLink href={outlineButton?.internal?.slug?.current} passHref>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  bg="transparent"
-                  color="gray.800"
-                  borderColor="black"
-                  _hover={{
-                    backgroundColor: 'black',
-                    color: 'white',
-                  }}
-                  height="14"
-                  px="8"
-                  shadow="base"
-                  fontSize="md"
-                >
-                  {outlineButton?.linkText ?? ''}
-                </Button>
+                <a>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    bg="transparent"
+                    color="gray.800"
+                    borderColor="black"
+                    _hover={{
+                      backgroundColor: 'black',
+                      color: 'white',
+                    }}
+                    height="14"
+                    px="8"
+                    shadow="base"
+                    fontSize="md"
+                  >
+                    {outlineButton?.linkText ?? ''}
+                  </Button>
+                </a>
               </NextLink>
             </Stack>
           </MotionBox>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, TabList, Tabs, Tab, Input, TabPanels, TabPanel } from '@chakra-ui/react';
+import { Box, TabList, Tabs, Tab, TabPanels, TabPanel } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { NavItem } from '../NavItem';

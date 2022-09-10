@@ -9,8 +9,8 @@ export interface SEOProps {
 
 export const Seo = ({ title, description }: SEOProps) => {
   const router = useRouter();
-  const metaTitle = title ?? SEO.title;
-  const metaDescription = description ?? SEO.description;
+  // const metaTitle = title ?? SEO.title;
+  // const metaDescription = description ?? SEO.description;
   const url = `${SEO.openGraph.url}${router.asPath.replace('/', '')}`;
   const openGraphTitle = title ?? SEO.title;
   const openGraphDescription = description ?? SEO.description;

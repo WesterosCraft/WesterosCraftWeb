@@ -43,12 +43,12 @@ export const links = [
       {
         _key: '86d12d05e6cc',
         _type: 'internalLink',
-        description: 'Read about us, our process and progress',
+        description: 'Read about us and our process',
         link: {
           _type: 'progress',
           slug: {
             _type: 'slug',
-            current: 'about',
+            current: '/about',
           },
         },
         title: 'About',
@@ -62,7 +62,7 @@ export const links = [
           _type: 'rookery',
           slug: {
             _type: 'slug',
-            current: 'rookery',
+            current: '/rookery',
           },
         },
         title: 'Rookery',
@@ -109,7 +109,7 @@ export const links = [
           _type: 'modpack',
           slug: {
             _type: 'slug',
-            current: 'join',
+            current: '/join',
           },
         },
         icon: 'stormsend',
@@ -118,29 +118,15 @@ export const links = [
       {
         _key: '1bf1d695cb94',
         _type: 'internalLink',
-        description: 'A knowledge base of all of our builds',
+        description: 'Check up on our status',
         link: {
           slug: {
             _type: 'slug',
-            current: 'downloads',
+            current: '/progress',
           },
         },
         icon: 'summerhall',
-        title: 'Downloads',
-      },
-      {
-        _key: '2ee753e4caec',
-        _type: 'internalLink',
-        description: "If you got a question, it's probably answered",
-        link: {
-          _type: 'guide',
-          slug: {
-            _type: 'slug',
-            current: 'frequently-asked-questions',
-          },
-        },
-        icon: 'highgarden',
-        title: 'FAQ',
+        title: 'Progress',
       },
       {
         _key: '0e2307ba6efd',
@@ -150,11 +136,25 @@ export const links = [
           _type: 'allGuides',
           slug: {
             _type: 'slug',
-            current: 'wiki/guides',
+            current: '/wiki/guides',
           },
         },
         icon: 'sunspear',
         title: 'Rules & Guides',
+      },
+      {
+        _key: '2ee753e4caec',
+        _type: 'internalLink',
+        description: "If you got a question, it's probably answered",
+        link: {
+          _type: 'guide',
+          slug: {
+            _type: 'slug',
+            current: '/wiki/guides/resources/frequently-asked-questions',
+          },
+        },
+        icon: 'highgarden',
+        title: 'FAQ',
       },
     ],
     title: 'Resources',

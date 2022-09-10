@@ -4,7 +4,6 @@ import {
   VStack,
   Stack,
   Text,
-  Button,
   StackDivider,
   HStack,
   Img,
@@ -64,6 +63,8 @@ export interface IconAsset {
 export interface TButton {
   _type: string;
   linkText: string;
+  internal?: any;
+  external?: any;
 }
 
 export const ServerFeatureGrid = ({
@@ -177,32 +178,60 @@ export const ServerFeatureGrid = ({
                     <Text mt="3">{server.description}</Text>
                   </VStack>
                   <HStack justify={{ base: 'center', sm: 'flex-start' }} w="full" spacing={4}>
-                    {server.leftButton && (
-                      <NextLink href="/" passHref>
+                    {server.leftButton ? (
+                      server.leftButton?.internal ? (
+                        <NextLink href={server.leftButton.internal?.slug?.current} passHref>
+                          <Link
+                            fontWeight="md"
+                            color="white"
+                            textDecor="underline"
+                            textDecorationColor="primaryRed"
+                            textUnderlineOffset="3px"
+                          >
+                            {server.leftButton.linkText}
+                          </Link>
+                        </NextLink>
+                      ) : (
                         <Link
+                          isExternal
+                          href={server.leftButton?.external ?? ''}
                           fontWeight="md"
                           color="white"
                           textDecor="underline"
                           textDecorationColor="primaryRed"
                           textUnderlineOffset="3px"
                         >
-                          {server.leftButton.linkText}
+                          {server.leftButton?.linkText}
                         </Link>
-                      </NextLink>
-                    )}
-                    {server.rightButton && (
-                      <NextLink href="/" passHref>
+                      )
+                    ) : null}
+                    {server.rightButton ? (
+                      server.rightButton?.internal ? (
+                        <NextLink href="/" passHref>
+                          <Link
+                            fontWeight="md"
+                            color="white"
+                            textDecor="underline"
+                            textDecorationColor="primaryRed"
+                            textUnderlineOffset="3px"
+                          >
+                            {server.rightButton.linkText}
+                          </Link>
+                        </NextLink>
+                      ) : (
                         <Link
+                          isExternal
+                          href={server.rightButton?.external ?? ''}
                           fontWeight="md"
                           color="white"
                           textDecor="underline"
                           textDecorationColor="primaryRed"
                           textUnderlineOffset="3px"
                         >
-                          {server.rightButton.linkText}
+                          {server.rightButton?.linkText}
                         </Link>
-                      </NextLink>
-                    )}
+                      )
+                    ) : null}
                   </HStack>
                 </VStack>
               </Stack>

@@ -44,6 +44,11 @@ export default {
       type: 'string',
     },
     {
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+    },
+    {
       name: 'copy',
       title: 'Copy',
       type: 'array',

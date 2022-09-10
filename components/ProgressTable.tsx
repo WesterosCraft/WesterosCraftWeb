@@ -11,8 +11,8 @@ import {
   Flex,
   Input,
   Button,
-  Heading,
   Text,
+  TableContainer,
 } from '@chakra-ui/react';
 import {
   useTable,
@@ -27,29 +27,15 @@ import {
 } from 'react-table';
 import 'regenerator-runtime/runtime';
 import { matchSorter } from 'match-sorter';
+import { nameFormatter } from '../utils';
 
 const ProgressTable = ({ data }: any) => {
-  // console.log("👾 ~ ProgressTable ~ data", data);
-
-  //   {
-  //     "buildType": {
-  //         "title": "Castle"
-  //     },
-  //     "projectStatus": "notStarted",
-  //     "region": {
-  //         "name": "North"
-  //     },
-  //     "slug": {
-  //         "_type": "slug",
-  //         "current": "blackpool1"
-  //     },
-  //     "title": "Blackpool"
-  // }
   const columns = React.useMemo(
     () => [
       {
         Header: 'Name',
         accessor: 'title',
+        disableFilters: true,
         Cell: ({ cell: { value } }: any) => <Text size="sm">{value}</Text>,
       },
       {
@@ -58,7 +44,7 @@ const ProgressTable = ({ data }: any) => {
         Filter: SelectColumnFilter,
         filter: 'includes',
         defaultCanFilter: true,
-        Cell: ({ cell: { value } }: any) => <>{value}</>,
+        Cell: ({ cell: { value } }: any) => <>{nameFormatter(value)}</>,
       },
       {
         Header: 'Region',
@@ -94,16 +80,6 @@ const ProgressTable = ({ data }: any) => {
     [],
   );
 
-  const defaultColumn = React.useMemo(
-    () => ({
-      // Let's set up our default Filter UI
-      Filter: DefaultColumnFilter,
-      // And also our default editable cell
-      // Cell: EditableCell,
-    }),
-    [],
-  );
-
   const {
     getTableProps,
     getTableBodyProps,
@@ -124,11 +100,7 @@ const ProgressTable = ({ data }: any) => {
     {
       columns,
       data,
-      defaultColumn,
       filterTypes,
-      //   updateMyData,
-      //   autoResetPage: !skipReset,
-      //   autoResetSelectedRows: !skipReset,
       disableMultiSort: true,
     },
     useGlobalFilter,
@@ -142,12 +114,14 @@ const ProgressTable = ({ data }: any) => {
 
   // Render the UI for your table
   return (
-    <>
+    <TableContainer>
       <Flex width="full" justifyContent="flex-end">
         <Select
           mr={4}
           width="120px"
           value={pageSize}
+          borderColor="primaryDark"
+          borderRadius="none"
           onChange={e => {
             setPageSize(Number(e.target.value));
           }}
@@ -165,12 +139,9 @@ const ProgressTable = ({ data }: any) => {
         />
       </Flex>
       <Table
-        fontSize="sm"
-        width="full"
-        size="md"
         my={3}
         borderWidth="1px"
-        borderColor="gray.200"
+        borderColor="primaryDark"
         variant="striped"
         {...getTableProps()}
       >
@@ -179,13 +150,13 @@ const ProgressTable = ({ data }: any) => {
             <Tr {...headerGroup.getHeaderGroupProps()} key={i}>
               {headerGroup.headers.map((column, i) => (
                 <Th {...column.getHeaderProps()} key={i}>
-                  <div>
-                    <span {...column.getSortByToggleProps()}>
+                  <Box mb="2">
+                    <Text fontFamily="body" {...column.getSortByToggleProps()}>
                       {column.render('Header')}
                       {/* Add a sort direction indicator */}
                       {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                    </span>
-                  </div>
+                    </Text>
+                  </Box>
                   {/* Render the columns filter UI */}
                   <div>{column.canFilter ? column.render('Filter') : null}</div>
                 </Th>
@@ -193,14 +164,14 @@ const ProgressTable = ({ data }: any) => {
             </Tr>
           ))}
         </Thead>
-        <Tbody {...getTableBodyProps()}>
+        <Tbody borderBottomWidth="1.2px" borderColor="primaryDark" {...getTableBodyProps()}>
           {page.map((row, i) => {
             prepareRow(row);
             return (
               <Tr {...row.getRowProps()} key={i}>
                 {row.cells.map((cell, i) => {
                   return (
-                    <Td {...cell.getCellProps()} key={i}>
+                    <Td border={0} {...cell.getCellProps()} key={i}>
                       {cell.render('Cell')}
                     </Td>
                   );
@@ -232,25 +203,28 @@ const ProgressTable = ({ data }: any) => {
           Next
         </Button>
       </Flex>
-    </>
+    </TableContainer>
   );
 };
 
 // Define a default UI for filtering
-function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }: any) {
-  const count = preFilteredRows.length;
+// function DefaultColumnFilter({ column: { filterValue, preFilteredRows, setFilter } }: any) {
+//   const count = preFilteredRows.length;
 
-  return (
-    <Input
-      size="xs"
-      value={filterValue || ''}
-      onChange={e => {
-        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
-      }}
-      placeholder={`Search ${count} builds...`}
-    />
-  );
-}
+//   return (
+//     <Input
+//       size="xs"
+//       borderRadius="none"
+//       borderColor="primaryDark"
+//       fontFamily="body"
+//       value={filterValue || ''}
+//       onChange={e => {
+//         setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+//       }}
+//       placeholder={`Search ${count} builds...`}
+//     />
+//   );
+// }
 
 function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows, id } }: any) {
   // Calculate the options for filtering
@@ -269,9 +243,12 @@ function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows,
     <Select
       size="xs"
       value={filterValue}
+      borderRadius="none"
+      borderColor="primaryDark"
       onChange={e => {
         setFilter(e.target.value || undefined);
       }}
+      fontFamily="body"
     >
       <option value="">All</option>
       {options.map((option: any, i) => (
@@ -294,6 +271,9 @@ function GlobalFilter({ preGlobalFilteredRows, globalFilter, setGlobalFilter }: 
     <Input
       maxW={300}
       size="md"
+      borderRadius="none"
+      borderColor="primaryDark"
+      fontFamily="body"
       value={value || ''}
       onChange={e => {
         setValue(e.target.value);

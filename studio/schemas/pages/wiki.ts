@@ -1,8 +1,8 @@
 import seo from '../objects/seo';
 
 export default {
-  name: 'progress',
-  title: 'Progress',
+  name: 'wiki',
+  title: 'Wiki',
   type: 'document',
   __experimental_actions: [/*'create',*/ 'update', /*'delete',*/ 'publish'],
   groups: [
@@ -39,15 +39,21 @@ export default {
     },
     { name: 'heading', title: 'Heading', type: 'string' },
     {
-      name: 'subheading',
-      title: 'Subheading',
-      type: 'string',
+      name: 'copy',
+      title: 'Copy',
+      type: 'text',
     },
     {
-      name: 'heroImage',
-      title: 'Hero Image',
+      name: 'locationsImage',
+      title: 'Locations Image',
       type: 'image',
     },
+    {
+      name: 'guidesImage',
+      title: 'Guides Image',
+      type: 'image',
+    },
+
     seo,
   ],
 };

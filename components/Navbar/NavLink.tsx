@@ -1,4 +1,4 @@
-import { chakra, HTMLChakraProps, useColorModeValue as mode } from '@chakra-ui/react';
+import { chakra, HTMLChakraProps } from '@chakra-ui/react';
 import * as React from 'react';
 
 interface NavLinkProps extends HTMLChakraProps<'a'> {

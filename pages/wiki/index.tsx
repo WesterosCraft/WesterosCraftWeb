@@ -9,10 +9,9 @@ import {
   Text,
   VStack,
   SimpleGrid,
-  Container,
 } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import { sanityClient } from '../../lib/sanity.server';
 import type { ReactElement } from 'react';
 import Link from 'next/link';
@@ -21,7 +20,6 @@ import { LocationCard } from '../../components/LocationCard';
 import { urlFor } from '../../lib/sanity';
 import { NextSeo } from 'next-seo';
 import { Banner } from '../../components/Banner';
-import Dropcap from '../../components/Dropcap';
 
 export interface WikiPageData {
   _createdAt: Date;
@@ -34,6 +32,8 @@ export interface WikiPageData {
   slug: Slug;
   title: string;
   updatedLocations: AtedLocation[];
+  locationsImage: any;
+  guidesImage: any;
 }
 
 export interface AtedLocation {
@@ -94,7 +94,28 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
           <Text mt={4}>Join, explore, and enjoy!</Text>
         </Box>
         <Box mt="10">
-          <Cards />
+          <SimpleGrid height="auto" gap={8} minChildWidth={['320px', '392px']}>
+            <Card
+              {...{
+                title: 'Locations',
+                subtitle: 'View a comprehensive list of every build we have to offer.',
+                href: '/wiki/locations',
+                image:
+                  urlFor(pageData?.locationsImage).url() ||
+                  'https://cdn.sanity.io/images/1as7cn02/production/6aa4f30c3b90f86ee2f16625f65531a0c041894d-1000x563.png',
+              }}
+            />
+            <Card
+              {...{
+                title: 'Guides',
+                subtitle: 'View in depth guides on how to explore and play on our server.',
+                href: '/wiki/guides',
+                image:
+                  urlFor(pageData?.guidesImage).url() ||
+                  'https://cdn.sanity.io/images/1as7cn02/production/a1e3f84a67270e65cba4daee16005c5611639d65-1000x755.png',
+              }}
+            />
+          </SimpleGrid>
         </Box>
         <Box mt="12" mb="16">
           <Banner
@@ -166,29 +187,6 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
   );
 }
 
-const Cards = () => (
-  <SimpleGrid height="auto" gap={8} minChildWidth={['320px', '392px']}>
-    {[
-      {
-        title: 'Guides',
-        subtitle: 'View in depth guides on how to explore and play on our server.',
-        href: '/wiki/guides',
-        image:
-          'https://cdn.sanity.io/images/1as7cn02/production/a1e3f84a67270e65cba4daee16005c5611639d65-1000x755.png',
-      },
-      {
-        title: 'Locations',
-        subtitle: 'View a single comprehensive list of every build we have to offer.',
-        href: '/wiki/locations',
-        image:
-          'https://cdn.sanity.io/images/1as7cn02/production/6aa4f30c3b90f86ee2f16625f65531a0c041894d-1000x563.png',
-      },
-    ].map((i, n) => (
-      <Card key={n} {...i} />
-    ))}
-  </SimpleGrid>
-);
-
 const Card = ({ title = '', href = '', subtitle = '', image = '' }) => {
   const borderColor = useColorModeValue('primaryDark', 'primaryLight');
 
@@ -210,41 +208,42 @@ const Card = ({ title = '', href = '', subtitle = '', image = '' }) => {
       }}
     >
       <LinkOverlay as={Link} href={href}>
-        <Box>
-          <VStack textAlign="center" width="full">
-            <Heading size="lg" color={borderColor}>
-              {title}
-            </Heading>
-            <Text>{subtitle}</Text>
-          </VStack>
-          <Divider borderBottomColor="primaryDark" mt={2} />
-          <Flex
-            height="300px"
-            width="full"
-            outline="1.5px solid black"
-            bgColor="#fff8e0"
-            mt={3}
-            mb={2}
-            overflow="hidden"
-          >
-            <Box
-              alignSelf="flex-end"
-              position="relative"
-              width={362}
-              maxHeight="300px"
-              height="full"
+        <a>
+          <Box>
+            <VStack textAlign="center" width="full">
+              <Heading size="lg" color={borderColor}>
+                {title}
+              </Heading>
+              <Text>{subtitle}</Text>
+            </VStack>
+            <Divider borderBottomColor="primaryDark" mt={2} />
+            <Flex
+              width="full"
+              outline="1.5px solid black"
+              bgColor="#fff8e0"
+              mt={3}
+              mb={2}
+              overflow="hidden"
             >
-              <Image layout="fill" src={image} alt={title} />
-            </Box>
-          </Flex>
-        </Box>
+              <Image
+                loader={({ src, width = 464 }) => {
+                  return `${src}?w=${width}&h=300&q=75`;
+                }}
+                src={image}
+                alt={title}
+                width={464}
+                height={300}
+              />
+            </Flex>
+          </Box>
+        </a>
       </LinkOverlay>
     </LinkBox>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const pageData = await sanityClient.fetch(`*[_type == "page" && slug.current == "wiki"]{
+  const pageData = await sanityClient.fetch(`*[_type == "wiki" && slug.current == "wiki"]{
     ...,
     "createdLocations": *[_type == 'location'] | order(dateCompleted desc)[0...6] {
       title,

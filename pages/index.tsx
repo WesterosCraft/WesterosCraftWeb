@@ -138,6 +138,15 @@ export const getStaticProps: GetStaticProps = async () => {
             lqip
           }
         }
+      },
+      servers[] {
+        ...,
+        leftButton {
+          ...,
+          internal->{
+            slug
+          }
+        }
       }
     },
     imageGridFeature {

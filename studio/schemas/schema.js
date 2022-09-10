@@ -20,6 +20,7 @@ import page from './documents/page';
 import category from './objects/category';
 import home from './pages/home';
 import join from './pages/join';
+import wiki from './pages/wiki';
 import rookery from './pages/rookery';
 import progress from './pages/progress';
 import about from './pages/about';
@@ -42,6 +43,7 @@ export default createSchema({
     about,
     location,
     region,
+    wiki,
     buildCategory,
     rookeryEdition,
     guide,

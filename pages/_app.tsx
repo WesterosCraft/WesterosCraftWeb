@@ -4,26 +4,15 @@ import { DefaultSeo } from 'next-seo';
 import type { NextPage } from 'next';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-// @ts-ignore
-import galite from 'ga-lite';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { theme } from '../theme';
 import SEO from '../next-seo.config';
+import * as ga from '../lib/ga';
 
 import '../public/stylesheet.css';
 
 import '@fontsource/karla/400.css';
 import '@fontsource/karla/500.css';
-
-// if (typeof window !== "undefined") {
-//   if (process.env.NODE_ENV === "production") {
-//     galite("create", process.env.NEXT_PUBLIC_GA_TRACKING_ID ?? "", "auto");
-//   }
-//   const terminationEvent = "onpagehide" in window ? "pagehide" : "unload";
-//   window.addEventListener(terminationEvent, function () {
-//     galite("send", "timing", "JS Dependencies", "unload");
-//   });
-// }
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -40,10 +29,14 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   React.useEffect(() => {
     const handleRouteChange = (url: string) => {
-      // galite("set", "page", url);
-      // galite("send", "pageview");
+      ga.pageview(url);
     };
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
     router.events.on('routeChangeComplete', handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
     return () => {
       router.events.off('routeChangeComplete', handleRouteChange);
     };

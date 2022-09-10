@@ -1,6 +1,6 @@
 import type { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
-import { Text, Stack, Heading, Container, Box, chakra, SimpleGrid } from '@chakra-ui/react';
+import { Text, Heading, Box, chakra, SimpleGrid } from '@chakra-ui/react';
 import { sanityClient } from '../../../lib/sanity.server';
 import { NextSeo } from 'next-seo';
 import { RegionCard } from '../../../components/RegionCard/RegionCard';

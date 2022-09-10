@@ -1,4 +1,4 @@
-import { Flex, Text, Divider, LinkBox, HStack, LinkOverlay, Box, Spacer } from '@chakra-ui/react';
+import { Flex, Text, Divider, LinkBox, HStack, LinkOverlay, Spacer } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import NextImage from 'next/future/image';
 import { nameFormatter } from '../utils';

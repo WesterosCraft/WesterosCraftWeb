@@ -16,6 +16,7 @@ const pageList = [
   'rookeryEdition',
   'about',
   'progress',
+  'wiki',
 ];
 
 const hiddenDocTypes = (listItem: any) => !pageList.includes(listItem.getId());
@@ -39,6 +40,7 @@ const structure = () =>
               S.documentListItem().schemaType('about').id('732cd7ab-edd9-4380-b714-f142cea5092b'),
               S.documentListItem().schemaType('page').id('af51b184-4e59-4b48-b04f-862580eb88a9'),
               S.documentListItem().schemaType('rookery').id('e1eada00-e72d-44c2-8235-1c43b319bc81'),
+              S.documentListItem().schemaType('wiki').id('cfea717a-f38a-465f-8e2e-c0d90f61a5f2'),
               S.documentListItem()
                 .schemaType('progress')
                 .id('a9fbc1d3-6345-498d-82b2-c99989b5db1a'),

@@ -1,5 +1,5 @@
 import { useDisclosure } from '@chakra-ui/react';
-import { isFocusable, getOwnerDocument, isRightClick } from '@chakra-ui/utils';
+import { isFocusable, getOwnerDocument } from '@chakra-ui/utils';
 import * as React from 'react';
 
 const getTarget = (event: React.FocusEvent) =>

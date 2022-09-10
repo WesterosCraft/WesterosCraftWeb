@@ -1,22 +1,9 @@
 import type { ReactElement } from 'react';
-import {
-  Text,
-  VStack,
-  Heading,
-  Box,
-  SimpleGrid,
-  Divider,
-  HStack,
-  Image,
-  LinkBox,
-  LinkOverlay,
-} from '@chakra-ui/react';
+import { VStack, Heading, Box, SimpleGrid, Divider } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../../../lib/sanity.server';
 import groupBy from 'lodash/groupBy';
 import { WikiLayout } from '../../../components/Layout/WikiLayout';
-import { urlFor } from '../../../lib/sanity';
-import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { GuideCard } from '../../../components/GuideCard';
 
