@@ -1,4 +1,4 @@
-import { Box, Text, Center } from '@chakra-ui/react';
+import { Box, Text, Center, chakra } from '@chakra-ui/react';
 import NextImage from 'next/future/image';
 import { container, child } from '../constants/animation';
 import { urlFor } from '../lib/sanity';
@@ -30,6 +30,22 @@ export interface Metadata {
 export const FeatureGrid = ({ features }: FeatureGridProps) => {
   return (
     <ContainerBorder variant="dark" pt={['20', '24']} pb={['24', '32']} px="4">
+      <MotionBox
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-100px' }}
+      >
+        <Center textAlign="center" maxW="2xl" mx="auto" mb="24" px="4">
+          <Text color="white" fontSize={['lg', null, 'xl']}>
+            <chakra.span color="primaryGold">WesterosCraft</chakra.span> is a modded server where
+            visitors can explore the entire continent of Westeros and are free to join the community
+            of builders bringing it to life. Wander the streets of King’s Landing or the fields of
+            Highgarden. Take a flight through the deadly Moon Door, or even retrace the steps of
+            your favorite character.
+          </Text>
+        </Center>
+      </MotionBox>
       <MotionBox
         display="grid"
         gridTemplateColumns={{

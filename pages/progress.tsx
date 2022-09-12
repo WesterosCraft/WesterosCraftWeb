@@ -69,7 +69,7 @@ export default function ProgressPage({ allLocations, pageData }: any) {
           <ContainerBorder variant="dark" color="white" py={{ base: '16', sm: '20' }} px="4">
             <Box maxW="5xl" mx="auto">
               <VStack spacing={12}>
-                <HStack>
+                <Box textAlign="center">
                   <Text fontSize="2xl">
                     Westeros is an estimated
                     <chakra.span fontSize="7xl" color="primaryGold">
@@ -84,8 +84,14 @@ export default function ProgressPage({ allLocations, pageData }: any) {
                     {'  '}
                     complete
                   </Text>
-                </HStack>
-                <HStack spacing={10} textAlign="center" w="full" divider={<StackDivider />}>
+                </Box>
+                <Stack
+                  direction={{ base: 'column', md: 'row' }}
+                  spacing={10}
+                  textAlign="center"
+                  w="full"
+                  divider={<StackDivider />}
+                >
                   <Stat flex="none">
                     <StatNumber fontSize="5xl">
                       {pageData?.totalCompleted +
@@ -106,7 +112,7 @@ export default function ProgressPage({ allLocations, pageData }: any) {
                     <StatNumber fontSize="5xl">{pageData?.totalInProgress}</StatNumber>
                     <StatHelpText fontSize="xl">In Progress</StatHelpText>
                   </Stat>
-                </HStack>
+                </Stack>
               </VStack>
             </Box>
           </ContainerBorder>

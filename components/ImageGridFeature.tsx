@@ -134,9 +134,9 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                 {link.description}
               </Text>
               <Flex mt="3" mb="2" justifyContent={{ base: 'flex-end', sm: 'flex-start' }} w="full">
-                <NextLink href={`/wiki/${link.linkUrl.internal?.slug.current}` ?? '/wiki'} passHref>
+                {link.linkUrl.linkText === 'Coming Soon' ? (
                   <Button
-                    isDisabled={link.linkUrl.linkText === 'Coming Soon'}
+                    isDisabled
                     fontWeight="md"
                     color="primaryRed"
                     variant="link"
@@ -151,7 +151,30 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                   >
                     {link.linkUrl.linkText}
                   </Button>
-                </NextLink>
+                ) : (
+                  <NextLink
+                    href={`/wiki/${link.linkUrl.internal?.slug.current}` ?? '/wiki'}
+                    passHref
+                  >
+                    <a>
+                      <Button
+                        fontWeight="md"
+                        color="primaryRed"
+                        variant="link"
+                        fontSize="sm"
+                        fill="primaryRed"
+                        _hover={{
+                          textDecor: 'none',
+                          color: 'red.800',
+                          fill: 'red.800',
+                        }}
+                        rightIcon={<ArrowRightIcon />}
+                      >
+                        {link.linkUrl.linkText}
+                      </Button>
+                    </a>
+                  </NextLink>
+                )}
               </Flex>
             </MotionBox>
           ))}

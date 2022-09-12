@@ -10,9 +10,9 @@
     "postinstall": "cd studio && rm -rf node_modules && yarn install"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.2.4",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@chakra-ui/react": "^2.3.2",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@fontsource/karla": "^4.5.8",
     "@portabletext/react": "^1.0.6",
     "@sanity/asset-utils": "^1.2.3",
@@ -22,7 +22,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "dayjs": "^1.11.2",
     "embla-carousel-react": "^6.2.0",
-    "framer-motion": "^6.3.10",
+    "framer-motion": "^7.3.2",
     "ga-lite": "^2.1.6",
     "lodash": "^4.17.21",
     "match-sorter": "^6.3.1",

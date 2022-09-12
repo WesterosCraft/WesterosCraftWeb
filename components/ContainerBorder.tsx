@@ -14,7 +14,7 @@ export const ContainerBorder = ({
   ...rest
 }: ContainerBorderProps) => {
   return (
-    <Box as="section" w="full" className={className}>
+    <Box as="section" w="full" className={className || 'container-border'}>
       <Box maxW="7xl" mx="auto" px={[2, null, 5]}>
         <Stack
           w="full"

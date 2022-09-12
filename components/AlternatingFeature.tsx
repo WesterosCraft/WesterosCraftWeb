@@ -5,6 +5,7 @@ import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
 import { ContainerBorder } from './ContainerBorder';
+import NextLink from 'next/link';
 
 export interface AlternatingFeatureProps {
   features: Feature[];
@@ -32,6 +33,8 @@ export interface Metadata {
 export interface Link {
   _type: string;
   linkText: string;
+  external?: string;
+  internal?: any;
 }
 
 export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
@@ -110,18 +113,39 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
                 // @ts-ignore
                 transition={{ delay: 0.5 }}
               >
-                <Button
-                  color="primaryRed"
-                  variant="link"
-                  rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
-                  _hover={{
-                    textDecor: 'none',
-                    color: 'red.800',
-                    fill: 'red.800',
-                  }}
-                >
-                  {item.link.linkText}
-                </Button>
+                {item.link?.external ? (
+                  <Button
+                    href={item.link?.external}
+                    as={Link}
+                    color="primaryRed"
+                    variant="link"
+                    rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
+                    _hover={{
+                      textDecor: 'none',
+                      color: 'red.800',
+                      fill: 'red.800',
+                    }}
+                  >
+                    {item.link.linkText}
+                  </Button>
+                ) : (
+                  <NextLink href={item.link?.internal?.slug?.current} passHref>
+                    <a>
+                      <Button
+                        color="primaryRed"
+                        variant="link"
+                        rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
+                        _hover={{
+                          textDecor: 'none',
+                          color: 'red.800',
+                          fill: 'red.800',
+                        }}
+                      >
+                        {item.link.linkText}
+                      </Button>
+                    </a>
+                  </NextLink>
+                )}
               </MotionBox>
             </Stack>
           </Box>

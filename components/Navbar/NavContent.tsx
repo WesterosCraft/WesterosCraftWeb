@@ -29,6 +29,7 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
   const router = useRouter();
   const { isOpen, onClose, onToggle } = useDisclosure();
   const isMobile = useBreakpointValue({ base: true, lg: false });
+  const isSmallestMobile = useBreakpointValue({ base: true, sm: false });
 
   React.useEffect(() => {
     if (!isMobile && isOpen) {
@@ -64,7 +65,7 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
         <Box ml="4">
           <NextLink href="/">
             <a>
-              <Logo hideText={isWiki} />
+              <Logo hideText={isWiki || isSmallestMobile} />
             </a>
           </NextLink>
         </Box>

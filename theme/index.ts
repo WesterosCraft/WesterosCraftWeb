@@ -23,6 +23,7 @@ export const theme = {
     primaryDarkGlare2: '#595e56',
     primaryGold: '#daaf3c',
     primaryRed: '#9B2C2C',
+    primaryBrown: '#292823',
     crownlands: {
       light: '',
       default: '#a65348',

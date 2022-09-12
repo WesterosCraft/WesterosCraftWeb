@@ -34,6 +34,7 @@ export interface HeroPageProps {
 }
 
 export default function HomePage({ pageData }: { pageData: HeroPageProps }) {
+  console.log('👾 ~ HomePage ~ pageData', pageData);
   return (
     <>
       <Seo title={pageData?.seo?.title} />
@@ -173,6 +174,11 @@ export const getStaticProps: GetStaticProps = async () => {
       ...,
       features[]{
         ...,
+        link {
+          linkText,
+          external,
+          internal->{ slug }
+        },
         "image": image.asset->{
           _id,
           _rev,

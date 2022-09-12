@@ -29,7 +29,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   React.useEffect(() => {
     const handleRouteChange = (url: string) => {
-      ga.pageview(url);
+      ga?.pageview(url);
     };
     //When the component is mounted, subscribe to router changes
     //and log those page views
