@@ -104,9 +104,11 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
           )
         )}
         <NextLink href="/join" passHref>
-          <Button bg="primaryRed" color="white" w="full" size="lg" mt="5">
-            Join Server
-          </Button>
+          <a>
+            <Button bg="primaryRed" color="white" w="full" size="lg" mt="5">
+              Join Server
+            </Button>
+          </a>
         </NextLink>
       </NavMenu>
     </>
@@ -139,9 +141,11 @@ const DesktopNavContent = (props: FlexProps) => {
       </HStack>
 
       <NextLink href="/join" passHref>
-        <Button bg="white" fontWeight="bold">
-          Join Server
-        </Button>
+        <a>
+          <Button bg="white" fontWeight="bold">
+            Join Server
+          </Button>
+        </a>
       </NextLink>
     </Flex>
   );

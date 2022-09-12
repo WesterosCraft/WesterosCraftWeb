@@ -45,6 +45,54 @@ export default {
         hotspot: true,
       },
     },
+    { name: 'heading', title: 'Heading', type: 'string' },
+    { name: 'subheading', title: 'Subheading', type: 'text' },
+    { name: 'startedHeading', title: 'Started Heading', type: 'string' },
+    { name: 'startedSubheading', title: 'Started Subheading', type: 'text' },
+    {
+      name: 'guides',
+      title: 'Guides',
+      type: 'array',
+      of: [
+        {
+          name: 'guide',
+          title: 'guide',
+          type: 'object',
+          fields: [
+            {
+              name: 'name',
+              title: 'Name',
+              type: 'string',
+            },
+            {
+              name: 'isRecommended',
+              title: 'Is Recommended?',
+              type: 'boolean',
+              initialValue: false,
+            },
+            {
+              name: 'description',
+              title: 'Description',
+              type: 'string',
+            },
+            {
+              name: 'features',
+              title: 'Features',
+              description: 'Comma seperated list of features',
+              type: 'text',
+            },
+            {
+              name: 'guideRef',
+              title: 'Guide Ref',
+              type: 'reference',
+              to: [{ type: 'guide' }],
+            },
+          ],
+        },
+      ],
+    },
+    { name: 'otherHeading', title: 'Other Heading', type: 'string' },
+    { name: 'otherSubheading', title: 'Other Subheading', type: 'text' },
     seo,
   ],
 };

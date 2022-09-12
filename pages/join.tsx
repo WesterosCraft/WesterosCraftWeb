@@ -9,7 +9,45 @@ import { ContainerBorder } from '../components/ContainerBorder';
 import { PricingTiers } from '../components/PricingTiers/PricingTiers';
 import { TwoTiers } from '../components/TwoTiers/TwoTiers';
 
-export default function JoinPage({ pageData }: any) {
+export interface JoinPageData {
+  _createdAt: Date;
+  _id: string;
+  _rev: string;
+  _type: string;
+  _updatedAt: Date;
+  guides: Guide[];
+  heading: string;
+  otherHeading: string;
+  otherSubheading: string;
+  startedHeading: string;
+  startedSubheading: string;
+  slug: Slug;
+  subheading: string;
+  title: string;
+  seo: any;
+}
+
+export interface Guide {
+  _key: string;
+  _type: string;
+  description: string;
+  features: string;
+  guideRef: GuideRef;
+  isRecommended: boolean;
+  name: string;
+}
+
+export interface GuideRef {
+  slug: Slug;
+  guideCategory: { title: string };
+}
+
+export interface Slug {
+  _type: string;
+  current: string;
+}
+
+export default function JoinPage({ pageData }: { pageData: JoinPageData }) {
   return (
     <>
       <Seo title={pageData?.seo?.title || pageData?.title} />
@@ -21,39 +59,37 @@ export default function JoinPage({ pageData }: any) {
           mx="auto"
           py={{ base: '16', sm: '20' }}
         >
-          <HStack spacing={12}>
+          <HStack spacing={{ base: 4, sm: 12 }}>
             <Img mt="12" width="80px" alt="Longclaw" src={Longclaw.src} />
             <Box maxW="2xl">
-              <Heading size={{ base: '2xl', sm: '3xl', lg: '4xl' }}>Join the Watch</Heading>
+              <Heading size={{ base: '2xl', sm: '3xl', lg: '4xl' }}>{pageData?.heading}</Heading>
               <Text fontSize="2xl" maxW="3xl" mt="6">
-                We have several different ways to start exploring the server and have compiled
-                guides on all the suggested ways below! Be sure to read the guides in full.
+                {pageData?.subheading}
               </Text>
             </Box>
           </HStack>
         </ContainerBorder>
         <Box w="full" bg="primaryDark">
           <ContainerBorder variant="dark" py={{ base: '24', sm: '32' }}>
-            <Center textAlign="center" flexDirection="column" color="white" maxW="2xl" mx="auto">
+            <Center
+              px="4"
+              textAlign="center"
+              flexDirection="column"
+              color="white"
+              maxW="2xl"
+              mx="auto"
+            >
               <Heading size={{ base: 'xl', sm: '3xl' }} color="primaryGold">
-                Getting Started
+                {pageData?.startedHeading}
               </Heading>
               <Text mt="6" fontSize="xl">
-                {`WesterosCraft uses several mods and plugins to aid our realistic and book accurate
-                version of Westeros. In order to get you in the server and exploring what we've
-                built so far as easy as possible, we've compiled several ways you can get the mods
-                and plugins you need to be able to connect below.`}
-              </Text>
-              <Text mt="4" fontSize="xl">
-                Be sure to read the guides thoroughly, and if you need any help, feel free to check
-                out the tech support forum or the #techsupport Discord channel!
+                {pageData?.startedSubheading}
               </Text>
             </Center>
           </ContainerBorder>
-          <PricingTiers />
+          <PricingTiers data={pageData?.guides} />
         </Box>
         <TwoTiers />
-        {/* <ManualModpackTiers /> */}
       </Flex>
     </>
   );
@@ -62,13 +98,11 @@ export default function JoinPage({ pageData }: any) {
 export const getStaticProps: GetStaticProps = async () => {
   const pageData = await sanityClient.fetch(`*[_type == "join"]{
     ...,
-    mainImage {
-      asset->{
-        _id,
-        _rev,
-        metadata {
-          lqip
-        }
+    guides[] {
+      ...,
+      guideRef->{
+        slug,
+        guideCategory->{ title }
       }
     }
   }[0]`);
