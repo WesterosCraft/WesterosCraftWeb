@@ -95,7 +95,7 @@ const MobileSubMenu = (props: SubmenuProps) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box className="mobile-sub-menu">
       <NavLink.Mobile
         as="button"
         textAlign="start"
