@@ -45,7 +45,7 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
           }}
           rightIcon={<ChevronDownIcon boxSize={3} />}
         >
-          <Text>{link.title}</Text>
+          {link.title}
         </Button>
       </PopoverTrigger>
 
@@ -56,33 +56,35 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
         borderRadius="none"
         borderColor="primaryDarkGlare2"
       >
-        <SimpleGrid spacing="4" columns={1}>
-          {link?.links?.map((item, idx) =>
-            item._type === 'externalLink' ? (
-              <Link
-                key={idx}
-                color="white"
-                isExternal
-                _hover={{
-                  textDecor: 'none',
-                }}
-                href={item.link?.slug?.current}
-              >
-                <DesktopMenuItem title={item.title} icon={item.icon}>
-                  {item.description}
-                </DesktopMenuItem>
-              </Link>
-            ) : (
-              <NextLink key={idx} href={item.link?.slug?.current || `/${item.title}`}>
-                <a>
+        <Box>
+          <SimpleGrid spacing="4" columns={1}>
+            {link?.links?.map((item, idx) =>
+              item._type === 'externalLink' ? (
+                <Link
+                  key={idx}
+                  color="white"
+                  isExternal
+                  _hover={{
+                    textDecor: 'none',
+                  }}
+                  href={item.link?.slug?.current}
+                >
                   <DesktopMenuItem title={item.title} icon={item.icon}>
                     {item.description}
                   </DesktopMenuItem>
-                </a>
-              </NextLink>
-            ),
-          )}
-        </SimpleGrid>
+                </Link>
+              ) : (
+                <NextLink key={idx} href={item.link?.slug?.current || `/${item.title}`}>
+                  <a>
+                    <DesktopMenuItem title={item.title} icon={item.icon}>
+                      {item.description}
+                    </DesktopMenuItem>
+                  </a>
+                </NextLink>
+              ),
+            )}
+          </SimpleGrid>
+        </Box>
       </PopoverContent>
     </Popover>
   );
