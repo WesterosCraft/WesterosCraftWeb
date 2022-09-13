@@ -242,6 +242,7 @@ function SelectColumnFilter({ column: { filterValue, setFilter, preFilteredRows,
   // Render a multi-select box
   return (
     <Select
+      w="full"
       size="xs"
       value={filterValue}
       borderRadius="none"

@@ -11,7 +11,6 @@ import {
   Divider,
   Icon,
   IconProps,
-  useBreakpointValue,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
@@ -78,7 +77,6 @@ export const Hero = ({
   solidButton,
   heroImageSlider,
 }: HeroProps) => {
-  const isMobile = useBreakpointValue({ base: true, xl: false });
   return (
     <Flex
       height={{ base: 550, sm: 600, md: 750 }}
@@ -104,7 +102,7 @@ export const Hero = ({
         top="auto"
         right="0"
         bottom={['60px', 'auto']}
-        zIndex={{ base: '500', lg: '10' }}
+        zIndex={{ base: '500', lg: '9' }}
         width={{ base: '95%', sm: '92%', lg: '43%' }}
         height={{ base: 'auto', lg: '400px' }}
         bgColor="primary"
@@ -197,7 +195,7 @@ export const Hero = ({
         <HeroCarousel slides={heroImageSlider} />
       </Box>
 
-      <Flex justify="flex-end" align="center" zIndex="10" width="85%" maxWidth="1350px" py="52px">
+      <Flex justify="flex-end" align="center" zIndex="9" width="85%" maxWidth="1350px" py="52px">
         <Box display={{ base: 'none', lg: 'block' }} width="36%">
           <MotionBox
             initial={{ opacity: 0, y: 10 }}
