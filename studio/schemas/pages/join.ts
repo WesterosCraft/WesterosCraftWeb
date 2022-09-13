@@ -93,6 +93,19 @@ export default {
     },
     { name: 'otherHeading', title: 'Other Heading', type: 'string' },
     { name: 'otherSubheading', title: 'Other Subheading', type: 'text' },
+    {
+      name: 'otherGuides',
+      title: 'Other Guides',
+      type: 'array',
+      of: [
+        {
+          name: 'guideRef',
+          title: 'Guide Ref',
+          type: 'reference',
+          to: [{ type: 'guide' }],
+        },
+      ],
+    },
     seo,
   ],
 };

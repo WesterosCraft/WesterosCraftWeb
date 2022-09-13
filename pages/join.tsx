@@ -25,6 +25,7 @@ export interface JoinPageData {
   subheading: string;
   title: string;
   seo: any;
+  otherGuides: OtherGuides[];
 }
 
 export interface Guide {
@@ -40,6 +41,23 @@ export interface Guide {
 export interface GuideRef {
   slug: Slug;
   guideCategory: { title: string };
+}
+
+export interface Slug {
+  _type: string;
+  current: string;
+}
+
+export interface OtherGuides {
+  description: string;
+  guideCategory: GuideCategory;
+  slug: Slug;
+  title: string;
+  icon: any;
+}
+
+export interface GuideCategory {
+  title: string;
 }
 
 export interface Slug {
@@ -89,7 +107,7 @@ export default function JoinPage({ pageData }: { pageData: JoinPageData }) {
           </ContainerBorder>
           <PricingTiers data={pageData?.guides} />
         </Box>
-        <TwoTiers />
+        <TwoTiers data={pageData?.otherGuides} />
       </Flex>
     </>
   );
@@ -103,6 +121,17 @@ export const getStaticProps: GetStaticProps = async () => {
       guideRef->{
         slug,
         guideCategory->{ title }
+      }
+    },
+    otherGuides[]->{
+      slug,
+      guideCategory->{ title },
+      description,
+      title,
+      icon {
+        asset->{
+          url
+        }
       }
     }
   }[0]`);

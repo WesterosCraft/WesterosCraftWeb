@@ -11,7 +11,7 @@ export const PricingTiers = ({ data }: { data: Guide[] }) => (
     <SimpleGrid
       columns={{ base: 1, lg: 3 }}
       spacing={{ base: '8', lg: '0' }}
-      mx="-6"
+      mx={['0', null, null, null, '-6']}
       justifyItems="center"
       alignItems="center"
     >

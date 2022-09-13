@@ -5,15 +5,12 @@ import {
   Button,
   Flex,
   FlexProps,
-  LightMode,
-  List,
-  ListIcon,
-  ListItem,
-  ListItemProps,
+  HStack,
+  Img,
+  Spacer,
   Text,
-  useColorModeValue as mode,
 } from '@chakra-ui/react';
-// import { HiArrowNarrowRight, HiCheckCircle } from 'react-icons/hi'
+import NextLink from 'next/link';
 
 interface PriceDisplayProps extends FlexProps {
   currency: string;
@@ -21,85 +18,55 @@ interface PriceDisplayProps extends FlexProps {
   duration: string;
 }
 
-const PriceDisplay = (props: PriceDisplayProps) => {
-  const { currency, price, duration, ...rest } = props;
-  return (
-    <Flex w="100%" align="center" fontWeight="extrabold" {...rest}>
-      <Text fontSize="4xl" lineHeight="1" marginEnd="2">
-        {currency}
-      </Text>
-      <Text fontSize="6xl" lineHeight="1" letterSpacing="tight">
-        {price}
-      </Text>
-      <Text fontSize="2xl" marginStart="1" alignSelf="flex-end">
-        {duration}
-      </Text>
-    </Flex>
-  );
-};
-
-const PricingDetail = (props: ListItemProps) => {
-  const { children, ...rest } = props;
-  return (
-    <ListItem display="flex" alignItems="center" fontWeight="medium" {...rest}>
-      <ListIcon
-        fontSize="2xl"
-        // as={HiCheckCircle}
-        color="gray.400"
-        marginEnd="4"
-        mt="1"
-      />
-      <Text as="span" display="inline-block">
-        {children}
-      </Text>
-    </ListItem>
-  );
-};
-
 interface PricingCardProps extends BoxProps {
-  features: string[];
   name: string;
   description: string;
-  duration: string;
-  price: number;
-  colorScheme: string;
+  icon: string;
   onClick?: () => void;
+  url: string;
 }
 
 export const PricingCard = (props: PricingCardProps) => {
-  const { features, name, description, onClick, price, duration, colorScheme: c, ...rest } = props;
+  const { name, description, onClick, icon, url, ...rest } = props;
   return (
-    <Box bg="white" shadow="md" w="full" maxW="lg" mx="auto" overflow="hidden" {...rest}>
-      <Box bg={`${c}.600`} px="8" py="8" color="white">
-        <Text fontWeight="bold" fontSize="lg">
-          {name}
-        </Text>
-        <PriceDisplay my="2" currency="€" price={price} duration={duration} />
-        <Text>{description}</Text>
+    <Flex
+      direction="column"
+      bg="white"
+      border="1px solid"
+      borderColor="primaryDark"
+      w="full"
+      maxW="lg"
+      mx="auto"
+      overflow="hidden"
+      height="full"
+      {...rest}
+    >
+      <HStack align="flex-start" px="8" py="8" spacing="4">
+        <Img src={icon} alt="Guide icon" width="52px" height="52px" display={['none', 'block']} />
+        <Box>
+          <Text fontWeight="bold" fontSize="lg">
+            {name}
+          </Text>
+          <Text>{description}</Text>
+        </Box>
+      </HStack>
+      <Spacer />
+      <Box px="8" py="12">
+        <NextLink href={url} passHref>
+          <a>
+            <Button
+              onClick={onClick}
+              size="lg"
+              w="full"
+              bg="black"
+              color="white"
+              _hover={{ bg: 'blackAlpha.700' }}
+            >
+              View Guide
+            </Button>
+          </a>
+        </NextLink>
       </Box>
-      <Box px="8" py="6" borderBottomWidth="1px">
-        <LightMode>
-          <Button
-            onClick={onClick}
-            size="lg"
-            w="full"
-            colorScheme={c}
-            // rightIcon={<HiArrowNarrowRight />}
-          >
-            Start for free
-          </Button>
-        </LightMode>
-        <Text mt="2" color={mode('gray.600', 'gray.400')} align="center" fontSize="sm">
-          No credit card required
-        </Text>
-      </Box>
-      <Box px="8" pt="10" pb="12">
-        <List stylePosition="outside" spacing="4">
-          {features.map((feature, index) => (
-            <PricingDetail key={index}>{feature}</PricingDetail>
-          ))}
-        </List>
-      </Box>
-    </Box>
+    </Flex>
   );
 };

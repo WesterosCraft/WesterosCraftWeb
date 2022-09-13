@@ -28,7 +28,7 @@ export const PricingCard = (props: PricingCardProps) => {
       <Flex textAlign="center" align="flex-end" justify="center" fontWeight="medium" my="8">
         <Text size="md">{description}</Text>
       </Flex>
-      <List spacing="4" mb="8" maxW="28ch" mx="auto">
+      <List spacing="4" mb="8" maxW="28ch" w="full" mx="auto">
         {features.map((feature, index) => (
           <ListItem key={index}>
             <ListIcon fontSize="xl" as={SquareCheckIcon} marginEnd={2} fill="primaryGold" />

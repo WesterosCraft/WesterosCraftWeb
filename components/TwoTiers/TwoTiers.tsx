@@ -1,9 +1,11 @@
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import * as React from 'react';
+import { OtherGuides } from '../../pages/join';
+import { slugify } from '../../utils';
 import { ContainerBorder } from '../ContainerBorder';
 import { PricingCard } from './PricingCard';
 
-export const TwoTiers = () => {
+export const TwoTiers = ({ data }: { data: OtherGuides[] }) => {
   return (
     <ContainerBorder py="20">
       <Box maxW={{ base: 'xl', md: '5xl' }} mx="auto" px={{ base: '6', md: '8' }}>
@@ -16,33 +18,22 @@ export const TwoTiers = () => {
             work? There are other options for you!`}
           </Text>
         </Box>
-        <SimpleGrid alignItems="flex-start" mt="16" columns={{ base: 1, lg: 2 }} spacing="10">
-          <PricingCard
-            colorScheme="blue"
-            name="Guide"
-            price={29}
-            duration="/ mo"
-            description="Lorem ipsum dolor sit amet consectetur, adipisicing."
-            features={[
-              '50 quod similique',
-              '2000 libero doloribus modi nostru',
-              'Unlimited basic esse repudiandae exceptur',
-              '90 cupiditate adipisci quibusdam',
-            ]}
-          />
-          <PricingCard
-            colorScheme="teal"
-            name="Guide"
-            price={79}
-            duration="/ mo"
-            description="Lorem ipsum dolor sit amet consectetur, adipisicing."
-            features={[
-              '100 quod similique',
-              '20K libero doloribus modi nostru',
-              'Unlimited ipsa esse repudiandae exceptur',
-              '9000 cupiditate adipisci quibusdam',
-            ]}
-          />
+        <SimpleGrid
+          alignItems="flex-start"
+          mt="16"
+          columns={{ base: 1, lg: 2 }}
+          spacing="10"
+          gridTemplateRows="1fr"
+        >
+          {data?.map(guide => (
+            <PricingCard
+              key={guide?.title}
+              name={guide?.title}
+              description={guide?.description}
+              icon={guide?.icon?.asset?.url}
+              url={`/wiki/guides/${slugify(guide?.guideCategory?.title)}/${guide?.slug?.current}`}
+            />
+          ))}
         </SimpleGrid>
       </Box>
     </ContainerBorder>

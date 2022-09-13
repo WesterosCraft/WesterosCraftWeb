@@ -34,7 +34,6 @@ export interface HeroPageProps {
 }
 
 export default function HomePage({ pageData }: { pageData: HeroPageProps }) {
-  console.log('👾 ~ HomePage ~ pageData', pageData);
   return (
     <>
       <Seo title={pageData?.seo?.title} />

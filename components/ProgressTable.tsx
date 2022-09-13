@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import React from 'react';
 import {
   Select,
@@ -147,9 +148,9 @@ const ProgressTable = ({ data }: any) => {
       >
         <Thead>
           {headerGroups.map((headerGroup, i) => (
-            <Tr {...headerGroup.getHeaderGroupProps()} key={i}>
+            <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, i) => (
-                <Th {...column.getHeaderProps()} key={i}>
+                <Th {...column.getHeaderProps()}>
                   <Box mb="2">
                     <Text fontFamily="body" {...column.getSortByToggleProps()}>
                       {column.render('Header')}
@@ -168,10 +169,10 @@ const ProgressTable = ({ data }: any) => {
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <Tr {...row.getRowProps()} key={i}>
+              <Tr {...row.getRowProps()}>
                 {row.cells.map((cell, i) => {
                   return (
-                    <Td border={0} {...cell.getCellProps()} key={i}>
+                    <Td border={0} {...cell.getCellProps()}>
                       {cell.render('Cell')}
                     </Td>
                   );
