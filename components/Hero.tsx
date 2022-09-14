@@ -17,6 +17,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronRightIcon } from './Icons/ChevronRight';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
+
 export interface HeroProps {
   copy: string;
   heading1: string;
@@ -109,7 +110,7 @@ export const Hero = ({
         border="1px solid"
         borderColor="primaryDark"
         borderRightWidth="0"
-        padding={{ base: '20px 40px 30px 20px', sm: '30px' }}
+        padding={{ base: '20px', sm: '30px' }}
       >
         <Box display={{ base: 'flex', lg: 'none' }} flexWrap="wrap" className="mobile-content">
           <MotionBox
@@ -195,7 +196,14 @@ export const Hero = ({
         <HeroCarousel slides={heroImageSlider} />
       </Box>
 
-      <Flex justify="flex-end" align="center" zIndex="9" width="85%" maxWidth="1350px" py="52px">
+      <Flex
+        justify="flex-end"
+        align="center"
+        zIndex="9"
+        width="85%"
+        maxWidth="1350px"
+        py={['0px', '52px']}
+      >
         <Box display={{ base: 'none', lg: 'block' }} width="36%">
           <MotionBox
             initial={{ opacity: 0, y: 10 }}
