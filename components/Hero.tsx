@@ -202,7 +202,7 @@ export const Hero = ({
         zIndex="9"
         width="85%"
         maxWidth="1350px"
-        py={['0px', '52px']}
+        py={['0px', null, null, '52px']}
       >
         <Box display={{ base: 'none', lg: 'block' }} width="36%">
           <MotionBox
