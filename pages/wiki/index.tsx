@@ -1,6 +1,5 @@
 import {
   Heading,
-  useColorModeValue,
   Flex,
   Box,
   LinkBox,
@@ -188,12 +187,10 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
 }
 
 const Card = ({ title = '', href = '', subtitle = '', image = '' }) => {
-  const borderColor = useColorModeValue('primaryDark', 'primaryLight');
-
   return (
     <LinkBox
       as={Flex}
-      borderColor={borderColor}
+      borderColor="primaryDark"
       outline="1.5px solid"
       outlineColor="primaryDark"
       flexDirection="column"
@@ -211,7 +208,7 @@ const Card = ({ title = '', href = '', subtitle = '', image = '' }) => {
         <a>
           <Box>
             <VStack textAlign="center" width="full">
-              <Heading size="lg" color={borderColor}>
+              <Heading size="lg" color="primaryDark">
                 {title}
               </Heading>
               <Text>{subtitle}</Text>
