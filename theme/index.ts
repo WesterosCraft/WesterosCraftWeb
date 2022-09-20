@@ -1,7 +1,11 @@
 import { styles } from './styles';
+import { type ThemeConfig } from '@chakra-ui/react';
 
-export const theme = {
+export const theme: ThemeConfig = {
+  // @ts-ignore
   styles,
+  initialColorMode: 'light',
+  useSystemColorMode: false,
   fonts: {
     body: `'Karla', sans-serif`,
     heading: `esmeraldapro, -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";`,
