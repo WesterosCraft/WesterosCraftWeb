@@ -188,6 +188,7 @@ export const getStaticProps: GetStaticProps = async () => {
       pageData,
       allLocations,
     },
+    revalidate: 900,
   };
 };
 

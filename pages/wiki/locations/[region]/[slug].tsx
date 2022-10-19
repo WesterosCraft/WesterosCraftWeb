@@ -27,7 +27,7 @@ const LocationPage = ({ pageData }: LocationPageProps) => {
       <Box className="content-wrapper">
         <ProjectDetails
           pageData={pageData}
-          display={['inline-flex', null, null, null, null, 'none']}
+          display={['inline-flex', null, null, null, null]}
           className="page-project-details"
           ml={[0, null, 3]}
           float={['none', null, 'right']}
@@ -128,6 +128,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       pageData,
     },
+    revalidate: 60,
   };
 };
 
