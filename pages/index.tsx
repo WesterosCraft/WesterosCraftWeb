@@ -48,6 +48,7 @@ export default function HomePage({ pageData }: { pageData: HeroPageProps }) {
               </Heading>
             </Center>
           </ContainerBorder>
+
           <FeatureGrid {...pageData?.featureGrid} />
           <ServerFeatureGrid {...pageData?.serverFeatureGrid} />
           <VideoFeature {...pageData?.videoFeature} />
