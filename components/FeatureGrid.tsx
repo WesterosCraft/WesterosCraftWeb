@@ -4,7 +4,6 @@ import { container, child } from '../constants/animation';
 import { urlFor } from '../lib/sanity';
 import { ContainerBorder } from './ContainerBorder';
 import { MotionBox } from './MotionBox';
-import { SpinnyThing } from './SpinnyThing';
 
 export interface FeatureGridProps {
   features: Feature[];
@@ -37,7 +36,7 @@ export const FeatureGrid = ({ features }: FeatureGridProps) => {
         whileInView="visible"
         viewport={{ once: true, margin: '-100px' }}
       >
-        <Center textAlign="center" maxW="2xl" mx="auto" mb="10" px="4">
+        <Center textAlign="center" maxW="2xl" mx="auto" mb="24" px="4">
           <Text color="white" fontSize={['lg', null, 'xl']}>
             <chakra.span color="primaryGold">WesterosCraft</chakra.span> is a modded server where
             visitors can explore the entire continent of Westeros and are free to join the community
@@ -46,11 +45,6 @@ export const FeatureGrid = ({ features }: FeatureGridProps) => {
             your favorite character.
           </Text>
         </Center>
-        <Box>
-          <Center className="spinny-thing" mx="auto" w="full" mb={['20', '24']}>
-            <SpinnyThing />
-          </Center>
-        </Box>
       </MotionBox>
       <MotionBox
         display="grid"
