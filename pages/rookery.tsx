@@ -86,6 +86,7 @@ export default function Rookery({ pageData }: { pageData: RookeryPage }) {
                 src={urlFor(pageData?.latestEdition?.thumbnail).url()}
                 placeholder="blur"
                 blurDataURL={pageData?.latestEdition?.thumbnail?.metadata?.lqip}
+                alt={pageData?.latestEdition?.title ?? 'Rookery'}
               />
               <VStack spacing="10" justify="center" align="center" color="white">
                 <Box textAlign="center">
@@ -122,6 +123,7 @@ export default function Rookery({ pageData }: { pageData: RookeryPage }) {
                   src={urlFor(edition.thumbnail).url()}
                   placeholder="blur"
                   blurDataURL={edition?.thumbnail?.metadata?.lqip}
+                  alt={edition?.title ?? 'Rookery edition'}
                 />
                 <Flex maxW={336} flexDir="row" w="full" justify="space-between">
                   <Text fontSize="lg" fontWeight="medium">
