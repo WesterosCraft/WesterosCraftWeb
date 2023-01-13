@@ -54,9 +54,9 @@ const MobileLocationsPanel = () => {
             }}
           />
         ) : (
-          <NextLink key={idx} href={`/wiki/locations/${key}`}>
-            <NavLink.Mobile>{startCase(toLower(key))}</NavLink.Mobile>
-          </NextLink>
+          <NavLink.Mobile as={NextLink} key={idx} href={`/wiki/locations/${key}`}>
+            {startCase(toLower(key))}
+          </NavLink.Mobile>
         ),
       )}
     </>
@@ -84,24 +84,24 @@ const DesktopLocationsPanel = () => {
       {sortedLocations.map(([key, value], i) => (
         <AccordionItem key={i} border={0}>
           <NextLink href={`/wiki/locations/${key}`}>
-            <a>
-              <AccordionButton
-                _hover={{ bg: 'primaryDarkGlare' }}
-                _activeLink={{ bg: 'primaryDarkGlare' }}
-                aria-current={router.query?.region === key ? 'page' : undefined}
-              >
-                <NavGroup active={router.query?.region === key} label={startCase(toLower(key))} />
-              </AccordionButton>
-            </a>
+            <AccordionButton
+              _hover={{ bg: 'primaryDarkGlare' }}
+              _activeLink={{ bg: 'primaryDarkGlare' }}
+              aria-current={router.query?.region === key ? 'page' : undefined}
+            >
+              <NavGroup active={router.query?.region === key} label={startCase(toLower(key))} />
+            </AccordionButton>
           </NextLink>
           <AccordionPanel px={4}>
             <Stack spacing="1">
               {value?.map((loc, i) => (
-                <NextLink key={i} href={`/wiki/locations/${key}/${loc?.slug?.current}`}>
-                  <a>
-                    <NavItem active={router.query?.slug === loc?.slug?.current} label={loc.title} />
-                  </a>
-                </NextLink>
+                <NavItem
+                  as={NextLink}
+                  key={i}
+                  href={`/wiki/locations/${key}/${loc?.slug?.current}`}
+                  active={router.query?.slug === loc?.slug?.current}
+                  label={loc.title}
+                />
               ))}
             </Stack>
           </AccordionPanel>

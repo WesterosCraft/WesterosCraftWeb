@@ -32,7 +32,7 @@ export const RichText = ({ value }: { value: any[] }) => {
             return (
               <Heading
                 fontFamily="body"
-                fontWeight="semibold"
+                fontWeight="medium"
                 mt={10}
                 textAlign={center ? 'center' : 'left'}
                 as={heading}
@@ -48,7 +48,7 @@ export const RichText = ({ value }: { value: any[] }) => {
               <Flex paddingY={1}>
                 <Box as="blockquote" display="flex">
                   {/* <Box as={IoIosQuote} /> */}
-                  <Text paddingLeft={2} fontSize="lg" fontWeight="semibold">
+                  <Text paddingLeft={2} fontSize="lg" fontWeight="medium">
                     {props.children}
                   </Text>
                 </Box>

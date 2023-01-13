@@ -34,9 +34,9 @@ const MobileGuidesPanel = () => {
             }}
           />
         ) : (
-          <NextLink key={idx} href={`/wiki/guides`}>
-            <NavLink.Mobile>{startCase(toLower(title))}</NavLink.Mobile>
-          </NextLink>
+          <NavLink.Mobile as={NextLink} key={idx} href={`/wiki/guides`}>
+            {startCase(toLower(title))}
+          </NavLink.Mobile>
         ),
       )}
     </>
@@ -54,15 +54,13 @@ const DesktopGuidesPanel = () => {
       {guidesByCategory.map(([title, guides], i) => (
         <AccordionItem key={i} border={0}>
           <NextLink href={`/wiki/guides/${slugify(title)}`}>
-            <a>
-              <AccordionButton
-                _hover={{ bg: 'primaryDarkGlare' }}
-                _activeLink={{ bg: 'primaryDarkGlare' }}
-                aria-current={router.query?.category === slugify(title) ? 'page' : undefined}
-              >
-                <NavGroup label={title} />
-              </AccordionButton>
-            </a>
+            <AccordionButton
+              _hover={{ bg: 'primaryDarkGlare' }}
+              _activeLink={{ bg: 'primaryDarkGlare' }}
+              aria-current={router.query?.category === slugify(title) ? 'page' : undefined}
+            >
+              <NavGroup label={title} />
+            </AccordionButton>
           </NextLink>
 
           <AccordionPanel px={4}>
@@ -74,12 +72,10 @@ const DesktopGuidesPanel = () => {
                     guide?.slug?.current
                   }`}
                 >
-                  <a>
-                    <NavItem
-                      active={router.query?.slug === guide?.slug?.current}
-                      label={guide.title}
-                    />
-                  </a>
+                  <NavItem
+                    active={router.query?.slug === guide?.slug?.current}
+                    label={guide.title}
+                  />
                 </NextLink>
               ))}
             </Stack>

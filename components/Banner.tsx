@@ -28,18 +28,16 @@ export const Banner = ({ linkText, link, isExternal, external }: BannerProps) =>
           </Link>
         ) : (
           <NextLink href={link}>
-            <a>
-              <Text
-                color="white"
-                _hover={{
-                  textDecor: 'none',
-                  color: 'whiteAlpha.800',
-                }}
-                fontSize="xl"
-              >
-                {linkText}
-              </Text>
-            </a>
+            <Text
+              color="white"
+              _hover={{
+                textDecor: 'none',
+                color: 'whiteAlpha.800',
+              }}
+              fontSize="xl"
+            >
+              {linkText}
+            </Text>
           </NextLink>
         )}
       </Box>

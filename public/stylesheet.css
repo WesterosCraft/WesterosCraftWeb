@@ -1,8 +1,0 @@
-@font-face {
-  font-family: "esmeraldapro";
-  src: url("./fonts/EsmeraldaPro-Regular.ttf") format("truetype"),
-    url("./fonts/EsmeraldaPro-Regular.woff2") format("woff2"),
-    url("./fonts/EsmeraldaPro-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}

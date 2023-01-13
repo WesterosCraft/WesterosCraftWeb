@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AspectRatio, Box, Heading, Button, Icon, Link, Stack, Text } from '@chakra-ui/react';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
@@ -130,20 +130,18 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
                   </Button>
                 ) : (
                   <NextLink href={item.link?.internal?.slug?.current} passHref>
-                    <a>
-                      <Button
-                        color="primaryRed"
-                        variant="link"
-                        rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
-                        _hover={{
-                          textDecor: 'none',
-                          color: 'red.800',
-                          fill: 'red.800',
-                        }}
-                      >
-                        {item.link.linkText}
-                      </Button>
-                    </a>
+                    <Button
+                      color="primaryRed"
+                      variant="link"
+                      rightIcon={<Icon fill="primaryRed" as={ArrowRightIcon} />}
+                      _hover={{
+                        textDecor: 'none',
+                        color: 'red.800',
+                        fill: 'red.800',
+                      }}
+                    >
+                      {item.link.linkText}
+                    </Button>
                   </NextLink>
                 )}
               </MotionBox>

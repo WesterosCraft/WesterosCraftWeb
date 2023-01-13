@@ -13,7 +13,7 @@ export const NavGroup = (props: NavGroupProps) => {
       <Text
         px="3"
         fontSize="xs"
-        fontWeight="semibold"
+        fontWeight="medium"
         textTransform="uppercase"
         letterSpacing="widest"
         color={active ? 'gray.200' : 'gray.300'}

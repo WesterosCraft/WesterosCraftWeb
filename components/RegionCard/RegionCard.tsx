@@ -12,7 +12,7 @@ import {
   HStack,
   Flex,
 } from '@chakra-ui/react';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import * as React from 'react';
 import camelCase from 'lodash/camelCase';
 import tinycolor from 'tinycolor2';
@@ -85,20 +85,21 @@ export const RegionCard = ({
                 {description}
               </Box>
               <Wrap direction="column" shouldWrapChildren my="4" spacing="4">
-                <NextLink passHref href={notableBuild?.link}>
-                  <Link
-                    textDecor="underline"
-                    textDecorationColor="primaryRed"
-                    textUnderlineOffset="3px"
-                  >{`Notable Build: ${notableBuild?.title}`}</Link>
-                </NextLink>
-                <NextLink passHref href={recentlyUpdated?.link}>
-                  <Link
-                    textDecor="underline"
-                    textDecorationColor="primaryRed"
-                    textUnderlineOffset="3px"
-                  >{`Recently Update: ${recentlyUpdated?.title}`}</Link>
-                </NextLink>
+                <Link
+                  as={NextLink}
+                  href={notableBuild?.link}
+                  textDecor="underline"
+                  textDecorationColor="primaryRed"
+                  textUnderlineOffset="3px"
+                >{`Notable Build: ${notableBuild?.title}`}</Link>
+
+                <Link
+                  as={NextLink}
+                  href={recentlyUpdated?.link}
+                  textDecor="underline"
+                  textDecorationColor="primaryRed"
+                  textUnderlineOffset="3px"
+                >{`Recently Update: ${recentlyUpdated?.title}`}</Link>
                 <Spacer />
                 <Box w="full">
                   <Text>{`${percentComplete}% Complete`}</Text>
@@ -107,19 +108,17 @@ export const RegionCard = ({
               </Wrap>
             </Box>
             <NextLink href={`/wiki/locations/${slug}`} passHref>
-              <a>
-                <Button
-                  width="full"
-                  bgColor={resolvedColor}
-                  _hover={{
-                    bgColor: hoverColor,
-                    color: color.isDark() ? 'white' : 'black',
-                  }}
-                  color={color.isDark() ? 'white' : 'black'}
-                >
-                  View Locations
-                </Button>
-              </a>
+              <Button
+                width="full"
+                bgColor={resolvedColor}
+                _hover={{
+                  bgColor: hoverColor,
+                  color: color.isDark() ? 'white' : 'black',
+                }}
+                color={color.isDark() ? 'white' : 'black'}
+              >
+                View Locations
+              </Button>
             </NextLink>
           </Center>
         </Flex>

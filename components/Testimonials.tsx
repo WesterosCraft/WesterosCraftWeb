@@ -63,7 +63,7 @@ export const Testimonials = ({ testimonials }: TestimonialsProps) => (
               </Flex>
             </Box>
             <Box textAlign={{ base: 'center', lg: 'right' }} w="full">
-              <Text fontWeight="semibold">{`- ${testi.author}`}</Text>
+              <Text fontWeight="medium">{`- ${testi.author}`}</Text>
               <Text>{testi.position}</Text>
             </Box>
           </Stack>

@@ -13,7 +13,7 @@ const DesktopNavLink = React.forwardRef<HTMLAnchorElement, NavLinkProps>((props,
       display="inline-block"
       px="4"
       py="6"
-      fontWeight="semibold"
+      fontWeight="medium"
       aria-current={active ? 'page' : undefined}
       color="white"
       transition="all 0.2s"
@@ -35,7 +35,7 @@ export const MobileNavLink = React.forwardRef((props: NavLinkProps, ref) => {
       display="flex"
       alignItems="center"
       height="14"
-      fontWeight="semibold"
+      fontWeight="medium"
       borderBottomWidth="1px"
       // @ts-ignore
       ref={ref}

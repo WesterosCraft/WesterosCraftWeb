@@ -1,6 +1,6 @@
 import { Flex, Text, Divider, LinkBox, HStack, LinkOverlay, Spacer } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import { nameFormatter } from '../utils';
 
 export interface LocationCardProps {
@@ -49,39 +49,37 @@ export const LocationCard = ({
       </HStack>
       <Divider borderBottomColor="black" mt={2} />
       <LinkOverlay as={NextLink} passHref href={link}>
-        <a>
-          {image ? (
-            <Flex
-              mt={3}
-              mb={2}
-              width="full"
-              height="auto"
-              outline="1.5px solid black"
-              position="relative"
-              bgColor="primaryGlare"
-            >
-              <NextImage
-                src={image}
-                blurDataURL={blurDataURL || undefined}
-                placeholder={blurDataURL ? 'blur' : undefined}
-                width={352}
-                height={275}
-                alt={title ?? ''}
-                loader={myLoader}
-              />
-            </Flex>
-          ) : (
-            <Spacer
-              mt={3}
-              mb={2}
-              outline="1.5px solid black"
-              position="relative"
-              className="spacer"
-              h={229}
-              bgColor="primaryGlare"
+        {image ? (
+          <Flex
+            mt={3}
+            mb={2}
+            width="full"
+            height="auto"
+            outline="1.5px solid black"
+            position="relative"
+            bgColor="primaryGlare"
+          >
+            <NextImage
+              src={image}
+              blurDataURL={blurDataURL || undefined}
+              placeholder={blurDataURL ? 'blur' : undefined}
+              width={352}
+              height={275}
+              alt={title ?? ''}
+              loader={myLoader}
             />
-          )}
-        </a>
+          </Flex>
+        ) : (
+          <Spacer
+            mt={3}
+            mb={2}
+            outline="1.5px solid black"
+            position="relative"
+            className="spacer"
+            h={229}
+            bgColor="primaryGlare"
+          />
+        )}
       </LinkOverlay>
       <Spacer />
       <HStack justify="space-between">

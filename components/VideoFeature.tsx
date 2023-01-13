@@ -5,7 +5,7 @@ import { Box, Heading, Text, AspectRatio, Center, Stack } from '@chakra-ui/react
 import dynamic from 'next/dynamic';
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import { PlayIcon } from './Icons/PlayIcon';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';

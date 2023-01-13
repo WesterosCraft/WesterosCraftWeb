@@ -20,7 +20,7 @@ import { ContainerBorder } from '../components/ContainerBorder';
 import Dropcap from '../components/Dropcap';
 import { PortableText } from '@portabletext/react';
 import { urlFor } from '../lib/sanity';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { Seo } from '../components/Seo';
 
@@ -234,20 +234,18 @@ export default function AboutPage({ pageData }: { pageData: AboutPageData }) {
                 to having a fully explorable map.
               </Text>
               <NextLink href="/join">
-                <a>
-                  <Button
-                    mt="8"
-                    size="lg"
-                    bg="primaryRed"
-                    _hover={{ bg: 'red.800' }}
-                    color="white"
-                    height="14"
-                    px="8"
-                    fontSize="md"
-                  >
-                    Join the Server
-                  </Button>
-                </a>
+                <Button
+                  mt="8"
+                  size="lg"
+                  bg="primaryRed"
+                  _hover={{ bg: 'red.800' }}
+                  color="white"
+                  height="14"
+                  px="8"
+                  fontSize="md"
+                >
+                  Join the Server
+                </Button>
               </NextLink>
             </Box>
           </Box>
