@@ -114,7 +114,7 @@ const DesktopNavContent = (props: FlexProps) => {
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
       <HStack spacing={8}>
         <NextLink href="/" passHref>
-          <Box rel="home">
+          <Box>
             <VisuallyHidden>WesterosCraft</VisuallyHidden>
             <Logo h="6" />
           </Box>
