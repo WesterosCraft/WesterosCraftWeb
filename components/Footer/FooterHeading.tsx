@@ -7,7 +7,7 @@ export const FooterHeading = (props: HeadingProps) => (
     as="h4"
     color="whiteAlpha.900"
     fontSize="sm"
-    fontWeight="semibold"
+    fontWeight="medium"
     textTransform="uppercase"
     letterSpacing="wider"
     {...props}

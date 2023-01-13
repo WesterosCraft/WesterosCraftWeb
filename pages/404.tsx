@@ -25,7 +25,7 @@ export default function FourOhFourPage() {
           textAlign="center"
         >
           <Box bg="blackAlpha.600" maxW="4xl" py="8" mx="auto">
-            <Text textTransform="uppercase" fontWeight="semibold" color="white" opacity={0.8}>
+            <Text textTransform="uppercase" fontWeight="medium" color="white" opacity={0.8}>
               404 error
             </Text>
             <Heading mt="2" size={{ base: '2xl', sm: '3xl' }} color="white">

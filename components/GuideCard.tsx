@@ -66,16 +66,14 @@ export const GuideCard = (guide: GuidesPageData) => {
       <LinkBox w="full" h="full">
         <HStack spacing={4} w="full" align="flex-start" justify="flex-start">
           <Image width="12" height="12" src={urlFor(guide.icon.asset).url()} alt={guide.title} />
-          <NextLink
+          <LinkOverlay
+            as={NextLink}
             href={`/wiki/guides/${slugify(guide?.guideCategory?.title)}/${guide?.slug?.current}`}
-            passHref
           >
-            <LinkOverlay>
-              <Text fontSize="lg" fontWeight="medium">
-                {guide?.title}
-              </Text>
-            </LinkOverlay>
-          </NextLink>
+            <Text fontSize="lg" fontWeight="medium">
+              {guide?.title}
+            </Text>
+          </LinkOverlay>
         </HStack>
         <Text mt="2" fontSize="sm">
           {guide?.description}

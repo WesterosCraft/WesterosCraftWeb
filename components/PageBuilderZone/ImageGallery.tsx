@@ -1,5 +1,5 @@
 import { SimpleGrid, Box, HStack, Text, Divider, Heading, Button, VStack } from '@chakra-ui/react';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { urlFor } from '../../lib/sanity';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 

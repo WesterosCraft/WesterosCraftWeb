@@ -8,15 +8,15 @@ export const LinkGrid = (props: SimpleGridProps) => (
     <Box minW="130px">
       <FooterHeading mb="4">About</FooterHeading>
       <Stack color="white">
-        <NextLink href="/about" passHref>
-          <Link>About Us</Link>
-        </NextLink>
-        <NextLink href="/progress" passHref>
-          <Link>Progress</Link>
-        </NextLink>
-        <NextLink href="/rookery" passHref>
-          <Link>The Rookery</Link>
-        </NextLink>
+        <Link as={NextLink} href="/about">
+          About Us
+        </Link>
+        <Link as={NextLink} href="/progress">
+          Progress
+        </Link>
+        <Link as={NextLink} href="/rookery">
+          The Rookery
+        </Link>
       </Stack>
     </Box>
     <Box minW="130px">
@@ -33,9 +33,10 @@ export const LinkGrid = (props: SimpleGridProps) => (
     <Box minW="130px">
       <FooterHeading mb="4">Resources</FooterHeading>
       <Stack color="white">
-        <NextLink href="/wiki" passHref>
-          <Link>Wiki</Link>
-        </NextLink>
+        <Link as={NextLink} href="/wiki">
+          Wiki
+        </Link>
+
         <Link href="http://mc.westeroscraft.com/">Map</Link>
         <Link href="https://ko-fi.com/westeroscraft">Donate</Link>
       </Stack>

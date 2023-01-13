@@ -13,7 +13,7 @@ import {
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
 import { child, container } from '../constants/animation';
@@ -129,7 +129,7 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
               borderTopWidth="1px"
               borderColor="gray.200"
             >
-              <Text fontWeight="semibold">{link.heading}</Text>
+              <Text fontWeight="medium">{link.heading}</Text>
               <Text mt="2" fontSize="sm">
                 {link.description}
               </Text>
@@ -156,23 +156,21 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                     href={`/wiki/${link.linkUrl.internal?.slug.current}` ?? '/wiki'}
                     passHref
                   >
-                    <a>
-                      <Button
-                        fontWeight="md"
-                        color="primaryRed"
-                        variant="link"
-                        fontSize="sm"
-                        fill="primaryRed"
-                        _hover={{
-                          textDecor: 'none',
-                          color: 'red.800',
-                          fill: 'red.800',
-                        }}
-                        rightIcon={<ArrowRightIcon />}
-                      >
-                        {link.linkUrl.linkText}
-                      </Button>
-                    </a>
+                    <Button
+                      fontWeight="md"
+                      color="primaryRed"
+                      variant="link"
+                      fontSize="sm"
+                      fill="primaryRed"
+                      _hover={{
+                        textDecor: 'none',
+                        color: 'red.800',
+                        fill: 'red.800',
+                      }}
+                      rightIcon={<ArrowRightIcon />}
+                    >
+                      {link.linkUrl.linkText}
+                    </Button>
                   </NextLink>
                 )}
               </Flex>

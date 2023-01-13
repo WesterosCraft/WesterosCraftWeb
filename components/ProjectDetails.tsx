@@ -19,7 +19,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Text,
   FlexProps,
   ButtonGroup,
 } from '@chakra-ui/react';
@@ -140,16 +139,14 @@ export const ProjectDetails = ({ pageData, ...rest }: ProjectDetailsProps) => {
                           isExternal
                           _hover={{ textDecoration: 'none' }}
                         >
-                          <a>
-                            <Button
-                              variant="primaryBlack"
-                              size="xs"
-                              colorScheme="gray"
-                              textDecoration="none"
-                            >
-                              View App
-                            </Button>
-                          </a>
+                          <Button
+                            variant="primaryBlack"
+                            size="xs"
+                            colorScheme="gray"
+                            textDecoration="none"
+                          >
+                            View App
+                          </Button>
                         </Link>
                       )}
                       {pageData?.dynmapXcoord && !isEmpty(pageData?.dynmapXcoord) && (

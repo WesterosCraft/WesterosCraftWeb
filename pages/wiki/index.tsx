@@ -10,10 +10,10 @@ import {
   SimpleGrid,
 } from '@chakra-ui/react';
 import { GetStaticProps } from 'next';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import { sanityClient } from '../../lib/sanity.server';
 import type { ReactElement } from 'react';
-import Link from 'next/link';
+import NextLink from 'next/link';
 import { WikiLayout } from '../../components/Layout/WikiLayout';
 import { LocationCard } from '../../components/LocationCard';
 import { urlFor } from '../../lib/sanity';
@@ -204,36 +204,34 @@ const Card = ({ title = '', href = '', subtitle = '', image = '' }) => {
         cursor: 'pointer',
       }}
     >
-      <LinkOverlay as={Link} href={href}>
-        <a>
-          <Box>
-            <VStack textAlign="center" width="full">
-              <Heading size="lg" color="primaryDark">
-                {title}
-              </Heading>
-              <Text>{subtitle}</Text>
-            </VStack>
-            <Divider borderBottomColor="primaryDark" mt={2} />
-            <Flex
-              width="full"
-              outline="1.5px solid black"
-              bgColor="#fff8e0"
-              mt={3}
-              mb={2}
-              overflow="hidden"
-            >
-              <Image
-                loader={({ src, width = 464 }) => {
-                  return `${src}?w=${width}&h=300&q=75`;
-                }}
-                src={image}
-                alt={title}
-                width={464}
-                height={300}
-              />
-            </Flex>
-          </Box>
-        </a>
+      <LinkOverlay as={NextLink} href={href}>
+        <Box>
+          <VStack textAlign="center" width="full">
+            <Heading size="lg" color="primaryDark">
+              {title}
+            </Heading>
+            <Text>{subtitle}</Text>
+          </VStack>
+          <Divider borderBottomColor="primaryDark" mt={2} />
+          <Flex
+            width="full"
+            outline="1.5px solid black"
+            bgColor="#fff8e0"
+            mt={3}
+            mb={2}
+            overflow="hidden"
+          >
+            <Image
+              loader={({ src, width = 464 }) => {
+                return `${src}?w=${width}&h=300&q=75`;
+              }}
+              src={image}
+              alt={title}
+              width={464}
+              height={300}
+            />
+          </Flex>
+        </Box>
       </LinkOverlay>
     </LinkBox>
   );

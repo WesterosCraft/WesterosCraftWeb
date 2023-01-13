@@ -105,11 +105,15 @@ export default function GuidesPage({ pageData }: { pageData: GuidesPageData }) {
         <AlertDescription maxWidth="sm">
           We expect visitors to follow to follow a set of rules in order to maintain a healthy and
           friendly community. Please read them{' '}
-          <NextLink href="/wiki/guides/rules-and-guidelines/server-rules" passHref>
-            <Link textDecor="underline" textDecorationColor="primaryRed" textUnderlineOffset="3px">
-              here.
-            </Link>
-          </NextLink>
+          <Link
+            as={NextLink}
+            href="/wiki/guides/rules-and-guidelines/server-rules"
+            textDecor="underline"
+            textDecorationColor="primaryRed"
+            textUnderlineOffset="3px"
+          >
+            here.
+          </Link>
         </AlertDescription>
       </Alert>
       <VStack w="full" spacing={12}>

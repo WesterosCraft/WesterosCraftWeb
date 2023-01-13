@@ -64,9 +64,7 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
         </Box>
         <Box ml="4">
           <NextLink href="/">
-            <a>
-              <Logo hideText={isWiki || isSmallestMobile} />
-            </a>
+            <Logo hideText={isWiki || isSmallestMobile} />
           </NextLink>
         </Box>
         {isWiki && (
@@ -81,11 +79,9 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
         )}
         <Box display={{ base: isWiki ? 'none' : 'inherit', sm: 'inherit' }}>
           <NextLink href="/join">
-            <a>
-              <Button size={{ base: 'sm', md: 'md' }} bg="white">
-                Get Started
-              </Button>
-            </a>
+            <Button size={{ base: 'sm', md: 'md' }} bg="white">
+              Get Started
+            </Button>
           </NextLink>
         </Box>
       </Flex>
@@ -104,11 +100,9 @@ const MobileNavContext = ({ isWiki, ...rest }: MobileNavContextProps) => {
           )
         )}
         <NextLink href="/join" passHref>
-          <a>
-            <Button bg="primaryRed" color="white" w="full" size="lg" mt="5">
-              Join Server
-            </Button>
-          </a>
+          <Button bg="primaryRed" color="white" w="full" size="lg" mt="5">
+            Join Server
+          </Button>
         </NextLink>
       </NavMenu>
     </>
@@ -120,7 +114,7 @@ const DesktopNavContent = (props: FlexProps) => {
     <Flex className="nav-content__desktop" align="center" justify="space-between" {...props}>
       <HStack spacing={8}>
         <NextLink href="/" passHref>
-          <Box as="a" rel="home">
+          <Box rel="home">
             <VisuallyHidden>WesterosCraft</VisuallyHidden>
             <Logo h="6" />
           </Box>
@@ -141,11 +135,9 @@ const DesktopNavContent = (props: FlexProps) => {
       </HStack>
 
       <NextLink href="/join" passHref>
-        <a>
-          <Button bg="white" fontWeight="bold">
-            Join Server
-          </Button>
-        </a>
+        <Button bg="white" fontWeight="bold">
+          Join Server
+        </Button>
       </NextLink>
     </Flex>
   );

@@ -7,7 +7,6 @@ import {
   Popover,
   PopoverTrigger,
   Button,
-  Text,
   PopoverContent,
   Link,
 } from '@chakra-ui/react';
@@ -35,6 +34,7 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
           py="6"
           color="white"
           fill="white"
+          fontWeight="medium"
           _focus={{
             bg: 'inherit',
           }}
@@ -75,11 +75,9 @@ const DesktopSubmenu = ({ link }: SubmenuProps) => {
                 </Link>
               ) : (
                 <NextLink key={idx} href={item.link?.slug?.current || `/${item.title}`}>
-                  <a>
-                    <DesktopMenuItem title={item.title} icon={item.icon}>
-                      {item.description}
-                    </DesktopMenuItem>
-                  </a>
+                  <DesktopMenuItem title={item.title} icon={item.icon}>
+                    {item.description}
+                  </DesktopMenuItem>
                 </NextLink>
               ),
             )}
@@ -114,9 +112,9 @@ const MobileSubMenu = (props: SubmenuProps) => {
       <Collapse in={isOpen}>
         <Box pl="5" w="full">
           {link.links?.map((item, idx) => (
-            <NextLink key={idx} href={item.link?.slug?.current ?? '/'} passHref>
-              <NavLink.Mobile>{item.title}</NavLink.Mobile>
-            </NextLink>
+            <NavLink.Mobile as={NextLink} key={idx} href={item.link?.slug?.current ?? '/'}>
+              {item.title}
+            </NavLink.Mobile>
           ))}
         </Box>
       </Collapse>

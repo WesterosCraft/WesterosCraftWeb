@@ -24,9 +24,7 @@ const DesktopWikiSidenav = () => {
         <AlgoliaInput />
       </Box>
       <NextLink href="/wiki">
-        <a>
-          <NavItem active={router.asPath === '/wiki'} label="Wiki" mb="4" />
-        </a>
+        <NavItem active={router.asPath === '/wiki'} label="Wiki" mb="4" />
       </NextLink>
       <WikiNavTabs>
         <TabPanels>
@@ -49,14 +47,10 @@ const MobileWikiSidenav = () => {
     <Box color="white" fontSize="sm" overflowY="scroll" className="no-bg-scrollbar">
       <Box mb="6">
         <NextLink href="/">
-          <a>
-            <NavItem label="Home" />
-          </a>
+          <NavItem label="Home" />
         </NextLink>
         <NextLink href="/wiki">
-          <a>
-            <NavItem active={router.asPath === '/wiki'} label="Wiki" />
-          </a>
+          <NavItem active={router.asPath === '/wiki'} label="Wiki" />
         </NextLink>
       </Box>
 
@@ -94,7 +88,6 @@ function WikiNavTabs({ children }: { children?: React.ReactNode }) {
         {WIKI_TABS.map(tab => (
           <NextLink key={tab.label} href={tab.href} passHref>
             <Tab
-              as="a"
               _selected={{
                 borderColor: 'inherit',
                 borderBottomColor: 'primaryDark',

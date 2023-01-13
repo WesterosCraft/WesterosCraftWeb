@@ -9,11 +9,6 @@ import { theme } from '../theme';
 import SEO from '../next-seo.config';
 import * as ga from '../lib/ga';
 
-import '../public/stylesheet.css';
-
-import '@fontsource/karla/400.css';
-import '@fontsource/karla/500.css';
-
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };

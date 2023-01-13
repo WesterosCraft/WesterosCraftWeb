@@ -1,5 +1,21 @@
 import { styles } from './styles';
 import { type ThemeConfig } from '@chakra-ui/react';
+import localFont from '@next/font/local';
+import { Karla } from '@next/font/google';
+
+const karla = Karla({
+  weight: ['400', '500'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+});
+
+const esmerelda = localFont({
+  src: [
+    { path: './fonts/EsmeraldaPro-Regular.ttf', weight: '400', style: 'normal' },
+    { path: './fonts/EsmeraldaPro-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/EsmeraldaPro-Regular.woff', weight: '400', style: 'normal' },
+  ],
+});
 
 export const theme: ThemeConfig = {
   // @ts-ignore
@@ -7,8 +23,8 @@ export const theme: ThemeConfig = {
   initialColorMode: 'light',
   useSystemColorMode: false,
   fonts: {
-    body: `'Karla', sans-serif`,
-    heading: `esmeraldapro, -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";`,
+    body: karla.style.fontFamily,
+    heading: `${esmerelda.style.fontFamily}, -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";`,
     mono: 'Menlo, monospace',
   },
   colors: {

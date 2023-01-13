@@ -1,5 +1,5 @@
 import { Box, Text, Center, chakra } from '@chakra-ui/react';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import { container, child } from '../constants/animation';
 import { urlFor } from '../lib/sanity';
 import { ContainerBorder } from './ContainerBorder';
@@ -78,7 +78,7 @@ export const FeatureGrid = ({ features }: FeatureGridProps) => {
               />
             </Center>
             <Box maxW="md" color="white" mt={['0', '4', '6']} mx="auto">
-              <Text fontWeight="semibold" color="primaryGold" fontSize="lg">
+              <Text fontWeight="medium" color="primaryGold" fontSize="lg">
                 {feature.heading}
               </Text>
               <Text mt={2}>{feature.subheading}</Text>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import {
   Box,
   Button,
@@ -154,29 +154,25 @@ export const Hero = ({
             </Text>
             <Stack direction={{ base: 'row' }} spacing="4" mt={{ base: '4', sm: '8' }}>
               <NextLink href={solidButton?.internal?.slug?.current}>
-                <a>
-                  <Button size="md" bg="black" _hover={{ bg: 'blackAlpha.700' }} color="white">
-                    {solidButton?.linkText ?? ''}
-                  </Button>
-                </a>
+                <Button size="md" bg="black" _hover={{ bg: 'blackAlpha.700' }} color="white">
+                  {solidButton?.linkText ?? ''}
+                </Button>
               </NextLink>
               <NextLink href={outlineButton?.internal?.slug?.current} passHref>
-                <a>
-                  <Button
-                    variant="outline"
-                    size="md"
-                    bg="transparent"
-                    color="gray.800"
-                    borderColor="black"
-                    _hover={{
-                      backgroundColor: 'black',
-                      color: 'white',
-                    }}
-                    shadow="base"
-                  >
-                    {outlineButton?.linkText ?? ''}
-                  </Button>
-                </a>
+                <Button
+                  variant="outline"
+                  size="md"
+                  bg="transparent"
+                  color="gray.800"
+                  borderColor="black"
+                  _hover={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                  }}
+                  shadow="base"
+                >
+                  {outlineButton?.linkText ?? ''}
+                </Button>
               </NextLink>
             </Stack>
           </MotionBox>
@@ -241,38 +237,34 @@ export const Hero = ({
             </Text>
             <Stack direction={{ base: 'column', sm: 'row' }} spacing="4" mt="8">
               <NextLink href={solidButton?.internal?.slug?.current}>
-                <a>
-                  <Button
-                    size="lg"
-                    bg="black"
-                    _hover={{ bg: 'blackAlpha.700' }}
-                    color="white"
-                    px="8"
-                    fontSize="md"
-                  >
-                    {solidButton?.linkText ?? ''}
-                  </Button>
-                </a>
+                <Button
+                  size="lg"
+                  bg="black"
+                  _hover={{ bg: 'blackAlpha.700' }}
+                  color="white"
+                  px="8"
+                  fontSize="md"
+                >
+                  {solidButton?.linkText ?? ''}
+                </Button>
               </NextLink>
               <NextLink href={outlineButton?.internal?.slug?.current} passHref>
-                <a>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    bg="transparent"
-                    color="gray.800"
-                    borderColor="black"
-                    _hover={{
-                      backgroundColor: 'black',
-                      color: 'white',
-                    }}
-                    px="8"
-                    shadow="base"
-                    fontSize="md"
-                  >
-                    {outlineButton?.linkText ?? ''}
-                  </Button>
-                </a>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  bg="transparent"
+                  color="gray.800"
+                  borderColor="black"
+                  _hover={{
+                    backgroundColor: 'black',
+                    color: 'white',
+                  }}
+                  px="8"
+                  shadow="base"
+                  fontSize="md"
+                >
+                  {outlineButton?.linkText ?? ''}
+                </Button>
               </NextLink>
             </Stack>
           </MotionBox>
@@ -500,7 +492,7 @@ const WesterosOutline = (props: IconProps) => (
 //               color="primaryRed"
 //               textTransform="uppercase"
 //               mb="8"
-//               fontWeight="semibold"
+//               fontWeight="medium"
 //               letterSpacing="wide"
 //             >
 //               {subheading}

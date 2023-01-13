@@ -53,18 +53,16 @@ export const PricingCard = (props: PricingCardProps) => {
       <Spacer />
       <Box px="8" py="12">
         <NextLink href={url} passHref>
-          <a>
-            <Button
-              onClick={onClick}
-              size="lg"
-              w="full"
-              bg="black"
-              color="white"
-              _hover={{ bg: 'blackAlpha.700' }}
-            >
-              View Guide
-            </Button>
-          </a>
+          <Button
+            onClick={onClick}
+            size="lg"
+            w="full"
+            bg="black"
+            color="white"
+            _hover={{ bg: 'blackAlpha.700' }}
+          >
+            View Guide
+          </Button>
         </NextLink>
       </Box>
     </Flex>

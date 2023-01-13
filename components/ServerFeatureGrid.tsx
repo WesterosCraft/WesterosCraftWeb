@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
-import NextImage from 'next/future/image';
+import NextImage from 'next/image';
 import { urlFor } from '../lib/sanity';
 import { MotionBox } from './MotionBox';
 import { container, child } from '../constants/animation';
@@ -170,7 +170,7 @@ export const ServerFeatureGrid = ({
                     textAlign={{ base: 'center', sm: 'left' }}
                     spacing={1}
                   >
-                    <Text fontWeight="semibold" fontSize="2xl">
+                    <Text fontWeight="medium" fontSize="2xl">
                       {server.heading}
                     </Text>
                     <Text fontSize="sm">{server.subheading}</Text>
@@ -180,17 +180,17 @@ export const ServerFeatureGrid = ({
                   <HStack justify={{ base: 'center', sm: 'flex-start' }} w="full" spacing={4}>
                     {server.leftButton ? (
                       server.leftButton?.internal ? (
-                        <NextLink href={server.leftButton.internal?.slug?.current} passHref>
-                          <Link
-                            fontWeight="md"
-                            color="white"
-                            textDecor="underline"
-                            textDecorationColor="primaryRed"
-                            textUnderlineOffset="3px"
-                          >
-                            {server.leftButton.linkText}
-                          </Link>
-                        </NextLink>
+                        <Link
+                          as={NextLink}
+                          href={server.leftButton.internal?.slug?.current}
+                          fontWeight="md"
+                          color="white"
+                          textDecor="underline"
+                          textDecorationColor="primaryRed"
+                          textUnderlineOffset="3px"
+                        >
+                          {server.leftButton.linkText}
+                        </Link>
                       ) : (
                         <Link
                           isExternal
@@ -207,17 +207,17 @@ export const ServerFeatureGrid = ({
                     ) : null}
                     {server.rightButton ? (
                       server.rightButton?.internal ? (
-                        <NextLink href="/" passHref>
-                          <Link
-                            fontWeight="md"
-                            color="white"
-                            textDecor="underline"
-                            textDecorationColor="primaryRed"
-                            textUnderlineOffset="3px"
-                          >
-                            {server.rightButton.linkText}
-                          </Link>
-                        </NextLink>
+                        <Link
+                          as={NextLink}
+                          href="/"
+                          fontWeight="md"
+                          color="white"
+                          textDecor="underline"
+                          textDecorationColor="primaryRed"
+                          textUnderlineOffset="3px"
+                        >
+                          {server.rightButton.linkText}
+                        </Link>
                       ) : (
                         <Link
                           isExternal

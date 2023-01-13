@@ -33,22 +33,20 @@ export const PricingTiers = ({ data }: { data: Guide[] }) => (
               }`}
               passHref
             >
-              <a>
-                <Button
-                  bg="primaryRed"
-                  size="lg"
-                  w="full"
-                  fontWeight="extrabold"
-                  py={{ md: '8' }}
-                  borderWidth="1.5px"
-                  _hover={{
-                    color: 'primaryRed',
-                    bg: 'white',
-                  }}
-                >
-                  View Guide
-                </Button>
-              </a>
+              <Button
+                bg="primaryRed"
+                size="lg"
+                w="full"
+                fontWeight="extrabold"
+                py={{ md: '8' }}
+                borderWidth="1.5px"
+                _hover={{
+                  color: 'primaryRed',
+                  bg: 'white',
+                }}
+              >
+                View Guide
+              </Button>
             </NextLink>
           }
         />

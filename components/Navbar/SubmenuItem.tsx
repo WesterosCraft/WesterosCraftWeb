@@ -38,10 +38,15 @@ export const SubmenuItem = ({ title, icon, children, ...rest }: SubmenuItemProps
       _hover={{ bg: 'primaryDarkGlare2' }}
       {...rest}
     >
-      <NextImage width="36px" height="36px" src={iconMap[icon ?? 'default']} />
+      <NextImage
+        width={36}
+        height={36}
+        src={iconMap[icon ?? 'default']}
+        alt={icon ?? 'Menu Icon'}
+      />
 
       <Flex display="flex" direction="column" transition="all 0.2s" _focus={{ shadow: 'outline' }}>
-        <Text fontWeight="semibold" color="white">
+        <Text fontWeight="medium" color="white">
           {title}
         </Text>
 
