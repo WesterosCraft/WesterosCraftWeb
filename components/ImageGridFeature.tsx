@@ -14,7 +14,7 @@ import NextLink from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
 import NextImage from 'next/image';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { MotionBox } from './MotionBox';
 import { child, container } from '../constants/animation';
 import { ContainerBorder } from './ContainerBorder';
@@ -196,7 +196,7 @@ export const ImageGridFeature = ({ heading, images, links, subheading }: ImageGr
                 return `${src}?w=${width}&h=355&q=100&fit=crop&crop=center`;
               }}
               alt={image._key}
-              src={urlFor(image.asset).url()}
+              src={urlForImage(image.asset).url()}
               width={355}
               height={355}
               placeholder="blur"

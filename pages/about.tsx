@@ -19,7 +19,7 @@ import { sanityClient } from '../lib/sanity.server';
 import { ContainerBorder } from '../components/ContainerBorder';
 import Dropcap from '../components/Dropcap';
 import { PortableText } from '@portabletext/react';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import NextImage from 'next/image';
 import NextLink from 'next/link';
 import { Seo } from '../components/Seo';
@@ -115,7 +115,7 @@ export default function AboutPage({ pageData }: { pageData: AboutPageData }) {
             <Img
               width={{ base: '100px', md: '120px' }}
               alt="Banner"
-              src={urlFor(pageData?.heroImage).url()}
+              src={urlForImage(pageData?.heroImage).url()}
             />
             <Box maxW="2xl" textAlign={{ base: 'center', sm: 'left' }}>
               <Heading size={{ base: '2xl', sm: '3xl', lg: '4xl' }}>{pageData?.heading}</Heading>
@@ -196,7 +196,7 @@ export default function AboutPage({ pageData }: { pageData: AboutPageData }) {
                           >
                             <NextImage
                               alt={value?.alt}
-                              src={urlFor(value?.image?.asset).url()}
+                              src={urlForImage(value?.image?.asset).url()}
                               width={value?.width || 'auto'}
                               height={value?.height || 'auto'}
                               // style={{ maxWidth: '100%', height: 'auto' }}

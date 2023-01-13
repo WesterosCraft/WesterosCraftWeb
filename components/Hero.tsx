@@ -15,7 +15,7 @@ import {
 import NextLink from 'next/link';
 import useEmblaCarousel from 'embla-carousel-react';
 import { ChevronRightIcon } from './Icons/ChevronRight';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { MotionBox } from './MotionBox';
 
 export interface HeroProps {
@@ -379,7 +379,7 @@ function HeroCarousel({ slides }: { slides: HeroImageSlider[] }) {
                     blurDataURL={slide?.slideImage?.metadata?.lqip}
                     fill
                     style={{ objectFit: 'cover' }}
-                    src={urlFor(slide?.slideImage).url()}
+                    src={urlForImage(slide?.slideImage).url()}
                     alt={slide?.location?.title ?? 'Westeros Location'}
                     sizes="80vw"
                     quality={100}

@@ -16,7 +16,7 @@ import type { ReactElement } from 'react';
 import NextLink from 'next/link';
 import { WikiLayout } from '../../components/Layout/WikiLayout';
 import { LocationCard } from '../../components/LocationCard';
-import { urlFor } from '../../lib/sanity';
+import { urlForImage } from '../../lib/sanity.image';
 import { NextSeo } from 'next-seo';
 import { Banner } from '../../components/Banner';
 
@@ -100,7 +100,7 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
                 subtitle: 'View a comprehensive list of every build we have to offer.',
                 href: '/wiki/locations',
                 image:
-                  urlFor(pageData?.locationsImage).url() ||
+                  urlForImage(pageData?.locationsImage).url() ||
                   'https://cdn.sanity.io/images/1as7cn02/production/6aa4f30c3b90f86ee2f16625f65531a0c041894d-1000x563.png',
               }}
             />
@@ -110,7 +110,7 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
                 subtitle: 'View in depth guides on how to explore and play on our server.',
                 href: '/wiki/guides',
                 image:
-                  urlFor(pageData?.guidesImage).url() ||
+                  urlForImage(pageData?.guidesImage).url() ||
                   'https://cdn.sanity.io/images/1as7cn02/production/a1e3f84a67270e65cba4daee16005c5611639d65-1000x755.png',
               }}
             />
@@ -141,7 +141,7 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
                   key={loc?.title}
                   title={loc?.title}
                   category={loc?.extendedBuildCategory?.title}
-                  image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
+                  image={loc.extendedImage?._rev ? urlForImage(loc.extendedImage).url() : undefined}
                   blurDataURL={
                     loc.extendedImage?._rev ? loc.extendedImage?.metadata?.lqip : undefined
                   }
@@ -169,7 +169,7 @@ export default function Wiki({ pageData }: { pageData: WikiPageData }) {
                   key={loc?.title}
                   title={loc?.title}
                   category={loc?.extendedBuildCategory?.title}
-                  image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
+                  image={loc.extendedImage?._rev ? urlForImage(loc.extendedImage).url() : undefined}
                   blurDataURL={
                     loc.extendedImage?._rev ? loc.extendedImage.metadata.lqip : undefined
                   }

@@ -14,7 +14,7 @@ import {
 import { PortableText } from '@portabletext/react';
 import { getFile } from '@sanity/asset-utils';
 import { ChakraNextImage } from './ChakraNextImage';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { ExclamationIcon } from './Icons/ExclamationIcon';
 
 export const RichText = ({ value }: { value: any[] }) => {
@@ -74,7 +74,7 @@ export const RichText = ({ value }: { value: any[] }) => {
                 >
                   <ChakraNextImage
                     alt={value?.alt}
-                    src={urlFor(value?.image?.asset).url()}
+                    src={urlForImage(value?.image?.asset).url()}
                     width={value?.width || 500}
                     height={value?.height || 350}
                   />

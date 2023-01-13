@@ -13,7 +13,7 @@ import {
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
 import NextImage from 'next/image';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { MotionBox } from './MotionBox';
 import { container, child } from '../constants/animation';
 import { ContainerBorder } from './ContainerBorder';
@@ -97,7 +97,7 @@ export const ServerFeatureGrid = ({
                 height={386}
                 placeholder="blur"
                 blurDataURL={leftImage.asset.metadata.lqip}
-                src={urlFor(leftImage.asset).url()}
+                src={urlForImage(leftImage.asset).url()}
                 alt="Baratheon"
               />
             </MotionBox>
@@ -116,7 +116,7 @@ export const ServerFeatureGrid = ({
                 height={386}
                 placeholder="blur"
                 blurDataURL={rightImage.asset.metadata.lqip}
-                src={urlFor(rightImage.asset).url()}
+                src={urlForImage(rightImage.asset).url()}
                 alt="Targaryen"
               />
             </MotionBox>
@@ -163,7 +163,7 @@ export const ServerFeatureGrid = ({
                 direction={{ base: 'column', sm: 'row' }}
                 align={{ base: 'center', sm: 'flex-start' }}
               >
-                <Img src={urlFor(server.icon.asset).url()} />
+                <Img src={urlForImage(server.icon.asset).url()} />
                 <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={6}>
                   <VStack
                     align={{ base: 'center', sm: 'flex-start' }}

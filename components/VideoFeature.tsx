@@ -7,7 +7,7 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false });
 
 import NextImage from 'next/image';
 import { PlayIcon } from './Icons/PlayIcon';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { MotionBox } from './MotionBox';
 import { ContainerBorder } from './ContainerBorder';
 
@@ -85,7 +85,7 @@ export const VideoFeature = ({
         >
           <YoutubePlayer
             url={videoLink}
-            thumbnailUrl={urlFor(videoThumbnail).url()}
+            thumbnailUrl={urlForImage(videoThumbnail).url()}
             thumbnailBlur={videoThumbnail.metadata.lqip}
           />
         </MotionBox>

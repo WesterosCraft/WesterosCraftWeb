@@ -1,6 +1,6 @@
 import { Text, VStack, HStack, Image, LinkBox, LinkOverlay } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { slugify } from '../utils';
 
 export interface GuidesPageData {
@@ -65,7 +65,12 @@ export const GuideCard = (guide: GuidesPageData) => {
     <VStack p={4} outline="1.5px solid black">
       <LinkBox w="full" h="full">
         <HStack spacing={4} w="full" align="flex-start" justify="flex-start">
-          <Image width="12" height="12" src={urlFor(guide.icon.asset).url()} alt={guide.title} />
+          <Image
+            width="12"
+            height="12"
+            src={urlForImage(guide.icon.asset).url()}
+            alt={guide.title}
+          />
           <LinkOverlay
             as={NextLink}
             href={`/wiki/guides/${slugify(guide?.guideCategory?.title)}/${guide?.slug?.current}`}

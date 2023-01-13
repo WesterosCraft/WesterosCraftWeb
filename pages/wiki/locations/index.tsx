@@ -5,7 +5,7 @@ import { sanityClient } from '../../../lib/sanity.server';
 import { NextSeo } from 'next-seo';
 import { RegionCard } from '../../../components/RegionCard/RegionCard';
 import { WikiLayout } from '../../../components/Layout/WikiLayout';
-import { urlFor } from '../../../lib/sanity';
+import { urlForImage } from '../../../lib/sanity.image';
 
 export interface RegionsPage {
   _createdAt: Date;
@@ -84,8 +84,8 @@ function LocationsPage({ pageData }: { pageData: RegionsPage }) {
                 name={region.name}
                 heading={region.heading}
                 description={region.subheading}
-                image={urlFor(region?.image).url()}
-                icon={region?.icon ? urlFor(region?.icon).url() : undefined}
+                image={urlForImage(region?.image).url()}
+                icon={region?.icon ? urlForImage(region?.icon).url() : undefined}
                 slug={region.slug.current}
                 percentComplete={region.percentComplete}
                 blurDataURL={region.image.metadata.lqip}
