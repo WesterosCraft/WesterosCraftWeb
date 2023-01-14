@@ -15,6 +15,7 @@ const esmerelda = localFont({
     { path: './fonts/EsmeraldaPro-Regular.woff2', weight: '400', style: 'normal' },
     { path: './fonts/EsmeraldaPro-Regular.woff', weight: '400', style: 'normal' },
   ],
+  display: 'swap',
 });
 
 export const theme: ThemeConfig = {

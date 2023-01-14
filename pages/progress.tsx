@@ -21,7 +21,7 @@ import { OneColumnLayout } from '../components';
 import { sanityClient } from '../lib/sanity.server';
 import ProgressTable from '../components/ProgressTable';
 import { ContainerBorder } from '../components/ContainerBorder';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import NextLink from 'next/link';
 import { Seo } from '../components/Seo';
 
@@ -54,7 +54,7 @@ export default function ProgressPage({ allLocations, pageData }: any) {
             <Img
               width={{ base: '100px', md: '120px' }}
               alt="Banner"
-              src={urlFor(pageData?.heroImage).url()}
+              src={urlForImage(pageData?.heroImage).url()}
             />
             <Box maxW="2xl" textAlign={{ base: 'center', sm: 'left' }}>
               <Heading size={{ base: '2xl', sm: '3xl', lg: '4xl' }}>Project Progress</Heading>

@@ -16,7 +16,7 @@ import { OneColumnLayout } from '../components';
 import { GetStaticProps } from 'next';
 import { sanityClient } from '../lib/sanity.server';
 import NextImage from 'next/image';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { ContainerBorder } from '../components/ContainerBorder';
 import Raven from '../public/raven.png';
 
@@ -83,7 +83,7 @@ export default function Rookery({ pageData }: { pageData: RookeryPage }) {
                 priority
                 width={512}
                 height={650}
-                src={urlFor(pageData?.latestEdition?.thumbnail).url()}
+                src={urlForImage(pageData?.latestEdition?.thumbnail).url()}
                 placeholder="blur"
                 blurDataURL={pageData?.latestEdition?.thumbnail?.metadata?.lqip}
                 alt={pageData?.latestEdition?.title ?? 'Rookery'}
@@ -120,7 +120,7 @@ export default function Rookery({ pageData }: { pageData: RookeryPage }) {
                 <NextImage
                   width={336}
                   height={435}
-                  src={urlFor(edition.thumbnail).url()}
+                  src={urlForImage(edition.thumbnail).url()}
                   placeholder="blur"
                   blurDataURL={edition?.thumbnail?.metadata?.lqip}
                   alt={edition?.title ?? 'Rookery edition'}

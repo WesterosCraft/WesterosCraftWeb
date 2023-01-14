@@ -1,7 +1,7 @@
 import { Box, Text, Center, chakra } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { container, child } from '../constants/animation';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { ContainerBorder } from './ContainerBorder';
 import { MotionBox } from './MotionBox';
 
@@ -70,7 +70,7 @@ export const FeatureGrid = ({ features }: FeatureGridProps) => {
           >
             <Center>
               <NextImage
-                src={urlFor(feature?.banner).url()}
+                src={urlForImage(feature?.banner).url()}
                 alt="Banner"
                 blurDataURL={feature?.banner?.metadata.lqip!}
                 width={75}

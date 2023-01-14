@@ -6,7 +6,7 @@ import { Breadcrumbs } from '../../../../components/Breadcrumbs';
 import { NextSeo } from 'next-seo';
 import { WikiLayout } from '../../../../components/Layout/WikiLayout';
 import { LocationCard } from '../../../../components/LocationCard';
-import { urlFor } from '../../../../lib/sanity';
+import { urlForImage } from '../../../../lib/sanity.image';
 export interface RegionPageData {
   locations: Location[];
   name: string;
@@ -64,7 +64,7 @@ const RegionPage = ({ pageData }: { pageData: RegionPageData }) => {
               key={loc?.title}
               title={loc?.title}
               category={loc?.extendedBuildCategory?.title}
-              image={loc.extendedImage?._rev ? urlFor(loc.extendedImage).url() : undefined}
+              image={loc.extendedImage?._rev ? urlForImage(loc.extendedImage).url() : undefined}
               blurDataURL={loc.extendedImage?._rev ? loc.extendedImage.metadata.lqip : undefined}
               link={`${loc?.region?.slug?.current}/${loc?.slug?.current}`}
               projectStatus={loc?.projectStatus}

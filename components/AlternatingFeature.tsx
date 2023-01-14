@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AspectRatio, Box, Heading, Button, Icon, Link, Stack, Text } from '@chakra-ui/react';
 import NextImage from 'next/image';
 import { ArrowRightIcon } from './Icons/ArrowRightIcon';
-import { urlFor } from '../lib/sanity';
+import { urlForImage } from '../lib/sanity.image';
 import { MotionBox } from './MotionBox';
 import { ContainerBorder } from './ContainerBorder';
 import NextLink from 'next/link';
@@ -70,7 +70,7 @@ export const AlternatingFeature = ({ features }: AlternatingFeatureProps) => {
               pointerEvents="none"
             >
               <NextImage
-                src={urlFor(item.image).quality(100).url()}
+                src={urlForImage(item.image).quality(100).url()}
                 placeholder="blur"
                 width={650}
                 height={450}

@@ -1,6 +1,6 @@
 import { SimpleGrid, Box, HStack, Text, Divider, Heading, Button, VStack } from '@chakra-ui/react';
 import Image from 'next/image';
-import { urlFor } from '../../lib/sanity';
+import { urlForImage } from '../../lib/sanity.image';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 export interface ImageGallery {
@@ -56,7 +56,7 @@ export const PageBuilderImageGallery = (props: ImageGallery) => {
                 </VStack>
                 {image?.asset && (
                   <Image
-                    src={urlFor(image?.asset).url()}
+                    src={urlForImage(image?.asset).url()}
                     width={96}
                     height={96}
                     alt={image?.title}
